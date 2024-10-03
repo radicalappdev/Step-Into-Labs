@@ -9,7 +9,7 @@ import SwiftUI
 import RealityKit
 import RealityKitContent
 
-struct ContentView: View {
+struct Directory: View {
 
     var body: some View {
         VStack {
@@ -24,6 +24,6 @@ struct ContentView: View {
 }
 
 #Preview(windowStyle: .automatic) {
-    ContentView()
+    Directory()
         .environment(AppModel())
 }

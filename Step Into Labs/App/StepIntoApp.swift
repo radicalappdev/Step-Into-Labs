@@ -14,7 +14,7 @@ struct StepIntoApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Directory()
                 .environment(appModel)
         }
 
