@@ -14,6 +14,10 @@ import SwiftUI
 import RealityKit
 
 struct Lab003: View {
+
+    let count: Int = 12
+    let radius: Float = 160
+
     var body: some View {
         RealityView { content, attachments in
             let model = ModelEntity(
