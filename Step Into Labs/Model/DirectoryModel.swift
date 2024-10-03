@@ -43,18 +43,21 @@ class ModelData {
         Lab(title: "Lab 001",
             type: .WINDOW,
             date: Date("10/3/2024"),
+            isFeatured: true,
             subtitle: "Example of a 2D Window",
             description: "Testing out the window")
 
         ,Lab(title: "Lab 002",
              type: .VOLUME,
              date: Date("10/3/2024"),
+             isFeatured: false,
              subtitle: "Example of a 3D Volume",
              description: "Testing out the volume")
 
         ,Lab(title: "Lab 003",
              type: .SPACE,
              date: Date("10/3/2024"),
+             isFeatured: false,
              subtitle: "Example of anImmersive Space",
              description: "Testing out the immersive space")
 

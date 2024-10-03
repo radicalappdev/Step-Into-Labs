@@ -2,11 +2,11 @@
 //
 //  Title: Lab002
 //
-//  Subtitle:
+//  Subtitle: Example of a 3D Volume
 //
-//  Description:
+//  Description: Testing out the volume
 //
-//  Type:
+//  Type: Volume
 //
 //  Created by Joseph Simpson on 10/3/24.
 

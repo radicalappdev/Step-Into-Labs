@@ -2,11 +2,11 @@
 //
 //  Title: Lab003
 //
-//  Subtitle:
+//  Subtitle: Example of anImmersive Space
 //
-//  Description:
+//  Description: Testing out the immersive space
 //
-//  Type:
+//  Type: Space
 //
 //  Created by Joseph Simpson on 10/3/24.
 
