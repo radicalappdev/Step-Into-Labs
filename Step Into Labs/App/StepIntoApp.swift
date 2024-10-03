@@ -48,6 +48,12 @@ struct StepIntoApp: App {
 
         })
         .windowStyle(.volumetric)
+        .defaultWindowPlacement { _, context in
+            if let mainWindow = context.windows.first {
+                return WindowPlacement(.trailing(mainWindow))
+            }
+            return WindowPlacement(.none)
+        }
 
         .windowResizability(.contentMinSize)
 
