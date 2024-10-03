@@ -31,7 +31,3 @@ struct LabRouter: View {
         }
     }
 }
-
-//#Preview {
-//    LabRouter()
-//}

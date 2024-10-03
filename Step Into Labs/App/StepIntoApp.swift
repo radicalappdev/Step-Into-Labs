@@ -11,12 +11,19 @@ import SwiftUI
 struct StepIntoApp: App {
 
     @State private var appModel = AppModel()
+    @State private var modelData = ModelData()
 
     var body: some Scene {
+
+        // Main window
         WindowGroup {
             Directory()
                 .environment(appModel)
+                .environment(modelData)
         }
+        .defaultSize(CGSize(width: 700, height: 640))
+
+        // Router scenes
 
     }
 }

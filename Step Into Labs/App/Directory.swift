@@ -12,18 +12,32 @@ import RealityKitContent
 struct Directory: View {
 
     var body: some View {
-        VStack {
-            Model3D(named: "Scene", bundle: realityKitContentBundle)
-                .padding(.bottom, 50)
+        NavigationStack {
 
-            Text("Hello, world!")
+            VStack {
+                LabList()
+                    .navigationTitle("Step Into Labs")
+            }
+        }
+        .padding(EdgeInsets(top: 12, leading: 0, bottom: 0, trailing: 0))
+        .ornament(attachmentAnchor: .scene(.top)) {
+            HStack {
+                Text("https://stepinto.vision/category/labs/")
+            }
+            .padding(20)
+            .background(.thickMaterial)
+            .glassBackgroundEffect()
+            .cornerRadius(20)
 
         }
-        .padding()
+
+
+
     }
 }
 
 #Preview(windowStyle: .automatic) {
-    Directory()
-        .environment(AppModel())
+    let modelData = ModelData()
+    return Directory()
+        .environment(modelData)
 }
