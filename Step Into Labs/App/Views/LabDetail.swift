@@ -78,7 +78,7 @@ struct LabDetail: View {
                 }
             }
         }
-        .navigationTitle("Canvatorium Visio")
+        .navigationTitle("Step Into Labs")
     }
 
     func handleWindow() {
