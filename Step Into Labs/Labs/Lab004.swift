@@ -37,8 +37,9 @@ struct Lab004: View {
                                     .padding()
                                     .rotation3DEffect(.degrees(rotation), axis: (x: 0, y: 1, z: 0))
                                     .frame(width: 200, height: 200)
+                                    .shadow(radius: 24)
                                     .opacity(opacity)
-                                    .offset(z: 40)
+                                    .offset(z: 60)
                             }
                             .frame(width: 200, height: 200)
                         }
