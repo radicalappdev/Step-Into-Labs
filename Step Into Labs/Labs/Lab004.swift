@@ -12,6 +12,7 @@
 
 import SwiftUI
 import RealityKit
+
 struct Lab004: View {
     var body: some View {
         GeometryReader { outerGeo in
@@ -24,10 +25,12 @@ struct Lab004: View {
                                 let itemCenterX = geo.frame(in: .global).midX
                                 let distance = abs(itemCenterX - centerX)
                                 let maxDistance = outerGeo.size.width / 2
+
                                 let rotation = -Double(itemCenterX - centerX) / 8
 
-                                // Calculate opacity based on distance
-                                let opacity = max(0.1, 1.0 - (distance / maxDistance))
+                                // Keep full opacity in the central 80% of the screen
+                                let fadeThreshold = maxDistance * 0.4
+                                let opacity = distance < fadeThreshold ? 1.0 : max(0.1, 1.0 - (distance - fadeThreshold) / (maxDistance - fadeThreshold))
 
                                 RoundedRectangle(cornerRadius: 24)
                                     .foregroundStyle(.black)
@@ -47,6 +50,7 @@ struct Lab004: View {
         }
     }
 }
+
 
 
 #Preview {
