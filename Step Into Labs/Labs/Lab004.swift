@@ -2,10 +2,11 @@
 //
 //  Title: Lab004
 //
-//  Subtitle:
+//  Subtitle:Cover Flow Demo
 //
-//  Description:
-//
+//  Description: Taking inspiration from the cover flow article by Paul Hudson, I adapted this for Apple Vision Pro by adding in some offsets and opacity calculations.
+//  Based on "How to create 3D effects like Cover Flow using ScrollView and GeometryReader" by Paul Hudson
+//  https://www.hackingwithswift.com/quick-start/swiftui/how-to-create-3d-effects-like-cover-flow-using-scrollview-and-geometryreader
 //  Type:
 //
 //  Created by Joseph Simpson on 10/6/24.

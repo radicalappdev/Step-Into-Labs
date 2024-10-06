@@ -66,7 +66,7 @@ class ModelData {
              date: Date("10/3/2024"),
              isFeatured: true,
              subtitle: "Cover Flow Demo",
-             description: "")
+             description: "Taking inspiration from the [cover flow article](https://www.hackingwithswift.com/quick-start/swiftui/how-to-create-3d-effects-like-cover-flow-using-scrollview-and-geometryreader) by Paul Hudson, I adapted this for Apple Vision Pro by adding in some offsets and opacity calculations.")
 
 
     ]
