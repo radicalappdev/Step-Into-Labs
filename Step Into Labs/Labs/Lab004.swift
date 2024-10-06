@@ -22,13 +22,19 @@ struct Lab004: View {
                             GeometryReader { geo in
                                 let centerX = outerGeo.size.width / 2
                                 let itemCenterX = geo.frame(in: .global).midX
+                                let distance = abs(itemCenterX - centerX)
+                                let maxDistance = outerGeo.size.width / 2
                                 let rotation = -Double(itemCenterX - centerX) / 8
+
+                                // Calculate opacity based on distance
+                                let opacity = max(0.1, 1.0 - (distance / maxDistance))
 
                                 RoundedRectangle(cornerRadius: 24)
                                     .foregroundStyle(.black)
                                     .padding()
                                     .rotation3DEffect(.degrees(rotation), axis: (x: 0, y: 1, z: 0))
                                     .frame(width: 200, height: 200)
+                                    .opacity(opacity)
                                     .offset(z: 40)
                             }
                             .frame(width: 200, height: 200)
@@ -37,11 +43,11 @@ struct Lab004: View {
                 }
                 .padding(.horizontal, outerGeo.size.width / 2 - 100)
                 .padding(.vertical, outerGeo.size.height / 2 - 100)
-
             }
         }
     }
 }
+
 
 #Preview {
     Lab004()
