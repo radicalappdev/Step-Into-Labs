@@ -2,9 +2,9 @@
 //
 //  Title: Lab005
 //
-//  Subtitle:
+//  Subtitle: Animate Offset & rotation3DEffect
 //
-//  Description:
+//  Description: Using rotation3DEffect along with offset to create a pseudo-3D layout. This is a revamped version of Canvatorium Visio Lab 5006, adapted for Step Into Vision.
 //
 //  Type:
 //
