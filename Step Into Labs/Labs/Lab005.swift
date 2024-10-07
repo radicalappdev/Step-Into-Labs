@@ -26,8 +26,8 @@ struct Lab005: View {
                     .foregroundColor(.stepRed)
                     .cornerRadius(24)
                     .shadow(radius: 20)
-                    .offset(x: isClicked ? -60 : 0)
-                    .offset(z: isClicked ? 60 : 1)
+                    .offset(x: isClicked ? -40 : 0)
+                    .offset(z: isClicked ? 80 : 1)
                     .rotation3DEffect(
                         Angle(degrees: isClicked ? 25 : 0),
                         axis: (x: 0, y: 1, z: 0)
@@ -41,8 +41,8 @@ struct Lab005: View {
                     .foregroundColor(.stepBlue)
                     .cornerRadius(24)
                     .shadow(radius: 20)
-                    .offset(x: isClicked ? 60 : 0)
-                    .offset(z: isClicked ? 60 : 1)
+                    .offset(x: isClicked ? 40 : 0)
+                    .offset(z: isClicked ? 80 : 1)
                     .rotation3DEffect(
                         Angle(degrees: isClicked ? -25 : 0),
                         axis: (x: 0, y: 1, z: 0)
