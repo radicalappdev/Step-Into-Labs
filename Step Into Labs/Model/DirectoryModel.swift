@@ -42,31 +42,38 @@ class ModelData {
 
         Lab(title: "Lab 001",
             type: .WINDOW,
-            date: Date("10/3/2024"),
+            date: Date("10/03/2024"),
             isFeatured: false,
             subtitle: "Example of a 2D Window",
             description: "Testing out the window")
 
         ,Lab(title: "Lab 002",
              type: .VOLUME,
-             date: Date("10/3/2024"),
+             date: Date("10/03/2024"),
              isFeatured: false,
              subtitle: "Example of a 3D Volume",
              description: "Testing out the volume")
 
         ,Lab(title: "Lab 003",
              type: .SPACE,
-             date: Date("10/3/2024"),
+             date: Date("10/03/2024"),
              isFeatured: false,
              subtitle: "Example of anImmersive Space",
              description: "Testing out the immersive space")
 
         ,Lab(title: "Lab 004",
              type: .WINDOW,
-             date: Date("10/3/2024"),
+             date: Date("10/06/2024"),
              isFeatured: true,
              subtitle: "Cover Flow Demo",
              description: "Taking inspiration from the [cover flow article](https://www.hackingwithswift.com/quick-start/swiftui/how-to-create-3d-effects-like-cover-flow-using-scrollview-and-geometryreader) by Paul Hudson, I adapted this for Apple Vision Pro by adding in some offsets and opacity calculations.")
+
+        ,Lab(title: "Lab 005",
+             type: .WINDOW,
+             date: Date("10/07/2024"),
+             isFeatured: true,
+             subtitle: "Animate Offset & rotation3DEffect",
+             description: "Using rotation3DEffect along with offset to create a pseudo-3D layout. This is a revamped version of Canvatorium Visio Lab 5006, adapted for Step Into Vision.")
 
 
     ]
