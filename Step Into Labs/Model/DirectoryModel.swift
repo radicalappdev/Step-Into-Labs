@@ -81,7 +81,7 @@ class ModelData {
              date: Date("10/10/2024"),
              isFeatured: true,
              subtitle: "Stage Manager Concept",
-             description: "What if Apple made Stage Manager available on visionOS as a way to group multiple windows into sets that could be moved around.")
+             description: "What if Apple made Stage Manager available on visionOS as a way to group multiple windows into sets that could be moved around. This is a revamped version of Canvatorium Visio Lab 5032, adapted for Step Into Vision.")
 
 
     ]
