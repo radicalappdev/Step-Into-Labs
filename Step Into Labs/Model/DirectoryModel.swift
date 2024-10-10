@@ -9,6 +9,7 @@ import SwiftUI
 
 enum LabType: String {
     case WINDOW  = "Window Content"
+    case WINDOW_ALT  = "Plain Window Content"
     case VOLUME = "Volume Content"
     case SPACE = "Mixed Immersive Space"
     case SPACE_FULL = "Full Immersive Space"
@@ -76,7 +77,7 @@ class ModelData {
              description: "Using rotation3DEffect along with offset to create a pseudo-3D layout. This is a revamped version of Canvatorium Visio Lab 5006, adapted for Step Into Vision.")
 
         ,Lab(title: "Lab 006",
-             type: .VOLUME,
+             type: .WINDOW_ALT,
              date: Date("10/10/2024"),
              isFeatured: true,
              subtitle: "Stage Manager Concept",

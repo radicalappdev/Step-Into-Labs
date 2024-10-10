@@ -38,6 +38,19 @@ struct StepIntoApp: App {
             return WindowPlacement(.none)
         }
 
+        // 1. Window: Use this window group to open 2D windows with Lab Content based on the Router
+        WindowGroup(id: "RouterWindowAlt", for: String.self, content: { $route in
+            LabRouter(route: $route)
+        })
+        .windowStyle(.plain)
+        .defaultSize(CGSize(width: 680, height: 400))
+        .defaultWindowPlacement { _, context in
+            if let mainWindow = context.windows.first {
+                return WindowPlacement(.trailing(mainWindow))
+            }
+            return WindowPlacement(.none)
+        }
+
         // 2. Volume:  Use this window group to open 3D Volumes
         WindowGroup(id: "RouterVolume", for: String.self, content: { $route in
             let initialSize = Size3D(width: 500, height: 500, depth: 500)

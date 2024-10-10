@@ -69,6 +69,8 @@ struct LabDetail: View {
             Task {
                 if(lab.type == .WINDOW) {
                     handleWindow()
+                } else if (lab.type == .WINDOW_ALT) {
+                    handleWindowAlt()
                 } else if (lab.type == .VOLUME) {
                     handleVolume()
                 } else if (lab.type == .SPACE) {
@@ -88,6 +90,17 @@ struct LabDetail: View {
             showLabContent = false
         } else {
             openWindow(id: "RouterWindow", value: lab.title)
+            labIsOpen = true
+        }
+    }
+
+    func handleWindowAlt() {
+        if(labIsOpen) {
+            dismissWindow(id: "RouterWindowAlt")
+            labIsOpen = false
+            showLabContent = false
+        } else {
+            openWindow(id: "RouterWindowAlt", value: lab.title)
             labIsOpen = true
         }
     }

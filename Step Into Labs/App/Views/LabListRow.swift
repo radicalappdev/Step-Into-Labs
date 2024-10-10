@@ -20,7 +20,7 @@ struct LabListRow: View {
                     .padding(4)
             }
             switch lab.type {
-            case .WINDOW:
+            case .WINDOW, .WINDOW_ALT:
                 Image(systemName: "macwindow")
             case .VOLUME:
                 Image(systemName: "cube.transparent")

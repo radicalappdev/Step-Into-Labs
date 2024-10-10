@@ -18,9 +18,9 @@ struct Lab006: View {
                     ForEach(items[1..<4], id: \.self) { item in
                         Rectangle()
                             .foregroundColor(item)
-                            .cornerRadius(24)
+                            .cornerRadius(12)
                             .shadow(radius: 20)
-                            .frame(width: 260, height: 180)
+                            .frame(width: 100, height: 75)
                             .onTapGesture {
                                 withAnimation(.easeInOut(duration: 0.2)) {
 
@@ -42,10 +42,9 @@ struct Lab006: View {
                     .foregroundColor(items[0])
                     .cornerRadius(24)
                     .shadow(radius: 20)
-                    .frame(width: 900, height: 600)
+                    .frame(width: 400 , height: 300)
 
             }
-            //            .offset(z: 300)
         }
     }
 }
