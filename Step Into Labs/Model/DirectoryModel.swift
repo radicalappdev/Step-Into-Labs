@@ -64,16 +64,23 @@ class ModelData {
         ,Lab(title: "Lab 004",
              type: .WINDOW,
              date: Date("10/06/2024"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Cover Flow Demo",
              description: "Taking inspiration from the [cover flow article](https://www.hackingwithswift.com/quick-start/swiftui/how-to-create-3d-effects-like-cover-flow-using-scrollview-and-geometryreader) by Paul Hudson, I adapted this for Apple Vision Pro by adding in some offsets and opacity calculations.")
 
         ,Lab(title: "Lab 005",
              type: .WINDOW,
              date: Date("10/07/2024"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Animate Offset & rotation3DEffect",
              description: "Using rotation3DEffect along with offset to create a pseudo-3D layout. This is a revamped version of Canvatorium Visio Lab 5006, adapted for Step Into Vision.")
+
+        ,Lab(title: "Lab 006",
+             type: .VOLUME,
+             date: Date("10/10/2024"),
+             isFeatured: true,
+             subtitle: "Stage Manager Concept",
+             description: "What if Apple made Stage Manager available on visionOS as a way to group multiple windows into sets that could be moved around.")
 
 
     ]
