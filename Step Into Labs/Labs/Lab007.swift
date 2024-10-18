@@ -15,9 +15,9 @@ import RealityKit
 
 struct Lab007: View {
 
-    // Set up a tracked entity with an anchor
+    // 1. Set up a tracked entity with an anchor
     // RealityKit will update this in real time
-    // No need to ARKit or hand tracking
+    // No need for ARKit or hand tracking
     @State var handTrackedEntity: Entity = {
         let handAnchor = AnchorEntity(.hand(.left, location: .aboveHand))
         return handAnchor
@@ -26,17 +26,16 @@ struct Lab007: View {
     var body: some View {
         RealityView { content, attachments in
 
+            // Make sure to add the hand tracked entity to the scene graph
             content.add(handTrackedEntity)
 
-
-            // Load the attachment
+            // 3.  Load the attachment
             if let attachmentEntity = attachments.entity(for: "AttachmentContent") {
-
 
                 // Add the billboard component to keep facing the user
                 attachmentEntity.components[BillboardComponent.self] = .init()
 
-                // Add the attachment as a child of the tracked entity
+                // 4.  Add the attachment as a child of the tracked entity
                 handTrackedEntity.addChild(attachmentEntity)
 
             }
@@ -45,24 +44,23 @@ struct Lab007: View {
             // ...
         } attachments: {
 
+            // 2. Create the attachment view
             Attachment(id: "AttachmentContent") {
-                VStack {
-                    Text("Hand anchored menu")
-                        .font(.largeTitle)
-                        .padding(18)
-
+                HStack(spacing: 12) {
                     Button(action: {
-                        print("something happened")
+                        print("Button one pressed")
                     }, label: {
-                        Text("Test")
+                        Text("One")
 
                     })
 
-                }
-                .padding()
-                .glassBackgroundEffect()
-                .cornerRadius(12)
+                    Button(action: {
+                        print("Button two pressed")
+                    }, label: {
+                        Text("Two")
 
+                    })
+                }
             }
 
         }
