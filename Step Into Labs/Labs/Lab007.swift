@@ -46,11 +46,23 @@ struct Lab007: View {
         } attachments: {
 
             Attachment(id: "AttachmentContent") {
-                Text("A Sphere")
-                    .font(.largeTitle)
-                    .padding(18)
-                    .background(.black)
-                    .cornerRadius(12)
+                VStack {
+                    Text("Hand anchored menu")
+                        .font(.largeTitle)
+                        .padding(18)
+
+                    Button(action: {
+                        print("something happened")
+                    }, label: {
+                        Text("Test")
+
+                    })
+
+                }
+                .padding()
+                .glassBackgroundEffect()
+                .cornerRadius(12)
+
             }
 
         }
