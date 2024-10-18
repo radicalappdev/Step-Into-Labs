@@ -59,7 +59,7 @@ class ModelData {
              type: .SPACE,
              date: Date("10/03/2024"),
              isFeatured: false,
-             subtitle: "Example of anImmersive Space",
+             subtitle: "Example of an Immersive Space",
              description: "Testing out the immersive space")
 
         ,Lab(title: "Lab 004",
@@ -79,11 +79,16 @@ class ModelData {
         ,Lab(title: "Lab 006",
              type: .WINDOW_ALT,
              date: Date("10/10/2024"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Stage Manager Concept",
              description: "What if Apple made Stage Manager available on visionOS as a way to group multiple windows into sets that could be moved around. This is a revamped version of Canvatorium Visio Lab 5032, adapted for Step Into Vision.")
 
-
+        ,Lab(title: "Lab 007",
+             type: .SPACE,
+             date: Date("10/17/2024"),
+             isFeatured: true,
+             subtitle: "Anchor an attachment to a hand",
+             description: "TBD")
     ]
 
 }
