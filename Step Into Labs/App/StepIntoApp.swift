@@ -85,6 +85,7 @@ struct StepIntoApp: App {
     }
 
     init() {
-        RealityKitContent.BreathComponent.registerComponent()
+        BreathComponent.registerComponent()
+        BreathSystem.registerSystem()
     }
 }

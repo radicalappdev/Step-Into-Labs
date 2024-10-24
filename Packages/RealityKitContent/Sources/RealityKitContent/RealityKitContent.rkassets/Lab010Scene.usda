@@ -10,12 +10,13 @@
 
 def Xform "Root"
 {
-    def Sphere "Sphere" (
+    reorder nameChildren = ["Sphere_1", "Sphere_2"]
+    def Sphere "Sphere_1" (
         active = true
         prepend apiSchemas = ["MaterialBindingAPI"]
     )
     {
-        rel material:binding = </Root/Sphere/DefaultMaterial>
+        rel material:binding = </Root/Sphere_1/DefaultMaterial>
         double radius = 0.1
         float3 xformOp:translate = (1, 1.5, -2)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
@@ -24,7 +25,7 @@ def Xform "Root"
         {
             token outputs:mtlx:surface
             token outputs:realitykit:vertex
-            prepend token outputs:surface.connect = </Root/Sphere/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+            token outputs:surface.connect = </Root/Sphere_1/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
 
             def Shader "DefaultSurfaceShader"
             {
@@ -45,6 +46,94 @@ def Xform "Root"
 
         def RealityKitCustomComponent "RealityKitContent_BreathComponent"
         {
+            uniform token info:id = "RealityKitContent.BreathComponent"
+        }
+    }
+
+    def Sphere "Sphere_2" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </Root/Sphere_2/DefaultMaterial>
+        double radius = 0.1
+        float2 ui:nodegraph:node:pos = (20, 20)
+        int ui:nodegraph:node:stackingOrder = 1
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (1, 2.2, -2)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:mtlx:surface
+            token outputs:realitykit:vertex
+            token outputs:surface.connect = </Root/Sphere_2/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                float inputs:clearcoat = 1
+                color3f inputs:diffuseColor = (0.12156863, 0.40784314, 0.4117647) (
+                    colorSpace = "lin_srgb"
+                )
+                color3f inputs:emissiveColor = (0.12156863, 0.40784314, 0.4117647) (
+                    colorSpace = "lin_srgb"
+                )
+                float inputs:metallic = 0.4
+                float inputs:opacity = 0.8
+                float inputs:roughness = 0.15
+                token outputs:surface
+            }
+        }
+
+        def RealityKitCustomComponent "RealityKitContent_BreathComponent"
+        {
+            float duration = 2
+            uniform token info:id = "RealityKitContent.BreathComponent"
+        }
+    }
+
+    def Sphere "Sphere_3" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </Root/Sphere_3/DefaultMaterial>
+        double radius = 0.1
+        float2 ui:nodegraph:node:pos = (40, 40)
+        int ui:nodegraph:node:stackingOrder = 2
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (1, 0.8, -2)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:mtlx:surface
+            token outputs:realitykit:vertex
+            token outputs:surface.connect = </Root/Sphere_3/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                float inputs:clearcoat = 1
+                color3f inputs:diffuseColor = (0.12156863, 0.40784314, 0.4117647) (
+                    colorSpace = "lin_srgb"
+                )
+                color3f inputs:emissiveColor = (0.12156863, 0.40784314, 0.4117647) (
+                    colorSpace = "lin_srgb"
+                )
+                float inputs:metallic = 0.4
+                float inputs:opacity = 0.8
+                float inputs:roughness = 0.15
+                token outputs:surface
+            }
+        }
+
+        def RealityKitCustomComponent "RealityKitContent_BreathComponent"
+        {
+            float duration = 8
             uniform token info:id = "RealityKitContent.BreathComponent"
         }
     }
