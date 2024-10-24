@@ -15,51 +15,40 @@ import RealityKit
 
 struct Lab008: View {
 
+    // 1. Create an entity that will be anchored to the head
     @State var headTrackedEntity: Entity = {
         let headAnchor = AnchorEntity(.head)
         return headAnchor
     }()
 
-
     var body: some View {
         RealityView { content, attachments in
 
+            // 2. Create a model to attach to the tracked entity
+            // Set the Z position to push the model away from the user
             let model = ModelEntity(
                 mesh: .generateSphere(radius: 0.1),
                 materials: [SimpleMaterial(color: .black, isMetallic: false)])
-            model.position = SIMD3(x: 0, y: 0, z: -2)
-            model.scale = SIMD3(x: -1, y: 1, z: 1)
+            model.position = SIMD3(x: 0, y: 0, z: -1.5)
+            model.scale = SIMD3(x: -1, y: 1, z: 1) // flip this inside out
 
-            content.add(model)
-
-
-            // Make sure to add the hand tracked entity to the scene graph
-            content.add(headTrackedEntity)
-
-            // 3.  Load the attachment
+            // Bonus: add an attachment to the model
             if let attachmentEntity = attachments.entity(for: "AttachmentContent") {
-
-                attachmentEntity.scale = .init(repeating: 3.0)
-
-                // Add the billboard component to keep facing the user
+                attachmentEntity.scale = .init(repeating: 2.0)
                 attachmentEntity.components[BillboardComponent.self] = .init()
-
-
-                // 4.  Add the attachment as a child of the tracked entity
                 model.addChild(attachmentEntity)
-
             }
-
             headTrackedEntity.addChild(model)
+
+            // 3. Make sure to add the head tracked entity to the scene graph
+            content.add(headTrackedEntity)
 
         } update: { content, attachments in
             //...
         } attachments: {
             Attachment(id: "AttachmentContent") {
-                HStack(spacing: 12) {
-                    Text("👀")
-                        .font(.extraLargeTitle2)
-                }
+                Text("👀")
+                    .font(.extraLargeTitle2)
             }
         }
     }
