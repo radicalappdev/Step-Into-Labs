@@ -89,6 +89,17 @@ class ModelData {
              isFeatured: true,
              subtitle: "Anchor an attachment to a hand",
              description: "TBD")
+
+
+
+
+
+        ,Lab(title: "Lab 010",
+             type: .SPACE,
+             date: Date("10/24/2024"),
+             isFeatured: true,
+             subtitle: "Learning the basics of Systems",
+             description: "TBD")
     ]
 
 }
