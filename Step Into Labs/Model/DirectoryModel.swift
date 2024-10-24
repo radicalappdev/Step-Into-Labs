@@ -90,6 +90,12 @@ class ModelData {
              subtitle: "Anchor an attachment to a hand",
              description: "Create a tracked entity that will update based on the anchor, then child an attachment entity to it. No need for hand tracking or ARKit.")
 
+        ,Lab(title: "Lab 008",
+             type: .SPACE,
+             date: Date("10/24/2024"),
+             isFeatured: true,
+             subtitle: "Anchor an Entity to the head",
+             description: "Create an entity and anchor it to a point in front of the user as they move their head.")
 
 
 
