@@ -46,7 +46,7 @@ def Xform "Root"
 
         def RealityKitCustomComponent "RealityKitContent_BreathComponent"
         {
-            float duration = 8
+            float duration = 4
             uniform token info:id = "RealityKitContent.BreathComponent"
         }
     }
@@ -89,7 +89,7 @@ def Xform "Root"
 
         def RealityKitCustomComponent "RealityKitContent_BreathComponent"
         {
-            float duration = 8
+            float duration = 2
             uniform token info:id = "RealityKitContent.BreathComponent"
         }
     }

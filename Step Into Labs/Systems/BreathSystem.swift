@@ -19,28 +19,33 @@ class BreathSystem: System {
         // Perform required initialization or setup.
     }
 
-    var accumulatedTime: Float = 0.0  // Accumulate total elapsed time
+    var accumulatedTime: [Entity: Float] = [:] // Track accumulated time per entity
 
     func update(context: SceneUpdateContext) {
         for entity in context.entities(
             matching: Self.query,
             updatingSystemWhen: .rendering
         ) {
-            if let breath = entity.components[BreathComponent.self] {
-                let duration = breath.duration  // Total time for one cycle (up + down)
+            guard let breath = entity.components[BreathComponent.self] else { continue }
 
-                // Accumulate delta time across frames
-                accumulatedTime += Float(context.deltaTime)
+            let duration = breath.duration
+            let deltaTime = Float(context.deltaTime)
 
-                // Calculate the phase of the sine wave (0 to 2π), wrapping by duration
-                let phase = (accumulatedTime / duration) * 2.0 * .pi
+            // Accumulate time for this entity
+            accumulatedTime[entity, default: 0.0] += deltaTime
 
-                // Compute the scale to smoothly oscillate between 1.0 and 2.0
-                let scale = 1.5 + 0.5 * sin(phase)  // Range: [1.0, 2.0]
-                print("Breath duration: \(duration), scale: \(scale)")
+            // Calculate the phase of the sine wave (0 to 2π), wrapping by duration
+            let phase = (accumulatedTime[entity]! / duration) * 2.0 * .pi
 
-                // Apply the scale to the entity
-                entity.transform.scale = .init(repeating: scale)
+            // Compute the scale to smoothly oscillate between 1.0 and 2.0
+            let scale = 1.5 + 0.5 * sin(phase)
+
+            // Apply the scale to the entity
+            entity.transform.scale = .init(repeating: scale)
+
+            // Reset accumulated time if a full cycle has passed
+            if accumulatedTime[entity]! >= duration {
+                accumulatedTime[entity] = 0.0
             }
         }
     }
