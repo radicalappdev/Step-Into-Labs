@@ -46,12 +46,12 @@ def Xform "Root"
 
         def RealityKitCustomComponent "RealityKitContent_BreathComponent"
         {
+            float duration = 8
             uniform token info:id = "RealityKitContent.BreathComponent"
         }
     }
 
     def Sphere "Sphere_2" (
-        active = true
         prepend apiSchemas = ["MaterialBindingAPI"]
     )
     {
@@ -89,13 +89,12 @@ def Xform "Root"
 
         def RealityKitCustomComponent "RealityKitContent_BreathComponent"
         {
-            float duration = 2
+            float duration = 8
             uniform token info:id = "RealityKitContent.BreathComponent"
         }
     }
 
     def Sphere "Sphere_3" (
-        active = true
         prepend apiSchemas = ["MaterialBindingAPI"]
     )
     {

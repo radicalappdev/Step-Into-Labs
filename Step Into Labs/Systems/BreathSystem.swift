@@ -19,7 +19,7 @@ class BreathSystem: System {
         // Perform required initialization or setup.
     }
 
-    var accumulatedTime: Float = 0.0  // Store the accumulated time
+    var accumulatedTime: Float = 0.0  // Accumulate total elapsed time
 
     func update(context: SceneUpdateContext) {
         for entity in context.entities(
@@ -27,26 +27,26 @@ class BreathSystem: System {
             updatingSystemWhen: .rendering
         ) {
             if let breath = entity.components[BreathComponent.self] {
-                let duration = breath.duration  // Duration for one full breathing cycle
+                let duration = breath.duration  // Total time for one cycle (up + down)
 
-                // Accumulate delta time to track the total animation progress
+                // Accumulate delta time across frames
                 accumulatedTime += Float(context.deltaTime)
 
-                // Normalize accumulated time within the duration (wrap around after a full cycle)
-                let normalizedTime = accumulatedTime.truncatingRemainder(dividingBy: duration)
+                // Calculate the phase of the sine wave (0 to 2π), wrapping by duration
+                let phase = (accumulatedTime / duration) * 2.0 * .pi
 
-                // Map normalized time to a phase (radians) for smooth sin wave scaling
-                let phase = (normalizedTime / duration) * 2.0 * .pi
+                // Compute the scale to smoothly oscillate between 1.0 and 2.0
+                let scale = 1.5 + 0.5 * sin(phase)  // Range: [1.0, 2.0]
+                print("Breath duration: \(duration), scale: \(scale)")
 
-                // Scale oscillates between 1.0 and 2.0
-                let scale = 1.0 + 0.5 * (1.0 + sin(phase))
-                // print("Breath duration: \(duration), scale: \(scale)")
-
-                // Apply the scale uniformly to the entity
+                // Apply the scale to the entity
                 entity.transform.scale = .init(repeating: scale)
             }
         }
     }
+
+
+
 
 
 
