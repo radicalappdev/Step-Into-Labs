@@ -12,10 +12,18 @@
 
 import SwiftUI
 import RealityKit
+import RealityKitContent
 
 struct Lab010: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        RealityView { content in
+            // Load the scene from the Reality Kit bindle
+            if let scene = try? await Entity(named: "Lab010Scene", in: realityKitContentBundle) {
+                content.add(scene)
+
+
+            }
+        }
     }
 }
 

@@ -17,18 +17,28 @@ def Xform "Root"
     {
         rel material:binding = </Root/Sphere/DefaultMaterial>
         double radius = 0.1
-        float3 xformOp:translate = (0.8, 1, -2)
+        float3 xformOp:translate = (1, 1.5, -2)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         def Material "DefaultMaterial"
         {
+            token outputs:mtlx:surface
+            token outputs:realitykit:vertex
             prepend token outputs:surface.connect = </Root/Sphere/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
 
             def Shader "DefaultSurfaceShader"
             {
                 uniform token info:id = "UsdPreviewSurface"
-                color3f inputs:diffuseColor = (1, 1, 1)
-                float inputs:roughness = 0.75
+                float inputs:clearcoat = 1
+                color3f inputs:diffuseColor = (0.12156863, 0.40784314, 0.4117647) (
+                    colorSpace = "lin_srgb"
+                )
+                color3f inputs:emissiveColor = (0.12156863, 0.40784314, 0.4117647) (
+                    colorSpace = "lin_srgb"
+                )
+                float inputs:metallic = 0.4
+                float inputs:opacity = 0.8
+                float inputs:roughness = 0.15
                 token outputs:surface
             }
         }
