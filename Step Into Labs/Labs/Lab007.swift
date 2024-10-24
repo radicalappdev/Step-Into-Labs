@@ -2,13 +2,15 @@
 //
 //  Title: Lab007
 //
-//  Subtitle:
+//  Subtitle: Anchor an attachment to a hand
 //
-//  Description:
+//  Description: Create a tracked entity that will update based on the anchor, then child an attachment entity to it. No need for hand tracking or ARKit.
 //
-//  Type:
+//  Type: Space
 //
 //  Created by Joseph Simpson on 10/17/24.
+//
+//  Special Thanks to @JohnAdams_IV on X for prompting me to build this lab.
 
 import SwiftUI
 import RealityKit
@@ -23,8 +25,20 @@ struct Lab007: View {
         return handAnchor
     }()
 
+    @State var scaler: Float = 1.0
+    @State var target: Entity?
+
+
     var body: some View {
         RealityView { content, attachments in
+
+            let model = ModelEntity(
+                mesh: .generateSphere(radius: 0.1),
+                materials: [SimpleMaterial(color: .black, isMetallic: false)])
+            model.position = SIMD3(x: 0.8, y: 1, z: -2)
+            target = model
+            content.add(model)
+
 
             // Make sure to add the hand tracked entity to the scene graph
             content.add(handTrackedEntity)
@@ -41,7 +55,10 @@ struct Lab007: View {
             }
 
         } update: { content, attachments in
-            // ...
+
+            print("Scaling target: \(scaler)")
+            target?.scale = .init(repeating: scaler)
+
         } attachments: {
 
             // 2. Create the attachment view
@@ -49,6 +66,7 @@ struct Lab007: View {
                 HStack(spacing: 12) {
                     Button(action: {
                         print("Button one pressed")
+                        scaler -= 0.5
                     }, label: {
                         Text("One")
 
@@ -56,6 +74,7 @@ struct Lab007: View {
 
                     Button(action: {
                         print("Button two pressed")
+                        scaler += 0.5
                     }, label: {
                         Text("Two")
 

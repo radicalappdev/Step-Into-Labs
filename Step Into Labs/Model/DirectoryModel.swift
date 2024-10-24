@@ -88,7 +88,7 @@ class ModelData {
              date: Date("10/17/2024"),
              isFeatured: true,
              subtitle: "Anchor an attachment to a hand",
-             description: "TBD")
+             description: "Create a tracked entity that will update based on the anchor, then child an attachment entity to it. No need for hand tracking or ARKit.")
 
 
 
