@@ -99,7 +99,7 @@ class ModelData {
              date: Date("10/24/2024"),
              isFeatured: true,
              subtitle: "Learning the basics of Systems",
-             description: "TBD")
+             description: "Creating a custom component and system that will add a breathing effect to entities based on the duration entered in the component.")
     ]
 
 }

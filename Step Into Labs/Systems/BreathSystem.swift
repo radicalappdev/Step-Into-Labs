@@ -9,17 +9,19 @@ import Foundation
 import RealityKit
 import RealityKitContent
 
+// This was used by Lab 010 to learn my way around components and systems
 class BreathSystem: System {
 
     // Define a query to return all entities with a BreathComponent.
     private static let query = EntityQuery(where: .has(BreathComponent.self))
 
-
+    // init is required even when not used
     required init(scene: Scene) {
         // Perform required initialization or setup.
     }
 
-    var accumulatedTime: [Entity: Float] = [:] // Track accumulated time per entity
+    // Track accumulated time per entity - this will break if we have a dymaic number of entities
+    var accumulatedTime: [Entity: Float] = [:]
 
     func update(context: SceneUpdateContext) {
         for entity in context.entities(
