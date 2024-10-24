@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import RealityKitContent
 
 @main
 struct StepIntoApp: App {
@@ -81,5 +82,9 @@ struct StepIntoApp: App {
         })
         .immersionStyle(selection: $exampleImmersionStyle, in: .full)
 
+    }
+
+    init() {
+        RealityKitContent.BreathComponent.registerComponent()
     }
 }
