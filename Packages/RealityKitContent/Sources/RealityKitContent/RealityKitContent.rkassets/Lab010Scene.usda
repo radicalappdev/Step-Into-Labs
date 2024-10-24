@@ -31,13 +31,10 @@ def Xform "Root"
             {
                 uniform token info:id = "UsdPreviewSurface"
                 float inputs:clearcoat = 1
-                color3f inputs:diffuseColor = (0.12156863, 0.40784314, 0.4117647) (
-                    colorSpace = "lin_srgb"
+                color3f inputs:diffuseColor = (0.003921569, 0.38039216, 0.41960785) (
+                    colorSpace = "srgb_texture"
                 )
-                color3f inputs:emissiveColor = (0.12156863, 0.40784314, 0.4117647) (
-                    colorSpace = "lin_srgb"
-                )
-                float inputs:metallic = 0.4
+                float inputs:metallic = 0.1
                 float inputs:opacity = 0.8
                 float inputs:roughness = 0.15
                 token outputs:surface
@@ -61,7 +58,7 @@ def Xform "Root"
         int ui:nodegraph:node:stackingOrder = 1
         quatf xformOp:orient = (1, 0, 0, 0)
         float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (1, 2.2, -2)
+        float3 xformOp:translate = (1, 2, -2)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         def Material "DefaultMaterial"
@@ -74,13 +71,10 @@ def Xform "Root"
             {
                 uniform token info:id = "UsdPreviewSurface"
                 float inputs:clearcoat = 1
-                color3f inputs:diffuseColor = (0.12156863, 0.40784314, 0.4117647) (
-                    colorSpace = "lin_srgb"
+                color3f inputs:diffuseColor = (0.41960785, 0.003921569, 0.17254902) (
+                    colorSpace = "srgb_texture"
                 )
-                color3f inputs:emissiveColor = (0.12156863, 0.40784314, 0.4117647) (
-                    colorSpace = "lin_srgb"
-                )
-                float inputs:metallic = 0.4
+                float inputs:metallic = 0.1
                 float inputs:opacity = 0.8
                 float inputs:roughness = 0.15
                 token outputs:surface
@@ -104,7 +98,7 @@ def Xform "Root"
         int ui:nodegraph:node:stackingOrder = 2
         quatf xformOp:orient = (1, 0, 0, 0)
         float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (1, 0.8, -2)
+        float3 xformOp:translate = (1, 1, -2)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         def Material "DefaultMaterial"
@@ -117,13 +111,10 @@ def Xform "Root"
             {
                 uniform token info:id = "UsdPreviewSurface"
                 float inputs:clearcoat = 1
-                color3f inputs:diffuseColor = (0.12156863, 0.40784314, 0.4117647) (
-                    colorSpace = "lin_srgb"
+                color3f inputs:diffuseColor = (0.003921569, 0.17254902, 0.41960785) (
+                    colorSpace = "srgb_texture"
                 )
-                color3f inputs:emissiveColor = (0.12156863, 0.40784314, 0.4117647) (
-                    colorSpace = "lin_srgb"
-                )
-                float inputs:metallic = 0.4
+                float inputs:metallic = 0.1
                 float inputs:opacity = 0.8
                 float inputs:roughness = 0.15
                 token outputs:surface
