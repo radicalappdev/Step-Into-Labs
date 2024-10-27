@@ -97,8 +97,12 @@ class ModelData {
              subtitle: "Anchor an Entity to the head",
              description: "Create an entity and anchor it to a point in front of the user as they move their head.")
 
-
-
+        ,Lab(title: "Lab 009",
+             type: .SPACE,
+             date: Date("10/27/2024"),
+             isFeatured: true,
+             subtitle: "A spooky time for visionOS developers",
+             description: "What really scares us?")
 
         ,Lab(title: "Lab 010",
              type: .SPACE,
