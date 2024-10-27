@@ -2,11 +2,11 @@
 //
 //  Title: Lab009
 //
-//  Subtitle:
+//  Subtitle: A spooky time for visionOS developers
 //
-//  Description:
+//  Description: What really scares us?
 //
-//  Type:
+//  Type: Full Space
 //
 //  Created by Joseph Simpson on 10/27/24.
 
@@ -20,7 +20,6 @@ struct Lab009: View {
         return headAnchor
     }()
 
-
     @State var leftHandTrackedEntity: Entity = {
         let handAnchor = AnchorEntity(.hand(.left, location: .aboveHand))
         return handAnchor
@@ -30,8 +29,6 @@ struct Lab009: View {
         let handAnchor = AnchorEntity(.hand(.right, location: .aboveHand))
         return handAnchor
     }()
-
-
 
     var body: some View {
         RealityView { content, attachments in
@@ -92,7 +89,7 @@ struct Lab009: View {
         }
         .frame(width: 960 , height: 520  )
         .background(.gray)
-        .clipShape(.rect(cornerRadius: 24))
+        .clipShape(.rect(cornerRadius: 12))
     }
 
     var inputLost: some View {
@@ -101,6 +98,7 @@ struct Lab009: View {
                 .foregroundStyle(.white)
             VStack(alignment: .leading) {
                 Text("Input temporarily not working")
+                    .font(.headline)
                 Text("Trying to reconnect, please wait")
             }
         }
