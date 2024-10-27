@@ -97,8 +97,8 @@ struct Lab009: View {
 
     var inputLost: some View {
         HStack {
-            Image(systemName: "exclamationmark.triangle")
-                .foregroundStyle(.yellow)
+            Image(systemName: "exclamationmark.triangle.fill")
+                .foregroundStyle(.white)
             VStack(alignment: .leading) {
                 Text("Input temporarily not working")
                 Text("Trying to reconnect, please wait")
