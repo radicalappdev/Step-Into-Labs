@@ -64,44 +64,49 @@ struct Lab009: View {
         } attachments: {
 
             Attachment(id: "AttachmentHead") {
-                VStack(spacing: 12) {
-                    Text("Lost Connection")
-                        .font(.extraLargeTitle2)
-                    Text("The session will resume automatically when the connection improves.")
-                    Button("Close") {
-                        print("Reconnecting...")
-                    }
-                    .buttonBorderShape(.roundedRectangle(radius: 12))
-                    .background(.gray)
-
-                }
-                .frame(width: 960 , height: 520  )
-                .background(.gray)
-                .clipShape(.rect(cornerRadius: 24))
+                connectionLost
             }
 
             Attachment(id: "AttachmentLeftHand") {
-                HStack {
-                    Image(systemName: "exclamationmark.triangle")
-                        .foregroundStyle(.yellow)
-                    VStack(alignment: .leading) {
-                        Text("Input temporarily not working")
-                        Text("Trying to reconnect, please wait")
-                    }
-                }
-                .padding()
-                .glassBackgroundEffect()
-                .clipShape(.capsule(style: .circular))
+                inputLost
             }
 
             Attachment(id: "AttachmentRightHand") {
-                VStack(spacing: 12) {
-                    Text("Right Hand")
-                }
-                .padding()
+                inputLost
             }
 
         }
+    }
+
+    var connectionLost: some View {
+        VStack(spacing: 12) {
+            Text("Lost Connection")
+                .font(.extraLargeTitle2)
+            Text("The session will resume automatically when the connection improves.")
+            Button("Close") {
+                print("Reconnecting...")
+            }
+            .buttonBorderShape(.roundedRectangle(radius: 12))
+            .background(.gray)
+
+        }
+        .frame(width: 960 , height: 520  )
+        .background(.gray)
+        .clipShape(.rect(cornerRadius: 24))
+    }
+
+    var inputLost: some View {
+        HStack {
+            Image(systemName: "exclamationmark.triangle")
+                .foregroundStyle(.yellow)
+            VStack(alignment: .leading) {
+                Text("Input temporarily not working")
+                Text("Trying to reconnect, please wait")
+            }
+        }
+        .padding()
+        .glassBackgroundEffect()
+        .clipShape(.capsule(style: .circular))
     }
 }
 
