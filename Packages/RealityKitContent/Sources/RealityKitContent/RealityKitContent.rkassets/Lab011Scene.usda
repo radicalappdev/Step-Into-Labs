@@ -103,6 +103,29 @@ def Xform "Root"
         float3 xformOp:scale = (0.9999997, 0.049999982, 0.9999997)
         float3 xformOp:translate = (0, 1.0000181, -1)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (2, 2, 2)
+                token shapeType = "Box"
+
+                def RealityKitStruct "pose"
+                {
+                }
+            }
+        }
     }
 
     def Cube "Wall_3" (
@@ -149,7 +172,7 @@ def Xform "Root"
     {
         rel material:binding = </Root/Subject/DefaultMaterial>
         double radius = 0.2
-        float3 xformOp:translate = (0, 1, -1)
+        float3 xformOp:translate = (0, 1.5, -1)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         def Material "DefaultMaterial"
