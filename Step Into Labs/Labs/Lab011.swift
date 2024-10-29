@@ -12,10 +12,16 @@
 
 import SwiftUI
 import RealityKit
+import RealityKitContent
 
 struct Lab011: View {
     var body: some View {
         RealityView { content, attachments in
+
+            if let scene = try? await Entity(named: "Lab011Scene", in: realityKitContentBundle) {
+                content.add(scene)
+
+            }
 
         } update: { content, attachments in
 
