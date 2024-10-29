@@ -1,0 +1,169 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 2.0 (448.0.16.0.3)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    reorder nameChildren = ["MaplePlywood", "GlossyBlackWoodPlank", "Wall_0", "Wall_1", "Wall_2", "Wall_3", "Roof", "Subject", "Floor"]
+    def Cube "Floor" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </Root/GlossyBlackWoodPlank> (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        double size = 2
+        float3 xformOp:scale = (1, 0.05, 1)
+        float3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "MaplePlywood" (
+        active = true
+        references = @Materials/MaplePlywood.usdz@
+    )
+    {
+        color3f inputs:Basecolor_Tint = (0.99215686, 0.98039216, 0.98039216) (
+            colorSpace = "srgb_displayp3"
+        )
+    }
+
+    def "GlossyBlackWoodPlank" (
+        active = true
+        references = @Materials/GlossyBlackWoodPlank.usdz@
+    )
+    {
+        color3f inputs:Basecolor_Tint = (0.83137256, 0.73333335, 0.73333335) (
+            colorSpace = "srgb_displayp3"
+        )
+    }
+
+    def Cube "Wall_0" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (0, 0, 1.5707964)
+        }
+    )
+    {
+        rel material:binding = </Root/MaplePlywood> (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        double size = 2
+        float2 ui:nodegraph:node:pos = (32.36331, 471.47977)
+        int ui:nodegraph:node:stackingOrder = 1
+        quatf xformOp:orient = (0.70710677, 0, 0, 0.70710677)
+        float3 xformOp:scale = (1, 0.05, 1)
+        float3 xformOp:translate = (1, 1.0000125, 4.2282045e-7)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def Cube "Wall_1" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (0, 0, 1.5707964)
+        }
+    )
+    {
+        rel material:binding = </Root/MaplePlywood> (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        double size = 2
+        float2 ui:nodegraph:node:pos = (52.36331, 491.47977)
+        int ui:nodegraph:node:stackingOrder = 2
+        quatf xformOp:orient = (0.70710677, 0, 0, 0.70710677)
+        float3 xformOp:scale = (0.9999998, 0.04999999, 0.9999998)
+        float3 xformOp:translate = (-1, 1.0000125, 4.2282045e-7)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def Cube "Wall_2" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (1.5707964, 0, 1.5707964)
+        }
+    )
+    {
+        rel material:binding = </Root/MaplePlywood> (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        double size = 2
+        float2 ui:nodegraph:node:pos = (72.36331, 511.47977)
+        int ui:nodegraph:node:stackingOrder = 3
+        quatf xformOp:orient = (0.5, 0.5, 0.5, 0.5)
+        float3 xformOp:scale = (0.9999997, 0.049999982, 0.9999997)
+        float3 xformOp:translate = (0, 1.0000181, -1)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def Cube "Wall_3" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (1.5707964, 0, 1.5707964)
+        }
+    )
+    {
+        rel material:binding = </Root/MaplePlywood> (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        double size = 2
+        float2 ui:nodegraph:node:pos = (92.36331, 531.47974)
+        int ui:nodegraph:node:stackingOrder = 4
+        quatf xformOp:orient = (0.5, 0.49999994, 0.5, 0.5)
+        float3 xformOp:scale = (0.9999997, 0.049999982, 0.9999997)
+        float3 xformOp:translate = (-5.9604645e-8, 1.0000175, 1)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def Cube "Roof" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </Root/GlossyBlackWoodPlank> (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        double size = 2
+        float2 ui:nodegraph:node:pos = (32.36331, 471.47977)
+        int ui:nodegraph:node:stackingOrder = 1
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (1, 0.05, 1)
+        float3 xformOp:translate = (0, 2, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def Sphere "Subject" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </Root/Subject/DefaultMaterial>
+        double radius = 0.3
+        float3 xformOp:translate = (0, 1, -1)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/Subject/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+    }
+}
+

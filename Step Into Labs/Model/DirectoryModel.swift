@@ -110,6 +110,13 @@ class ModelData {
              isFeatured: true,
              subtitle: "Learning the basics of Systems",
              description: "Creating a custom component and system that will add a breathing effect to entities based on the duration entered in the component.")
+
+        ,Lab(title: "Lab 011",
+             type: .SPACE,
+             date: Date("10/29/2024"),
+             isFeatured: true,
+             subtitle: "Playing with Occlusion Material",
+             description: "Making myself a little fort and playing with occlusion material.")
     ]
 
 }
