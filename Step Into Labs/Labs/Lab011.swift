@@ -45,10 +45,8 @@ struct Lab011: View {
 
     var tapExample: some Gesture {
         TapGesture()
-            .targetedToAnyEntity() // 3. make sure to use this line to target entities
+            .targetedToAnyEntity()
             .onEnded { value in
-                print("TAPPED", value.entity.name)
-
                 if(value.entity.name == "Wall_2") {
                     subjectEntity?.isEnabled = !subjectEntity!.isEnabled
                 }
@@ -59,20 +57,14 @@ struct Lab011: View {
         DragGesture()
             .targetedToAnyEntity()
             .onChanged { value in
-
                 if(value.entity.name == "Subject") {
-
                     let newPost = value.convert(value.location3D, from: .local, to: .scene)
-
-                    // Clamp the values in both X and Y
                     value.entity.position.x = min(max(newPost.x, -0.8), 0.8)
                     value.entity.position.y = min(max(newPost.y, 0.2), 1.8)
                 }
-
             }
             .onEnded { value in
                 // do something
-
             }
     }
 }
