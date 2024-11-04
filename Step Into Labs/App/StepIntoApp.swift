@@ -84,8 +84,4 @@ struct StepIntoApp: App {
 
     }
 
-    init() {
-        BreathComponent.registerComponent()
-        BreathSystem.registerSystem()
-    }
 }

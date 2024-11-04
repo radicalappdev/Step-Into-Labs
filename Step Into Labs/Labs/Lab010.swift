@@ -15,6 +15,12 @@ import RealityKit
 import RealityKitContent
 
 struct Lab010: View {
+
+    init() {
+        BreathComponent.registerComponent()
+        BreathSystem.registerSystem()
+    }
+    
     var body: some View {
         RealityView { content in
             // Load the scene from the Reality Kit bindle

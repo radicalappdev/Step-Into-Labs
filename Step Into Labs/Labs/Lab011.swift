@@ -32,6 +32,8 @@ struct Lab011: View {
                     subjectEntity = subject
                 }
 
+
+
             }
 
         } update: { content, attachments in
