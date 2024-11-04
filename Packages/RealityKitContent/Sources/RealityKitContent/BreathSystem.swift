@@ -11,6 +11,7 @@ import Foundation
 // Added to teach myself ECS in visionOS starting with Lab 010
 public struct BreathComponent: Component, Codable {
 
+    public var accumulatedTime: Float = 0
     public var duration: Float = 4.0
 
     public init() {
@@ -38,16 +39,16 @@ public class BreathSystem: System {
             matching: Self.query,
             updatingSystemWhen: .rendering
         ) {
-            guard let breath = entity.components[BreathComponent.self] else { continue }
 
+            // Get the component
+            var breath = entity.components[BreathComponent.self]!
             let duration = breath.duration
-            let deltaTime = Float(context.deltaTime)
 
-            // Accumulate time for this entity
-            accumulatedTime[entity, default: 0.0] += deltaTime
+            // Accumulate time for this entity and set the new value on the component
+            breath.accumulatedTime += Float(context.deltaTime)
 
             // Calculate the phase of the sine wave (0 to 2π), wrapping by duration
-            let phase = (accumulatedTime[entity]! / duration) * 2.0 * .pi
+            let phase = (breath.accumulatedTime / duration) * 2.0 * .pi
 
             // Compute the scale to smoothly oscillate between 1.0 and 2.0
             let scale = 1.5 + 0.5 * sin(phase)
@@ -56,9 +57,14 @@ public class BreathSystem: System {
             entity.transform.scale = .init(repeating: scale)
 
             // Reset accumulated time if a full cycle has passed
-            if accumulatedTime[entity]! >= duration {
-                accumulatedTime[entity] = 0.0
+            if breath.accumulatedTime >= duration {
+                breath.accumulatedTime = 0.0
             }
+
+            entity.components[BreathComponent.self] = breath
+
+
+
         }
     }
 
