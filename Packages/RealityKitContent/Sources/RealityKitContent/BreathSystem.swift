@@ -11,8 +11,11 @@ import Foundation
 // Added to teach myself ECS in visionOS starting with Lab 010
 public struct BreathComponent: Component, Codable {
 
-    public var accumulatedTime: Float = 0
+    /// The time it will take for a full cycle of the breath animation
     public var duration: Float = 4.0
+
+    /// Store accumation time used for the breath animation
+    public var accumulatedTime: Float = 0
 
     public init() {
 
@@ -31,9 +34,6 @@ public class BreathSystem: System {
         // Perform required initialization or setup.
     }
 
-    // Track accumulated time per entity - this will break if we have a dymaic number of entities
-    var accumulatedTime: [Entity: Float] = [:]
-
     public func update(context: SceneUpdateContext) {
         for entity in context.entities(
             matching: Self.query,
@@ -41,7 +41,8 @@ public class BreathSystem: System {
         ) {
 
             // Get the component
-            var breath = entity.components[BreathComponent.self]!
+            guard var breath = entity.components[BreathComponent.self] else { continue }
+
             let duration = breath.duration
 
             // Accumulate time for this entity and set the new value on the component
@@ -62,8 +63,6 @@ public class BreathSystem: System {
             }
 
             entity.components[BreathComponent.self] = breath
-
-
 
         }
     }
