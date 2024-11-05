@@ -117,6 +117,13 @@ class ModelData {
              isFeatured: true,
              subtitle: "Playing with Occlusion Material",
              description: "Making myself a little fort and playing with occlusion material.")
+
+        ,Lab(title: "Lab 012",
+             type: .SPACE,
+             date: Date("11/05/2024"),
+             isFeatured: true,
+             subtitle: "I'll be in my box",
+             description: "But I can still see you!")
     ]
 
 }
