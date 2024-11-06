@@ -16,7 +16,11 @@ import RealityKitContent
 
 struct Lab012: View {
 
-    @State var subjectEntity: Entity? = nil
+
+    @State var handTrackedEntity: Entity = {
+        let handAnchor = AnchorEntity(.hand(.left, location: .palm))
+        return handAnchor
+    }()
 
     var body: some View {
         RealityView { content, attachments in
@@ -24,14 +28,14 @@ struct Lab012: View {
             if let scene = try? await Entity(named: "Lab012Scene", in: realityKitContentBundle) {
                 content.add(scene)
 
+
                 if let subject = scene.findEntity(named: "Subject") {
+                    subject.components[BillboardComponent.self] = .init()
 
-                    let mat = OcclusionMaterial()
-                    subject.components[ModelComponent.self]?.materials[0] = mat
-                    subject.isEnabled = false
-                    subjectEntity = subject
+                    handTrackedEntity.addChild(subject)
+                    content.add(handTrackedEntity)
+
                 }
-
 
 
             }
@@ -41,33 +45,6 @@ struct Lab012: View {
         } attachments: {
 
         }
-        .gesture(tapExample)
-        .gesture(dragGesture)
-    }
-
-    var tapExample: some Gesture {
-        TapGesture()
-            .targetedToAnyEntity()
-            .onEnded { value in
-                if(value.entity.name == "Wall_2") {
-                    subjectEntity?.isEnabled = !subjectEntity!.isEnabled
-                }
-            }
-    }
-
-    var dragGesture: some Gesture {
-        DragGesture()
-            .targetedToAnyEntity()
-            .onChanged { value in
-                if(value.entity.name == "Subject") {
-                    let newPost = value.convert(value.location3D, from: .local, to: .scene)
-                    value.entity.position.x = min(max(newPost.x, -0.8), 0.8)
-                    value.entity.position.y = min(max(newPost.y, 0.2), 1.8)
-                }
-            }
-            .onEnded { value in
-                // do something
-            }
     }
 }
 

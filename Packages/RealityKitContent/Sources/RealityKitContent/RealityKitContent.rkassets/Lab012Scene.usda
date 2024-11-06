@@ -10,7 +10,7 @@
 
 def Xform "Root"
 {
-    reorder nameChildren = ["Floor", "GlossyBlackWoodPlank", "MaplePlywood", "Roof", "Wall_0", "Wall_1", "Wall_2", "Wall_3", "MyBox", "Timeline"]
+    reorder nameChildren = ["Floor", "GlossyBlackWoodPlank", "MaplePlywood", "MyBox", "Timeline", "Subject", "OccMaterial"]
     def Cube "Floor" (
         active = true
         prepend apiSchemas = ["MaterialBindingAPI"]
@@ -238,6 +238,223 @@ def Xform "Root"
                 def RealityKitStruct "timingFunction"
                 {
                     token type = "easeInOut"
+                }
+            }
+        }
+    }
+
+    def "Subject" (
+        active = true
+        references = @MagnifyingGlass.usdz@
+    )
+    {
+        reorder nameChildren = ["geom", "SubjectGlass"]
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "geom"
+        {
+            over "realistic"
+            {
+                over "materials"
+                {
+                    over "magnifying_glass_realistic_01_matsg"
+                    {
+                        string inputs:file20:varname (
+                            customData = {
+                                dictionary realitykit = {
+                                    float2 positionInSubgraph = (438.25, 709.5)
+                                }
+                            }
+                        )
+                        string inputs:file21:varname (
+                            customData = {
+                                dictionary realitykit = {
+                                    float2 positionInSubgraph = (657.25, 709.5)
+                                }
+                            }
+                        )
+                        string inputs:file22:varname (
+                            customData = {
+                                dictionary realitykit = {
+                                    float2 positionInSubgraph = (877.75, 709.5)
+                                }
+                            }
+                        )
+                        string inputs:file23:varname (
+                            customData = {
+                                dictionary realitykit = {
+                                    float2 positionInSubgraph = (1098.75, 709.5)
+                                }
+                            }
+                        )
+                        token outputs:realitykit:vertex
+                        float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (1432, 281)
+
+                        over "file23_mtlx"
+                        {
+                            float2 ui:nodegraph:node:pos = (892.25, 261)
+                        }
+
+                        over "file20_mtlx_offset"
+                        {
+                            float2 ui:nodegraph:node:pos = (892.25, 82.5)
+                        }
+
+                        over "Lookup_st"
+                        {
+                            float2 ui:nodegraph:node:pos = (91, 313)
+                        }
+
+                        over "file20_mtlx"
+                        {
+                            float2 ui:nodegraph:node:pos = (350, 100.5)
+                        }
+
+                        over "file20_mtlx_scale"
+                        {
+                            float2 ui:nodegraph:node:pos = (622.75, 100.5)
+                        }
+
+                        over "file22_mtlx"
+                        {
+                            float2 ui:nodegraph:node:pos = (350, 521.5)
+                        }
+
+                        over "magnifying_glass_realistic_glass_mat_mtlx"
+                        {
+                            float2 ui:nodegraph:node:pos = (1162, 281)
+                        }
+
+                        over "file21_mtlx"
+                        {
+                            float2 ui:nodegraph:node:pos = (622.75, 431.5)
+                        }
+                    }
+
+                    over "magnifying_glass_realistic_01_mat_sg"
+                    {
+                        string inputs:file6:varname (
+                            customData = {
+                                dictionary realitykit = {
+                                    float2 positionInSubgraph = (338.5, 1014.5)
+                                }
+                            }
+                        )
+                        string inputs:file7:varname (
+                            customData = {
+                                dictionary realitykit = {
+                                    float2 positionInSubgraph = (550, 1014.5)
+                                }
+                            }
+                        )
+                        string inputs:file8:varname (
+                            customData = {
+                                dictionary realitykit = {
+                                    float2 positionInSubgraph = (763.5, 1014.5)
+                                }
+                            }
+                        )
+                        string inputs:file9:varname (
+                            customData = {
+                                dictionary realitykit = {
+                                    float2 positionInSubgraph = (976.5, 1014.5)
+                                }
+                            }
+                        )
+                        string inputs:file15:varname (
+                            customData = {
+                                dictionary realitykit = {
+                                    float2 positionInSubgraph = (1195.5, 1014.5)
+                                }
+                            }
+                        )
+                        token outputs:realitykit:vertex
+                        float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (1432, 465.5)
+
+                        over "magnifying_glass_realistic_mat_mtlx"
+                        {
+                            float2 ui:nodegraph:node:pos = (1162, 465.5)
+                        }
+
+                        over "file7_mtlx"
+                        {
+                            float2 ui:nodegraph:node:pos = (892.25, 315)
+                        }
+
+                        over "file9_mtlx_scale"
+                        {
+                            float2 ui:nodegraph:node:pos = (622.75, 100.5)
+                        }
+
+                        over "file9_mtlx"
+                        {
+                            float2 ui:nodegraph:node:pos = (350, 100.5)
+                        }
+
+                        over "file6_mtlx"
+                        {
+                            float2 ui:nodegraph:node:pos = (350, 656)
+                        }
+
+                        over "file8_mtlx"
+                        {
+                            float2 ui:nodegraph:node:pos = (622.75, 826.5)
+                        }
+
+                        over "Lookup_st"
+                        {
+                            float2 ui:nodegraph:node:pos = (91, 465.5)
+                        }
+
+                        over "file9_mtlx_offset"
+                        {
+                            float2 ui:nodegraph:node:pos = (892.25, 100.5)
+                        }
+
+                        over "file15_mtlx"
+                        {
+                            float2 ui:nodegraph:node:pos = (622.75, 485.5)
+                        }
+                    }
+                }
+            }
+        }
+
+        def Cylinder "SubjectGlass" (
+            active = true
+            prepend apiSchemas = ["MaterialBindingAPI"]
+            customData = {
+                float3 rotationEulerHint = (1.5707964, 0, 0)
+            }
+        )
+        {
+            reorder nameChildren = ["DefaultMaterial", "OccMaterial"]
+            uniform token axis = "Y"
+            double height = 0.017
+            rel material:binding = </Root/Subject/SubjectGlass/OccMaterial> (
+                bindMaterialAs = "weakerThanDescendants"
+            )
+            double radius = 0.048
+            quatf xformOp:orient = (0.70710677, 0.7071067, 0, 0)
+            float3 xformOp:scale = (0.99999994, 0.99999994, 0.99999994)
+            float3 xformOp:translate = (8.032657e-9, 0.179, 8.96398e-9)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def Material "OccMaterial"
+            {
+                token outputs:mtlx:surface.connect = </Root/Subject/SubjectGlass/OccMaterial/OcclusionSurface.outputs:out>
+                token outputs:realitykit:vertex
+                float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (335.25, 100.5)
+
+                def Shader "OcclusionSurface"
+                {
+                    uniform token info:id = "ND_realitykit_occlusion_surfaceshader"
+                    token outputs:out
+                    float2 ui:nodegraph:node:pos = (-166.6914, 36.13672)
+                    int ui:nodegraph:node:stackingOrder = 6
                 }
             }
         }
