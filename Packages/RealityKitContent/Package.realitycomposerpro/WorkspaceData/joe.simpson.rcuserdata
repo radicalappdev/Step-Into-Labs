@@ -1,10 +1,11 @@
 {
-  "advancedEditorSelectedIdentifier" : "ShaderGraphEditorPluginID",
+  "advancedEditorSelectedIdentifier" : "ProjectBrowser",
   "openSceneRelativePaths" : [
     "Immersive.usda",
     "Scene.usda",
     "Lab011Scene.usda",
-    "Lab012Scene.usda"
+    "Lab012Scene.usda",
+    "Lab010Scene.usda"
   ],
   "recentIdentifiers" : {
     "2A0E68BB-1D35-4AF2-9835-3F346F1688E6" : [
@@ -19,6 +20,28 @@
   },
   "sceneCameraHistory" : {
     "2A0E68BB-1D35-4AF2-9835-3F346F1688E6" : [
+      {
+        "date" : 753062386.607864,
+        "title" : "Untitled",
+        "transform" : [
+          0.9997426,
+          8.004386e-11,
+          -0.022683708,
+          0,
+          -0.002988437,
+          0.99128383,
+          -0.13170986,
+          0,
+          0.02248599,
+          0.1317438,
+          0.9910287,
+          0,
+          0.23597062,
+          1.2213674,
+          0.45245793,
+          1
+        ]
+      },
       {
         "date" : 751459318.032888,
         "title" : "Untitled",
@@ -556,5 +579,5 @@
   "sceneViewportBackgroundColors" : {
 
   },
-  "selectedSceneRelativePath" : "Lab012Scene.usda"
+  "selectedSceneRelativePath" : "Lab010Scene.usda"
 }

@@ -124,6 +124,13 @@ class ModelData {
              isFeatured: true,
              subtitle: "I'll be in my box",
              description: "But I can still see you!")
+
+        ,Lab(title: "Lab 013",
+             type: .SPACE,
+             date: Date("11/11/2024"),
+             isFeatured: true,
+             subtitle: "Using targetedToEntity with a Query",
+             description: "Instead of using the broad targetedToAnyEntity modifier, let's try to use targetedToEntity to query components with a custom component.")
     ]
 
 }
