@@ -127,7 +127,7 @@ class ModelData {
 
         ,Lab(title: "Lab 013",
              type: .SPACE,
-             date: Date("11/11/2024"),
+             date: Date("11/12/2024"),
              isFeatured: true,
              subtitle: "Using targetedToEntity with a Query",
              description: "Instead of using the broad targetedToAnyEntity modifier, let's try to use targetedToEntity to query components with a custom component.")

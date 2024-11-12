@@ -6,9 +6,9 @@
 //
 //  Description: Instead of using the broad targetedToAnyEntity modifier, let's try to use targetedToEntity to query components with a custom component.
 //
-//  Type:
+//  Type: Space
 //
-//  Created by Joseph Simpson on 11/11/24.
+//  Created by Joseph Simpson on 11/12/24.
 
 import SwiftUI
 import RealityKit
@@ -17,34 +17,35 @@ import RealityKitContent
 struct Lab013: View {
 
     init() {
-        BreathComponent.registerComponent()
-        BreathSystem.registerSystem()
+        // Make sure to register the component!
+        AllowGestures.registerComponent()
     }
 
     var body: some View {
         RealityView { content in
-            // Load the scene from the Reality Kit bindle
-            if let scene = try? await Entity(named: "Lab010Scene", in: realityKitContentBundle) {
+
+            // Load the scene from the Reality Kit bundle
+            if let scene = try? await Entity(named: "Lab013Scene", in: realityKitContentBundle) {
                 content.add(scene)
 
+                // Contains a red sphere and a green sphere. Only the green sphere has the new component.
 
-                // The scene contains three entities with the new component, all with different duration values.
-
-                // The more spheres will load on the right. These do not have the Breath Component.
             }
         }
         .gesture(tapExample)
     }
 
-    // Create our gesture
     var tapExample: some Gesture {
         TapGesture()
-        // Make sure to use this line to target entities with a custom component
-            .targetedToEntity(where: .has(BreathComponent.self))
+        // We can target the gesture only on entites with the AllowGestures component.
+            .targetedToEntity(where: .has(AllowGestures.self))
             .onEnded { value in
-                value.entity.position.x += 0.5
+
+                // Just a bit of visual feedback that the gesture is firing
+                value.entity.position.y += 0.1
             }
     }
+
 }
 
 #Preview {

@@ -5,13 +5,17 @@
     "Scene.usda",
     "Lab011Scene.usda",
     "Lab012Scene.usda",
-    "Lab010Scene.usda"
+    "Lab010Scene.usda",
+    "Lab013Scene.usda"
   ],
   "recentIdentifiers" : {
     "2A0E68BB-1D35-4AF2-9835-3F346F1688E6" : [
 
     ],
     "4E7393D3-3FFC-4BFB-8AC2-9243FE94CF44" : [
+
+    ],
+    "835B1610-AB22-4775-95C9-44CD41AE334E" : [
 
     ],
     "90C235E0-C99C-42E7-9D0D-5E131743A0A7" : [
@@ -353,6 +357,30 @@
         ]
       }
     ],
+    "835B1610-AB22-4775-95C9-44CD41AE334E" : [
+      {
+        "date" : 753141218.028161,
+        "title" : "Untitled",
+        "transform" : [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0.7071069,
+          -0.70710677,
+          0,
+          0,
+          0.70710677,
+          0.7071069,
+          0,
+          -0.09382945,
+          2.620812,
+          1.0367687,
+          1
+        ]
+      }
+    ],
     "90C235E0-C99C-42E7-9D0D-5E131743A0A7" : [
       {
         "date" : 752537551.753999,
@@ -579,5 +607,5 @@
   "sceneViewportBackgroundColors" : {
 
   },
-  "selectedSceneRelativePath" : "Lab010Scene.usda"
+  "selectedSceneRelativePath" : "Lab013Scene.usda"
 }
