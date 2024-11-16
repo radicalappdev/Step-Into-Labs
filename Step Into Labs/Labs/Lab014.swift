@@ -88,6 +88,8 @@ fileprivate struct IndirectTransformGesture: ViewModifier {
         vector: .init(repeating: 0.0)
     )
 
+    @State var rotation: Angle = .zero
+
     func body(content: Content) -> some View {
         content
             .gesture(
@@ -115,8 +117,28 @@ fileprivate struct IndirectTransformGesture: ViewModifier {
                             value.entity.position.x = posX
                             value.entity.position.z = posZ
 
-                        case .rotate: break
-                        case .scale: break
+                        case .rotate:
+                            // Just a hack to rotate by *something* from the drag gesture. I'm sure there is a better way.
+                            rotation.degrees += 0.01 * (value.velocity.width)
+                            let rotationTransform = Transform(yaw: Float(rotation.radians))
+
+                            value.entity.transform.rotation = initialOrientation * rotationTransform.rotation
+                        case .scale:
+
+                            // A hack to get some value from the gesture that we can use to scale
+                            let magnification = 0.01 * Float(value.translation3D.length.magnitude)
+                            let scaler = magnification + initialScale.x
+
+                            // Clamp scale values for each axis independently
+                            let minScale: Float = 0.25
+                            let maxScale: Float = 3
+                            let newScaler: Float = min(max(scaler, minScale), maxScale)
+
+                            // Apply the clamped scale to the entity
+                            value.entity.setScale(
+                                .init(repeating: newScaler),
+                                relativeTo: value.entity.parent!
+                            )
                         case .none: break
                         }
 
