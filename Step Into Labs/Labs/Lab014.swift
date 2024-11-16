@@ -126,7 +126,7 @@ fileprivate struct IndirectTransformGesture: ViewModifier {
                         case .scale:
 
                             // A hack to get some value from the gesture that we can use to scale
-                            let magnification = 0.01 * Float(value.translation3D.length.magnitude)
+                            let magnification = 0.01 * Float(value.gestureValue.translation3D.x)
                             let scaler = magnification + initialScale.x
 
                             // Clamp scale values for each axis independently
