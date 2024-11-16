@@ -107,9 +107,14 @@ fileprivate struct IndirectTransformGesture: ViewModifier {
                         case .move:
                             // Calculate vector by which to move the entity
                             let movement = value.convert(value.gestureValue.translation3D, from: .local, to: .scene)
+                            // Add the two vectors and clamp the result to keep the entity in the volume. Ignore the Y axis
+                            let newPostion = initialPosition + movement
+                            let limit: Float = 0.25
+                            let posX = min(max(newPostion.x, -limit), limit)
+                            let posZ = min(max(newPostion.z, -limit), limit)
+                            value.entity.position.x = posX
+                            value.entity.position.z = posZ
 
-                            // Add the initial position and the movement to get the new position
-                            value.entity.position = initialPosition + movement
                         case .rotate: break
                         case .scale: break
                         case .none: break
