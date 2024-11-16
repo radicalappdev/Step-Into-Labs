@@ -6,7 +6,8 @@
     "Lab011Scene.usda",
     "Lab012Scene.usda",
     "Lab010Scene.usda",
-    "Lab013Scene.usda"
+    "Lab013Scene.usda",
+    "GestureLabs.usda"
   ],
   "recentIdentifiers" : {
     "2A0E68BB-1D35-4AF2-9835-3F346F1688E6" : [
@@ -19,6 +20,9 @@
 
     ],
     "90C235E0-C99C-42E7-9D0D-5E131743A0A7" : [
+
+    ],
+    "C5B50F83-0F34-4891-8072-A6408510F3B3" : [
 
     ]
   },
@@ -607,5 +611,5 @@
   "sceneViewportBackgroundColors" : {
 
   },
-  "selectedSceneRelativePath" : "Lab013Scene.usda"
+  "selectedSceneRelativePath" : "GestureLabs.usda"
 }
