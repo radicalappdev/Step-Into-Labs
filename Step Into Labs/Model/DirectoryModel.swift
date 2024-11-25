@@ -86,42 +86,42 @@ class ModelData {
         ,Lab(title: "Lab 007",
              type: .SPACE,
              date: Date("10/17/2024"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Anchor an attachment to a hand",
              description: "Create a tracked entity that will update based on the anchor, then child an attachment entity to it. No need for hand tracking or ARKit.")
 
         ,Lab(title: "Lab 008",
              type: .SPACE,
              date: Date("10/24/2024"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Anchor an Entity to the head",
              description: "Create an entity and anchor it to a point in front of the user as they move their head.")
 
         ,Lab(title: "Lab 009",
              type: .SPACE_FULL,
              date: Date("10/27/2024"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "A spooky time for visionOS developers",
              description: "What really scares us?")
 
         ,Lab(title: "Lab 010",
              type: .SPACE,
              date: Date("10/24/2024"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Learning the basics of Systems",
              description: "Creating a custom component and system that will add a breathing effect to entities based on the duration entered in the component.")
 
         ,Lab(title: "Lab 011",
              type: .SPACE,
              date: Date("10/29/2024"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Playing with Occlusion Material",
              description: "Making myself a little fort and playing with occlusion material.")
 
         ,Lab(title: "Lab 012",
              type: .SPACE,
              date: Date("11/05/2024"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "I'll be in my box",
              description: "But I can still see you!")
 
