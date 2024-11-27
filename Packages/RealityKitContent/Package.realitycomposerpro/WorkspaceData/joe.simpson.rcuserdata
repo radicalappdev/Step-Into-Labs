@@ -1,13 +1,8 @@
 {
   "advancedEditorSelectedIdentifier" : "ProjectBrowser",
   "openSceneRelativePaths" : [
-    "Immersive.usda",
-    "Scene.usda",
-    "Lab011Scene.usda",
-    "Lab012Scene.usda",
-    "Lab010Scene.usda",
-    "Lab013Scene.usda",
-    "GestureLabs.usda"
+    "JiggleLabs.usda",
+    "Lab013Scene.usda"
   ],
   "recentIdentifiers" : {
     "2A0E68BB-1D35-4AF2-9835-3F346F1688E6" : [
@@ -23,6 +18,9 @@
 
     ],
     "C5B50F83-0F34-4891-8072-A6408510F3B3" : [
+
+    ],
+    "EF7EEC0C-5DBF-4E32-8A84-4A83A2B4924D" : [
 
     ]
   },
@@ -606,10 +604,100 @@
           1
         ]
       }
+    ],
+    "EF7EEC0C-5DBF-4E32-8A84-4A83A2B4924D" : [
+      {
+        "date" : 754437911.931376,
+        "title" : "Untitled",
+        "transform" : [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0.7071069,
+          -0.7071067,
+          0,
+          0,
+          0.7071067,
+          0.7071069,
+          0,
+          0,
+          0.70984745,
+          0.7098462,
+          1
+        ]
+      },
+      {
+        "date" : 754437762.539546,
+        "title" : "Untitled",
+        "transform" : [
+          1,
+          0,
+          -0,
+          0,
+          -0,
+          0.7071069,
+          -0.7071067,
+          0,
+          0,
+          0.7071067,
+          0.7071069,
+          0,
+          0,
+          0.10120964,
+          0.10120946,
+          1
+        ]
+      },
+      {
+        "date" : 754437662.848591,
+        "title" : "Untitled",
+        "transform" : [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0.7071069,
+          -0.7071067,
+          0,
+          0,
+          0.7071067,
+          0.7071069,
+          0,
+          0.6124454,
+          2.2979345,
+          0.7209834,
+          1
+        ]
+      },
+      {
+        "date" : 754437657.964587,
+        "title" : "Untitled",
+        "transform" : [
+          1,
+          0,
+          -0,
+          0,
+          -0,
+          0.7071069,
+          -0.7071067,
+          0,
+          0,
+          0.7071067,
+          0.7071069,
+          0,
+          0.8000001,
+          1.7024184,
+          -0.7975812,
+          1
+        ]
+      }
     ]
   },
   "sceneViewportBackgroundColors" : {
 
   },
-  "selectedSceneRelativePath" : "GestureLabs.usda"
+  "selectedSceneRelativePath" : "JiggleLabs.usda"
 }

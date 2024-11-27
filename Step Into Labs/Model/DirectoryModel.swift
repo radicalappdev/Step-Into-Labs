@@ -138,6 +138,13 @@ class ModelData {
              isFeatured: true,
              subtitle: "Building an Indirect Transform System",
              description: "Use the Drag Gesture and a Toolbar to switch modes. We can use one gesture to drag, scale, and rotate our entities.")
+
+        ,Lab(title: "Lab 015",
+             type: .SPACE,
+             date: Date("11/27/2024"),
+             isFeatured: true,
+             subtitle: "Exploring Physics Joints",
+             description: "Can I make something jiggle?")
     ]
 
 }
