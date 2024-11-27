@@ -77,13 +77,9 @@ def Xform "Root"
                 }
             }
 
-            def RealityKitCustomComponent "RealityKitContent_AllowGestures"
-            {
-                uniform token info:id = "RealityKitContent.AllowGestures"
-            }
-
             def RealityKitComponent "RigidBody"
             {
+                bool gravityEnabled = 0
                 uniform token info:id = "RealityKit.RigidBody"
 
                 def RealityKitStruct "massFrame"
@@ -95,6 +91,7 @@ def Xform "Root"
 
                 def RealityKitStruct "material"
                 {
+                    double dynamicFriction = 0
                     double restitution = 1
                 }
             }
@@ -159,6 +156,7 @@ def Xform "Root"
 
             def RealityKitComponent "RigidBody"
             {
+                bool gravityEnabled = 0
                 uniform token info:id = "RealityKit.RigidBody"
 
                 def RealityKitStruct "massFrame"
@@ -170,6 +168,7 @@ def Xform "Root"
 
                 def RealityKitStruct "material"
                 {
+                    double dynamicFriction = 0
                     double restitution = 1
                 }
             }
@@ -234,6 +233,7 @@ def Xform "Root"
 
             def RealityKitComponent "RigidBody"
             {
+                bool gravityEnabled = 0
                 uniform token info:id = "RealityKit.RigidBody"
 
                 def RealityKitStruct "massFrame"
@@ -245,6 +245,7 @@ def Xform "Root"
 
                 def RealityKitStruct "material"
                 {
+                    double dynamicFriction = 0
                     double restitution = 1
                 }
             }
@@ -259,7 +260,7 @@ def Xform "Root"
             double size = 0.2
             quatf xformOp:orient = (1, 0, 0, 0)
             float3 xformOp:scale = (0.2, 1, 1)
-            float3 xformOp:translate = (-0.3, 0, 0)
+            float3 xformOp:translate = (-0.17160125, 0, 0)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
             def Material "DefaultMaterial"
@@ -279,7 +280,7 @@ def Xform "Root"
             {
                 bool gravityEnabled = 0
                 uniform token info:id = "RealityKit.RigidBody"
-                token motionType = "Static"
+                token motionType = "Dynamic"
 
                 def RealityKitStruct "massFrame"
                 {
@@ -329,7 +330,7 @@ def Xform "Root"
             int ui:nodegraph:node:stackingOrder = 1
             quatf xformOp:orient = (1, 0, 0, 0)
             float3 xformOp:scale = (0.2, 1, 1)
-            float3 xformOp:translate = (0.9, 0, 0)
+            float3 xformOp:translate = (0.77116287, 0, 0.0000032782555)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
             def Material "DefaultMaterial"
@@ -349,7 +350,7 @@ def Xform "Root"
             {
                 bool gravityEnabled = 0
                 uniform token info:id = "RealityKit.RigidBody"
-                token motionType = "Static"
+                token motionType = "Dynamic"
 
                 def RealityKitStruct "massFrame"
                 {
