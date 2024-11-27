@@ -31,87 +31,88 @@ struct Lab015: View {
                     let hingeOrientation = simd_quatf(from: [1, 0, 0], to: [0, 0, 1])
 
                     // Entities
-                    let End_1 = jiggle.findEntity(named: "end1")!
-                    let Sphere_1 = jiggle.findEntity(named: "ball1")!
-                    let Sphere_2 = jiggle.findEntity(named: "ball2")!
-                    let Sphere_3 = jiggle.findEntity(named: "ball3")!
-                    let End_2 = jiggle.findEntity(named: "end2")!
+                    let ball1 = jiggle.findEntity(named: "ball1")!
+                    let ball2 = jiggle.findEntity(named: "ball2")!
+                    let ball3 = jiggle.findEntity(named: "ball3")!
+                    let ball4 = jiggle.findEntity(named: "ball4")!
+                    let ball5 = jiggle.findEntity(named: "ball5")!
+                    let ball6 = jiggle.findEntity(named: "ball6")!
 
-                    // Pins and Joints
-                    let attachmentPin1 = End_1.pins.set(
-                        named: "end_1_hinge",
-                        position: .zero,
-                        orientation: hingeOrientation
-                    )
-
-                    let relativeJointLocation1 = End_1.position(
-                        relativeTo: Sphere_1
-                    )
-
-                    let ballPin1 = Sphere_1.pins.set(
-                        named: "ball_1_hinge",
-                        position: relativeJointLocation1,
-                        orientation: hingeOrientation
-                    )
-
-                    let joint1 = PhysicsRevoluteJoint(pin0: attachmentPin1, pin1: ballPin1)
-
+                    // Pins and Joints for connections
                     // Connect ball1 to ball2
-                    let relativeJointLocation2 = Sphere_1.position(
-                        relativeTo: Sphere_2
-                    )
-
-                    let ballPin2_1 = Sphere_1.pins.set(
-                        named: "ball_1_to_2_hinge",
+                    let ball1ToBall2Pin1 = ball1.pins.set(
+                        named: "ball1_to_ball2_hinge",
                         position: .zero,
                         orientation: hingeOrientation
                     )
 
-                    let ballPin2_2 = Sphere_2.pins.set(
-                        named: "ball_2_hinge",
-                        position: relativeJointLocation2,
+                    let ball1ToBall2Pin2 = ball2.pins.set(
+                        named: "ball2_to_ball1_hinge",
+                        position: ball2.position(relativeTo: ball1),
                         orientation: hingeOrientation
                     )
 
-                    let joint2 = PhysicsRevoluteJoint(pin0: ballPin2_1, pin1: ballPin2_2)
+                    let joint1 = PhysicsRevoluteJoint(pin0: ball1ToBall2Pin1, pin1: ball1ToBall2Pin2)
 
                     // Connect ball2 to ball3
-                    let relativeJointLocation3 = Sphere_2.position(
-                        relativeTo: Sphere_3
-                    )
-
-                    let ballPin3_1 = Sphere_2.pins.set(
-                        named: "ball_2_to_3_hinge",
+                    let ball2ToBall3Pin1 = ball2.pins.set(
+                        named: "ball2_to_ball3_hinge",
                         position: .zero,
                         orientation: hingeOrientation
                     )
 
-                    let ballPin3_2 = Sphere_3.pins.set(
-                        named: "ball_3_hinge",
-                        position: relativeJointLocation3,
+                    let ball2ToBall3Pin2 = ball3.pins.set(
+                        named: "ball3_to_ball2_hinge",
+                        position: ball3.position(relativeTo: ball2),
                         orientation: hingeOrientation
                     )
 
-                    let joint3 = PhysicsRevoluteJoint(pin0: ballPin3_1, pin1: ballPin3_2)
+                    let joint2 = PhysicsRevoluteJoint(pin0: ball2ToBall3Pin1, pin1: ball2ToBall3Pin2)
 
-                    // Connect ball3 to end2
-                    let relativeJointLocation4 = Sphere_3.position(
-                        relativeTo: End_2
-                    )
-
-                    let ballPin4_1 = Sphere_3.pins.set(
-                        named: "ball_3_to_end2_hinge",
+                    // Connect ball3 to ball4
+                    let ball3ToBall4Pin1 = ball3.pins.set(
+                        named: "ball3_to_ball4_hinge",
                         position: .zero,
                         orientation: hingeOrientation
                     )
 
-                    let attachmentPin2 = End_2.pins.set(
-                        named: "end_2_hinge",
-                        position: relativeJointLocation4,
+                    let ball3ToBall4Pin2 = ball4.pins.set(
+                        named: "ball4_to_ball3_hinge",
+                        position: ball4.position(relativeTo: ball3),
                         orientation: hingeOrientation
                     )
 
-                    let joint4 = PhysicsRevoluteJoint(pin0: ballPin4_1, pin1: attachmentPin2)
+                    let joint3 = PhysicsRevoluteJoint(pin0: ball3ToBall4Pin1, pin1: ball3ToBall4Pin2)
+
+                    // Connect ball4 to ball5
+                    let ball4ToBall5Pin1 = ball4.pins.set(
+                        named: "ball4_to_ball5_hinge",
+                        position: .zero,
+                        orientation: hingeOrientation
+                    )
+
+                    let ball4ToBall5Pin2 = ball5.pins.set(
+                        named: "ball5_to_ball4_hinge",
+                        position: ball5.position(relativeTo: ball4),
+                        orientation: hingeOrientation
+                    )
+
+                    let joint4 = PhysicsRevoluteJoint(pin0: ball4ToBall5Pin1, pin1: ball4ToBall5Pin2)
+
+                    // Connect ball5 to ball6
+                    let ball5ToBall6Pin1 = ball5.pins.set(
+                        named: "ball5_to_ball6_hinge",
+                        position: .zero,
+                        orientation: hingeOrientation
+                    )
+
+                    let ball5ToBall6Pin2 = ball6.pins.set(
+                        named: "ball6_to_ball5_hinge",
+                        position: ball6.position(relativeTo: ball5),
+                        orientation: hingeOrientation
+                    )
+
+                    let joint5 = PhysicsRevoluteJoint(pin0: ball5ToBall6Pin1, pin1: ball5ToBall6Pin2)
 
                     // Add all joints to the simulation
                     Task {
@@ -119,12 +120,17 @@ struct Lab015: View {
                         try joint2.addToSimulation()
                         try joint3.addToSimulation()
                         try joint4.addToSimulation()
+                        try joint5.addToSimulation()
                     }
                 }
             }
         }
         .modifier(DragGestureImproved())
     }
+}
+
+#Preview {
+    Lab015()
 }
 
 #Preview {
