@@ -10,11 +10,11 @@
 
 def Xform "Root"
 {
-    reorder nameChildren = ["Sphere_1", "Sphere_2", "Sphere_3", "Jiggle"]
+    reorder nameChildren = ["Simple", "Chain"]
     float3 xformOp:translate = (0, 1.5, -1)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
-    def Xform "Jiggle" (
+    def Xform "Chain" (
         active = true
     )
     {
@@ -24,7 +24,7 @@ def Xform "Root"
             prepend apiSchemas = ["MaterialBindingAPI"]
         )
         {
-            rel material:binding = </Root/Jiggle/ball1/DefaultMaterial>
+            rel material:binding = </Root/Chain/ball1/DefaultMaterial>
             double radius = 0.1
             float2 ui:nodegraph:node:pos = (60, 60)
             int ui:nodegraph:node:stackingOrder = 3
@@ -37,7 +37,7 @@ def Xform "Root"
             {
                 token outputs:mtlx:surface
                 token outputs:realitykit:vertex
-                token outputs:surface.connect = </Root/Jiggle/ball1/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+                token outputs:surface.connect = </Root/Chain/ball1/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
 
                 def Shader "DefaultSurfaceShader"
                 {
@@ -101,7 +101,7 @@ def Xform "Root"
             prepend apiSchemas = ["MaterialBindingAPI"]
         )
         {
-            rel material:binding = </Root/Jiggle/ball2/DefaultMaterial>
+            rel material:binding = </Root/Chain/ball2/DefaultMaterial>
             double radius = 0.1
             float2 ui:nodegraph:node:pos = (80, 80)
             int ui:nodegraph:node:stackingOrder = 4
@@ -114,7 +114,7 @@ def Xform "Root"
             {
                 token outputs:mtlx:surface
                 token outputs:realitykit:vertex
-                token outputs:surface.connect = </Root/Jiggle/ball2/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+                token outputs:surface.connect = </Root/Chain/ball2/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
 
                 def Shader "DefaultSurfaceShader"
                 {
@@ -178,7 +178,7 @@ def Xform "Root"
             prepend apiSchemas = ["MaterialBindingAPI"]
         )
         {
-            rel material:binding = </Root/Jiggle/ball3/DefaultMaterial>
+            rel material:binding = </Root/Chain/ball3/DefaultMaterial>
             double radius = 0.1
             float2 ui:nodegraph:node:pos = (100, 100)
             int ui:nodegraph:node:stackingOrder = 5
@@ -191,7 +191,7 @@ def Xform "Root"
             {
                 token outputs:mtlx:surface
                 token outputs:realitykit:vertex
-                token outputs:surface.connect = </Root/Jiggle/ball3/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+                token outputs:surface.connect = </Root/Chain/ball3/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
 
                 def Shader "DefaultSurfaceShader"
                 {
@@ -256,7 +256,7 @@ def Xform "Root"
             prepend apiSchemas = ["MaterialBindingAPI"]
         )
         {
-            rel material:binding = </Root/Jiggle/ball4/DefaultMaterial>
+            rel material:binding = </Root/Chain/ball4/DefaultMaterial>
             double radius = 0.1
             float2 ui:nodegraph:node:pos = (80, 80)
             int ui:nodegraph:node:stackingOrder = 4
@@ -269,7 +269,7 @@ def Xform "Root"
             {
                 token outputs:mtlx:surface
                 token outputs:realitykit:vertex
-                token outputs:surface.connect = </Root/Jiggle/ball4/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+                token outputs:surface.connect = </Root/Chain/ball4/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
 
                 def Shader "DefaultSurfaceShader"
                 {
@@ -333,7 +333,7 @@ def Xform "Root"
             prepend apiSchemas = ["MaterialBindingAPI"]
         )
         {
-            rel material:binding = </Root/Jiggle/ball5/DefaultMaterial>
+            rel material:binding = </Root/Chain/ball5/DefaultMaterial>
             double radius = 0.1
             float2 ui:nodegraph:node:pos = (100, 100)
             int ui:nodegraph:node:stackingOrder = 5
@@ -346,7 +346,7 @@ def Xform "Root"
             {
                 token outputs:mtlx:surface
                 token outputs:realitykit:vertex
-                token outputs:surface.connect = </Root/Jiggle/ball5/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+                token outputs:surface.connect = </Root/Chain/ball5/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
 
                 def Shader "DefaultSurfaceShader"
                 {
@@ -410,7 +410,7 @@ def Xform "Root"
             prepend apiSchemas = ["MaterialBindingAPI"]
         )
         {
-            rel material:binding = </Root/Jiggle/ball6/DefaultMaterial>
+            rel material:binding = </Root/Chain/ball6/DefaultMaterial>
             double radius = 0.1
             float2 ui:nodegraph:node:pos = (120, 120)
             int ui:nodegraph:node:stackingOrder = 6
@@ -423,7 +423,7 @@ def Xform "Root"
             {
                 token outputs:mtlx:surface
                 token outputs:realitykit:vertex
-                token outputs:surface.connect = </Root/Jiggle/ball6/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+                token outputs:surface.connect = </Root/Chain/ball6/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
 
                 def Shader "DefaultSurfaceShader"
                 {
@@ -431,6 +431,174 @@ def Xform "Root"
                     float inputs:clearcoat = 1
                     color3f inputs:diffuseColor = (0.003921569, 0.17254902, 0.41960785) (
                         colorSpace = "srgb_texture"
+                    )
+                    float inputs:metallic = 0.1
+                    float inputs:opacity = 0.8
+                    float inputs:roughness = 0.15
+                    token outputs:surface
+                }
+            }
+
+            def RealityKitComponent "InputTarget"
+            {
+                uniform token info:id = "RealityKit.InputTarget"
+            }
+
+            def RealityKitComponent "Collider"
+            {
+                uint group = 1
+                uniform token info:id = "RealityKit.Collider"
+                uint mask = 4294967295
+                token type = "Default"
+
+                def RealityKitStruct "Shape"
+                {
+                    float3 extent = (0.2, 0.2, 0.2)
+                    float radius = 0.1
+                    token shapeType = "Sphere"
+
+                    def RealityKitStruct "pose"
+                    {
+                    }
+                }
+            }
+
+            def RealityKitComponent "RigidBody"
+            {
+                bool gravityEnabled = 0
+                uniform token info:id = "RealityKit.RigidBody"
+
+                def RealityKitStruct "massFrame"
+                {
+                    def RealityKitStruct "m_pose"
+                    {
+                    }
+                }
+
+                def RealityKitStruct "material"
+                {
+                    double dynamicFriction = 0
+                    double restitution = 1
+                }
+            }
+        }
+    }
+
+    def Xform "Simple" (
+        active = true
+    )
+    {
+        reorder nameChildren = ["a", "b", "ball3", "ball4", "ball5", "ball6"]
+        float2 ui:nodegraph:node:pos = (20, 20)
+        int ui:nodegraph:node:stackingOrder = 1
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (-0.9, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Sphere "a" (
+            active = true
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Root/Simple/a/DefaultMaterial>
+            double radius = 0.1
+            float2 ui:nodegraph:node:pos = (60, 60)
+            int ui:nodegraph:node:stackingOrder = 3
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def Material "DefaultMaterial"
+            {
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+                token outputs:surface.connect = </Root/Simple/a/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+                def Shader "DefaultSurfaceShader"
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    float inputs:clearcoat = 1
+                    color3f inputs:diffuseColor = (0, 0, 0) (
+                        colorSpace = "srgb_displayp3"
+                    )
+                    float inputs:metallic = 0.1
+                    float inputs:opacity = 0.8
+                    float inputs:roughness = 0.15
+                    token outputs:surface
+                }
+            }
+
+            def RealityKitComponent "InputTarget"
+            {
+                uniform token info:id = "RealityKit.InputTarget"
+            }
+
+            def RealityKitComponent "Collider"
+            {
+                uint group = 1
+                uniform token info:id = "RealityKit.Collider"
+                uint mask = 4294967295
+                token type = "Default"
+
+                def RealityKitStruct "Shape"
+                {
+                    float3 extent = (0.2, 0.2, 0.2)
+                    float radius = 0.1
+                    token shapeType = "Sphere"
+
+                    def RealityKitStruct "pose"
+                    {
+                    }
+                }
+            }
+
+            def RealityKitComponent "RigidBody"
+            {
+                bool gravityEnabled = 0
+                uniform token info:id = "RealityKit.RigidBody"
+
+                def RealityKitStruct "massFrame"
+                {
+                    def RealityKitStruct "m_pose"
+                    {
+                    }
+                }
+
+                def RealityKitStruct "material"
+                {
+                    double dynamicFriction = 0
+                    double restitution = 1
+                }
+            }
+        }
+
+        def Sphere "b" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Root/Simple/b/DefaultMaterial>
+            double radius = 0.1
+            float2 ui:nodegraph:node:pos = (80, 80)
+            int ui:nodegraph:node:stackingOrder = 4
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:translate = (0.3, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def Material "DefaultMaterial"
+            {
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+                token outputs:surface.connect = </Root/Simple/b/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+                def Shader "DefaultSurfaceShader"
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    float inputs:clearcoat = 1
+                    color3f inputs:diffuseColor = (0, 0, 0) (
+                        colorSpace = "srgb_displayp3"
                     )
                     float inputs:metallic = 0.1
                     float inputs:opacity = 0.8

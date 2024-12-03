@@ -144,7 +144,7 @@ class ModelData {
              date: Date("11/27/2024"),
              isFeatured: true,
              subtitle: "Exploring Physics Joints",
-             description: "Can I make something jiggle?")
+             description: "Loading some entities and adding physics joints between them.")
     ]
 
 }
