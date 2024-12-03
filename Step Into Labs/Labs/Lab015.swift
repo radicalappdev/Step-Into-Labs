@@ -30,10 +30,14 @@ struct Lab015: View {
 
                     let hingeOrientation = simd_quatf(from: [1, 0, 0], to: [0, 0, 1])
                     
-                    // Get all balls in sequence
-                    let balls = (1...6).compactMap { jiggle.findEntity(named: "ball\($0)") }
+                    // The balls are chrildren of the Jiggle entity. Each one named ball1, ball2, etc.
+                    let balls = jiggle.children
+                        .filter { $0.name.hasPrefix("ball") }
+                        .sorted { Int($0.name.dropFirst(4))! < Int($1.name.dropFirst(4))! }
                     
-                    // Create joints between consecutive balls
+                    // We create connections by using two copies of the balls array.
+                    // We drop the first element of the second array to shift the positions.
+                    // Then we can zip the arrays to join them (ball1 to ball2, ball2 to ball3,...)
                     let joints = zip(balls, balls.dropFirst()).map { (ball1, ball2) -> PhysicsRevoluteJoint in
                         let pin1 = ball1.pins.set(
                             named: "ball\(ball1.name)_to_\(ball2.name)_hinge",
