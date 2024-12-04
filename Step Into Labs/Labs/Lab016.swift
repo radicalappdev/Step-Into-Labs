@@ -2,11 +2,11 @@
 //
 //  Title: Lab016
 //
-//  Subtitle:
+//  Subtitle: We can hide the system hand menu in Immersive Spaces
 //
-//  Description:
+//  Description: SwiftUI has a modifier called `persistentSystemOverlays` that allows us to hide the system hand menu in Immersive Spaces.
 //
-//  Type:
+//  Type: Space
 //
 //  Created by Joseph Simpson on 12/4/24.
 
@@ -26,12 +26,9 @@ struct Lab016: View {
     var body: some View {
         RealityView { content, attachments in
 
-            let model = ModelEntity(
-                mesh: .generateSphere(radius: 0.1),
-                materials: [SimpleMaterial(color: .black, isMetallic: false)])
-            model.position = SIMD3(x: 0.8, y: 1, z: -2)
-
-            content.add(model)
+            if let scene = try? await Entity(named: "Lab010Scene", in: realityKitContentBundle) {
+                content.add(scene)
+            }
 
             content.add(handTrackedEntity)
 
