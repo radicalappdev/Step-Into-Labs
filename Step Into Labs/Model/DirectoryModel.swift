@@ -150,8 +150,8 @@ class ModelData {
              type: .SPACE,
              date: Date("12/04/2024"),
              isFeatured: true,
-             subtitle: "We can hide the system hand menu in Immersive Spaces",
-             description: "SwiftUI has a modifier called `persistentSystemOverlays` that allows us to hide the system hand menu in Immersive Spaces.")
+             subtitle: "TBD",
+             description: "TBD")
     ]
 
 }
