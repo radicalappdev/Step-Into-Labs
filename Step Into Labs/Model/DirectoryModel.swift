@@ -145,6 +145,13 @@ class ModelData {
              isFeatured: true,
              subtitle: "Exploring Physics Joints",
              description: "Loading some entities and adding physics joints between them.")
+
+        ,Lab(title: "Lab 016",
+             type: .SPACE,
+             date: Date("12/04/2024"),
+             isFeatured: true,
+             subtitle: "persistentSystemOverlays?",
+             description: "TBD")
     ]
 
 }
