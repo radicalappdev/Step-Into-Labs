@@ -103,6 +103,15 @@
       [
         "90C235E0-C99C-42E7-9D0D-5E131743A0A7",
         "Root",
+        "CubeController"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "90C235E0-C99C-42E7-9D0D-5E131743A0A7",
+        "Root",
         "SkyDome"
       ],
       {
@@ -212,7 +221,55 @@
       [
         "90C235E0-C99C-42E7-9D0D-5E131743A0A7",
         "Root",
+        "SpinCube",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "90C235E0-C99C-42E7-9D0D-5E131743A0A7",
+        "Root",
+        "SpinCube"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "90C235E0-C99C-42E7-9D0D-5E131743A0A7",
+        "Root",
         "Subject"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "90C235E0-C99C-42E7-9D0D-5E131743A0A7",
+        "Root",
+        "Cube"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "90C235E0-C99C-42E7-9D0D-5E131743A0A7",
+        "Root",
+        "Timeline",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "90C235E0-C99C-42E7-9D0D-5E131743A0A7",
+        "Root",
+        "CubeController",
+        "Track"
       ],
       {
         "isExpanded" : true,
