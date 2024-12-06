@@ -1,8 +1,9 @@
 {
-  "advancedEditorSelectedIdentifier" : "ProjectBrowser",
+  "advancedEditorSelectedIdentifier" : "BehaviorsPluginID",
   "openSceneRelativePaths" : [
     "JiggleLabs.usda",
-    "Lab012Scene.usda"
+    "Lab012Scene.usda",
+    "Lab013Scene.usda"
   ],
   "recentIdentifiers" : {
     "2A0E68BB-1D35-4AF2-9835-3F346F1688E6" : [
@@ -385,6 +386,28 @@
     ],
     "90C235E0-C99C-42E7-9D0D-5E131743A0A7" : [
       {
+        "date" : 755215294.19434,
+        "title" : "Untitled",
+        "transform" : [
+          -0.052155793,
+          3.2462598e-08,
+          -0.9986389,
+          0,
+          -0.17853807,
+          0.98388886,
+          0.009324522,
+          0,
+          0.9825497,
+          0.17878139,
+          -0.051315535,
+          0,
+          5.5235043,
+          1.7644789,
+          -0.06612617,
+          1
+        ]
+      },
+      {
         "date" : 755188470.789112,
         "title" : "Untitled",
         "transform" : [
@@ -579,28 +602,6 @@
           0.1352191,
           0.022484064,
           0.13201332,
-          1
-        ]
-      },
-      {
-        "date" : 752537551.753999,
-        "title" : "Untitled",
-        "transform" : [
-          0.69342643,
-          2.9484596e-08,
-          -0.72052735,
-          0,
-          -0.1152317,
-          0.9871289,
-          -0.1108975,
-          0,
-          0.7112534,
-          0.15992685,
-          0.6845013,
-          0,
-          4.4226985,
-          3.4704762,
-          4.226193,
           1
         ]
       }

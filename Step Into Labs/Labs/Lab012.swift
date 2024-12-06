@@ -26,6 +26,8 @@ struct Lab012: View {
         return handAnchor
     }()
 
+    @State var orbIsActive: Bool = false
+
     var body: some View {
         RealityView { content, attachments in
 
@@ -33,6 +35,8 @@ struct Lab012: View {
                 content.add(scene)
                 content.add(leftHandTrackedEntity)
                 content.add(rightHandTrackedEntity)
+                
+
             }
 
         } update: { content, attachments in
@@ -42,6 +46,7 @@ struct Lab012: View {
         }
         .persistentSystemOverlays(.hidden)
         .gesture(tapGesture)
+        .gesture(longPressGesture)
         .modifier(DragGestureImproved())
         .modifier(MagnifyGestureImproved())
 
@@ -73,6 +78,24 @@ struct Lab012: View {
                             relativeTo: leftHandTrackedEntity
                         )
                 }
+            }
+    }
+
+    // A long press gesture that will toggle the opacity of the subject material
+    var longPressGesture: some Gesture {
+        LongPressGesture()
+            .targetedToAnyEntity()
+            .onEnded { value in
+                let subject = value.entity
+
+                orbIsActive.toggle()
+
+                if var mat = subject.components[ModelComponent.self]?.materials.first as? PhysicallyBasedMaterial {
+
+                    mat.blending = .transparent(opacity: orbIsActive ? 0.2 : 1.0)
+                    subject.components[ModelComponent.self]?.materials[0] = mat
+                }
+
             }
     }
 
