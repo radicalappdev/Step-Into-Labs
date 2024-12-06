@@ -21,6 +21,8 @@ def Xform "Root"
             bindMaterialAs = "weakerThanDescendants"
         )
         double radius = 0.1
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (1, 1, 1)
         float3 xformOp:translate = (1, 1, -1)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
@@ -160,8 +162,8 @@ def Xform "Root"
                     float4 startColorB = (0.00030352705, 0.11953841, 0.14702724, 1)
                     float stretchFactor = 0
                     bool useEndColor = 1
-                    bool useEndColorRange = 1
-                    bool useStartColorRange = 1
+                    bool useEndColorRange = 0
+                    bool useStartColorRange = 0
                     float3 vortexDirection = (0, 1, 0)
                     float vortexStrength = 0
                 }

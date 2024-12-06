@@ -90,8 +90,12 @@ struct Lab012: View {
 
                 orbIsActive.toggle()
 
-                if var mat = subject.components[ModelComponent.self]?.materials.first as? PhysicallyBasedMaterial {
+                if var emitter = subject.components[ParticleEmitterComponent.self] {
+                    emitter.isEmitting = !orbIsActive
+                    subject.components[ParticleEmitterComponent.self] = emitter
+                }
 
+                if var mat = subject.components[ModelComponent.self]?.materials.first as? PhysicallyBasedMaterial {
                     mat.blending = .transparent(opacity: orbIsActive ? 0.2 : 1.0)
                     subject.components[ModelComponent.self]?.materials[0] = mat
                 }
