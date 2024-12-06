@@ -16,7 +16,6 @@ import RealityKitContent
 
 struct Lab012: View {
 
-
     @State var leftHandTrackedEntity: Entity = {
         let handAnchor = AnchorEntity(.hand(.left, location: .palm))
         return handAnchor
@@ -28,35 +27,12 @@ struct Lab012: View {
     }()
 
     var body: some View {
-        RealityView {
- content,
- attachments in
+        RealityView { content, attachments in
 
             if let scene = try? await Entity(named: "Lab012Scene", in: realityKitContentBundle) {
                 content.add(scene)
-
-
-                if let subjectLeft = scene.findEntity(named: "SubjectLeft") {
-                    leftHandTrackedEntity.addChild(subjectLeft)
-                    subjectLeft
-                        .setPosition(
-                            [0.12, 0.12, 0],
-                            relativeTo: leftHandTrackedEntity
-                        )
-                    content.add(leftHandTrackedEntity)
-                }
-
-                if let subjectRight = scene.findEntity(named: "SubjectRight") {
-                    rightHandTrackedEntity.addChild(subjectRight)
-                    subjectRight
-                        .setPosition(
-                            [-0.12, 0.12, 0],
-                            relativeTo: rightHandTrackedEntity
-                        )
-                    content.add(rightHandTrackedEntity)
-                }
-
-
+                content.add(leftHandTrackedEntity)
+                content.add(rightHandTrackedEntity)
             }
 
         } update: { content, attachments in
@@ -65,7 +41,41 @@ struct Lab012: View {
 
         }
         .persistentSystemOverlays(.hidden)
+        .gesture(tapGesture)
+        .modifier(DragGestureImproved())
+        .modifier(MagnifyGestureImproved())
+
     }
+
+    var tapGesture: some Gesture {
+        TapGesture(count: 2)
+            .targetedToAnyEntity()
+
+            .onEnded { value in
+                
+
+                let subject = value.entity
+                subject.scale = .init(repeating: 1.0)
+
+                if(value.entity.parent == leftHandTrackedEntity) {
+                    // Move the subject from the anchor to the scene root
+                    leftHandTrackedEntity.parent?.addChild(subject)
+                    leftHandTrackedEntity.removeChild(subject)
+                    // Set position back to default
+                    subject.position = [1, 1, -1]
+
+                } else {
+                    // Attach the subject to the anchor
+                    leftHandTrackedEntity.addChild(subject)
+                    subject
+                        .setPosition(
+                            [0.12, 0.12, 0],
+                            relativeTo: leftHandTrackedEntity
+                        )
+                }
+            }
+    }
+
 }
 
 #Preview {

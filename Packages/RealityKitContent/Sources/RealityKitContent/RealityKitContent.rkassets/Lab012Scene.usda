@@ -10,209 +10,7 @@
 
 def Xform "Root"
 {
-    reorder nameChildren = ["Floor", "GlossyBlackWoodPlank", "MaplePlywood", "MyBox", "Timeline", "SubjectRight", "SubjectLeft", "OccMaterial"]
-    def Cube "Floor" (
-        active = false
-        prepend apiSchemas = ["MaterialBindingAPI"]
-    )
-    {
-        rel material:binding = </Root/GlossyBlackWoodPlank> (
-            bindMaterialAs = "weakerThanDescendants"
-        )
-        double size = 2
-        float2 ui:nodegraph:node:pos = (20, 20)
-        int ui:nodegraph:node:stackingOrder = 1
-        quatf xformOp:orient = (1, 0, 0, 0)
-        float3 xformOp:scale = (1, 0.05, 1)
-        float3 xformOp:translate = (0, 0, 0)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-    }
-
-    def "GlossyBlackWoodPlank" (
-        active = true
-        references = @Materials/GlossyBlackWoodPlank.usdz@
-    )
-    {
-        color3f inputs:Basecolor_Tint = (0.83137256, 0.73333335, 0.73333335) (
-            colorSpace = "srgb_displayp3"
-        )
-        token outputs:mtlx:surface.connect = </Root/GlossyBlackWoodPlank/PreviewSurface.outputs:out>
-        float2 ui:nodegraph:node:pos = (20, 20)
-        int ui:nodegraph:node:stackingOrder = 1
-    }
-
-    def "MaplePlywood" (
-        active = true
-        references = @Materials/MaplePlywood.usdz@
-    )
-    {
-        color3f inputs:Basecolor_Tint = (0.99215686, 0.98039216, 0.98039216) (
-            colorSpace = "srgb_displayp3"
-        )
-        token outputs:mtlx:surface.connect = </Root/MaplePlywood/PreviewSurface.outputs:out>
-        float2 ui:nodegraph:node:pos = (20, 20)
-        int ui:nodegraph:node:stackingOrder = 1
-    }
-
-    def Xform "MyBox" (
-        active = false
-    )
-    {
-        reorder nameChildren = ["Roof", "Wall_0", "Wall_1", "Wall_2", "Wall_3"]
-        float3 xformOp:translate = (0, 3, 0)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-
-        def Cube "Roof" (
-            active = true
-            prepend apiSchemas = ["MaterialBindingAPI"]
-        )
-        {
-            rel material:binding = </Root/GlossyBlackWoodPlank> (
-                bindMaterialAs = "weakerThanDescendants"
-            )
-            double size = 2
-            float2 ui:nodegraph:node:pos = (52.36331, 491.47977)
-            int ui:nodegraph:node:stackingOrder = 2
-            quatf xformOp:orient = (1, 0, 0, 0)
-            float3 xformOp:scale = (1, 0.05, 1)
-            float3 xformOp:translate = (0, 2, 0)
-            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-        }
-
-        def Cube "Wall_0" (
-            active = true
-            prepend apiSchemas = ["MaterialBindingAPI"]
-            customData = {
-                float3 rotationEulerHint = (0, 0, 1.5707964)
-            }
-        )
-        {
-            rel material:binding = </Root/MaplePlywood> (
-                bindMaterialAs = "weakerThanDescendants"
-            )
-            double size = 2
-            float2 ui:nodegraph:node:pos = (52.36331, 491.47977)
-            int ui:nodegraph:node:stackingOrder = 2
-            quatf xformOp:orient = (0.70710677, 0, 0, 0.70710677)
-            float3 xformOp:scale = (0.99999976, 0.049999986, 0.99999976)
-            float3 xformOp:translate = (1, 1.0000125, 4.2282045e-7)
-            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-        }
-
-        def Cube "Wall_1" (
-            active = true
-            prepend apiSchemas = ["MaterialBindingAPI"]
-            customData = {
-                float3 rotationEulerHint = (0, 0, 1.5707964)
-            }
-        )
-        {
-            rel material:binding = </Root/MaplePlywood> (
-                bindMaterialAs = "weakerThanDescendants"
-            )
-            double size = 2
-            float2 ui:nodegraph:node:pos = (72.36331, 511.47977)
-            int ui:nodegraph:node:stackingOrder = 3
-            quatf xformOp:orient = (0.70710677, 0, 0, 0.70710677)
-            float3 xformOp:scale = (0.99999964, 0.04999998, 0.99999964)
-            float3 xformOp:translate = (-1, 1.0000125, 4.2282045e-7)
-            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-        }
-
-        def Cube "Wall_2" (
-            active = true
-            prepend apiSchemas = ["MaterialBindingAPI"]
-            customData = {
-                float3 rotationEulerHint = (1.5707964, 0, 1.5707964)
-            }
-        )
-        {
-            rel material:binding = </Root/MaplePlywood> (
-                bindMaterialAs = "weakerThanDescendants"
-            )
-            double size = 2
-            float2 ui:nodegraph:node:pos = (92.36331, 531.47974)
-            int ui:nodegraph:node:stackingOrder = 4
-            quatf xformOp:orient = (0.5, 0.49999994, 0.5, 0.5)
-            float3 xformOp:scale = (0.9999997, 0.049999982, 0.9999997)
-            float3 xformOp:translate = (0, 1, -1)
-            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-
-            def RealityKitComponent "InputTarget"
-            {
-                uniform token info:id = "RealityKit.InputTarget"
-            }
-
-            def RealityKitComponent "Collider"
-            {
-                uint group = 1
-                uniform token info:id = "RealityKit.Collider"
-                uint mask = 4294967295
-                token type = "Default"
-
-                def RealityKitStruct "Shape"
-                {
-                    float3 extent = (2, 2, 2)
-                    token shapeType = "Box"
-
-                    def RealityKitStruct "pose"
-                    {
-                    }
-                }
-            }
-        }
-
-        def Cube "Wall_3" (
-            active = true
-            prepend apiSchemas = ["MaterialBindingAPI"]
-            customData = {
-                float3 rotationEulerHint = (1.5707964, 0, 1.5707964)
-            }
-        )
-        {
-            rel material:binding = </Root/MaplePlywood> (
-                bindMaterialAs = "weakerThanDescendants"
-            )
-            double size = 2
-            float2 ui:nodegraph:node:pos = (112.36331, 551.47974)
-            int ui:nodegraph:node:stackingOrder = 5
-            quatf xformOp:orient = (0.5, 0.49999994, 0.5, 0.5)
-            float3 xformOp:scale = (0.9999997, 0.049999982, 0.9999997)
-            float3 xformOp:translate = (-5.9604645e-8, 1.0000175, 1)
-            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-        }
-
-        def RealityKitComponent "RCP_BehaviorsContainer"
-        {
-            rel behaviors = </Root/MyBox/OnAddedToScene>
-            uniform token info:id = "RCP.BehaviorsContainer"
-        }
-
-        def Preliminary_Behavior "OnAddedToScene"
-        {
-            rel actions = </Root/MyBox/OnAddedToScene/Action>
-            uniform bool exclusive
-            rel triggers = </Root/MyBox/OnAddedToScene/Trigger>
-
-            def Preliminary_Trigger "Trigger"
-            {
-                rel affectedObjects = </Root/MyBox>
-                token info:id = "SceneTransition"
-            }
-
-            def Preliminary_Action "Action"
-            {
-                rel affectedObjects = </Root>
-                rel animationLibraryKey = </Root/Timeline>
-                rel animationLibraryKeyOverrideKey = </Root/MyBox/OnAddedToScene/Trigger>
-                token info:id = "PlayTimeline"
-                int loops = 0
-                int performCount = 1
-                token type = "serial"
-            }
-        }
-    }
-
+    reorder nameChildren = ["OccMaterial", "SkyDome", "Timeline", "SubjectRight", "Subject"]
     def RealityKitTimeline "Timeline"
     {
         def RealityKitTrack "Track"
@@ -243,7 +41,7 @@ def Xform "Root"
         }
     }
 
-    def Sphere "SubjectLeft" (
+    def Sphere "Subject" (
         active = true
         prepend apiSchemas = ["MaterialBindingAPI"]
     )
@@ -253,6 +51,32 @@ def Xform "Root"
             bindMaterialAs = "weakerThanDescendants"
         )
         double radius = 0.1
+        float3 xformOp:translate = (1, 1, -1)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.2, 0.2, 0.2)
+                float radius = 0.1
+                token shapeType = "Sphere"
+
+                def RealityKitStruct "pose"
+                {
+                }
+            }
+        }
     }
 
     def Material "OccMaterial"
@@ -270,27 +94,9 @@ def Xform "Root"
         }
     }
 
-    def Sphere "SubjectRight" (
-        active = true
-        prepend apiSchemas = ["MaterialBindingAPI"]
-    )
-    {
-        reorder nameChildren = ["DefaultMaterial", "OccMaterial"]
-        rel material:binding = </Root/OccMaterial> (
-            bindMaterialAs = "weakerThanDescendants"
-        )
-        double radius = 0.1
-        float2 ui:nodegraph:node:pos = (83.1543, 76.81836)
-        int ui:nodegraph:node:stackingOrder = 1
-        quatf xformOp:orient = (1, 0, 0, 0)
-        float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (0, 0, 0)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-    }
-
     def "SkyDome" (
         active = true
-        prepend references = @SkyDome.usdz@
+        references = @SkyDome.usdz@
     )
     {
         float3 xformOp:scale = (0.01, 0.01, 0.01)
@@ -335,6 +141,64 @@ def Xform "Root"
                         colorSpace = "srgb_displayp3"
                     )
                 }
+            }
+        }
+    }
+
+    def Cylinder "Cylinder" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        uniform token axis = "Y"
+        double height = 0.8
+        rel material:binding = </Root/MaplePlywood> (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        double radius = 0.1
+        float3 xformOp:translate = (1, 0.4, -1)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "MaplePlywood" (
+        active = true
+        prepend references = @MaplePlywood.usdz@
+    )
+    {
+    }
+
+    def Cone "Cone" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (0, 0, 3.1415927)
+        }
+    )
+    {
+        uniform token axis = "Y"
+        double height = 0.2
+        rel material:binding = </Root/Cone/DefaultMaterial>
+        double radius = 0.1
+        quatf xformOp:orient = (-4.371139e-8, 0, 0, 1)
+        float3 xformOp:scale = (1.6, 1.6, 1.6)
+        float3 xformOp:translate = (1.0000023, 0.68517345, -1)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:mtlx:surface
+            token outputs:realitykit:vertex
+            prepend token outputs:surface.connect = </Root/Cone/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.41960785, 0.003921569, 0.17254902) (
+                    colorSpace = "srgb_texture"
+                )
+                float inputs:metallic = 0.5
+                float inputs:roughness = 0.5
+                token outputs:surface
             }
         }
     }
