@@ -17,24 +17,43 @@ import RealityKitContent
 struct Lab012: View {
 
 
-    @State var handTrackedEntity: Entity = {
+    @State var leftHandTrackedEntity: Entity = {
         let handAnchor = AnchorEntity(.hand(.left, location: .palm))
         return handAnchor
     }()
 
+    @State var rightHandTrackedEntity: Entity = {
+        let handAnchor = AnchorEntity(.hand(.right, location: .palm))
+        return handAnchor
+    }()
+
     var body: some View {
-        RealityView { content, attachments in
+        RealityView {
+ content,
+ attachments in
 
             if let scene = try? await Entity(named: "Lab012Scene", in: realityKitContentBundle) {
                 content.add(scene)
 
 
-                if let subject = scene.findEntity(named: "Subject") {
-                    subject.components[BillboardComponent.self] = .init()
+                if let subjectLeft = scene.findEntity(named: "SubjectLeft") {
+                    leftHandTrackedEntity.addChild(subjectLeft)
+                    subjectLeft
+                        .setPosition(
+                            [0.12, 0.12, 0],
+                            relativeTo: leftHandTrackedEntity
+                        )
+                    content.add(leftHandTrackedEntity)
+                }
 
-                    handTrackedEntity.addChild(subject)
-                    content.add(handTrackedEntity)
-
+                if let subjectRight = scene.findEntity(named: "SubjectRight") {
+                    rightHandTrackedEntity.addChild(subjectRight)
+                    subjectRight
+                        .setPosition(
+                            [-0.12, 0.12, 0],
+                            relativeTo: rightHandTrackedEntity
+                        )
+                    content.add(rightHandTrackedEntity)
                 }
 
 
@@ -45,6 +64,7 @@ struct Lab012: View {
         } attachments: {
 
         }
+        .persistentSystemOverlays(.hidden)
     }
 }
 

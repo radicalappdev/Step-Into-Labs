@@ -121,9 +121,9 @@ class ModelData {
         ,Lab(title: "Lab 012",
              type: .SPACE,
              date: Date("11/05/2024"),
-             isFeatured: false,
-             subtitle: "I'll be in my box",
-             description: "But I can still see you!")
+             isFeatured: true,
+             subtitle: "I'll be in my dome",
+             description: "Blending several concepts together to create a simple scene.")
 
         ,Lab(title: "Lab 013",
              type: .SPACE,
