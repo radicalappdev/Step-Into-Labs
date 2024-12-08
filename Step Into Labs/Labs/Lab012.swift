@@ -97,6 +97,8 @@ struct Lab012: View {
 
                 if var mat = subject.components[ModelComponent.self]?.materials.first as? PhysicallyBasedMaterial {
                     mat.blending = .transparent(opacity: orbIsActive ? 0.2 : 1.0)
+                    print("MAT" , mat.blending)
+                    // prints: transparent(opacity: RealityFoundation.PhysicallyBasedMaterial.Opacity(scale: 0.2, texture: nil))
                     subject.components[ModelComponent.self]?.materials[0] = mat
                 }
 
