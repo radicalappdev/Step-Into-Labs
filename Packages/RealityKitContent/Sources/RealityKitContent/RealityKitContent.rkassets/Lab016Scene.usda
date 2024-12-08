@@ -29,7 +29,9 @@ def Xform "Root"
         def RealityKitCustomComponent "RealityKitContent_EntitySpawnerComponent"
         {
             int copies = 100
+            bool hasSpawned = 0
             uniform token info:id = "RealityKitContent.EntitySpawnerComponent"
+            token spawnShape = "plane"
         }
     }
 }
