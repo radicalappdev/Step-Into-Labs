@@ -50,5 +50,34 @@ def Xform "Root"
             token SpawnShape = "domeUpper"
         }
     }
+
+    def Cone "Cone" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        uniform token axis = "Y"
+        double height = 0.2
+        rel material:binding = </Root/Cone/DefaultMaterial>
+        double radius = 0.1
+
+        def Material "DefaultMaterial"
+        {
+            prepend token outputs:surface.connect = </Root/Cone/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def RealityKitCustomComponent "RealityKitContent_EntitySpawnerComponent"
+        {
+            uniform token info:id = "RealityKitContent.EntitySpawnerComponent"
+        }
+    }
 }
 
