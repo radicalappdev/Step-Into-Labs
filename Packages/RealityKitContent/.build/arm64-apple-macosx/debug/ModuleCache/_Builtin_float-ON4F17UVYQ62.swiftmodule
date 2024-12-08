@@ -1,0 +1,16 @@
+---
+path:            '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/15.1/_Builtin_float.swiftmodule/arm64e-apple-macos.swiftmodule'
+dependencies:
+  - mtime:           1728604513000000000
+    path:            '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/15.1/_Builtin_float.swiftmodule/arm64e-apple-macos.swiftmodule'
+    size:            22056
+  - mtime:           1727576034000000000
+    path:            'usr/lib/swift/Swift.swiftmodule/arm64e-apple-macos.swiftinterface'
+    size:            2051235
+    sdk_relative:    true
+  - mtime:           1727576093000000000
+    path:            'usr/lib/swift/_Builtin_float.swiftmodule/arm64e-apple-macos.swiftinterface'
+    size:            4236
+    sdk_relative:    true
+version:         1
+...

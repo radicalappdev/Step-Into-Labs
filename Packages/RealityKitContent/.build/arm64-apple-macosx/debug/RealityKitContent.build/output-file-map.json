@@ -1,0 +1,29 @@
+{
+  "": {
+    "swift-dependencies": "/Users/joe.simpson/Repos/Step Into Labs/Packages/RealityKitContent/.build/arm64-apple-macosx/debug/RealityKitContent.build/master.swiftdeps"
+  },
+  "/Users/joe.simpson/Repos/Step Into Labs/Packages/RealityKitContent/Sources/RealityKitContent/BreathSystem.swift": {
+    "dependencies": "/Users/joe.simpson/Repos/Step Into Labs/Packages/RealityKitContent/.build/arm64-apple-macosx/debug/RealityKitContent.build/BreathSystem.d",
+    "object": "/Users/joe.simpson/Repos/Step Into Labs/Packages/RealityKitContent/.build/arm64-apple-macosx/debug/RealityKitContent.build/BreathSystem.swift.o",
+    "swiftmodule": "/Users/joe.simpson/Repos/Step Into Labs/Packages/RealityKitContent/.build/arm64-apple-macosx/debug/RealityKitContent.build/BreathSystem~partial.swiftmodule",
+    "swift-dependencies": "/Users/joe.simpson/Repos/Step Into Labs/Packages/RealityKitContent/.build/arm64-apple-macosx/debug/RealityKitContent.build/BreathSystem.swiftdeps"
+  },
+  "/Users/joe.simpson/Repos/Step Into Labs/Packages/RealityKitContent/Sources/RealityKitContent/EntitySpawnerComponent.swift": {
+    "dependencies": "/Users/joe.simpson/Repos/Step Into Labs/Packages/RealityKitContent/.build/arm64-apple-macosx/debug/RealityKitContent.build/EntitySpawnerComponent.d",
+    "object": "/Users/joe.simpson/Repos/Step Into Labs/Packages/RealityKitContent/.build/arm64-apple-macosx/debug/RealityKitContent.build/EntitySpawnerComponent.swift.o",
+    "swiftmodule": "/Users/joe.simpson/Repos/Step Into Labs/Packages/RealityKitContent/.build/arm64-apple-macosx/debug/RealityKitContent.build/EntitySpawnerComponent~partial.swiftmodule",
+    "swift-dependencies": "/Users/joe.simpson/Repos/Step Into Labs/Packages/RealityKitContent/.build/arm64-apple-macosx/debug/RealityKitContent.build/EntitySpawnerComponent.swiftdeps"
+  },
+  "/Users/joe.simpson/Repos/Step Into Labs/Packages/RealityKitContent/Sources/RealityKitContent/ExampleComponents.swift": {
+    "dependencies": "/Users/joe.simpson/Repos/Step Into Labs/Packages/RealityKitContent/.build/arm64-apple-macosx/debug/RealityKitContent.build/ExampleComponents.d",
+    "object": "/Users/joe.simpson/Repos/Step Into Labs/Packages/RealityKitContent/.build/arm64-apple-macosx/debug/RealityKitContent.build/ExampleComponents.swift.o",
+    "swiftmodule": "/Users/joe.simpson/Repos/Step Into Labs/Packages/RealityKitContent/.build/arm64-apple-macosx/debug/RealityKitContent.build/ExampleComponents~partial.swiftmodule",
+    "swift-dependencies": "/Users/joe.simpson/Repos/Step Into Labs/Packages/RealityKitContent/.build/arm64-apple-macosx/debug/RealityKitContent.build/ExampleComponents.swiftdeps"
+  },
+  "/Users/joe.simpson/Repos/Step Into Labs/Packages/RealityKitContent/Sources/RealityKitContent/RealityKitContent.swift": {
+    "dependencies": "/Users/joe.simpson/Repos/Step Into Labs/Packages/RealityKitContent/.build/arm64-apple-macosx/debug/RealityKitContent.build/RealityKitContent.d",
+    "object": "/Users/joe.simpson/Repos/Step Into Labs/Packages/RealityKitContent/.build/arm64-apple-macosx/debug/RealityKitContent.build/RealityKitContent.swift.o",
+    "swiftmodule": "/Users/joe.simpson/Repos/Step Into Labs/Packages/RealityKitContent/.build/arm64-apple-macosx/debug/RealityKitContent.build/RealityKitContent~partial.swiftmodule",
+    "swift-dependencies": "/Users/joe.simpson/Repos/Step Into Labs/Packages/RealityKitContent/.build/arm64-apple-macosx/debug/RealityKitContent.build/RealityKitContent.swiftdeps"
+  }
+}
