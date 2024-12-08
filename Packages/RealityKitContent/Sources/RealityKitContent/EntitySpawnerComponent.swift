@@ -18,20 +18,28 @@ public struct EntitySpawnerComponent: Component, Codable {
         case circle
     }
     
+    // These prooerties get their default values in RCP
     /// The number of clones to create
-    public var copies: Int = 12
+    public var Copies: Int = 12
     /// The shape to spawn entities in
-    public var spawnShape: SpawnShape = .domeUpper
+    public var SpawnShape: SpawnShape = .domeUpper
     /// Radius for spherical shapes (dome, sphere, circle)
-    public var radius: Float = 2.0
+    public var Radius: Float = 5.0
+   
+    // These properties DO NOT get their default values in RCP. The all show 0
     /// Dimensions for box spawning (width, height, depth)
-    public var boxDimensions: SIMD3<Float> = SIMD3(2, 2, 2)
+    public var BoxDimensions: SIMD3<Float> = SIMD3(2.0, 2.0, 2.0)
+   
     /// Dimensions for plane spawning (width, depth)
-    public var planeDimensions: SIMD2<Float> = SIMD2(2, 2)
+    public var PlaneDimensions: SIMD2<Float> = SIMD2(2.0, 2.0)
+   
     /// Track if we've already spawned copies
-    public var hasSpawned: Bool = false
+    public var HasSpawned: Bool = false
     
-    public init() {}
+    public init() {
+
+
+    }
 }
 
 public class EntitySpawnerSystem: System {
@@ -45,36 +53,39 @@ public class EntitySpawnerSystem: System {
 
     private func positionForShape(_ shape: EntitySpawnerComponent.SpawnShape, 
                                 component: EntitySpawnerComponent) -> SIMD3<Float> {
-        switch shape {
-        case .domeUpper:
-            let theta = Float.random(in: 0...(2 * .pi))
-            let phi = Float.random(in: 0...(Float.pi / 2))
-            return SIMD3(
-                component.radius * sin(phi) * cos(theta),
-                component.radius * cos(phi),
-                component.radius * sin(phi) * sin(theta)
-            )
-            
-        case .domeLower:
-            let theta = Float.random(in: 0...(2 * .pi))
-            let phi = Float.random(in: (Float.pi / 2)...Float.pi)
-            return SIMD3(
-                component.radius * sin(phi) * cos(theta),
-                component.radius * cos(phi),
-                component.radius * sin(phi) * sin(theta)
-            )
+    switch shape {
+  case .domeUpper:
+        let distance = Float.random(in: 1...component.Radius)
+        let theta = Float.random(in: 0...(2 * .pi))
+        let phi = Float.random(in: 0...(Float.pi / 2))
+        return SIMD3(
+            distance * sin(phi) * cos(theta),
+            distance * cos(phi),
+            distance * sin(phi) * sin(theta)
+        )
+        
+    case .domeLower:
+        let distance = Float.random(in: 1...component.Radius)
+        let theta = Float.random(in: 0...(2 * .pi))
+        let phi = Float.random(in: (Float.pi / 2)...Float.pi)
+        return SIMD3(
+            distance * sin(phi) * cos(theta),
+            distance * cos(phi),
+            distance * sin(phi) * sin(theta)
+        )
             
         case .sphere:
+            let distance = Float.random(in: 1...component.Radius)
             let theta = Float.random(in: 0...(2 * .pi))
             let phi = Float.random(in: 0...Float.pi)
             return SIMD3(
-                component.radius * sin(phi) * cos(theta),
-                component.radius * cos(phi),
-                component.radius * sin(phi) * sin(theta)
+                distance * sin(phi) * cos(theta),
+                distance * cos(phi),
+                distance * sin(phi) * sin(theta)
             )
             
         case .box:
-            let dims = component.boxDimensions * 0.5 // Convert to +/- dimensions
+            let dims = component.BoxDimensions * 0.5 // Convert to +/- dimensions
             return SIMD3(
                 Float.random(in: -dims.x...dims.x),
                 Float.random(in: -dims.y...dims.y),
@@ -82,7 +93,7 @@ public class EntitySpawnerSystem: System {
             )
             
         case .plane:
-            let dims = component.planeDimensions * 0.5 // Convert to +/- dimensions
+            let dims = component.PlaneDimensions * 0.5 // Convert to +/- dimensions
             return SIMD3(
                 Float.random(in: -dims.x...dims.x),
                 0,
@@ -91,7 +102,7 @@ public class EntitySpawnerSystem: System {
             
         case .circle:
             let angle = Float.random(in: 0...(2 * .pi))
-            let randomRadius = Float.random(in: 0...component.radius)
+            let randomRadius = Float.random(in: 0...component.Radius)
             return SIMD3(
                 randomRadius * cos(angle),
                 0,
@@ -106,14 +117,14 @@ public class EntitySpawnerSystem: System {
             updatingSystemWhen: .rendering
         ) {
             guard var spawnerComponent = entity.components[EntitySpawnerComponent.self] else { continue }
-            if spawnerComponent.hasSpawned { continue }
+            if spawnerComponent.HasSpawned { continue }
             
-            for _ in 1...spawnerComponent.copies {
+            for _ in 1...spawnerComponent.Copies {
                 let clone = entity.clone(recursive: true)
                 clone.components.remove(EntitySpawnerComponent.self)
                 
                 // Calculate offset in local space
-                let localOffset = positionForShape(spawnerComponent.spawnShape, component: spawnerComponent)
+                let localOffset = positionForShape(spawnerComponent.SpawnShape, component: spawnerComponent)
                 
                 // Convert the local offset to world space using the entity's transform
                 let worldTransform = entity.transform
@@ -127,7 +138,7 @@ public class EntitySpawnerSystem: System {
                 entity.parent?.addChild(clone)
             }
             
-            spawnerComponent.hasSpawned = true
+            spawnerComponent.HasSpawned = true
             entity.components[EntitySpawnerComponent.self] = spawnerComponent
         }
     }

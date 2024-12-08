@@ -28,6 +28,13 @@ struct Lab016: View {
             if let scene = try? await Entity(named: "Lab016Scene", in: realityKitContentBundle) {
                 content.add(scene)
 
+//                if let subject = scene.findEntity(named: "StepSphereGreen") {
+//                    if var spawner = subject.components[EntitySpawnerComponent.self] {
+//                        spawner.Copies = 200
+//                        subject.components[EntitySpawnerComponent.self] = spawner
+//                    }
+//                }
+
                 print("Scene added")
 
 
