@@ -22,14 +22,14 @@ def Xform "Root"
     def "StepSphereGreen" (
         active = true
         customData = {
-            float3 rotationEulerHint = (1.6457571, -4.6312145e-9, 1.2350576e-7)
+            float3 rotationEulerHint = (0, -4.6312145e-9, 1.2350576e-7)
         }
         prepend references = @BuildingBlocks/StepSphereGreen.usda@
     )
     {
-        quatf xformOp:orient = (0.68011373, 0.7331066, 4.369657e-8, 4.369657e-8)
+        quatf xformOp:orient = (1, 1.4299541e-16, -2.3156073e-9, 6.175288e-8)
         float3 xformOp:scale = (0.6, 0.6, 0.6)
-        float3 xformOp:translate = (0, 1, -2)
+        float3 xformOp:translate = (0, 0, 0)
 
         over "Collider"
         {
@@ -47,7 +47,7 @@ def Xform "Root"
             int Copies = 50
             uniform token info:id = "RealityKitContent.EntitySpawnerComponent"
             float2 PlaneDimensions = (3, 1)
-            token SpawnShape = "circle"
+            token SpawnShape = "domeUpper"
         }
     }
 }

@@ -48,6 +48,10 @@ struct Lab016: View {
             }
         }
 
+        .modifier(DragGestureImproved())
+        .modifier(MagnifyGestureImproved())
+        
+
     }
 
 }

@@ -29,7 +29,7 @@ public struct EntitySpawnerComponent: Component, Codable {
     // These properties DO NOT get their default values in RCP. The all show 0
     /// Dimensions for box spawning (width, height, depth)
     public var BoxDimensions: SIMD3<Float> = SIMD3(2.0, 2.0, 2.0)
-   
+
     /// Dimensions for plane spawning (width, depth)
     public var PlaneDimensions: SIMD2<Float> = SIMD2(2.0, 2.0)
    
@@ -37,7 +37,6 @@ public struct EntitySpawnerComponent: Component, Codable {
     public var HasSpawned: Bool = false
     
     public init() {
-
 
     }
 }
@@ -135,7 +134,8 @@ public class EntitySpawnerSystem: System {
                 clone.orientation = entity.orientation
                 
 
-                entity.parent?.addChild(clone)
+                 entity.parent?.addChild(clone)
+//                entity.addChild(clone)
             }
             
             spawnerComponent.HasSpawned = true
