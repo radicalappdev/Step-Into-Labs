@@ -5,7 +5,7 @@
     "Lab012Scene.usda",
     "Lab013Scene.usda",
     "BuildingBlocks\/StepSphereRed.usda",
-    "labs\/LabScene016.usda"
+    "Lab016Scene.usda"
   ],
   "recentIdentifiers" : {
     "0521479C-D4B3-482F-BA1B-037E23908C92" : [
@@ -914,5 +914,5 @@
   "sceneViewportBackgroundColors" : {
 
   },
-  "selectedSceneRelativePath" : "labs\/LabScene016.usda"
+  "selectedSceneRelativePath" : "Lab016Scene.usda"
 }

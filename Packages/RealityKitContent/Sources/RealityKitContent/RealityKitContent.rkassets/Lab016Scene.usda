@@ -12,7 +12,7 @@ def Xform "Root"
 {
     def "StepDome" (
         active = true
-        prepend references = @../BuildingBlocks/StepDome.usda@
+        prepend references = @BuildingBlocks/StepDome.usda@
     )
     {
         float3 xformOp:scale = (1, 1, 1)
@@ -21,10 +21,16 @@ def Xform "Root"
 
     def "StepSphereGreen" (
         active = true
-        prepend references = @../BuildingBlocks/StepSphereGreen.usda@
+        prepend references = @BuildingBlocks/StepSphereGreen.usda@
     )
     {
         float3 xformOp:scale = (1, 1, 1)
+
+        def RealityKitCustomComponent "RealityKitContent_EntitySpawnerComponent"
+        {
+            int copies = 100
+            uniform token info:id = "RealityKitContent.EntitySpawnerComponent"
+        }
     }
 }
 

@@ -16,11 +16,16 @@ import RealityKitContent
 
 struct Lab016: View {
 
+    init() {
+        EntitySpawnerComponent.registerComponent()
+        EntitySpawnerSystem.registerSystem()
+    }
+
 
     var body: some View {
         RealityView { content, attachments in
 
-            if let scene = try? await Entity(named: "BuildingBlocks/StepDome", in: realityKitContentBundle) {
+            if let scene = try? await Entity(named: "Lab016Scene", in: realityKitContentBundle) {
                 content.add(scene)
 
                 print("Scene added")
