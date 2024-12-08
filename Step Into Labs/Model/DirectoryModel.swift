@@ -128,14 +128,14 @@ class ModelData {
         ,Lab(title: "Lab 013",
              type: .SPACE,
              date: Date("11/12/2024"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Using targetedToEntity with a Query",
              description: "Instead of using the broad targetedToAnyEntity modifier, let's try to use targetedToEntity to query components with a custom component.")
 
         ,Lab(title: "Lab 014",
              type: .VOLUME,
              date: Date("11/16/2024"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Building an Indirect Transform System",
              description: "Use the Drag Gesture and a Toolbar to switch modes. We can use one gesture to drag, scale, and rotate our entities.")
 

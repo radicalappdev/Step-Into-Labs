@@ -4,10 +4,13 @@
     "JiggleLabs.usda",
     "Lab012Scene.usda",
     "Lab013Scene.usda",
-    "Building Blocks\/StepDome.usda",
-    "BuildingBlocks\/StepDome.usda"
+    "BuildingBlocks\/StepSphereRed.usda",
+    "labs\/LabScene016.usda"
   ],
   "recentIdentifiers" : {
+    "0521479C-D4B3-482F-BA1B-037E23908C92" : [
+
+    ],
     "2A0E68BB-1D35-4AF2-9835-3F346F1688E6" : [
 
     ],
@@ -26,7 +29,13 @@
     "C5B50F83-0F34-4891-8072-A6408510F3B3" : [
 
     ],
+    "D19CE1CC-1DEB-42EB-BE41-BD27D3C10D80" : [
+
+    ],
     "EF7EEC0C-5DBF-4E32-8A84-4A83A2B4924D" : [
+
+    ],
+    "FD04FE75-518A-4DD4-8641-074C2294C245" : [
 
     ]
   },
@@ -459,6 +468,28 @@
     ],
     "90C235E0-C99C-42E7-9D0D-5E131743A0A7" : [
       {
+        "date" : 755353445.859996,
+        "title" : "Untitled",
+        "transform" : [
+          0.9857555,
+          6.790263e-09,
+          -0.16818495,
+          0,
+          -0.09211435,
+          0.83667684,
+          -0.53989506,
+          0,
+          0.14071646,
+          0.5476968,
+          0.8247587,
+          0,
+          5.1350403,
+          44.32749,
+          29.703178,
+          1
+        ]
+      },
+      {
         "date" : 755216499.299407,
         "title" : "Untitled",
         "transform" : [
@@ -653,28 +684,6 @@
           0.6205354,
           0.467425,
           0.083424985,
-          1
-        ]
-      },
-      {
-        "date" : 755184873.751856,
-        "title" : "Untitled",
-        "transform" : [
-          0.18838604,
-          3.11127e-08,
-          -0.982095,
-          0,
-          -0.5754184,
-          0.8103768,
-          -0.110377066,
-          0,
-          0.7958671,
-          0.5859091,
-          0.15266368,
-          0,
-          0.3548661,
-          0.27184203,
-          0.032464173,
           1
         ]
       }
@@ -905,5 +914,5 @@
   "sceneViewportBackgroundColors" : {
 
   },
-  "selectedSceneRelativePath" : "Lab012Scene.usda"
+  "selectedSceneRelativePath" : "labs\/LabScene016.usda"
 }
