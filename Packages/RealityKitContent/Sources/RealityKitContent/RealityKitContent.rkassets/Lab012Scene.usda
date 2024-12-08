@@ -215,57 +215,6 @@ def Xform "Root"
         }
     }
 
-    def "SkyDome" (
-        active = true
-        references = @SkyDome.usdz@
-    )
-    {
-        float3 xformOp:scale = (0.01, 0.01, 0.01)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-
-        over "Looks"
-        {
-            over "GridMATSG"
-            {
-                token outputs:mtlx:surface
-                token outputs:realitykit:vertex
-
-                over "GridMAT"
-                {
-                    color3f inputs:diffuseColor = (0.83137256, 0.73333335, 0.73333335) (
-                        colorSpace = "srgb_displayp3"
-                    )
-                }
-            }
-
-            over "GroundMATSG"
-            {
-                token outputs:mtlx:surface
-                token outputs:realitykit:vertex
-
-                over "GroundMAT"
-                {
-                    color3f inputs:diffuseColor = (0.41960785, 0.003921569, 0.17254902) (
-                        colorSpace = "srgb_texture"
-                    )
-                }
-            }
-
-            over "DomeMATSG"
-            {
-                token outputs:mtlx:surface
-                token outputs:realitykit:vertex
-
-                over "DomeMAT"
-                {
-                    color3f inputs:diffuseColor = (0.83137256, 0.73333335, 0.73333335) (
-                        colorSpace = "srgb_displayp3"
-                    )
-                }
-            }
-        }
-    }
-
     def Cylinder "Cylinder" (
         active = true
         prepend apiSchemas = ["MaterialBindingAPI"]
@@ -490,6 +439,15 @@ def Xform "Root"
                 rel timeline = </Root/SpinCube>
             }
         }
+    }
+
+    def "StepDome" (
+        active = true
+        references = @BuildingBlocks/StepDome.usda@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 }
 

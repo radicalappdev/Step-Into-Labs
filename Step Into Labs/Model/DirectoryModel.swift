@@ -148,10 +148,10 @@ class ModelData {
 
         ,Lab(title: "Lab 016",
              type: .SPACE,
-             date: Date("12/04/2024"),
+             date: Date("12/84/2024"),
              isFeatured: true,
-             subtitle: "TBD",
-             description: "TBD")
+             subtitle: "Creating an entity spawner system",
+             description: "Using Components and Systems to create an entity spawner system.")
     ]
 
 }
