@@ -8,6 +8,24 @@
     "objectMetadataList" : [
       [
         "07EA2983-9D38-4950-A08B-CC74B611453D",
+        "Root",
+        "DebugContainer"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "07EA2983-9D38-4950-A08B-CC74B611453D",
+        "Root",
+        "DebugBox"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "07EA2983-9D38-4950-A08B-CC74B611453D",
         "Root"
       ],
       {
