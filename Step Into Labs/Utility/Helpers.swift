@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import RealityKit
 
 extension Date {
     init(_ dateString: String) {
@@ -96,5 +97,43 @@ struct MagnifyGestureImproved: ViewModifier {
                     }
             )
         
+    }
+}
+
+struct RotateGesture3DImproved: ViewModifier {
+
+    @State var isRotating: Bool = false
+    @State var initialOrientation:simd_quatf = simd_quatf(
+        vector: .init(repeating: 0.0)
+    )
+
+    func body(content: Content) -> some View {
+        content
+            .gesture(
+                RotateGesture3D(constrainedToAxis: .y)
+                    .targetedToAnyEntity()
+                    .onChanged { value in
+
+                        // Cache the entity's initial orientation when the gesture starts
+                        if !isRotating {
+                            isRotating = true
+                            initialOrientation = value.entity.transform.rotation
+                        }
+
+                        let rotation = value.rotation
+                        let rotationTransform = Transform(AffineTransform3D(rotation: rotation))
+
+                        // Multiply the initial orientation by the gesture rotation
+                        value.entity.transform.rotation = initialOrientation * rotationTransform.rotation
+
+                    }
+                    .onEnded { value in
+                        // Clean up when the gesture has ended
+                        isRotating = false
+                        initialOrientation = simd_quatf(
+                            vector: .init(repeating: 0.0)
+                        )
+                    }
+            )
     }
 }

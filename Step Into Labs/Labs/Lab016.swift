@@ -43,7 +43,8 @@ struct Lab016: View {
         .gesture(tap)
         .modifier(DragGestureImproved())
         .modifier(MagnifyGestureImproved())
-        
+        .modifier(RotateGesture3DImproved())
+
 
     }
 

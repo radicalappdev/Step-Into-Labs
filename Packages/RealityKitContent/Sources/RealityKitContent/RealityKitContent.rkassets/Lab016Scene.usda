@@ -20,59 +20,6 @@ def Xform "Root"
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 
-    def Cube "DebugBox" (
-        active = true
-        prepend apiSchemas = ["MaterialBindingAPI"]
-    )
-    {
-        rel material:binding = </Root/DebugContainer>
-        double size = 1
-        float3 xformOp:scale = (2, 1, 2)
-        float3 xformOp:translate = (1.3482435, 1.3001354, -2.0218978)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-    }
-
-    def Material "DebugContainer"
-    {
-        token cullMode = "front" (
-            allowedTokens = ["unspecified", "none", "front", "back"]
-        )
-        token outputs:mtlx:surface.connect = </Root/DebugContainer/PreviewSurface.outputs:out>
-        token outputs:realitykit:vertex
-        token outputs:surface.connect = </Root/DebugContainer/DefaultSurfaceShader.outputs:surface>
-        float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (0, 110.5)
-
-        def Shader "DefaultSurfaceShader" (
-            active = false
-        )
-        {
-            uniform token info:id = "UsdPreviewSurface"
-            color3f inputs:diffuseColor = (1, 1, 1)
-            float inputs:opacity = 0.1
-            float inputs:roughness = 0.75
-            token outputs:surface
-        }
-
-        def Shader "PreviewSurface"
-        {
-            uniform token info:id = "ND_UsdPreviewSurface_surfaceshader"
-            float inputs:metallic
-            float3 inputs:normal
-            float inputs:opacity.connect = </Root/DebugContainer/ConstantFloat.outputs:out>
-            token outputs:out
-            float2 ui:nodegraph:node:pos = (-255, 105)
-        }
-
-        def Shader "ConstantFloat"
-        {
-            uniform token info:id = "ND_constant_float"
-            float inputs:value = 0.1
-            float outputs:out
-            float2 ui:nodegraph:node:pos = (-483.28516, 131.34375)
-            int ui:nodegraph:node:stackingOrder = 1
-        }
-    }
-
     def "StepSphereGreen" (
         active = true
         customData = {
@@ -83,7 +30,7 @@ def Xform "Root"
     {
         quatf xformOp:orient = (1, 0, 0, 0)
         float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (1.3482435, 1.3001354, -2.0218978)
+        float3 xformOp:translate = (1.7009245, 1.3001354, -2)
 
         over "Collider"
         {
@@ -103,6 +50,41 @@ def Xform "Root"
             float2 PlaneDimensions = (3, 1)
             float Radius = 1
             token SpawnShape = "box"
+        }
+    }
+
+    def "StepSphereBlue" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (1.3162087, 1.1611724e-8, -4.504593e-9)
+        }
+        prepend references = @BuildingBlocks/StepSphereBlue.usda@
+    )
+    {
+        quatf xformOp:orient = (0.7911531, 0.61161816, 3.2157803e-9, -5.3328817e-9)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 1.2, -2)
+
+        def RealityKitCustomComponent "RealityKitContent_EntitySpawnerComponent"
+        {
+            uniform token info:id = "RealityKitContent.EntitySpawnerComponent"
+            float2 PlaneDimensions = (1.5, 1.5)
+            token SpawnShape = "plane"
+        }
+    }
+
+    def "StepSphereRed" (
+        active = true
+        prepend references = @BuildingBlocks/StepSphereRed.usda@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (-2.130386, 1.2, -2)
+
+        def RealityKitCustomComponent "RealityKitContent_EntitySpawnerComponent"
+        {
+            uniform token info:id = "RealityKitContent.EntitySpawnerComponent"
+            float Radius = 1
         }
     }
 }
