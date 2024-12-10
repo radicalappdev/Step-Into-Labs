@@ -18,7 +18,7 @@ public struct EntitySpawnerComponent: Component, Codable {
         case circle
     }
     
-    // These prooerties get their default values in RCP
+   
     /// The number of clones to create
     public var Copies: Int = 12
     /// The shape to spawn entities in
@@ -26,7 +26,6 @@ public struct EntitySpawnerComponent: Component, Codable {
     /// Radius for spherical shapes (dome, sphere, circle)
     public var Radius: Float = 5.0
    
-    // These properties DO NOT get their default values in RCP. The all show 0
     /// Dimensions for box spawning (width, height, depth)
     public var BoxDimensions: SIMD3<Float> = [2.0, 2.0, 2.0]
 
@@ -133,9 +132,7 @@ public class EntitySpawnerSystem: System {
                 // Inherit orientation from parent
                 clone.orientation = entity.orientation
                 
-
                  entity.parent?.addChild(clone)
-//                entity.addChild(clone)
             }
             
             spawnerComponent.HasSpawned = true
