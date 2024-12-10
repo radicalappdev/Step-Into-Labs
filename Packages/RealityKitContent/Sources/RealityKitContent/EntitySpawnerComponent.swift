@@ -19,7 +19,7 @@ public struct EntitySpawnerComponent: Component, Codable {
     }
     
    
-    /// The number of clones to create
+    /// The number of entities to manage in the pool
     public var Copies: Int = 12
     /// The shape to spawn entities in
     public var SpawnShape: SpawnShape = .domeUpper
@@ -34,6 +34,12 @@ public struct EntitySpawnerComponent: Component, Codable {
    
     /// Track if we've already spawned copies
     public var HasSpawned: Bool = false
+    
+    /// Track active entities for pool management
+    public var ActiveEntities: Int = 0
+    
+    /// Whether to continuously check for disabled entities to respawn
+    public var EnableRespawning: Bool = true
     
     public init() {
 
@@ -115,29 +121,65 @@ public class EntitySpawnerSystem: System {
             updatingSystemWhen: .rendering
         ) {
             guard var spawnerComponent = entity.components[EntitySpawnerComponent.self] else { continue }
-            if spawnerComponent.HasSpawned { continue }
             
-            for _ in 1...spawnerComponent.Copies {
-                let clone = entity.clone(recursive: true)
-                clone.components.remove(EntitySpawnerComponent.self)
-                
-                // Calculate offset in local space
-                let localOffset = positionForShape(spawnerComponent.SpawnShape, component: spawnerComponent)
-                
-                // Convert the local offset to world space using the entity's transform
-                let worldTransform = entity.transform
-                let rotatedOffset = worldTransform.rotation.act(localOffset)
-                clone.position = entity.position + (rotatedOffset * worldTransform.scale)
-                
-                // Inherit orientation from parent
-                clone.orientation = entity.orientation
-                
-                 entity.parent?.addChild(clone)
+            if !spawnerComponent.HasSpawned {
+                // Initial spawn
+                spawnInitialEntities(entity: entity, component: &spawnerComponent)
+            } else if spawnerComponent.EnableRespawning {
+                // Check for disabled entities to respawn
+                respawnDisabledEntities(entity: entity, component: &spawnerComponent)
             }
             
-            spawnerComponent.HasSpawned = true
             entity.components[EntitySpawnerComponent.self] = spawnerComponent
         }
+    }
+    
+    @MainActor private func spawnInitialEntities(
+        entity: Entity,
+        component: inout EntitySpawnerComponent
+    ) {
+        for _ in 1...component.Copies {
+            spawnEntity(entity: entity, component: component)
+        }
+        component.HasSpawned = true
+        component.ActiveEntities = component.Copies
+    }
+    
+    @MainActor private func respawnDisabledEntities(
+        entity: Entity,
+        component: inout EntitySpawnerComponent
+    ) {
+        guard let children = entity.parent?.children else { return }
+        
+        for child in children {
+            // Check if this is one of our spawned entities (excluding the original)
+            if child !== entity && !child.isEnabled {
+                // Reposition the disabled entity
+                let localOffset = positionForShape(component.SpawnShape, component: component)
+                let worldTransform = entity.transform
+                let rotatedOffset = worldTransform.rotation.act(localOffset)
+                child.position = entity.position + (rotatedOffset * worldTransform.scale)
+                
+                // Re-enable the entity
+                child.isEnabled = true
+            }
+        }
+    }
+    
+    @MainActor private func spawnEntity(
+        entity: Entity,
+        component: EntitySpawnerComponent
+    ) {
+        let clone = entity.clone(recursive: true)
+        clone.components.remove(EntitySpawnerComponent.self)
+        
+        let localOffset = positionForShape(component.SpawnShape, component: component)
+        let worldTransform = entity.transform
+        let rotatedOffset = worldTransform.rotation.act(localOffset)
+        clone.position = entity.position + (rotatedOffset * worldTransform.scale)
+        clone.orientation = entity.orientation
+        
+        entity.parent?.addChild(clone)
     }
 }
 

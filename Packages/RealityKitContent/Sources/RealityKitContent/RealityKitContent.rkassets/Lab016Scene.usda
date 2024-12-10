@@ -29,7 +29,7 @@ def Xform "Root"
     {
         quatf xformOp:orient = (1, 1.4299541e-16, -2.3156073e-9, 6.175288e-8)
         float3 xformOp:scale = (0.6, 0.6, 0.6)
-        float3 xformOp:translate = (0, 0, 0)
+        float3 xformOp:translate = (1, 1, -1)
 
         over "Collider"
         {
@@ -44,39 +44,11 @@ def Xform "Root"
         def RealityKitCustomComponent "RealityKitContent_EntitySpawnerComponent"
         {
             float3 BoxDimensions = (4, 2, 4)
-            int Copies = 50
+            int Copies = 10
             uniform token info:id = "RealityKitContent.EntitySpawnerComponent"
             float2 PlaneDimensions = (3, 1)
+            float Radius = 1
             token SpawnShape = "domeUpper"
-        }
-    }
-
-    def Cone "Cone" (
-        active = true
-        prepend apiSchemas = ["MaterialBindingAPI"]
-    )
-    {
-        uniform token axis = "Y"
-        double height = 0.2
-        rel material:binding = </Root/Cone/DefaultMaterial>
-        double radius = 0.1
-
-        def Material "DefaultMaterial"
-        {
-            prepend token outputs:surface.connect = </Root/Cone/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
-
-            def Shader "DefaultSurfaceShader"
-            {
-                uniform token info:id = "UsdPreviewSurface"
-                color3f inputs:diffuseColor = (1, 1, 1)
-                float inputs:roughness = 0.75
-                token outputs:surface
-            }
-        }
-
-        def RealityKitCustomComponent "RealityKitContent_EntitySpawnerComponent"
-        {
-            uniform token info:id = "RealityKitContent.EntitySpawnerComponent"
         }
     }
 }

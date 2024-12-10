@@ -47,11 +47,19 @@ struct Lab016: View {
                 Text("wow")
             }
         }
-
+        .gesture(tap)
         .modifier(DragGestureImproved())
         .modifier(MagnifyGestureImproved())
         
 
+    }
+
+    var tap: some Gesture {
+        TapGesture()
+            .targetedToAnyEntity()
+            .onEnded { value in
+                value.entity.isEnabled = false
+            }
     }
 
 }
