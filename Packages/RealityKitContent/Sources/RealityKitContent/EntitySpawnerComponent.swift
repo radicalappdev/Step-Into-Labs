@@ -149,18 +149,10 @@ public class EntitySpawnerSystem: System {
         entity: Entity,
         component: inout EntitySpawnerComponent
     ) {
-        guard let children = entity.parent?.children else { return }
-        
-        for child in children {
-            // Check if this is one of our spawned entities (excluding the original)
-            if child !== entity && !child.isEnabled {
-                // Reposition the disabled entity
-                let localOffset = positionForShape(component.SpawnShape, component: component)
-                let worldTransform = entity.transform
-                let rotatedOffset = worldTransform.rotation.act(localOffset)
-                child.position = entity.position + (rotatedOffset * worldTransform.scale)
-                
-                // Re-enable the entity
+        for child in entity.children {
+            if !child.isEnabled {
+                // Just use local coordinates directly
+                child.position = positionForShape(component.SpawnShape, component: component)
                 child.isEnabled = true
             }
         }
@@ -170,16 +162,14 @@ public class EntitySpawnerSystem: System {
         entity: Entity,
         component: EntitySpawnerComponent
     ) {
-        let clone = entity.clone(recursive: true)
+        let clone = entity.clone(recursive: false)
         clone.components.remove(EntitySpawnerComponent.self)
         
         let localOffset = positionForShape(component.SpawnShape, component: component)
-        let worldTransform = entity.transform
-        let rotatedOffset = worldTransform.rotation.act(localOffset)
-        clone.position = entity.position + (rotatedOffset * worldTransform.scale)
+        clone.position = localOffset  // Just use the local offset directly
         clone.orientation = entity.orientation
         
-        entity.parent?.addChild(clone)
+        entity.addChild(clone)
     }
 }
 
