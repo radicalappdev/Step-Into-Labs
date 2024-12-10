@@ -40,6 +40,8 @@ public struct EntitySpawnerComponent: Component, Codable {
     
     /// Whether to continuously check for disabled entities to respawn
     public var EnableRespawning: Bool = true
+
+//    public var TargetEntity: Entity = Entity()
     
     public init() {
 
@@ -151,7 +153,6 @@ public class EntitySpawnerSystem: System {
     ) {
         for child in entity.children {
             if !child.isEnabled {
-                // Just use local coordinates directly
                 child.position = positionForShape(component.SpawnShape, component: component)
                 child.isEnabled = true
             }
@@ -166,7 +167,7 @@ public class EntitySpawnerSystem: System {
         clone.components.remove(EntitySpawnerComponent.self)
         
         let localOffset = positionForShape(component.SpawnShape, component: component)
-        clone.position = localOffset  // Just use the local offset directly
+        clone.position = localOffset 
         clone.orientation = entity.orientation
         
         entity.addChild(clone)
