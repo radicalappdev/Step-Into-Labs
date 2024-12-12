@@ -2,9 +2,9 @@
 //
 //  Title: Lab017
 //
-//  Subtitle:
+//  Subtitle: Exploring a Skybox Material with Shader Graph
 //
-//  Description:
+//  Description: Having a little fun with occlusion too.
 //
 //  Type:
 //
@@ -26,26 +26,20 @@ struct Lab017: View {
 
             if let scene = try? await Entity(named: "Lab017Scene", in: realityKitContentBundle) {
                 content.add(scene)
-
-                if let skySphere = content.entities.first?.findEntity(named: "SkySphere"), let occSphere = content.entities.first?.findEntity(named: "OccSphere") {
-
-                    // Get their materials and save them in the vars.
-
-
-                }
-
-
-
             }
 
         } update: {content, attachments in
             if let skySphere = content.entities.first?.findEntity(named: "SkySphere"), let occSphere = content.entities.first?.findEntity(named: "OccSphere") {
 
-                // Disable this and replace it
                 skySphere.scale = showSkyLarge ? [10, 10, 10] : [0.5, 0.5, 0.5]
                 occSphere.scale = showSkyLarge ? [0.5, 0.5, 0.5] : [10, 10, 10]
 
-                // Instead of scaling, swap the materials
+                if(showSkyLarge) {
+                    occSphere.position = skySphere.position
+                } else {
+                    skySphere.position = occSphere.position
+                }
+
             }
 
 

@@ -20,19 +20,8 @@ def Xform "Root"
             bindMaterialAs = "weakerThanDescendants"
         )
         double radius = 0.5
-
-        def Material "DefaultMaterial"
-        {
-            token outputs:surface.connect = </Root/SkySphere/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
-
-            def Shader "DefaultSurfaceShader"
-            {
-                uniform token info:id = "UsdPreviewSurface"
-                color3f inputs:diffuseColor = (1, 1, 1)
-                float inputs:roughness = 0.75
-                token outputs:surface
-            }
-        }
+        float3 xformOp:translate = (1, 1.5, -1)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         def RealityKitComponent "InputTarget"
         {
@@ -104,10 +93,10 @@ def Xform "Root"
         {
             uniform token info:id = "ND_multiply_float"
             float inputs:in1.connect = </Root/SkyMat/Time.outputs:out>
-            float inputs:in2 = 0.1
+            float inputs:in2 = 0.05
             float outputs:out
             float2 ui:nodegraph:node:pos = (-346.01474, -20.055292)
-            int ui:nodegraph:node:stackingOrder = 1705
+            int ui:nodegraph:node:stackingOrder = 1707
         }
 
         def Shader "Fractal3D_1"
@@ -256,7 +245,7 @@ def Xform "Root"
         rel material:binding = </Root/OccMat>
         double radius = 0.5
         float3 xformOp:scale = (10, 10, 10)
-        float3 xformOp:translate = (0, 1.5, -1.5)
+        float3 xformOp:translate = (1, 1.5, -1)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         def RealityKitComponent "InputTarget"

@@ -157,8 +157,8 @@ class ModelData {
              type: .SPACE,
              date: Date("12/11/2024"),
              isFeatured: true,
-             subtitle: "Exploreing a Skybox Material with Shader Grapph",
-             description: "")
+             subtitle: "Exploring a Skybox Material with Shader Graph",
+             description: "Having a little fun with occlusion too.")
     ]
 
 }
