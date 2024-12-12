@@ -148,10 +148,17 @@ class ModelData {
 
         ,Lab(title: "Lab 016",
              type: .SPACE,
-             date: Date("12/84/2024"),
+             date: Date("12/04/2024"),
              isFeatured: true,
              subtitle: "Creating an entity spawner system",
              description: "Using Components and Systems to create an entity spawner system.")
+
+        ,Lab(title: "Lab 017",
+             type: .SPACE,
+             date: Date("12/11/2024"),
+             isFeatured: true,
+             subtitle: "Exploreing a Skybox Material with Shader Grapph",
+             description: "")
     ]
 
 }

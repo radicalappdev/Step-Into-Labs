@@ -1,11 +1,12 @@
 {
-  "advancedEditorSelectedIdentifier" : "ProjectBrowser",
+  "advancedEditorSelectedIdentifier" : "ShaderGraphEditorPluginID",
   "openSceneRelativePaths" : [
     "JiggleLabs.usda",
     "Lab012Scene.usda",
     "Lab013Scene.usda",
     "BuildingBlocks\/StepSphereRed.usda",
-    "Lab016Scene.usda"
+    "Lab016Scene.usda",
+    "Lab017Scene.usda"
   ],
   "recentIdentifiers" : {
     "0521479C-D4B3-482F-BA1B-037E23908C92" : [
@@ -39,6 +40,9 @@
 
     ],
     "FD04FE75-518A-4DD4-8641-074C2294C245" : [
+
+    ],
+    "FD46CB38-D383-49B0-BECF-828C0268C32B" : [
 
     ]
   },
@@ -1134,10 +1138,78 @@
           1
         ]
       }
+    ],
+    "FD46CB38-D383-49B0-BECF-828C0268C32B" : [
+      {
+        "date" : 755654505.670592,
+        "title" : "Untitled",
+        "transform" : [
+          0.99167293,
+          6.683308e-09,
+          -0.12878238,
+          0,
+          -0.05441518,
+          0.90634626,
+          -0.41901737,
+          0,
+          0.11672142,
+          0.4225359,
+          0.898799,
+          0,
+          0.23899259,
+          2.1786664,
+          0.2016511,
+          1
+        ]
+      },
+      {
+        "date" : 755652725.470155,
+        "title" : "Untitled",
+        "transform" : [
+          0.9916729,
+          3.0942644e-09,
+          -0.12878239,
+          0,
+          -0.05441519,
+          0.90634626,
+          -0.4190174,
+          0,
+          0.11672144,
+          0.4225359,
+          0.898799,
+          0,
+          0.446499,
+          1.7030922,
+          3.6258507,
+          1
+        ]
+      },
+      {
+        "date" : 755652655.953305,
+        "title" : "Untitled",
+        "transform" : [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0.7071069,
+          -0.70710677,
+          0,
+          0,
+          0.70710677,
+          0.7071069,
+          0,
+          -0.01550555,
+          1.8287902,
+          1.8287904,
+          1
+        ]
+      }
     ]
   },
   "sceneViewportBackgroundColors" : {
 
   },
-  "selectedSceneRelativePath" : "Lab016Scene.usda"
+  "selectedSceneRelativePath" : "Lab017Scene.usda"
 }

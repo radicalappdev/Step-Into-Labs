@@ -1,0 +1,286 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 2.0 (448.0.16.0.3)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    reorder nameChildren = ["SkyMat", "OccMat", "OccSphere", "SkySphere", "SkySphere"]
+    def Sphere "SkySphere" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </Root/SkyMat> (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        double radius = 0.5
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/SkySphere/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.2, 0.2, 0.2)
+                float radius = 0.5
+                token shapeType = "Sphere"
+
+                def RealityKitStruct "pose"
+                {
+                }
+            }
+        }
+    }
+
+    def Material "SkyMat"
+    {
+        token cullMode = "front" (
+            allowedTokens = ["unspecified", "none", "front", "back"]
+        )
+        token outputs:mtlx:surface.connect = </Root/SkyMat/PreviewSurface.outputs:out>
+        token outputs:realitykit:vertex
+        token outputs:surface.connect = </Root/SkyMat/DefaultSurfaceShader.outputs:surface>
+        float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (1669.2872, -42.734093)
+        int ui:nodegraph:realitykit:subgraphOutputs:stackingOrder = 1696
+
+        def Shader "DefaultSurfaceShader" (
+            active = false
+        )
+        {
+            uniform token info:id = "UsdPreviewSurface"
+            color3f inputs:diffuseColor = (1, 1, 1)
+            float inputs:roughness = 0.75
+            token outputs:surface
+        }
+
+        def Shader "PreviewSurface"
+        {
+            uniform token info:id = "ND_UsdPreviewSurface_surfaceshader"
+            color3f inputs:diffuseColor.connect = </Root/SkyMat/Mix.outputs:out>
+            float inputs:metallic
+            float inputs:roughness
+            token outputs:out
+            float2 ui:nodegraph:node:pos = (1432.7786, -34.52376)
+            int ui:nodegraph:node:stackingOrder = 1698
+        }
+
+        def Shader "Position"
+        {
+            uniform token info:id = "ND_position_vector3"
+            string inputs:space
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (-421.72287, -209.19849)
+            int ui:nodegraph:node:stackingOrder = 1183
+        }
+
+        def Shader "Multiply"
+        {
+            uniform token info:id = "ND_multiply_float"
+            float inputs:in1.connect = </Root/SkyMat/Time.outputs:out>
+            float inputs:in2 = 0.1
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-346.01474, -20.055292)
+            int ui:nodegraph:node:stackingOrder = 1705
+        }
+
+        def Shader "Fractal3D_1"
+        {
+            uniform token info:id = "ND_fractal3d_float"
+            float inputs:amplitude = 2
+            float inputs:diminish = 0.5
+            float inputs:lacunarity = 4
+            int inputs:octaves = 2
+            float3 inputs:position.connect = </Root/SkyMat/Add_1.outputs:out>
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (301.18732, -233.90132)
+            int ui:nodegraph:node:stackingOrder = 1183
+        }
+
+        def Shader "Add"
+        {
+            uniform token info:id = "ND_add_vector3FA"
+            float3 inputs:in1.connect = </Root/SkyMat/Position.outputs:out>
+            float inputs:in2.connect = </Root/SkyMat/Multiply.outputs:out>
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (65.48886, -133.94235)
+            int ui:nodegraph:node:stackingOrder = 1183
+        }
+
+        def Shader "Fractal3D"
+        {
+            uniform token info:id = "ND_fractal3d_float"
+            float inputs:diminish
+            float inputs:lacunarity = 3
+            int inputs:octaves = 10
+            float3 inputs:position.connect = </Root/SkyMat/Add.outputs:out>
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (296.19122, 3.3525913)
+            int ui:nodegraph:node:stackingOrder = 1183
+        }
+
+        def Shader "Multiply_2"
+        {
+            uniform token info:id = "ND_multiply_vector3"
+            float3 inputs:in1.connect = </Root/SkyMat/Position.outputs:out>
+            float3 inputs:in2 = (0.4, 0.4, 0.4)
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (-141.94827, -314.047)
+            int ui:nodegraph:node:stackingOrder = 1183
+            string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["inputs:in2"]
+        }
+
+        def Shader "Abs"
+        {
+            uniform token info:id = "ND_absval_float"
+            float inputs:in.connect = </Root/SkyMat/Multiply_1.outputs:out>
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (714.5553, -147.13521)
+            int ui:nodegraph:node:stackingOrder = 1183
+        }
+
+        def Shader "Multiply_1"
+        {
+            uniform token info:id = "ND_multiply_float"
+            float inputs:in1.connect = </Root/SkyMat/Fractal3D_1.outputs:out>
+            float inputs:in2.connect = </Root/SkyMat/Fractal3D.outputs:out>
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (507.89044, -126.31538)
+            int ui:nodegraph:node:stackingOrder = 1183
+        }
+
+        def Shader "Mix"
+        {
+            uniform token info:id = "ND_mix_color3"
+            color3f inputs:bg = (0.003921569, 0.17254902, 0.41960785) (
+                colorSpace = "srgb_texture"
+            )
+            color3f inputs:fg = (0.99215686, 0.98039216, 0.98039216) (
+                colorSpace = "srgb_displayp3"
+            )
+            float inputs:mix.connect = </Root/SkyMat/Abs.outputs:out>
+            color3f outputs:out
+            float2 ui:nodegraph:node:pos = (972.069, -186.61092)
+            int ui:nodegraph:node:stackingOrder = 1706
+        }
+
+        def Shader "Time"
+        {
+            uniform token info:id = "ND_time_float"
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-545.558, -71.75315)
+            int ui:nodegraph:node:stackingOrder = 1704
+        }
+
+        def Shader "Add_1"
+        {
+            uniform token info:id = "ND_add_vector3FA"
+            float3 inputs:in1.connect = </Root/SkyMat/Multiply_2.outputs:out>
+            float inputs:in2.connect = </Root/SkyMat/Multiply_3.outputs:out>
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (58.828827, -251.28186)
+            int ui:nodegraph:node:stackingOrder = 1183
+        }
+
+        def Shader "Multiply_3"
+        {
+            uniform token info:id = "ND_multiply_float"
+            float inputs:in1.connect = </Root/SkyMat/Multiply.outputs:out>
+            float inputs:in2 = 0.4
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-221.40689, -111.88554)
+            int ui:nodegraph:node:stackingOrder = 1183
+        }
+    }
+
+    def Material "OccMat"
+    {
+        token cullMode = "front" (
+            allowedTokens = ["unspecified", "none", "front", "back"]
+        )
+        token outputs:mtlx:surface.connect = </Root/OccMat/OcclusionSurface.outputs:out>
+        token outputs:realitykit:vertex
+        token outputs:surface.connect = </Root/OccMat/DefaultSurfaceShader.outputs:surface>
+        float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (0, 110.5)
+
+        def Shader "DefaultSurfaceShader" (
+            active = false
+        )
+        {
+            uniform token info:id = "UsdPreviewSurface"
+            color3f inputs:diffuseColor = (1, 1, 1)
+            float inputs:roughness = 0.75
+            token outputs:surface
+        }
+
+        def Shader "OcclusionSurface"
+        {
+            uniform token info:id = "ND_realitykit_occlusion_surfaceshader"
+            token outputs:out
+            float2 ui:nodegraph:node:pos = (-277.94922, 109)
+            int ui:nodegraph:node:stackingOrder = 3
+        }
+    }
+
+    def Sphere "OccSphere" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </Root/OccMat>
+        double radius = 0.5
+        float3 xformOp:scale = (10, 10, 10)
+        float3 xformOp:translate = (0, 1.5, -1.5)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (1, 1, 1)
+                token shapeType = "Sphere"
+
+                def RealityKitStruct "pose"
+                {
+                }
+            }
+        }
+    }
+}
+
