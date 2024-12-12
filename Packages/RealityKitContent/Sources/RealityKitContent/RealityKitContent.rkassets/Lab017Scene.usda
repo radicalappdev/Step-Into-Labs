@@ -56,7 +56,7 @@ def Xform "Root"
         token outputs:mtlx:surface.connect = </Root/SkyMat/PreviewSurface.outputs:out>
         token outputs:realitykit:vertex
         token outputs:surface.connect = </Root/SkyMat/DefaultSurfaceShader.outputs:surface>
-        float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (1669.2872, -42.734093)
+        float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (1681.75, 139.5)
         int ui:nodegraph:realitykit:subgraphOutputs:stackingOrder = 1696
 
         def Shader "DefaultSurfaceShader" (
@@ -76,7 +76,7 @@ def Xform "Root"
             float inputs:metallic
             float inputs:roughness
             token outputs:out
-            float2 ui:nodegraph:node:pos = (1432.7786, -34.52376)
+            float2 ui:nodegraph:node:pos = (1440, 139.5)
             int ui:nodegraph:node:stackingOrder = 1698
         }
 
@@ -85,8 +85,8 @@ def Xform "Root"
             uniform token info:id = "ND_position_vector3"
             string inputs:space
             float3 outputs:out
-            float2 ui:nodegraph:node:pos = (-421.72287, -209.19849)
-            int ui:nodegraph:node:stackingOrder = 1183
+            float2 ui:nodegraph:node:pos = (162.46315, 394.34058)
+            int ui:nodegraph:node:stackingOrder = 1709
         }
 
         def Shader "Multiply"
@@ -95,7 +95,7 @@ def Xform "Root"
             float inputs:in1.connect = </Root/SkyMat/Time.outputs:out>
             float inputs:in2 = 0.05
             float outputs:out
-            float2 ui:nodegraph:node:pos = (-346.01474, -20.055292)
+            float2 ui:nodegraph:node:pos = (253.25, 98)
             int ui:nodegraph:node:stackingOrder = 1707
         }
 
@@ -108,7 +108,7 @@ def Xform "Root"
             int inputs:octaves = 2
             float3 inputs:position.connect = </Root/SkyMat/Add_1.outputs:out>
             float outputs:out
-            float2 ui:nodegraph:node:pos = (301.18732, -233.90132)
+            float2 ui:nodegraph:node:pos = (711, 109.5)
             int ui:nodegraph:node:stackingOrder = 1183
         }
 
@@ -118,7 +118,7 @@ def Xform "Root"
             float3 inputs:in1.connect = </Root/SkyMat/Position.outputs:out>
             float inputs:in2.connect = </Root/SkyMat/Multiply.outputs:out>
             float3 outputs:out
-            float2 ui:nodegraph:node:pos = (65.48886, -133.94235)
+            float2 ui:nodegraph:node:pos = (526.75, 352.5)
             int ui:nodegraph:node:stackingOrder = 1183
         }
 
@@ -130,8 +130,8 @@ def Xform "Root"
             int inputs:octaves = 10
             float3 inputs:position.connect = </Root/SkyMat/Add.outputs:out>
             float outputs:out
-            float2 ui:nodegraph:node:pos = (296.19122, 3.3525913)
-            int ui:nodegraph:node:stackingOrder = 1183
+            float2 ui:nodegraph:node:pos = (711.17645, 331.6948)
+            int ui:nodegraph:node:stackingOrder = 1714
         }
 
         def Shader "Multiply_2"
@@ -140,8 +140,8 @@ def Xform "Root"
             float3 inputs:in1.connect = </Root/SkyMat/Position.outputs:out>
             float3 inputs:in2 = (0.4, 0.4, 0.4)
             float3 outputs:out
-            float2 ui:nodegraph:node:pos = (-141.94827, -314.047)
-            int ui:nodegraph:node:stackingOrder = 1183
+            float2 ui:nodegraph:node:pos = (282.32416, 265.7471)
+            int ui:nodegraph:node:stackingOrder = 1711
             string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["inputs:in2"]
         }
 
@@ -150,7 +150,7 @@ def Xform "Root"
             uniform token info:id = "ND_absval_float"
             float inputs:in.connect = </Root/SkyMat/Multiply_1.outputs:out>
             float outputs:out
-            float2 ui:nodegraph:node:pos = (714.5553, -147.13521)
+            float2 ui:nodegraph:node:pos = (1040.5, 139.5)
             int ui:nodegraph:node:stackingOrder = 1183
         }
 
@@ -160,7 +160,7 @@ def Xform "Root"
             float inputs:in1.connect = </Root/SkyMat/Fractal3D_1.outputs:out>
             float inputs:in2.connect = </Root/SkyMat/Fractal3D.outputs:out>
             float outputs:out
-            float2 ui:nodegraph:node:pos = (507.89044, -126.31538)
+            float2 ui:nodegraph:node:pos = (894.5, 139.5)
             int ui:nodegraph:node:stackingOrder = 1183
         }
 
@@ -175,7 +175,7 @@ def Xform "Root"
             )
             float inputs:mix.connect = </Root/SkyMat/Abs.outputs:out>
             color3f outputs:out
-            float2 ui:nodegraph:node:pos = (972.069, -186.61092)
+            float2 ui:nodegraph:node:pos = (1222.5, 139.5)
             int ui:nodegraph:node:stackingOrder = 1706
         }
 
@@ -183,7 +183,7 @@ def Xform "Root"
         {
             uniform token info:id = "ND_time_float"
             float outputs:out
-            float2 ui:nodegraph:node:pos = (-545.558, -71.75315)
+            float2 ui:nodegraph:node:pos = (62.25, 98)
             int ui:nodegraph:node:stackingOrder = 1704
         }
 
@@ -193,7 +193,7 @@ def Xform "Root"
             float3 inputs:in1.connect = </Root/SkyMat/Multiply_2.outputs:out>
             float inputs:in2.connect = </Root/SkyMat/Multiply_3.outputs:out>
             float3 outputs:out
-            float2 ui:nodegraph:node:pos = (58.828827, -251.28186)
+            float2 ui:nodegraph:node:pos = (526.75, 109.5)
             int ui:nodegraph:node:stackingOrder = 1183
         }
 
@@ -203,7 +203,7 @@ def Xform "Root"
             float inputs:in1.connect = </Root/SkyMat/Multiply.outputs:out>
             float inputs:in2 = 0.4
             float outputs:out
-            float2 ui:nodegraph:node:pos = (-221.40689, -111.88554)
+            float2 ui:nodegraph:node:pos = (410, 18)
             int ui:nodegraph:node:stackingOrder = 1183
         }
     }
