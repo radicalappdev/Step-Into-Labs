@@ -18,9 +18,6 @@ struct Lab017: View {
 
     @State var showSkyLarge: Bool = false
 
-    var skyMat: ShaderGraphMaterial?
-    var occMat: ShaderGraphMaterial?
-
     var body: some View {
         RealityView { content in
 
@@ -29,7 +26,9 @@ struct Lab017: View {
             }
 
         } update: {content in
-            if let skySphere = content.entities.first?.findEntity(named: "SkySphere"), let occSphere = content.entities.first?.findEntity(named: "OccSphere") {
+
+            guard let root = content.entities.first else { return }
+            if let skySphere = root.findEntity(named: "SkySphere"), let occSphere = root.findEntity(named: "OccSphere") {
 
                 skySphere.scale = showSkyLarge ? [10, 10, 10] : [0.5, 0.5, 0.5]
                 occSphere.scale = showSkyLarge ? [0.5, 0.5, 0.5] : [10, 10, 10]
@@ -41,6 +40,7 @@ struct Lab017: View {
                 }
 
             }
+
         }
         .gesture(tap)
         .modifier(DragGestureImproved())
