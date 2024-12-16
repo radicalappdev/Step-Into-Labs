@@ -1,0 +1,136 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 2.0 (448.60.4)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    reorder nameChildren = ["ToyRocket", "FalseFloor"]
+    def "ToyRocket" (
+        active = true
+        references = @ToyRocket.usdz@
+    )
+    {
+        reorder nameChildren = ["geom", "FullSpeed"]
+        float3 xformOp:scale = (5, 5, 5)
+        float3 xformOp:translate = (0, -1.0568526, -1.2)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Xform "FullSpeed"
+        {
+            float2 ui:nodegraph:node:pos = (-116.125, 139)
+            int ui:nodegraph:node:stackingOrder = 1
+            float3 xformOp:translate = (0, 0.08361134, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def RealityKitComponent "VFXEmitter"
+            {
+                token info:id = "RealityKit.VFXEmitter"
+
+                def RealityKitStruct "currentState"
+                {
+                    token birthDirection = "Local"
+                    token birthLocation = "Volume"
+                    float3 emissionDirection = (0, -1, 0)
+                    double emissionDuration = 1
+                    token emitterShape = "Cone"
+                    bool isLocal = 1
+                    bool isLocalFields = 0
+                    float particleSpeed = 0.5
+                    float radialAmount = 6.283
+                    float3 shapeSize = (0.1, 0.1, 0.1)
+                    bool spawnInheritParentColor = 0
+                    double warmupDuration = 0.5
+
+                    def RealityKitStruct "mainEmitter"
+                    {
+                        token billboardMode = "Billboard"
+                        float4 endColorA = (1, 0.56775206, 0.18347263, 1)
+                        double particleLifeSpan = 1.2
+                        float particleSize = 0.06
+                        float particleSizeVariation = 0.01
+                        float4 startColorA = (0.90967226, 0.7119758, 0, 1)
+                        bool useEndColor = 1
+                        bool useEndColorRange = 0
+                        bool useStartColorRange = 0
+                    }
+
+                    def RealityKitStruct "spawnedEmitter"
+                    {
+                    }
+                }
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.14075813, 0.23484674, 0.14075813)
+                float height = 0.23484674
+                float radius = 0.07037906
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                    float3 position = (-1.1175871e-8, 0.12399037, -3.7252903e-9)
+                }
+            }
+        }
+    }
+
+    def Cube "FalseFloor" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </Root/FalseFloor/DefaultMaterial>
+        double size = 0.1
+        float3 xformOp:scale = (40, 1, 40)
+        float3 xformOp:translate = (0, -0.05, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:mtlx:surface.connect = </Root/FalseFloor/DefaultMaterial/ShadowReceivingOcclusionSurface.outputs:out>
+            token outputs:realitykit:vertex
+            token outputs:surface.connect = </Root/FalseFloor/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+            float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (146.96484, 145.17578)
+            int ui:nodegraph:realitykit:subgraphOutputs:stackingOrder = 14
+
+            def Shader "DefaultSurfaceShader" (
+                active = false
+            )
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+
+            def Shader "ShadowReceivingOcclusionSurface"
+            {
+                uniform token info:id = "ND_realitykit_shadowreceiver_surfaceshader"
+                token outputs:out
+                float2 ui:nodegraph:node:pos = (-465.47266, 79.98828)
+                int ui:nodegraph:node:stackingOrder = 1
+            }
+        }
+    }
+}
+

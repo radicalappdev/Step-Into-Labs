@@ -159,6 +159,13 @@ class ModelData {
              isFeatured: true,
              subtitle: "Exploring a Skybox Material with Shader Graph",
              description: "Having a little fun with occlusion too.")
+
+        ,Lab(title: "Lab 018",
+             type: .SPACE,
+             date: Date("12/16/2024"),
+             isFeatured: true,
+             subtitle: "Pulling an entity out the ground",
+             description: "Using occlusion material to hide an entity under the users ground or floor.")
     ]
 
 }
