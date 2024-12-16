@@ -29,6 +29,7 @@ struct Lab018: View {
                 Text("")
             }
         }
+        .modifier(DragGestureLab018())
     }
 }
 
@@ -44,23 +45,17 @@ fileprivate struct DragGestureLab018: ViewModifier {
                     .targetedToAnyEntity()
                     .onChanged { value in
 
-                        // We we start the gesture, cache the entity position
                         if !isDragging {
                             isDragging = true
                             initialPosition = value.entity.position
                         }
 
-                        // Calculate vector by which to move the entity
                         let movement = value.convert(value.gestureValue.translation3D, from: .local, to: .scene)
-
-                        // only allow movement on the y axis
-
-                        // Add the initial position and the movement to get the new position
-                        value.entity.position = initialPosition + movement
+                        let yOnlyMovement = SIMD3<Float>(0, movement.y, 0)
+                        value.entity.position = initialPosition + yOnlyMovement
 
                     }
                     .onEnded { value in
-                        // Clean up when the gesture has ended
                         isDragging = false
                         initialPosition = .zero
                     }
