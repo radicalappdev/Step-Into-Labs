@@ -16,18 +16,12 @@ import RealityKitContent
 
 struct Lab018: View {
     var body: some View {
-        RealityView { content, attachments in
+        RealityView { content in
 
             if let scene = try? await Entity(named: "Lab018Scene", in: realityKitContentBundle) {
                 content.add(scene)
             }
 
-        } update: { content, attachments in
-
-        } attachments: {
-            Attachment(id: "AttachmentContent") {
-                Text("")
-            }
         }
         .modifier(DragGestureLab018())
     }
@@ -50,9 +44,12 @@ fileprivate struct DragGestureLab018: ViewModifier {
                             initialPosition = value.entity.position
                         }
 
+                        // Only move on Y, within a set range
                         let movement = value.convert(value.gestureValue.translation3D, from: .local, to: .scene)
-                        let yOnlyMovement = SIMD3<Float>(0, movement.y, 0)
-                        value.entity.position = initialPosition + yOnlyMovement
+                        let clampedY = min(max(initialPosition.y + movement.y, -1.06), 2.2)
+                        let yOnlyMovement = SIMD3<Float>(initialPosition.x, clampedY, initialPosition.z)
+
+                        value.entity.position = yOnlyMovement
 
                     }
                     .onEnded { value in
@@ -60,7 +57,6 @@ fileprivate struct DragGestureLab018: ViewModifier {
                         initialPosition = .zero
                     }
             )
-
     }
 }
 
