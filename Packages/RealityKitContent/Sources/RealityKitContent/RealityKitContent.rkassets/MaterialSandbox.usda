@@ -1,0 +1,206 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 2.0 (448.60.4)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    reorder nameChildren = ["SmoothConcrete", "Sphere"]
+    def Sphere "Sphere" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </Root/SmoothConcrete> (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        double radius = 0.5
+    }
+
+    def "SmoothConcrete" (
+        active = true
+        prepend references = @Materials/SmoothConcrete.usdz@
+    )
+    {
+        color3f inputs:Basecolor_Tint (
+            customData = {
+                dictionary realitykit = {
+                    float2 positionInSubgraph = (80.25, 27.5)
+                    float2 sizeInSubgraph = (160.5, 53)
+                    int stackingOrderInSubgraph = 2344
+                }
+            }
+        )
+        float2 inputs:UV_Scale = (0.5, 0.5) (
+            customData = {
+                dictionary realitykit = {
+                    float2 positionInSubgraph = (370.75, 667.5)
+                    float2 sizeInSubgraph = (138.5, 53)
+                    int stackingOrderInSubgraph = 2355
+                }
+            }
+        )
+        float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (2274.25, 665)
+
+        over "Dot"
+        {
+            float2 ui:nodegraph:node:pos = (529, 667.5)
+            int ui:nodegraph:node:stackingOrder = 2350
+        }
+
+        def Shader "Time"
+        {
+            uniform token info:id = "ND_time_float"
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (370.75, 225)
+            int ui:nodegraph:node:stackingOrder = 2763
+        }
+
+        over "Mix"
+        {
+            float inputs:mix.connect = </Root/SmoothConcrete/Multiply.outputs:out>
+            float2 ui:nodegraph:node:pos = (1760.5, 164.25)
+            int ui:nodegraph:node:stackingOrder = 2544
+        }
+
+        over "Swizzle"
+        {
+            float2 ui:nodegraph:node:pos = (1099.5, 490)
+            int ui:nodegraph:node:stackingOrder = 2607
+        }
+
+        over "PreviewSurface"
+        {
+            float2 ui:nodegraph:node:pos = (2032.5, 665)
+            int ui:nodegraph:node:stackingOrder = 2768
+            string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["Advanced"]
+        }
+
+        over "multiply"
+        {
+            float2 ui:nodegraph:node:pos = (1099.5, 853.5)
+            int ui:nodegraph:node:stackingOrder = 2563
+            string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["outputs:out"]
+        }
+
+        over "add"
+        {
+            float2 ui:nodegraph:node:pos = (1760.5, 853.5)
+            int ui:nodegraph:node:stackingOrder = 2564
+        }
+
+        def Shader "Position"
+        {
+            uniform token info:id = "ND_position_vector3"
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (80.25, 340)
+            int ui:nodegraph:node:stackingOrder = 2763
+        }
+
+        def Shader "Multiply_2"
+        {
+            uniform token info:id = "ND_multiply_vector3FA"
+            float3 inputs:in1.connect = </Root/SmoothConcrete/Position.outputs:out>
+            float inputs:in2.connect = </Root/SmoothConcrete/Multiply_3.outputs:out>
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (765.5, 268.5)
+            int ui:nodegraph:node:stackingOrder = 2763
+        }
+
+        def Shader "Multiply"
+        {
+            uniform token info:id = "ND_multiply_float"
+            float inputs:in1.connect = </Root/SmoothConcrete/CellNoise3D.outputs:out>
+            float inputs:in2.connect = </Root/SmoothConcrete/Swizzle.outputs:out>
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (1433.5, 374.5)
+            int ui:nodegraph:node:stackingOrder = 2591
+        }
+
+        def Shader "Multiply_3"
+        {
+            uniform token info:id = "ND_multiply_float"
+            float inputs:in1.connect = </Root/SmoothConcrete/Time.outputs:out>
+            float inputs:in2 = 10
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (529, 225)
+            int ui:nodegraph:node:stackingOrder = 2763
+        }
+
+        over "Swizzle_1"
+        {
+            float2 ui:nodegraph:node:pos = (1099.5, 192.5)
+            int ui:nodegraph:node:stackingOrder = 2608
+        }
+
+        over "Multiply_1"
+        {
+            float2 ui:nodegraph:node:pos = (1433.5, 86.25)
+            int ui:nodegraph:node:stackingOrder = 2610
+        }
+
+        over "Metallic"
+        {
+            float2 ui:nodegraph:node:pos = (1433.5, 1042)
+        }
+
+        over "Normal"
+        {
+            float2 ui:nodegraph:node:pos = (765.5, 853.5)
+        }
+
+        over "Roughness"
+        {
+            float2 ui:nodegraph:node:pos = (1322.6582, 649.25116)
+            int ui:nodegraph:node:stackingOrder = 2766
+        }
+
+        over "BaseColor"
+        {
+            float2 ui:nodegraph:node:pos = (765.5, 476.5)
+        }
+
+        def Shader "CellNoise3D"
+        {
+            uniform token info:id = "ND_cellnoise3d_float"
+            float3 inputs:position.connect = </Root/SmoothConcrete/Multiply_2.outputs:out>
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (1139.0781, 327.4961)
+            int ui:nodegraph:node:stackingOrder = 2771
+        }
+    }
+
+    def Cube "Cube" (
+        active = false
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </Root/SmoothConcrete> (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        double size = 1
+        float3 xformOp:translate = (1.2, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def Cylinder "Cylinder" (
+        active = false
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        uniform token axis = "Y"
+        double height = 1
+        rel material:binding = </Root/SmoothConcrete> (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        double radius = 0.5
+        float3 xformOp:translate = (-1.2, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+}
+

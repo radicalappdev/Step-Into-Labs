@@ -166,6 +166,13 @@ class ModelData {
              isFeatured: true,
              subtitle: "Pulling an entity out the ground",
              description: "Using occlusion material to hide an entity under the users ground or floor.")
+
+        ,Lab(title: "Lab 019",
+             type: .SPACE,
+             date: Date("12/17/2024"),
+             isFeatured: true,
+             subtitle: "Material Sandbox",
+             description: "Just a lab I'm using to view various materials in visionOS")
     ]
 
 }
