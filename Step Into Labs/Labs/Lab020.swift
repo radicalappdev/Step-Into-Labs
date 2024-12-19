@@ -19,6 +19,7 @@ struct Lab020: View {
     @State var subject: Entity?
     @State var collisionBeganUnfiltered: EventSubscription?
     @State var collisionBeganSubject: EventSubscription?
+    @State var collisionBeganSubjectScale: EventSubscription?
 
     var body: some View {
         RealityView { content in
@@ -43,6 +44,19 @@ struct Lab020: View {
                             bounceEntity(subject)
                         }
                     }
+
+                // Example 3: the red sphere does one thing and the green does something else
+                collisionBeganSubjectScale = content
+                    .subscribe(to: CollisionEvents.Began.self, on: subject)  { collisionEvent in
+                        print("Collision Subject Bounce \(collisionEvent.entityA.name) and \(collisionEvent.entityB.name)")
+                        if let subject {
+                            if(collisionEvent.entityB.name == "StepSphereRed") {
+                                scaleEntity(subject, scale: subject.scale.x - 0.1)
+                            } else if (collisionEvent.entityB.name == "StepSphereGreen") {
+                                scaleEntity(subject, scale: subject.scale.x + 0.1)
+                            }
+                        }
+                    }
             }
 
         }
@@ -51,13 +65,13 @@ struct Lab020: View {
 
     func bounceEntity(_ entity: Entity) {
         let transform = Transform(
-            scale: SIMD3<Float>(repeating: 1),
+            scale: SIMD3<Float>(repeating: entity.scale.x),
             rotation: simd_quatf(angle: 0, axis: SIMD3<Float>(0, 0, 0)),
             translation: SIMD3<Float>(entity.position.x, entity.position.y + 0.05, entity.position.z)
         )
 
         let transform2 = Transform(
-            scale: SIMD3<Float>(repeating: 1),
+            scale: SIMD3<Float>(repeating: entity.scale.x),
             rotation: simd_quatf(angle: 0, axis: SIMD3<Float>(0, 0, 0)),
             translation: SIMD3<Float>(entity.position.x, 1.0, entity.position.z)
         )
@@ -77,6 +91,21 @@ struct Lab020: View {
                 timingFunction: .easeOut
             )
         }
+    }
+
+    func scaleEntity(_ entity: Entity, scale: Float) {
+        let transform = Transform(
+            scale: SIMD3<Float>(repeating: scale),
+            rotation: simd_quatf(angle: 0, axis: SIMD3<Float>(0, 0, 0)),
+            translation: SIMD3<Float>(entity.position.x, entity.position.y, entity.position.z)
+        )
+
+        entity.move(
+            to: transform,
+            relativeTo: entity.parent!,
+            duration: 0.5,
+            timingFunction: .easeInOut
+        )
     }
 
 }
