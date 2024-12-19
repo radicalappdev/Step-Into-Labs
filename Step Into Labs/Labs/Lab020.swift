@@ -20,6 +20,7 @@ struct Lab020: View {
     @State var collisionBeganUnfiltered: EventSubscription?
     @State var collisionBeganSubject: EventSubscription?
     @State var collisionBeganSubjectColor: EventSubscription?
+    @State var collisionEndedSubject: EventSubscription?
 
     var body: some View {
         RealityView { content in
@@ -45,7 +46,8 @@ struct Lab020: View {
                         }
                     }
 
-                // Example 3: the red sphere does one thing and the green does something else
+                // Example 3: Have the red and green spheres change the color of the subject
+                // I'm sure there is a better way to do this with filters or masks...
                 collisionBeganSubjectColor = content
                     .subscribe(to: CollisionEvents.Began.self, on: subject)  { collisionEvent in
                         print("Collision Subject Color Change \(collisionEvent.entityA.name) and \(collisionEvent.entityB.name)")
@@ -64,6 +66,22 @@ struct Lab020: View {
 
                         }
                     }
+
+                // Example 4: Reset the subject after a short timer
+                collisionEndedSubject = content
+                    .subscribe(to: CollisionEvents.Ended.self, on: subject)  { collisionEvent in
+                        print("Collision Subject Bounce \(collisionEvent.entityA.name) and \(collisionEvent.entityB.name)")
+                        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
+                            if let subject {
+                                if var mat = subject.components[ModelComponent.self]?.materials.first as? PhysicallyBasedMaterial {
+                                    mat.baseColor = .init(tint: .stepBlue)
+                                    subject.components[ModelComponent.self]?.materials[0] = mat
+                                }
+
+                            }
+                        }
+                    }
+
             }
 
         }

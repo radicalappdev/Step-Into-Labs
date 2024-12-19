@@ -207,6 +207,15 @@
     "objectMetadataList" : [
       [
         "6A4899BA-6C06-45FC-9E6F-8C808AD446BD",
+        "Root",
+        "StepSphereRed"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "6A4899BA-6C06-45FC-9E6F-8C808AD446BD",
         "Root"
       ],
       {

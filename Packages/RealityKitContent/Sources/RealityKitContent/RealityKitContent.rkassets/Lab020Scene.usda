@@ -129,8 +129,8 @@ def Xform "Root"
         prepend references = @BuildingBlocks/StepSphereGreen.usda@
     )
     {
-        float3 xformOp:scale = (1.5, 1.5, 1.5)
-        float3 xformOp:translate = (0.4, 1, -1)
+        float3 xformOp:scale = (0.5, 0.5, 0.5)
+        float3 xformOp:translate = (0.3, 1, -1)
 
         over "Collider"
         {
