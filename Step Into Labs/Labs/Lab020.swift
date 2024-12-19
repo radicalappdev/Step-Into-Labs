@@ -19,7 +19,7 @@ struct Lab020: View {
     @State var subject: Entity?
     @State var collisionBeganUnfiltered: EventSubscription?
     @State var collisionBeganSubject: EventSubscription?
-    @State var collisionBeganSubjectScale: EventSubscription?
+    @State var collisionBeganSubjectColor: EventSubscription?
 
     var body: some View {
         RealityView { content in
@@ -46,15 +46,22 @@ struct Lab020: View {
                     }
 
                 // Example 3: the red sphere does one thing and the green does something else
-                collisionBeganSubjectScale = content
+                collisionBeganSubjectColor = content
                     .subscribe(to: CollisionEvents.Began.self, on: subject)  { collisionEvent in
-                        print("Collision Subject Bounce \(collisionEvent.entityA.name) and \(collisionEvent.entityB.name)")
+                        print("Collision Subject Color Change \(collisionEvent.entityA.name) and \(collisionEvent.entityB.name)")
                         if let subject {
-                            if(collisionEvent.entityB.name == "StepSphereRed") {
-                                scaleEntity(subject, scale: subject.scale.x - 0.1)
-                            } else if (collisionEvent.entityB.name == "StepSphereGreen") {
-                                scaleEntity(subject, scale: subject.scale.x + 0.1)
-                            }
+                                if var mat = subject.components[ModelComponent.self]?.materials.first as? PhysicallyBasedMaterial {
+
+                                    if(collisionEvent.entityB.name == "StepSphereRed") {
+                                        mat.baseColor = .init(tint: .stepRed)
+                                    } else if (collisionEvent.entityB.name == "StepSphereGreen") {
+                                        mat.baseColor = .init(tint: .stepGreen)
+                                    } else {
+                                        mat.baseColor = .init(tint: .stepBlue)
+                                    }
+                                    subject.components[ModelComponent.self]?.materials[0] = mat
+                                }
+
                         }
                     }
             }
@@ -91,21 +98,6 @@ struct Lab020: View {
                 timingFunction: .easeOut
             )
         }
-    }
-
-    func scaleEntity(_ entity: Entity, scale: Float) {
-        let transform = Transform(
-            scale: SIMD3<Float>(repeating: scale),
-            rotation: simd_quatf(angle: 0, axis: SIMD3<Float>(0, 0, 0)),
-            translation: SIMD3<Float>(entity.position.x, entity.position.y, entity.position.z)
-        )
-
-        entity.move(
-            to: transform,
-            relativeTo: entity.parent!,
-            duration: 0.5,
-            timingFunction: .easeInOut
-        )
     }
 
 }

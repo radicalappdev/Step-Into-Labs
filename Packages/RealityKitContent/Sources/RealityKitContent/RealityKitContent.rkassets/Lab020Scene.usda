@@ -239,6 +239,7 @@ def Xform "Root"
 
         over "Collider"
         {
+            uint mask = 4294967295
             token type = "Trigger"
 
             over "Shape"
