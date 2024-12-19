@@ -121,7 +121,7 @@ class ModelData {
         ,Lab(title: "Lab 012",
              type: .SPACE,
              date: Date("11/05/2024"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "I'll be in my dome",
              description: "Blending several concepts together to create a simple scene.")
 
@@ -142,7 +142,7 @@ class ModelData {
         ,Lab(title: "Lab 015",
              type: .SPACE,
              date: Date("11/27/2024"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Exploring Physics Joints",
              description: "Loading some entities and adding physics joints between them.")
 
@@ -156,7 +156,7 @@ class ModelData {
         ,Lab(title: "Lab 017",
              type: .SPACE,
              date: Date("12/11/2024"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Exploring a Skybox Material with Shader Graph",
              description: "Having a little fun with occlusion too.")
 
@@ -170,7 +170,7 @@ class ModelData {
         ,Lab(title: "Lab 019",
              type: .SPACE,
              date: Date("12/17/2024"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Material Sandbox",
              description: "Just a lab I'm using to view various materials in visionOS")
 
@@ -180,6 +180,13 @@ class ModelData {
              isFeatured: true,
              subtitle: "Exploring Collision Triggers",
              description: "Starting with simple triggers to perform actions in a scene.")
+
+        ,Lab(title: "Lab 021",
+             type: .SPACE,
+             date: Date("12/19/2024"),
+             isFeatured: true,
+             subtitle: "Collision Triggers with AnchorEntity Hands",
+             description: "Do collision triggers fire from hand anchored entities without ARKit?")
     ]
 
 }
