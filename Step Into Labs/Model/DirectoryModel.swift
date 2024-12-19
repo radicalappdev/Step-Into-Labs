@@ -173,6 +173,13 @@ class ModelData {
              isFeatured: true,
              subtitle: "Material Sandbox",
              description: "Just a lab I'm using to view various materials in visionOS")
+
+        ,Lab(title: "Lab 020",
+             type: .SPACE,
+             date: Date("12/19/2024"),
+             isFeatured: true,
+             subtitle: "Exploring Basic Collisions",
+             description: "Starting with simple triggers to perform actions in a scene.")
     ]
 
 }

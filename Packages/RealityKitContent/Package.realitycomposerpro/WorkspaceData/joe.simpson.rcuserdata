@@ -1,9 +1,7 @@
 {
-  "advancedEditorSelectedIdentifier" : "ShaderGraphEditorPluginID",
+  "advancedEditorSelectedIdentifier" : "ProjectBrowser",
   "openSceneRelativePaths" : [
-    "Lab018Scene.usda",
-    "MaterialSandbox.usda",
-    "Lab017Scene.usda"
+    "Lab020Scene.usda"
   ],
   "recentIdentifiers" : {
     "031AB4B8-A98D-4B94-9361-640C4AAEFEC5" : [
@@ -1949,5 +1947,5 @@
   "sceneViewportBackgroundColors" : {
 
   },
-  "selectedSceneRelativePath" : "MaterialSandbox.usda"
+  "selectedSceneRelativePath" : "Lab020Scene.usda"
 }
