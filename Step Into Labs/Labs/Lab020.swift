@@ -21,12 +21,12 @@ struct Lab020: View {
     @State var collisionBeganSubject: EventSubscription?
 
     var body: some View {
-        RealityView { content, attachments in
+        RealityView { content in
             if let scene = try? await Entity(named: "Lab020Scene", in: realityKitContentBundle) {
                 content.add(scene)
                 subject = scene.findEntity(named: "StepSphereBlue")
 
-                // This unfiltered event will fire twice. Once for each entity in the collision
+                // Example 1: This unfiltered event will fire twice. Once for each entity in the collision
                 // Each will be entityA in their own version of the event, so we don't need the burse for entityB
                 collisionBeganUnfiltered = content.subscribe(to: CollisionEvents.Began.self)  { collisionEvent in
                     print("Collision unfiltered \(collisionEvent.entityA.name) and \(collisionEvent.entityB.name)")
@@ -34,30 +34,22 @@ struct Lab020: View {
 
                 }
 
+                // Example 2: Only trigger collisions on the subject.
+                // Both the red and green spheres can collide with the subect to perform the bounce action
                 collisionBeganSubject = content
                     .subscribe(to: CollisionEvents.Began.self, on: subject)  { collisionEvent in
-                        print("Collision Subject \(collisionEvent.entityA.name) and \(collisionEvent.entityB.name)")
+                        print("Collision Subject Bounce \(collisionEvent.entityA.name) and \(collisionEvent.entityB.name)")
                         if let subject {
-                            popupEntity(subject)
-//                            if subject.position.y > 1.025 {
-//                            } else {
-//
-//                            }
+                            bounceEntity(subject)
                         }
                     }
             }
 
-        } update: { content, attachments in
-
-        } attachments: {
-            Attachment(id: "AttachmentContent") {
-                Text("")
-            }
         }
         .modifier(DragGestureImproved())
     }
 
-    func popupEntity(_ entity: Entity) {
+    func bounceEntity(_ entity: Entity) {
         let transform = Transform(
             scale: SIMD3<Float>(repeating: 1),
             rotation: simd_quatf(angle: 0, axis: SIMD3<Float>(0, 0, 0)),
@@ -70,20 +62,21 @@ struct Lab020: View {
             translation: SIMD3<Float>(entity.position.x, 1.0, entity.position.z)
         )
 
-        entity
-            .move(
-                to: transform,
-                relativeTo: entity.parent!,
-                duration: 0.5,
-                timingFunction: .easeInOut
-            )
-        entity
-            .move(
+        entity.move(
+            to: transform,
+            relativeTo: entity.parent!,
+            duration: 0.5,
+            timingFunction: .easeIn
+        )
+
+        Timer.scheduledTimer(withTimeInterval: 0.45, repeats: false) { _ in
+            entity.move(
                 to: transform2,
                 relativeTo: entity.parent!,
-                duration: 1.0,
-                timingFunction: .easeInOut
+                duration: 0.3,
+                timingFunction: .easeOut
             )
+        }
     }
 
 }
