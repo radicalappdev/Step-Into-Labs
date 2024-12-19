@@ -52,31 +52,21 @@ struct Lab020: View {
                     .subscribe(to: CollisionEvents.Began.self, on: subject)  { collisionEvent in
                         print("Collision Subject Color Change \(collisionEvent.entityA.name) and \(collisionEvent.entityB.name)")
                         if let subject {
-                                if var mat = subject.components[ModelComponent.self]?.materials.first as? PhysicallyBasedMaterial {
-
-                                    if(collisionEvent.entityB.name == "StepSphereRed") {
-                                        mat.baseColor = .init(tint: .stepRed)
-                                    } else if (collisionEvent.entityB.name == "StepSphereGreen") {
-                                        mat.baseColor = .init(tint: .stepGreen)
-                                    } else {
-                                        mat.baseColor = .init(tint: .stepBlue)
-                                    }
-                                    subject.components[ModelComponent.self]?.materials[0] = mat
-                                }
-
+                            if(collisionEvent.entityB.name == "StepSphereRed") {
+                                swapColorEntity(subject, color: .stepRed)
+                            } else if (collisionEvent.entityB.name == "StepSphereGreen") {
+                                swapColorEntity(subject, color: .stepGreen)
+                            }
                         }
                     }
 
                 // Example 4: Reset the subject after a short timer
                 collisionEndedSubject = content
                     .subscribe(to: CollisionEvents.Ended.self, on: subject)  { collisionEvent in
-                        print("Collision Subject Bounce \(collisionEvent.entityA.name) and \(collisionEvent.entityB.name)")
+                        print("Collision Subject Revert \(collisionEvent.entityA.name) and \(collisionEvent.entityB.name)")
                         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
                             if let subject {
-                                if var mat = subject.components[ModelComponent.self]?.materials.first as? PhysicallyBasedMaterial {
-                                    mat.baseColor = .init(tint: .stepBlue)
-                                    subject.components[ModelComponent.self]?.materials[0] = mat
-                                }
+                                swapColorEntity(subject, color: .stepBlue)
 
                             }
                         }
@@ -87,6 +77,14 @@ struct Lab020: View {
         }
         .modifier(DragGestureImproved())
     }
+
+    func swapColorEntity(_ entity: Entity, color: UIColor) {
+        if var mat = entity.components[ModelComponent.self]?.materials.first as? PhysicallyBasedMaterial {
+            mat.baseColor = .init(tint: color)
+            entity.components[ModelComponent.self]?.materials[0] = mat
+        }
+    }
+
 
     func bounceEntity(_ entity: Entity) {
         let transform = Transform(
