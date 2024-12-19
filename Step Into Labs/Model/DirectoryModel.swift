@@ -178,7 +178,7 @@ class ModelData {
              type: .SPACE,
              date: Date("12/19/2024"),
              isFeatured: true,
-             subtitle: "Exploring Basic Collisions",
+             subtitle: "Exploring Collision Triggers",
              description: "Starting with simple triggers to perform actions in a scene.")
     ]
 

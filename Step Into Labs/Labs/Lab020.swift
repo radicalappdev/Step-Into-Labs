@@ -2,11 +2,11 @@
 //
 //  Title: Lab020
 //
-//  Subtitle:
+//  Subtitle: Exploring Collision Triggers
 //
-//  Description:
+//  Description: Starting with simple triggers to perform actions in a scene.
 //
-//  Type:
+//  Type: Space
 //
 //  Created by Joseph Simpson on 12/19/24.
 
@@ -121,3 +121,5 @@ struct Lab020: View {
 #Preview {
     Lab020()
 }
+
+
