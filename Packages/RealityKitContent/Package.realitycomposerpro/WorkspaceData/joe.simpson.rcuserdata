@@ -1,7 +1,8 @@
 {
   "advancedEditorSelectedIdentifier" : "ProjectBrowser",
   "openSceneRelativePaths" : [
-    "Lab020Scene.usda"
+    "Lab020Scene.usda",
+    "BuildingBlocks\/StepDome.usda"
   ],
   "recentIdentifiers" : {
     "031AB4B8-A98D-4B94-9361-640C4AAEFEC5" : [
@@ -2015,5 +2016,5 @@
   "sceneViewportBackgroundColors" : {
 
   },
-  "selectedSceneRelativePath" : "Lab020Scene.usda"
+  "selectedSceneRelativePath" : "BuildingBlocks\/StepDome.usda"
 }
