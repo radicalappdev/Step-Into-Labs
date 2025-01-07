@@ -19,7 +19,7 @@ struct Lab022: View {
     @State var session: SpatialTrackingSession?
 
     // The anchors we will use on the left hand
-    @State var palmAnchor: Entity = AnchorEntity(.hand(.left, location: .palm))
+    @State var thumbAnchor: Entity = AnchorEntity(.hand(.left, location: .joint(for: .thumbTip)))
     @State var indexAnchor: Entity = AnchorEntity(.hand(.left, location: .joint(for: .indexFingerTip)))
     @State var middleAnchor: Entity = AnchorEntity(.hand(.left, location: .joint(for: .middleFingerTip)))
     @State var ringAnchor: Entity = AnchorEntity(.hand(.left, location: .joint(for: .ringFingerTip)))
@@ -44,13 +44,13 @@ struct Lab022: View {
             }
 
             // Add attachments to anchors
-            if let palmMenu = attachments.entity(for: "PalmMenu") {
-                palmAnchor.addChild(palmMenu)
-                palmMenu.setPosition([0 ,0.025 ,0], relativeTo: palmAnchor)
-                palmMenu.components.set(BillboardComponent())
-                content.add(palmAnchor)
+            if let thumbButton = attachments.entity(for: "menu") {
+                thumbAnchor.addChild(thumbButton)
+                thumbButton.setPosition([0.025, 0 ,0], relativeTo: thumbAnchor)
+                thumbButton.setScale([0.5 ,0.5 ,0.5], relativeTo: thumbAnchor)
+                thumbButton.components.set(BillboardComponent())
+                content.add(thumbAnchor)
             }
-
 
             if let indexButton = attachments.entity(for: "nosign") {
                 indexAnchor.addChild(indexButton)
@@ -85,14 +85,20 @@ struct Lab022: View {
             }
 
 
-
-
         } update: { content, attachments in
 
-
+            if let indexButton = attachments.entity(for: "nosign"),
+                let ringButton = attachments.entity(for: "move"),
+                let middleButton = attachments.entity(for: "rotate"),
+                let littleButton = attachments.entity(for: "scale") {
+                indexButton.isEnabled = showMenu
+                ringButton.isEnabled = showMenu
+                middleButton.isEnabled = showMenu
+                littleButton.isEnabled = showMenu
+            }
 
         } attachments: {
-            Attachment(id: "PalmMenu") {
+            Attachment(id: "menu") {
                 Toggle(isOn: $showMenu.animation(), label: {
                     Image(systemName: showMenu ? "hand.raised.fill" : "hand.raised")
                 })
@@ -133,7 +139,7 @@ struct Lab022: View {
             }
         }
         .persistentSystemOverlays(.hidden)
-        .upperLimbVisibility(.hidden)
+//        .upperLimbVisibility(.hidden)
         .modifier(IndirectTransformGesture(mode: $transformMode))
     }
 }
