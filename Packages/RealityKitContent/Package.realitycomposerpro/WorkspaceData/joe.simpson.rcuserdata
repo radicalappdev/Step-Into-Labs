@@ -1,5 +1,5 @@
 {
-  "advancedEditorSelectedIdentifier" : "ShaderGraphEditorPluginID",
+  "advancedEditorSelectedIdentifier" : "ProjectBrowser",
   "openSceneRelativePaths" : [
     "HandMenuLabs.usda",
     "MaterialSandbox.usda"
@@ -56,6 +56,28 @@
   },
   "sceneCameraHistory" : {
     "031AB4B8-A98D-4B94-9361-640C4AAEFEC5" : [
+      {
+        "date" : 757977722.025484,
+        "title" : "Untitled",
+        "transform" : [
+          0.9988169,
+          2.6534908e-09,
+          0.048629336,
+          0,
+          0.031893402,
+          0.7548936,
+          -0.6550714,
+          0,
+          -0.036709942,
+          0.65584725,
+          0.7540005,
+          0,
+          -0.03225189,
+          0.7949329,
+          0.7366914,
+          1
+        ]
+      },
       {
         "date" : 756173726.512308,
         "title" : "Untitled",
@@ -251,28 +273,6 @@
           -0.062265683,
           0.4302926,
           0.9108989,
-          1
-        ]
-      },
-      {
-        "date" : 756173550.776793,
-        "title" : "Untitled",
-        "transform" : [
-          0.99775976,
-          -9.912531e-10,
-          0.066898584,
-          0,
-          0.032065254,
-          0.8776449,
-          -0.4782376,
-          0,
-          -0.0587132,
-          0.47931138,
-          0.8756788,
-          0,
-          -0.040708046,
-          0.2813166,
-          0.5955273,
           1
         ]
       }
@@ -2019,5 +2019,5 @@
   "sceneViewportBackgroundColors" : {
 
   },
-  "selectedSceneRelativePath" : "MaterialSandbox.usda"
+  "selectedSceneRelativePath" : "HandMenuLabs.usda"
 }

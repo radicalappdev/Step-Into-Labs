@@ -10,9 +10,9 @@
 
 def Xform "Root"
 {
-    reorder nameChildren = ["StepDome", "LeftIndex", "LeftPalm"]
+    reorder nameChildren = ["StepDome", "LeftIndex", "LeftPalm", "Subject"]
     def "StepDome" (
-        active = true
+        active = false
         references = @BuildingBlocks/StepDome.usda@
     )
     {
@@ -20,63 +20,21 @@ def Xform "Root"
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 
-    def "LeftIndex" (
-        active = true
-        references = @BuildingBlocks/StepSphereGreen.usda@
-    )
-    {
-        double radius = 0.01
-        float3 xformOp:scale = (1, 1, 1)
-
-        over "Collider"
-        {
-            over "Shape"
-            {
-                float radius = 0.01
-                token shapeType = "Sphere"
-            }
-        }
-
-        def RealityKitComponent "Anchoring"
-        {
-            uniform token info:id = "RealityKit.Anchoring"
-
-            def RealityKitStruct "descriptor"
-            {
-                token location = "IndexFingerTip"
-                token orientation = "Left"
-                token type = "Hand"
-            }
-        }
-    }
-
-    def "LeftPalm" (
+    def "Subject" (
         active = true
         references = @BuildingBlocks/StepSphereRed.usda@
     )
     {
-        double radius = 0.02
+        double radius = 0.2
         float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (0, 0.03, 0)
+        float3 xformOp:translate = (1, 1.4, -1.5)
 
         over "Collider"
         {
             over "Shape"
             {
-                float radius = 0.02
+                float radius = 0.2
                 token shapeType = "Sphere"
-            }
-        }
-
-        def RealityKitComponent "Anchoring"
-        {
-            uniform token info:id = "RealityKit.Anchoring"
-
-            def RealityKitStruct "descriptor"
-            {
-                token location = "Palm"
-                token orientation = "Left"
-                token type = "Hand"
             }
         }
     }

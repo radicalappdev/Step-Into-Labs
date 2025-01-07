@@ -17,8 +17,8 @@ import RealityKitContent
 struct Lab022: View {
 
     @State var session: SpatialTrackingSession?
-    @State var palmEntity: Entity = Entity()
-    @State var menuOptions: Entity = Entity()
+    @State var palmAnchor: Entity = AnchorEntity(.hand(.left, location: .palm))
+    @State var subjectEntity: Entity = Entity()
 
     @State var showMenu = false
 
@@ -35,45 +35,41 @@ struct Lab022: View {
             if let scene = try? await Entity(named: "HandMenuLabs", in: realityKitContentBundle) {
                 content.add(scene)
 
-                if let palm = scene.findEntity(named: "LeftPalm") {
-                    palmEntity = palm
+                if let subject = scene.findEntity(named: "subject") {
+                    subjectEntity = subject
 
                 }
-
-                if let leftIndex = scene.findEntity(named: "LeftIndex") {
-                    menuOptions = leftIndex
-
-                }
-
             }
 
+            // Add attachments to anchors
+            if let palmMenu = attachments.entity(for: "PalmMenu") {
+                palmAnchor.addChild(palmMenu)
+                palmMenu.setPosition([0 ,0.025 ,0], relativeTo: palmAnchor)
+                palmMenu.components.set(BillboardComponent())
+                content.add(palmAnchor)
+            }
 
 
 
         } update: { content, attachments in
 
-            if(showMenu) {
-                menuOptions.isEnabled = showMenu
-            }
+
 
         } attachments: {
-            Attachment(id: "AttachmentContent") {
-                Text("")
+            Attachment(id: "PalmMenu") {
+                Toggle(isOn: $showMenu.animation(), label: {
+                    Image(systemName: showMenu ? "hand.raised.fill" : "hand.raised")
+                })
+                .toggleStyle(.button)
+                .glassBackgroundEffect()
             }
         }
         .persistentSystemOverlays(.hidden)
-//        .upperLimbVisibility(.hidden)
-        .gesture(tapPalm)
+        .upperLimbVisibility(.hidden)
 
     }
 
-    var tapPalm: some Gesture {
-        TapGesture()
-            .targetedToEntity(palmEntity)
-            .onEnded { value in
-                showMenu.toggle()
-            }
-    }
+
 }
 
 #Preview {
