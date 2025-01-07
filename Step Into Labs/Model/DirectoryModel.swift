@@ -149,7 +149,7 @@ class ModelData {
         ,Lab(title: "Lab 016",
              type: .SPACE,
              date: Date("12/04/2024"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Creating an entity spawner system",
              description: "Using Components and Systems to create an entity spawner system.")
 
@@ -163,14 +163,14 @@ class ModelData {
         ,Lab(title: "Lab 018",
              type: .SPACE,
              date: Date("12/16/2024"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Pulling an entity out the ground",
              description: "Using occlusion material to hide an entity under the users ground or floor.")
 
         ,Lab(title: "Lab 019",
              type: .SPACE,
              date: Date("12/17/2024"),
-             isFeatured: false,
+             isFeatured: true,
              subtitle: "Material Sandbox",
              description: "Just a lab I'm using to view various materials in visionOS")
 
@@ -187,6 +187,13 @@ class ModelData {
              isFeatured: true,
              subtitle: "Collision Triggers with AnchorEntity Hands",
              description: "Do collision triggers fire from hand anchored entities without ARKit?")
+
+        ,Lab(title: "Lab 022",
+             type: .SPACE,
+             date: Date("1/4/2024"),
+             isFeatured: true,
+             subtitle: "A simple Hand Menu",
+             description: "Building a simple hand menu with anchors")
     ]
 
 }

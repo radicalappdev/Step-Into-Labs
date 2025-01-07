@@ -1,8 +1,8 @@
 {
-  "advancedEditorSelectedIdentifier" : "ProjectBrowser",
+  "advancedEditorSelectedIdentifier" : "ShaderGraphEditorPluginID",
   "openSceneRelativePaths" : [
-    "Lab020Scene.usda",
-    "BuildingBlocks\/StepDome.usda"
+    "HandMenuLabs.usda",
+    "MaterialSandbox.usda"
   ],
   "recentIdentifiers" : {
     "031AB4B8-A98D-4B94-9361-640C4AAEFEC5" : [
@@ -15,6 +15,9 @@
 
     ],
     "0B1B0589-72ED-4935-8D32-700594B8B644" : [
+
+    ],
+    "1605787C-1F17-4706-A47E-4EE3FE226711" : [
 
     ],
     "2A0E68BB-1D35-4AF2-9835-3F346F1688E6" : [
@@ -2016,5 +2019,5 @@
   "sceneViewportBackgroundColors" : {
 
   },
-  "selectedSceneRelativePath" : "BuildingBlocks\/StepDome.usda"
+  "selectedSceneRelativePath" : "MaterialSandbox.usda"
 }

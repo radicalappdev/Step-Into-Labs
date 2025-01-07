@@ -1,0 +1,84 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 2.0 (448.60.4)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    reorder nameChildren = ["StepDome", "LeftIndex", "LeftPalm"]
+    def "StepDome" (
+        active = true
+        references = @BuildingBlocks/StepDome.usda@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "LeftIndex" (
+        active = true
+        references = @BuildingBlocks/StepSphereGreen.usda@
+    )
+    {
+        double radius = 0.01
+        float3 xformOp:scale = (1, 1, 1)
+
+        over "Collider"
+        {
+            over "Shape"
+            {
+                float radius = 0.01
+                token shapeType = "Sphere"
+            }
+        }
+
+        def RealityKitComponent "Anchoring"
+        {
+            uniform token info:id = "RealityKit.Anchoring"
+
+            def RealityKitStruct "descriptor"
+            {
+                token location = "IndexFingerTip"
+                token orientation = "Left"
+                token type = "Hand"
+            }
+        }
+    }
+
+    def "LeftPalm" (
+        active = true
+        references = @BuildingBlocks/StepSphereRed.usda@
+    )
+    {
+        double radius = 0.02
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 0.03, 0)
+
+        over "Collider"
+        {
+            over "Shape"
+            {
+                float radius = 0.02
+                token shapeType = "Sphere"
+            }
+        }
+
+        def RealityKitComponent "Anchoring"
+        {
+            uniform token info:id = "RealityKit.Anchoring"
+
+            def RealityKitStruct "descriptor"
+            {
+                token location = "Palm"
+                token orientation = "Left"
+                token type = "Hand"
+            }
+        }
+    }
+}
+

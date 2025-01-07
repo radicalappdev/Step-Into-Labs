@@ -12,7 +12,7 @@ def Xform "Root"
 {
     reorder nameChildren = ["SmoothConcrete", "Sphere"]
     def Sphere "Sphere" (
-        active = true
+        active = false
         prepend apiSchemas = ["MaterialBindingAPI"]
     )
     {
@@ -201,6 +201,147 @@ def Xform "Root"
         double radius = 0.5
         float3 xformOp:translate = (-1.2, 0, 0)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def Sphere "Sphere_1" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </Root/fogMaterial> (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        double radius = 0.5
+        float2 ui:nodegraph:node:pos = (20, 20)
+        int ui:nodegraph:node:stackingOrder = 1
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 0, -1)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/Sphere_1/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+    }
+
+    def Material "fogMaterial"
+    {
+        token outputs:mtlx:surface.connect = </Root/fogMaterial/UnlitSurface.outputs:out>
+        token outputs:realitykit:vertex
+        float2 ui:nodegraph:node:pos = (40, 40)
+        int ui:nodegraph:node:stackingOrder = 2
+        float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (335.25, 100.5)
+
+        def Shader "UnlitSurface"
+        {
+            uniform token info:id = "ND_realitykit_unlit_surfaceshader"
+            color3f inputs:color.connect = </Root/fogMaterial/Mix.outputs:out>
+            bool inputs:hasPremultipliedAlpha
+            float inputs:opacity
+            float inputs:opacityThreshold
+            token outputs:out
+            float2 ui:nodegraph:node:pos = (35.058594, 87.25391)
+            int ui:nodegraph:node:stackingOrder = 3
+        }
+
+        def Shader "ConstantColor3"
+        {
+            uniform token info:id = "ND_constant_color3"
+            color3f inputs:value = (1, 0.14913142, 0) (
+                colorSpace = "srgb_texture"
+            )
+            color3f outputs:out
+            float2 ui:nodegraph:node:pos = (-569.4806, 45.243694)
+            int ui:nodegraph:node:stackingOrder = 199
+        }
+
+        def Shader "ConstantColor3_1"
+        {
+            uniform token info:id = "ND_constant_color3"
+            color3f inputs:value = (0, 0, 0) (
+                colorSpace = "srgb_texture"
+            )
+            color3f outputs:out
+            float2 ui:nodegraph:node:pos = (-554.35583, 125.88377)
+            int ui:nodegraph:node:stackingOrder = 81
+        }
+
+        def Shader "Mix"
+        {
+            uniform token info:id = "ND_mix_color3"
+            color3f inputs:bg.connect = </Root/fogMaterial/ConstantColor3.outputs:out>
+            color3f inputs:fg.connect = </Root/fogMaterial/ConstantColor3_1.outputs:out>
+            float inputs:mix = 0
+            float inputs:mix.connect = </Root/fogMaterial/Clamp.outputs:out>
+            color3f outputs:out
+            float2 ui:nodegraph:node:pos = (-291.9892, 157.5253)
+            int ui:nodegraph:node:stackingOrder = 20
+        }
+
+        def Shader "CameraPosition"
+        {
+            uniform token info:id = "ND_realitykit_cameraposition_vector3"
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (-1334.4847, 68.82233)
+            int ui:nodegraph:node:stackingOrder = 59
+        }
+
+        def Shader "Position"
+        {
+            uniform token info:id = "ND_position_vector3"
+            string inputs:space = "world"
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (-1300.1991, 158.33653)
+            int ui:nodegraph:node:stackingOrder = 192
+        }
+
+        def Shader "Subtract"
+        {
+            uniform token info:id = "ND_subtract_vector3"
+            float3 inputs:in1.connect = </Root/fogMaterial/CameraPosition.outputs:out>
+            float3 inputs:in2.connect = </Root/fogMaterial/Position.outputs:out>
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (-1126.4415, 116.36468)
+            int ui:nodegraph:node:stackingOrder = 61
+        }
+
+        def Shader "Magnitude"
+        {
+            uniform token info:id = "ND_magnitude_vector3"
+            float3 inputs:in.connect = </Root/fogMaterial/Subtract.outputs:out>
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-1008.4218, 115.525)
+            int ui:nodegraph:node:stackingOrder = 68
+        }
+
+        def Shader "Multiply"
+        {
+            uniform token info:id = "ND_multiply_float"
+            float inputs:in1.connect = </Root/fogMaterial/Magnitude.outputs:out>
+            float inputs:in2 = 0.15
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-828.7488, 172.6984)
+            int ui:nodegraph:node:stackingOrder = 192
+        }
+
+        def Shader "Clamp"
+        {
+            uniform token info:id = "ND_clamp_float"
+            float inputs:high
+            float inputs:in.connect = </Root/fogMaterial/Multiply.outputs:out>
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-648.78925, 242.04729)
+            int ui:nodegraph:node:stackingOrder = 198
+        }
     }
 }
 
