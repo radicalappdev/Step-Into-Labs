@@ -11,32 +11,14 @@
 def Xform "Root"
 {
     reorder nameChildren = ["StepDome", "LeftIndex", "LeftPalm", "Subject"]
-    def "StepDome" (
-        active = false
-        references = @BuildingBlocks/StepDome.usda@
-    )
-    {
-        float3 xformOp:scale = (1, 1, 1)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-    }
-
-    def "Subject" (
+    def "GestureLabs" (
         active = true
-        references = @BuildingBlocks/StepSphereRed.usda@
+        prepend references = @GestureLabs.usda@
     )
     {
-        double radius = 0.2
         float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (1, 1.4, -1.5)
-
-        over "Collider"
-        {
-            over "Shape"
-            {
-                float radius = 0.2
-                token shapeType = "Sphere"
-            }
-        }
+        float3 xformOp:translate = (0, 0.8, -1)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 }
 
