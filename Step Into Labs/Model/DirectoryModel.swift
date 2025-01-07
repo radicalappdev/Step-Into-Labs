@@ -192,8 +192,8 @@ class ModelData {
              type: .SPACE,
              date: Date("1/4/2024"),
              isFeatured: true,
-             subtitle: "A simple Hand Menu",
-             description: "Building a simple hand menu with anchors")
+             subtitle: "A simple hand menu idea",
+             description: "Building a simple hand menu with hand anchors and attachments.")
     ]
 
 }

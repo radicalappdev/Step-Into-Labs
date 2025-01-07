@@ -2,11 +2,11 @@
 //
 //  Title: Lab022
 //
-//  Subtitle:
+//  Subtitle: A simple hand menu idea
 //
-//  Description:
+//  Description: Building a simple hand menu with hand anchors and attachments.
 //
-//  Type:
+//  Type: Space
 //
 //  Created by Joseph Simpson on 1/4/25.
 
@@ -15,6 +15,8 @@ import RealityKit
 import RealityKitContent
 
 struct Lab022: View {
+
+    // Please ignore my repetitive and redundant code. I'll clean this up later.
 
     @State var session: SpatialTrackingSession?
 
@@ -51,7 +53,6 @@ struct Lab022: View {
                 thumbButton.components.set(BillboardComponent())
                 content.add(thumbAnchor)
             }
-
             if let indexButton = attachments.entity(for: "nosign") {
                 indexAnchor.addChild(indexButton)
                 indexButton.setPosition([0.025, 0, 0], relativeTo: indexAnchor)
@@ -59,7 +60,6 @@ struct Lab022: View {
                 indexButton.components.set(BillboardComponent())
                 content.add(indexAnchor)
             }
-
             if let ringButton = attachments.entity(for: "move") {
                 ringAnchor.addChild(ringButton)
                 ringButton.setPosition([0.025, 0, 0], relativeTo: ringAnchor)
@@ -67,7 +67,6 @@ struct Lab022: View {
                 ringButton.components.set(BillboardComponent())
                 content.add(ringAnchor)
             }
-
             if let middleButton = attachments.entity(for: "rotate") {
                 middleAnchor.addChild(middleButton)
                 middleButton.setPosition([0.025, 0, 0], relativeTo: middleAnchor)
@@ -75,7 +74,6 @@ struct Lab022: View {
                 middleButton.components.set(BillboardComponent())
                 content.add(middleAnchor)
             }
-
             if let littleButton = attachments.entity(for: "scale") {
                 littleAnchor.addChild(littleButton)
                 littleButton.setPosition([0.025, 0, 0], relativeTo: littleAnchor)
@@ -99,10 +97,12 @@ struct Lab022: View {
 
         } attachments: {
             Attachment(id: "menu") {
-                Toggle(isOn: $showMenu.animation(), label: {
-                    Image(systemName: showMenu ? "hand.raised.fill" : "hand.raised")
-                })
-                .toggleStyle(.button)
+                Button {
+                    showMenu.toggle()
+                } label: {
+                    Image(systemName: "hand.raised")
+                }
+                .foregroundStyle(showMenu ? .stepRed : .stepBackgroundPrimary)
                 .glassBackgroundEffect()
             }
             Attachment(id: "nosign") {
@@ -111,7 +111,8 @@ struct Lab022: View {
                 } label: {
                     Image(systemName: "nosign")
                 }
-                .foregroundStyle(transformMode == .none ? .blue : .white)
+                .foregroundStyle(transformMode == .none ? .stepRed : .stepBackgroundPrimary)
+                .glassBackgroundEffect()
             }
             Attachment(id: "move") {
                 Button {
@@ -119,7 +120,8 @@ struct Lab022: View {
                 } label: {
                     Image(systemName: "move.3d")
                 }
-                .foregroundStyle(transformMode == .move ? .blue : .white)
+                .foregroundStyle(transformMode == .move ? .stepRed : .stepBackgroundPrimary)
+                .glassBackgroundEffect()
             }
             Attachment(id: "rotate") {
                 Button {
@@ -127,7 +129,8 @@ struct Lab022: View {
                 } label: {
                     Image(systemName: "rotate.3d")
                 }
-                .foregroundStyle(transformMode == .rotate ? .blue : .white)
+                .foregroundStyle(transformMode == .rotate ? .stepRed : .stepBackgroundPrimary)
+                .glassBackgroundEffect()
             }
             Attachment(id: "scale") {
                 Button {
@@ -135,7 +138,8 @@ struct Lab022: View {
                 } label: {
                     Image(systemName: "scale.3d")
                 }
-                .foregroundStyle(transformMode == .scale ? .blue : .white)
+                .foregroundStyle(transformMode == .scale ? .stepRed : .stepBackgroundPrimary)
+                .glassBackgroundEffect()
             }
         }
         .persistentSystemOverlays(.hidden)
