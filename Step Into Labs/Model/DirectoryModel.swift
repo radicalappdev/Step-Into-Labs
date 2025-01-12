@@ -194,6 +194,13 @@ class ModelData {
              isFeatured: true,
              subtitle: "A simple hand menu idea",
              description: "Building a simple hand menu with hand anchors and attachments.")
+
+        ,Lab(title: "Lab 023",
+             type: .SPACE,
+             date: Date("1/12/2024"),
+             isFeatured: true,
+             subtitle: "Physics Playground",
+             description: "")
     ]
 
 }
