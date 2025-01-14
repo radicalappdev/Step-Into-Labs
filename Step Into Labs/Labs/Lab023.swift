@@ -21,6 +21,7 @@ struct Lab023: View {
 
 
     @State var gameActive = false
+    @State var gameWon = false
     @State var score: Int = 0
 
     @State var collisionBeganSubject: EventSubscription?
@@ -53,6 +54,7 @@ struct Lab023: View {
 
                         if(collisionEvent.entityB == box) {
                             print("subject collision \(collisionEvent.entityB)")
+                            gameWon = true
                             gameOver()
                         }
 
@@ -81,6 +83,7 @@ struct Lab023: View {
                 VStack {
                     HStack {
                         Button(action: {
+                            gameWon = false
                             gameOver()
                         }, label: {
                             Text("Stop")
@@ -91,11 +94,11 @@ struct Lab023: View {
                         }, label: {
                             Text("Restart")
                         })
-                        if(gameActive == false && score > 0) {
-                            Text("You Won in \(score) bounces!")
-                        } else {
-                            Text("Collide with the box!")
-                        }
+                    }
+                    if(gameActive == false && score > 0) {
+                        Text("You Won in \(score) bounces!")
+                    } else {
+                        Text("Collide with the box!")
                     }
                 }
                 .padding(10)
@@ -126,6 +129,7 @@ struct Lab023: View {
 
     func startGame() {
         gameActive = true
+        gameWon = false
         score = 0
         ball.setPosition([0, 0.5, 0], relativeTo: ball.parent)
         if var ballMotion = ball.components[PhysicsMotionComponent.self] {
@@ -156,9 +160,12 @@ struct Lab023: View {
         box.isEnabled = false
         let resetTransform = Transform()
         chamber.setOrientation(resetTransform.rotation, relativeTo: nil)
-        if var fireworks = chamber.components[ParticleEmitterComponent.self] {
-            fireworks.burst()
-            chamber.components.set(fireworks)
+        if(gameWon) {
+            if var fireworks = chamber.components[ParticleEmitterComponent.self] {
+                fireworks.burst()
+                chamber.components.set(fireworks)
+            }
+
         }
     }
 }
