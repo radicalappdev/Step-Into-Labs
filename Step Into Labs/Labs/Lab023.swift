@@ -2,11 +2,11 @@
 //
 //  Title: Lab023
 //
-//  Subtitle:
+//  Subtitle: Anchored Bounce Box
 //
-//  Description:
+//  Description: A mini-game that uses a hand anchor to control a box to bounce a ball toward a target.
 //
-//  Type:
+//  Type: Space
 //
 //  Created by Joseph Simpson on 1/12/25.
 

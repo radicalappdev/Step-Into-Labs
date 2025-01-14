@@ -380,6 +380,16 @@
       [
         "8088479F-CE0C-4853-808C-58DB5763AAFA",
         "Root",
+        "Chamber",
+        "Structure"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "8088479F-CE0C-4853-808C-58DB5763AAFA",
+        "Root",
         "SpinChamber",
         "Track4"
       ],
