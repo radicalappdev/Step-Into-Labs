@@ -55,7 +55,7 @@ struct Lab023: View {
                             print("subject collision \(collisionEvent.entityB)")
                             gameOver()
                         }
-                        
+
                         if(gameActive) {
                             score += 1
                         }
@@ -66,10 +66,9 @@ struct Lab023: View {
                     self.handControl = handControl
                 }
 
-                
-                // add the menu
+
                 if let gameMenu = attachments.entity(for: "GameMenu") {
-                    gameMenu.setPosition([0, -0.75, 1.1], relativeTo: chamber)
+                    gameMenu.setPosition([0, -1.2, 1.1], relativeTo: chamber)
                     gameMenu.scale = [2,2,2]
                     content.add(gameMenu)
                 }
@@ -80,18 +79,27 @@ struct Lab023: View {
         } attachments: {
             Attachment(id: "GameMenu") {
                 VStack {
-                    Button(action: {
-                        startGame()
-                    }, label: {
-                        Text("Start Game")
-                    })
-                    if(gameActive == false && score > 0) {
-                        Text("You Won in \(score) bounces!")
-                    } else {
-                        Text("Tap to start")
+                    HStack {
+                        Button(action: {
+                            gameOver()
+                        }, label: {
+                            Text("Stop")
+                        })
+
+                        Button(action: {
+                            startGame()
+                        }, label: {
+                            Text("Restart")
+                        })
+                        if(gameActive == false && score > 0) {
+                            Text("You Won in \(score) bounces!")
+                        } else {
+                            Text("Collide with the box!")
+                        }
                     }
                 }
                 .padding(10)
+                .frame(width: 400, height: 100)
                 .background(Color.black)
                 .clipShape(.capsule)
             }
@@ -131,6 +139,7 @@ struct Lab023: View {
             ball.components.set(ballPhyics)
         }
         box.setPosition([Float.random(in: -0.9...0.9), Float.random(in: -0.9...0.9), Float.random(in: -0.9...0.9)], relativeTo: box.parent)
+        ball.isEnabled = true
         box.isEnabled = true
     }
 
@@ -143,7 +152,14 @@ struct Lab023: View {
             ball.components.set(ballPhyics)
         }
         box.setPosition([0.25, 0.5, 0], relativeTo: box.parent)
+        ball.isEnabled = false
         box.isEnabled = false
+        let resetTransform = Transform()
+        chamber.setOrientation(resetTransform.rotation, relativeTo: nil)
+        if var fireworks = chamber.components[ParticleEmitterComponent.self] {
+            fireworks.burst()
+            chamber.components.set(fireworks)
+        }
     }
 }
 
