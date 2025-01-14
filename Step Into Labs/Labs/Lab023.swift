@@ -15,17 +15,13 @@ import RealityKit
 import RealityKitContent
 
 struct Lab023: View {
+    @State var resetGame = false
+    @State var score: Int = 0
+
+    @State var collisionBeganSubject: EventSubscription?
+
+
     var body: some View {
-
-        @State var resetGame = false
-        @State var score: Int = 0
-
-        @State var collisionBeganSubject: EventSubscription?
-
-
-
-
-
         RealityView { content, attachments in
 
             if let scene = try? await Entity(named: "PhysicsPlayground", in: realityKitContentBundle) {
