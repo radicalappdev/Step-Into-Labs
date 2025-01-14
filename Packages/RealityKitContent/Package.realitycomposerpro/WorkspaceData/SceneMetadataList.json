@@ -370,16 +370,6 @@
       [
         "8088479F-CE0C-4853-808C-58DB5763AAFA",
         "Root",
-        "Chamber",
-        "Ceiling"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "8088479F-CE0C-4853-808C-58DB5763AAFA",
-        "Root",
         "SpinX",
         "Track"
       ],
@@ -401,26 +391,6 @@
         "Root",
         "Scale",
         "Track2"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "8088479F-CE0C-4853-808C-58DB5763AAFA",
-        "Root",
-        "Chamber",
-        "Floor"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "8088479F-CE0C-4853-808C-58DB5763AAFA",
-        "Root",
-        "Chamber",
-        "Rail_1"
       ],
       {
         "isExpanded" : true,
@@ -539,16 +509,6 @@
         "Root",
         "Timeline",
         "BumpSubject"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "8088479F-CE0C-4853-808C-58DB5763AAFA",
-        "Root",
-        "Chamber",
-        "ChamberMat"
       ],
       {
         "isExpanded" : true,
