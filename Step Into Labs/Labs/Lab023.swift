@@ -35,12 +35,11 @@ struct Lab023: View {
                 chamber.setScale([0.5, 0.5, 0.5], relativeTo: nil)
 
                 if let ball = scene.findEntity(named: "Ball"), let box = scene.findEntity(named: "Box") {
-                    print("subject found")
                     self.ball = ball
                     self.box = box
                     collisionBeganSubject = content.subscribe(to: CollisionEvents.Began.self, on: ball)  { collisionEvent in
                         score += 1
-//                        print("subject collision \(collisionEvent.entityB)")
+                        // print("subject collision \(collisionEvent.entityB)")
                     }
                 }
                 
@@ -64,7 +63,7 @@ struct Lab023: View {
                 VStack {
                     Button(action: {
                         print("game reset button pressed")
-                        ball.setPosition([0, 0, 0], relativeTo: ball.parent)
+                        ball.setPosition([0, 0.5, 0], relativeTo: ball.parent)
                         // position the ball at a random position relative to the parent
                         // clamp values between 0.9 and -0.9 on all axis
 

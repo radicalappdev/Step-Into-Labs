@@ -38,7 +38,7 @@ def Xform "Root"
             double size = 0.2
             quatf xformOp:orient = (1, 0, 0, 0)
             float3 xformOp:scale = (1, 1, 1)
-            float3 xformOp:translate = (0.25, 0, 0)
+            float3 xformOp:translate = (0.25, 0.5, 0)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
             def Material "BoxMaterial"
@@ -88,7 +88,7 @@ def Xform "Root"
             double radius = 0.1
             quatf xformOp:orient = (1, 0, 0, 0)
             float3 xformOp:scale = (1, 1, 1)
-            float3 xformOp:translate = (-0.25, 0, 0)
+            float3 xformOp:translate = (-0.25, 0.5, 0)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
             def RealityKitComponent "Collider"
@@ -114,6 +114,7 @@ def Xform "Root"
             {
                 float angularDamping = 0
                 uniform token info:id = "RealityKit.RigidBody"
+                bool isCCDEnabled = 0
                 float linearDamping = 0
 
                 def RealityKitStruct "massFrame"
