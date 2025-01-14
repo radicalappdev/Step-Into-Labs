@@ -40,7 +40,10 @@ def Xform "Root"
                 def Shader "DefaultSurfaceShader"
                 {
                     uniform token info:id = "UsdPreviewSurface"
-                    color3f inputs:diffuseColor = (0.581883, 0.21569154, 1) (
+                    color3f inputs:diffuseColor = (0.003921569, 0.38039216, 0.41960785) (
+                        colorSpace = "srgb_texture"
+                    )
+                    color3f inputs:emissiveColor = (0.003921569, 0.38039216, 0.41960785) (
                         colorSpace = "srgb_texture"
                     )
                     float inputs:opacity = 1
@@ -133,7 +136,10 @@ def Xform "Root"
                 {
                     uniform token info:id = "UsdPreviewSurface"
                     float inputs:clearcoat = 0
-                    color3f inputs:diffuseColor = (0, 0.9914394, 1) (
+                    color3f inputs:diffuseColor = (0.41960785, 0.003921569, 0.17254902) (
+                        colorSpace = "srgb_texture"
+                    )
+                    color3f inputs:emissiveColor = (0.41960785, 0.003921569, 0.17254902) (
                         colorSpace = "srgb_texture"
                     )
                     float inputs:roughness = 0.75
@@ -927,6 +933,15 @@ def Xform "Root"
                 token type = "Hand"
             }
         }
+    }
+
+    def "StepDome" (
+        active = true
+        prepend references = @BuildingBlocks/StepDome.usda@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 }
 
