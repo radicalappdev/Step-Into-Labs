@@ -16,10 +16,28 @@ import RealityKitContent
 
 struct Lab023: View {
     var body: some View {
+
+        @State var collisionBeganSubject: EventSubscription?
+        @State var score: Int = 0
+
+
         RealityView { content, attachments in
 
             if let scene = try? await Entity(named: "PhysicsPlayground", in: realityKitContentBundle) {
                 content.add(scene)
+
+                if let chamber = scene.findEntity(named: "Chamber") {
+                    chamber.setPosition([0, 1.4, -2], relativeTo: nil)
+                }
+
+                if let subject = scene.findEntity(named: "Ball") {
+                    print("subject found")
+
+                    collisionBeganSubject = content.subscribe(to: CollisionEvents.Began.self, on: subject)  { collisionEvent in
+                        score += 1
+                        print("subject collision \(collisionEvent.entityB)")
+                    }
+                }
 
             }
 
