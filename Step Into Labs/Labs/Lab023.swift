@@ -38,6 +38,10 @@ struct Lab023: View {
                     self.ball = ball
                     self.box = box
                     collisionBeganSubject = content.subscribe(to: CollisionEvents.Began.self, on: ball)  { collisionEvent in
+
+                        if(collisionEvent.entityB == box) {
+                            gameOver()
+                        }
                         score += 1
                         // print("subject collision \(collisionEvent.entityB)")
                     }
@@ -50,32 +54,54 @@ struct Lab023: View {
                     gameMenu.scale = [2,2,2]
                     content.add(gameMenu)
                 }
-
-
             }
 
         } update: { content, attachments in
-
-
 
         } attachments: {
             Attachment(id: "GameMenu") {
                 VStack {
                     Button(action: {
-                        print("game reset button pressed")
-                        ball.setPosition([0, 0.5, 0], relativeTo: ball.parent)
-                        // position the ball at a random position relative to the parent
-                        // clamp values between 0.9 and -0.9 on all axis
-
+                        startGame()
                     }, label: {
                         Text("Start Game")
                     })
+                    if(resetGame) {
+                        Text("You Won in \(score) bounces!")
+                    }
                 }
                 .padding(10)
                 .background(Color.black)
                 .clipShape(.capsule)
             }
         }
+    }
+
+    func startGame() {
+        resetGame = false
+        score = 0
+        ball.setPosition([0, 0.5, 0], relativeTo: ball.parent)
+        if var ballMotion = ball.components[PhysicsMotionComponent.self] {
+            // clear all velocity
+            ballMotion.angularVelocity = [0,0,0]
+            ballMotion.linearVelocity = [0,0,0]
+            ball.components.set(ballMotion)
+        }
+        if var ballPhyics = ball.components[PhysicsBodyComponent.self] {
+            ballPhyics.isAffectedByGravity = true
+            ball.components.set(ballPhyics)
+        }
+        box.setPosition([Float.random(in: -0.9...0.9), Float.random(in: -0.9...0.9), Float.random(in: -0.9...0.9)], relativeTo: box.parent)
+    }
+
+    func gameOver() {
+        resetGame = true
+        ball.setPosition([0.25, 0.5, 0], relativeTo: ball.parent)
+        if var ballPhyics = ball.components[PhysicsBodyComponent.self] {
+            ballPhyics.isAffectedByGravity = false
+            ball.components.set(ballPhyics)
+        }
+        box.setPosition([0.25, 0.5, 0], relativeTo: box.parent)
     }
 }
 

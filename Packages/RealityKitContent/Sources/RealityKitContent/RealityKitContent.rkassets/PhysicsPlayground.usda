@@ -139,6 +139,11 @@ def Xform "Root"
                     token outputs:surface
                 }
             }
+
+            def RealityKitComponent "MotionState"
+            {
+                uniform token info:id = "RealityKit.MotionState"
+            }
         }
 
         def Xform "Rails" (
