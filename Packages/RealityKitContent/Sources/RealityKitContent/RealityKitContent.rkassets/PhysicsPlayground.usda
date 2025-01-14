@@ -10,7 +10,7 @@
 
 def Xform "Root"
 {
-    reorder nameChildren = ["Chamber", "Structure"]
+    reorder nameChildren = ["HandControl", "Chamber"]
     def Xform "Chamber" (
         active = true
     )
@@ -103,6 +103,7 @@ def Xform "Root"
             def RealityKitComponent "RigidBody"
             {
                 float angularDamping = 0
+                bool gravityEnabled = 0
                 uniform token info:id = "RealityKit.RigidBody"
                 bool isCCDEnabled = 0
                 float linearDamping = 0
@@ -754,6 +755,44 @@ def Xform "Root"
                         double restitution = 1
                     }
                 }
+            }
+        }
+    }
+
+    def Cube "HandControl" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </Root/HandControl/DefaultMaterial>
+        double size = 0.05
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:mtlx:surface
+            token outputs:realitykit:vertex
+            token outputs:surface.connect = </Root/HandControl/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.26051742, 0.2605244, 0.26052064) (
+                    colorSpace = "srgb_texture"
+                )
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def RealityKitComponent "Anchoring"
+        {
+            uniform token info:id = "RealityKit.Anchoring"
+
+            def RealityKitStruct "descriptor"
+            {
+                token location = "IndexFingerTip"
+                token orientation = "Left"
+                token type = "Hand"
             }
         }
     }
