@@ -20,6 +20,9 @@ struct Lab023: View {
 
     @State var collisionBeganSubject: EventSubscription?
 
+    @State var ball = Entity()
+    @State var box = Entity()
+
 
     var body: some View {
         RealityView { content, attachments in
@@ -29,10 +32,13 @@ struct Lab023: View {
 
                 guard let chamber = scene.findEntity(named: "Chamber")  else { return }
                 chamber.setPosition([0, 1.4, -2], relativeTo: nil)
+                chamber.setScale([0.5, 0.5, 0.5], relativeTo: nil)
 
-                if let subject = scene.findEntity(named: "Ball") {
+                if let ball = scene.findEntity(named: "Ball"), let box = scene.findEntity(named: "Box") {
                     print("subject found")
-                    collisionBeganSubject = content.subscribe(to: CollisionEvents.Began.self, on: subject)  { collisionEvent in
+                    self.ball = ball
+                    self.box = box
+                    collisionBeganSubject = content.subscribe(to: CollisionEvents.Began.self, on: ball)  { collisionEvent in
                         score += 1
 //                        print("subject collision \(collisionEvent.entityB)")
                     }
@@ -51,22 +57,19 @@ struct Lab023: View {
 
         } update: { content, attachments in
 
-            if resetGame {
-                print("game reset")
-                if let subject = content.entities.first?.findEntity(named: "Ball") {
-                    subject.setPosition([0, 0.75, 0], relativeTo: subject.parent)
-                    resetGame = false
-                }
-            }
+
 
         } attachments: {
             Attachment(id: "GameMenu") {
                 VStack {
                     Button(action: {
-                        resetGame = true
                         print("game reset button pressed")
+                        ball.setPosition([0, 0, 0], relativeTo: ball.parent)
+                        // position the ball at a random position relative to the parent
+                        // clamp values between 0.9 and -0.9 on all axis
+
                     }, label: {
-                        Text("Restart")
+                        Text("Start Game")
                     })
                 }
                 .padding(10)
