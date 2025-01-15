@@ -201,6 +201,13 @@ class ModelData {
              isFeatured: true,
              subtitle: "Anchored Bounce Box",
              description: "A mini-game that uses a hand anchor to control a box to bounce a ball toward a target.")
+
+        ,Lab(title: "Lab 024",
+             type: .SPACE,
+             date: Date("1/15/2024"),
+             isFeatured: true,
+             subtitle: "Be careful with Windows",
+             description: "They can be tricky!")
     ]
 
 }
