@@ -18,6 +18,12 @@ struct Lab024: View {
     var body: some View {
         RealityView { content, attachments in
 
+            let floor = Entity()
+            floor.setPosition([0, 0, 0], relativeTo: nil)
+            let floorCollision = CollisionComponent(shapes: [ShapeResource.generateBox(width: 5, height: 0.01, depth: 5)])
+            floor.components.set(floorCollision)
+            content.add(floor)
+
             let window = Entity()
             window.setPosition([1.1, 1.5, -2], relativeTo: nil)
             content.add(window)
