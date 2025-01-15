@@ -113,8 +113,16 @@ struct Lab023: View {
                 // If the game is active, use the anchor orientation to tilt the chamber
                 if gameActive {
                     if let anchor = handControl {
-                        let transform = Transform(matrix: anchor.transformMatrix(relativeTo: nil))
-                        chamber.setOrientation(transform.rotation, relativeTo: nil)
+                        let anchorTransform = Transform(matrix: anchor.transformMatrix(relativeTo: nil))
+
+                        // Create a new transform that uses position and scale from the chamber, and rotation from the anchor
+                        var transform = Transform()
+                        transform.translation = chamber.position
+                        transform.scale = chamber.scale
+                        transform.rotation = anchorTransform.rotation
+                        // Use move(to:...) to smooth out the orientation changes
+                        chamber.move(to: transform, relativeTo: nil, duration: 0.03)
+
                     }
                 }
                 try? await Task.sleep(for: .seconds(1/30))
