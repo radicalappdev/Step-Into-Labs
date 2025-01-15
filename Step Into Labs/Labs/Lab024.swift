@@ -22,56 +22,114 @@ struct Lab024: View {
             floor.setPosition([0, 0, 0], relativeTo: nil)
             let floorCollision = CollisionComponent(shapes: [ShapeResource.generateBox(width: 5, height: 0.01, depth: 5)])
             floor.components.set(floorCollision)
+
+            var floorPhysics = PhysicsBodyComponent()
+            floorPhysics.mode = .static
+            floorPhysics.isAffectedByGravity = false
+            floor.components.set(floorPhysics)
             content.add(floor)
 
             let window = Entity()
             window.setPosition([1.1, 1.5, -2], relativeTo: nil)
+            window.setScale([2, 2, 2], relativeTo: nil)
             content.add(window)
-
-            // Reference view
-            if let list = attachments.entity(for: "AttachmentContent") {
-                list.setPosition([0.75, 1.5, -2], relativeTo: nil)
-                content.add(list)
-            }
 
             // Building the fake window
             if let windowBackground = attachments.entity(for: "WindowBackground") {
                 window.addChild(windowBackground)
-                windowBackground.setPosition([0 , 0, 0], relativeTo: window)
+                windowBackground.setPosition([0, 0, 0], relativeTo: window)
+
+                let collision = CollisionComponent(shapes: [ShapeResource.generateBox(width: 0.3, height: 0.21, depth: 0.001)])
+
+                var physicsBody = PhysicsBodyComponent()
+                physicsBody.isAffectedByGravity = false
+
+                windowBackground.components.set(collision)
+                windowBackground.components.set(physicsBody)
+
             }
 
             // add the title
             if let windowTitle = attachments.entity(for: "WindowTitle") {
                 window.addChild(windowTitle)
                 windowTitle.setPosition([-0.102 , 0.08, 0], relativeTo: window)
+
+                let collision = CollisionComponent(shapes: [ShapeResource.generateBox(width: 0.05, height: 0.03, depth: 0.001)])
+
+                var physicsBody = PhysicsBodyComponent()
+                physicsBody.isAffectedByGravity = false
+
+                windowTitle.components.set(collision)
+                windowTitle.components.set(physicsBody)
             }
 
             // add the button
             if let windowButton = attachments.entity(for: "WindowButton") {
                 window.addChild(windowButton)
                 windowButton.setPosition([0.102 , 0.08, 0], relativeTo: window)
+
+                let collision = CollisionComponent(shapes: [ShapeResource.generateBox(width: 0.05, height: 0.03, depth: 0.001)])
+
+                var physicsBody = PhysicsBodyComponent()
+                physicsBody.isAffectedByGravity = false
+
+                windowButton.components.set(collision)
+                windowButton.components.set(physicsBody)
             }
             
             // add the list
             if let windowList = attachments.entity(for: "WindowList") {
                 window.addChild(windowList)
                 windowList.setPosition([0 , -0.02, 0], relativeTo: window)
+
+                let collision = CollisionComponent(shapes: [ShapeResource.generateBox(width: 0.26, height: 0.12, depth: 0.001)])
+
+                var physicsBody = PhysicsBodyComponent()
+                physicsBody.isAffectedByGravity = false
+
+                windowList.components.set(collision)
+                windowList.components.set(physicsBody)
+
             }
 
             // Add the list rows
             if let windowListRow1 = attachments.entity(for: "WindowRow1") {
                 window.addChild(windowListRow1)
                 windowListRow1.setPosition([0 , 0.024, 0.0001], relativeTo: window)
+
+                let collision = CollisionComponent(shapes: [ShapeResource.generateBox(width: 0.26, height: 0.04, depth: 0.001)])
+
+                var physicsBody = PhysicsBodyComponent()
+                physicsBody.isAffectedByGravity = false
+
+                windowListRow1.components.set(collision)
+                windowListRow1.components.set(physicsBody)
             }
 
             if let windowListRow2 = attachments.entity(for: "WindowRow2") {
                 window.addChild(windowListRow2)
                 windowListRow2.setPosition([0 , -0.0189, 0.0001], relativeTo: window)
+
+                let collision = CollisionComponent(shapes: [ShapeResource.generateBox(width: 0.26, height: 0.04, depth: 0.001)])
+
+                var physicsBody = PhysicsBodyComponent()
+                physicsBody.isAffectedByGravity = false
+                
+                windowListRow2.components.set(collision)
+                windowListRow2.components.set(physicsBody)
             }
 
             if let windowListRow3 = attachments.entity(for: "WindowRow3") {
                 window.addChild(windowListRow3)
                 windowListRow3.setPosition([0 , -0.064, 0.0001], relativeTo: window)
+
+                let collision = CollisionComponent(shapes: [ShapeResource.generateBox(width: 0.26, height: 0.04, depth: 0.001)])
+
+                var physicsBody = PhysicsBodyComponent()
+                physicsBody.isAffectedByGravity = false
+
+                windowListRow3.components.set(collision)
+                windowListRow3.components.set(physicsBody)
             }
 
 
@@ -160,26 +218,6 @@ struct Lab024: View {
                 )
             }
 
-
-            Attachment(id: "AttachmentContent") {
-                NavigationStack {
-                    List {
-                        Text("Apple")
-                        Text("Banana")
-                        Text("Orange")
-                    }
-                    .navigationTitle("Fruits")
-                    .toolbar {
-                        Button(action: {
-                            print("button pressed")
-                        }, label: {
-                            Image(systemName: "plus")
-                        })
-                    }
-                }
-                .frame(width: 400, height: 300)
-                .glassBackgroundEffect()
-            }
         }
     }
 }
