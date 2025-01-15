@@ -33,8 +33,8 @@ struct Lab024: View {
             content.add(floor)
 
             let window = Entity()
-            window.setPosition([1.1, 1.5, -2], relativeTo: nil)
-            window.setScale([2, 2, 2], relativeTo: nil)
+            window.setPosition([0, 1.5, -2], relativeTo: nil)
+            window.setScale([3, 3, 3], relativeTo: nil)
             content.add(window)
 
             // Building the fake window
@@ -43,13 +43,7 @@ struct Lab024: View {
                 windowBackground.setPosition([0, 0, 0], relativeTo: window)
 
                 let collision = CollisionComponent(shapes: [ShapeResource.generateBox(width: 0.3, height: 0.21, depth: 0.001)])
-
-                var physicsBody = PhysicsBodyComponent()
-                physicsBody.isAffectedByGravity = false
-
                 windowBackground.components.set(collision)
-                windowBackground.components.set(physicsBody)
-
             }
 
             // add the title
@@ -58,12 +52,7 @@ struct Lab024: View {
                 windowTitle.setPosition([-0.102 , 0.08, 0], relativeTo: window)
 
                 let collision = CollisionComponent(shapes: [ShapeResource.generateBox(width: 0.05, height: 0.03, depth: 0.001)])
-
-                var physicsBody = PhysicsBodyComponent()
-                physicsBody.isAffectedByGravity = false
-
                 windowTitle.components.set(collision)
-                windowTitle.components.set(physicsBody)
             }
 
             // add the button
@@ -72,12 +61,7 @@ struct Lab024: View {
                 windowButton.setPosition([0.102 , 0.08, 0], relativeTo: window)
 
                 let collision = CollisionComponent(shapes: [ShapeResource.generateBox(width: 0.05, height: 0.03, depth: 0.001)])
-
-                var physicsBody = PhysicsBodyComponent()
-                physicsBody.isAffectedByGravity = false
-
                 windowButton.components.set(collision)
-                windowButton.components.set(physicsBody)
             }
             
             // add the list
@@ -86,13 +70,7 @@ struct Lab024: View {
                 windowList.setPosition([0 , -0.02, 0], relativeTo: window)
 
                 let collision = CollisionComponent(shapes: [ShapeResource.generateBox(width: 0.26, height: 0.12, depth: 0.001)])
-
-                var physicsBody = PhysicsBodyComponent()
-                physicsBody.isAffectedByGravity = false
-
                 windowList.components.set(collision)
-                windowList.components.set(physicsBody)
-
             }
 
             // Add the list rows
@@ -101,12 +79,7 @@ struct Lab024: View {
                 windowListRow1.setPosition([0 , 0.024, 0.0001], relativeTo: window)
 
                 let collision = CollisionComponent(shapes: [ShapeResource.generateBox(width: 0.26, height: 0.04, depth: 0.001)])
-
-                var physicsBody = PhysicsBodyComponent()
-                physicsBody.isAffectedByGravity = false
-
                 windowListRow1.components.set(collision)
-                windowListRow1.components.set(physicsBody)
             }
 
             if let windowListRow2 = attachments.entity(for: "WindowRow2") {
@@ -114,12 +87,7 @@ struct Lab024: View {
                 windowListRow2.setPosition([0 , -0.0189, 0.0001], relativeTo: window)
 
                 let collision = CollisionComponent(shapes: [ShapeResource.generateBox(width: 0.26, height: 0.04, depth: 0.001)])
-
-                var physicsBody = PhysicsBodyComponent()
-                physicsBody.isAffectedByGravity = false
-                
                 windowListRow2.components.set(collision)
-                windowListRow2.components.set(physicsBody)
             }
 
             if let windowListRow3 = attachments.entity(for: "WindowRow3") {
@@ -128,11 +96,6 @@ struct Lab024: View {
 
                 let collision = CollisionComponent(shapes: [ShapeResource.generateBox(width: 0.26, height: 0.04, depth: 0.001)])
                 windowListRow3.components.set(collision)
-
-                var physicsBody = PhysicsBodyComponent()
-                physicsBody.isAffectedByGravity = false
-
-                windowListRow3.components.set(physicsBody)
             }
 
 
