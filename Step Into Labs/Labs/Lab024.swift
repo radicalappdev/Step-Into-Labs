@@ -34,6 +34,25 @@ struct Lab024: View {
                 windowBackground.setPosition([0 , 0, 0], relativeTo: window)
             }
 
+            // add the title
+            if let windowTitle = attachments.entity(for: "WindowTitle") {
+                window.addChild(windowTitle)
+                windowTitle.setPosition([-0.102 , 0.08, 0], relativeTo: window)
+            }
+
+            // add the button
+            if let windowButton = attachments.entity(for: "WindowButton") {
+                window.addChild(windowButton)
+                windowButton.setPosition([0.102 , 0.08, 0], relativeTo: window)
+            }
+            
+            // add the list
+            if let windowList = attachments.entity(for: "WindowList") {
+                window.addChild(windowList)
+                windowList.setPosition([0 , -0.02, 0], relativeTo: window)
+            }
+
+
         } update: { content, attachments in
 
         } attachments: {
@@ -44,6 +63,30 @@ struct Lab024: View {
                 }
                 .frame(width: 400, height: 300)
                 .glassBackgroundEffect()
+            }
+
+            Attachment(id: "WindowTitle") {
+                    Text("Fruits")
+                        .font(.title)
+                        .frame(height: 60)
+            }
+
+            Attachment(id: "WindowButton") {
+                Button(action: {
+                    print("button pressed")
+                }, label: {
+                    Image(systemName: "plus")
+                })
+                .glassBackgroundEffect()
+            }
+
+            Attachment(id: "WindowList") {
+                List {
+                    Text("")
+                    Text("")
+                    Text("")
+                }
+                .frame(width: 400, height: 180)
             }
 
 
