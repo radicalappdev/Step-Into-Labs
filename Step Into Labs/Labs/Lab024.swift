@@ -15,6 +15,9 @@ import RealityKit
 import RealityKitContent
 
 struct Lab024: View {
+
+    @State var enableGravity = false
+
     var body: some View {
         RealityView { content, attachments in
 
@@ -136,6 +139,11 @@ struct Lab024: View {
 
 
         } update: { content, attachments in
+
+            if enableGravity {
+                print("gravity activated")
+
+            }
 
         } attachments: {
 
