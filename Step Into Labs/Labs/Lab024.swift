@@ -127,11 +127,11 @@ struct Lab024: View {
                 windowListRow3.setPosition([0 , -0.064, 0.0001], relativeTo: window)
 
                 let collision = CollisionComponent(shapes: [ShapeResource.generateBox(width: 0.26, height: 0.04, depth: 0.001)])
+                windowListRow3.components.set(collision)
 
                 var physicsBody = PhysicsBodyComponent()
                 physicsBody.isAffectedByGravity = false
 
-                windowListRow3.components.set(collision)
                 windowListRow3.components.set(physicsBody)
             }
 
@@ -142,6 +142,53 @@ struct Lab024: View {
 
             if enableGravity {
                 print("gravity activated")
+
+                if let windowBackground = attachments.entity(for: "WindowBackground") {
+                    var physicsBody = PhysicsBodyComponent()
+                    physicsBody.isAffectedByGravity = true
+                    windowBackground.components.set(physicsBody)
+                }
+
+                if let windowTitle = attachments.entity(for: "WindowTitle") {
+                    var physicsBody = PhysicsBodyComponent()
+                    physicsBody.isAffectedByGravity = true
+                    windowTitle.components.set(physicsBody)
+                }
+
+                // add the button
+                if let windowButton = attachments.entity(for: "WindowButton") {
+                    var physicsBody = PhysicsBodyComponent()
+                    physicsBody.isAffectedByGravity = true
+                    windowButton.components.set(physicsBody)
+                }
+
+                // add the list
+                if let windowList = attachments.entity(for: "WindowList") {
+                    var physicsBody = PhysicsBodyComponent()
+                    physicsBody.isAffectedByGravity = true
+                    windowList.components.set(physicsBody)
+                }
+
+                // Add the list rows
+                if let windowListRow1 = attachments.entity(for: "WindowRow1") {
+                    var physicsBody = PhysicsBodyComponent()
+                    physicsBody.isAffectedByGravity = true
+                    windowListRow1.components.set(physicsBody)
+                }
+
+                if let windowListRow2 = attachments.entity(for: "WindowRow2") {
+                    var physicsBody = PhysicsBodyComponent()
+                    physicsBody.isAffectedByGravity = true
+                    windowListRow2.components.set(physicsBody)
+                }
+
+                if let windowListRow3 = attachments.entity(for: "WindowRow3") {
+                    var physicsBody = PhysicsBodyComponent()
+                    physicsBody.isAffectedByGravity = true
+                    windowListRow3.components.set(physicsBody)
+                }
+
+
 
             }
 
@@ -164,6 +211,7 @@ struct Lab024: View {
             Attachment(id: "WindowButton") {
                 Button(action: {
                     print("button pressed")
+                    enableGravity = true
                 }, label: {
                     Image(systemName: "plus")
                 })
