@@ -52,6 +52,24 @@ struct Lab024: View {
                 windowList.setPosition([0 , -0.02, 0], relativeTo: window)
             }
 
+            // Add the list rows
+            if let windowListRow1 = attachments.entity(for: "WindowRow1") {
+                window.addChild(windowListRow1)
+                windowListRow1.setPosition([0 , 0.024, 0.0001], relativeTo: window)
+            }
+
+            if let windowListRow2 = attachments.entity(for: "WindowRow2") {
+                window.addChild(windowListRow2)
+                windowListRow2.setPosition([0 , -0.0189, 0.0001], relativeTo: window)
+            }
+
+            if let windowListRow3 = attachments.entity(for: "WindowRow3") {
+                window.addChild(windowListRow3)
+                windowListRow3.setPosition([0 , -0.064, 0.0001], relativeTo: window)
+            }
+
+
+
 
         } update: { content, attachments in
 
@@ -87,6 +105,53 @@ struct Lab024: View {
                     Text("")
                 }
                 .frame(width: 400, height: 180)
+            }
+
+            Attachment(id: "WindowRow1") {
+                HStack{
+                    Text("Apple")
+                    Spacer()
+                }
+                .padding()
+                .frame(width: 350, height: 60)
+                .background(.thickMaterial)
+                .clipShape(
+                    .rect(
+                        topLeadingRadius: 18,
+                        bottomLeadingRadius: 0,
+                        bottomTrailingRadius: 0,
+                        topTrailingRadius: 18
+                    )
+                )
+            }
+
+            Attachment(id: "WindowRow2") {
+                HStack{
+                    Text("Banana")
+                    Spacer()
+                }
+                .padding()
+                .frame(width: 350, height: 60)
+                .background(.thickMaterial)
+
+            }
+
+            Attachment(id: "WindowRow3") {
+                HStack{
+                    Text("Orange")
+                    Spacer()
+                }
+                .padding()
+                .frame(width: 350, height: 60)
+                .background(.thickMaterial)
+                .clipShape(
+                    .rect(
+                        topLeadingRadius: 0,
+                        bottomLeadingRadius:18,
+                        bottomTrailingRadius:18,
+                        topTrailingRadius: 0
+                    )
+                )
             }
 
 
