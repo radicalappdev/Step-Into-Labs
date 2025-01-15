@@ -2,11 +2,11 @@
 //
 //  Title: Lab024
 //
-//  Subtitle:
+//  Subtitle: Be careful with Windows
 //
-//  Description:
+//  Description: They can be tricky!
 //
-//  Type:
+//  Type: Space
 //
 //  Created by Joseph Simpson on 1/15/25.
 
