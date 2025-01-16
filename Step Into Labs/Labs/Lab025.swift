@@ -53,7 +53,12 @@ struct Lab025: View {
             let window = Entity()
             window.setPosition([1, 1.5, -2], relativeTo: nil)
             window.setScale([3, 3, 3], relativeTo: nil)
+            window.components.set(PhysicsSimulationComponent())
+            window.components.set(PhysicsJointsComponent())
             content.add(window)
+
+            // Create a dictionary to store our entities
+            var entityDict: [String: Entity] = [:]
 
             // Refactored entity setup using loop
             for component in blocks {
@@ -72,12 +77,62 @@ struct Lab025: View {
                     
                     var physicsBody = PhysicsBodyComponent()
                     physicsBody.isAffectedByGravity = false
+                    physicsBody.mode = .dynamic  // Make all bodies dynamic
                     entity.components.set(physicsBody)
                     
                     // Add InputTargetComponent only to WindowHandle
                     if component.id == "WindowHandle" {
                         entity.components.set(InputTargetComponent())
                     }
+                    
+                    // Store entity in dictionary
+                    entityDict[component.id] = entity
+                }
+            }
+
+            // Create joints after all entities are created
+            if let handle = entityDict["WindowHandle"],
+               let background = entityDict["WindowBackground"],
+               let list = entityDict["WindowList"] {
+                
+                // Join Background to Handle
+                let handleJoint = createFixedJoint(
+                    between: handle,
+                    and: background,
+                    name: "handle_background"
+                )
+                
+                // Join Title, Button, and List to Background
+                for childId in ["WindowTitle", "WindowButton", "WindowList"] {
+                    if let child = entityDict[childId] {
+                        let childJoint = createFixedJoint(
+                            between: background,
+                            and: child,
+                            name: "background_\(childId)"
+                        )
+                        Task {
+                            try await childJoint.addToSimulation()
+                        }
+                    }
+                }
+                
+                // Join Rows to List
+                for rowId in ["WindowRow1", "WindowRow2", "WindowRow3"] {
+                    if let row = entityDict[rowId] {
+                        let rowJoint = createFixedJoint(
+                            between: list,
+                            and: row,
+                            name: "list_\(rowId)"
+                        )
+                        Task {
+                            try await rowJoint.addToSimulation()
+                        }
+                    }
+                }
+                
+                // Add handle joint last
+                Task {
+                    try await handleJoint.addToSimulation()
                 }
             }
         } update: { content, attachments in
@@ -176,6 +231,23 @@ struct Lab025: View {
 
         }
         .modifier(DragGestureImproved())
+    }
+
+    // Helper function to create fixed joints
+    func createFixedJoint(between entity1: Entity, and entity2: Entity, name: String) -> PhysicsFixedJoint {
+        let pin1 = entity1.pins.set(
+            named: "\(name)_pin1",
+            position: .zero,
+            orientation: .init(angle: .pi, axis: [0, 0, 1])
+        )
+        
+        let pin2 = entity2.pins.set(
+            named: "\(name)_pin2",
+            position: entity2.position(relativeTo: entity1),
+            orientation: .init(angle: .pi, axis: [0, 0, 1])
+        )
+        
+        return PhysicsFixedJoint(pin0: pin1, pin1: pin2)
     }
 }
 
