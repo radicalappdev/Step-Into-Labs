@@ -18,6 +18,24 @@ struct Lab025: View {
 
     @State var enableGravity = false
 
+    // Define a structure for blocks
+    struct BlockData {
+        let id: String
+        let position: SIMD3<Float>
+        let collisionSize: (width: Float, height: Float, depth: Float)
+    }
+
+    let blocks: [BlockData] = [
+        BlockData(id: "WindowHandle", position: [0, -0.13, 0], collisionSize: (0.3, 0.21, 0.001)),
+        BlockData(id: "WindowBackground", position: [0, 0, 0], collisionSize: (0.3, 0.21, 0.001)),
+        BlockData(id: "WindowTitle", position: [-0.102, 0.08, 0], collisionSize: (0.05, 0.03, 0.001)),
+        BlockData(id: "WindowButton", position: [0.102, 0.08, 0], collisionSize: (0.05, 0.03, 0.001)),
+        BlockData(id: "WindowList", position: [0, -0.02, 0], collisionSize: (0.26, 0.12, 0.001)),
+        BlockData(id: "WindowRow1", position: [0, 0.024, 0.0001], collisionSize: (0.26, 0.04, 0.001)),
+        BlockData(id: "WindowRow2", position: [0, -0.0189, 0.0001], collisionSize: (0.26, 0.04, 0.001)),
+        BlockData(id: "WindowRow3", position: [0, -0.064, 0.0001], collisionSize: (0.26, 0.04, 0.001))
+    ]
+
     var body: some View {
         RealityView { content, attachments in
 
@@ -37,114 +55,31 @@ struct Lab025: View {
             window.setScale([3, 3, 3], relativeTo: nil)
             content.add(window)
 
-            // Add a fake window handle
-            if let windowHandle = attachments.entity(for: "WindowHandle") {
-                window.addChild(windowHandle)
-                windowHandle.setPosition([0, -0.13, 0], relativeTo: window)
-
-                let collision = CollisionComponent(shapes: [ShapeResource.generateBox(width: 0.3, height: 0.21, depth: 0.001)])
-                windowHandle.components.set(collision)
-
-                var physicsBody = PhysicsBodyComponent()
-                physicsBody.isAffectedByGravity = false
-                windowHandle.components.set(physicsBody)
-
-                windowHandle.components.set(InputTargetComponent())
-
+            // Refactored entity setup using loop
+            for component in blocks {
+                if let entity = attachments.entity(for: component.id) {
+                    window.addChild(entity)
+                    entity.setPosition(component.position, relativeTo: window)
+                    
+                    let collision = CollisionComponent(shapes: [
+                        ShapeResource.generateBox(
+                            width: component.collisionSize.width,
+                            height: component.collisionSize.height,
+                            depth: component.collisionSize.depth
+                        )
+                    ])
+                    entity.components.set(collision)
+                    
+                    var physicsBody = PhysicsBodyComponent()
+                    physicsBody.isAffectedByGravity = false
+                    entity.components.set(physicsBody)
+                    
+                    // Add InputTargetComponent only to WindowHandle
+                    if component.id == "WindowHandle" {
+                        entity.components.set(InputTargetComponent())
+                    }
+                }
             }
-
-            // Building the fake window
-            if let windowBackground = attachments.entity(for: "WindowBackground") {
-                window.addChild(windowBackground)
-                windowBackground.setPosition([0, 0, 0], relativeTo: window)
-
-                let collision = CollisionComponent(shapes: [ShapeResource.generateBox(width: 0.3, height: 0.21, depth: 0.001)])
-                windowBackground.components.set(collision)
-
-                var physicsBody = PhysicsBodyComponent()
-                physicsBody.isAffectedByGravity = false
-                windowBackground.components.set(physicsBody)
-            }
-
-            // add the title
-            if let windowTitle = attachments.entity(for: "WindowTitle") {
-                window.addChild(windowTitle)
-                windowTitle.setPosition([-0.102 , 0.08, 0], relativeTo: window)
-
-                let collision = CollisionComponent(shapes: [ShapeResource.generateBox(width: 0.05, height: 0.03, depth: 0.001)])
-                windowTitle.components.set(collision)
-
-                var physicsBody = PhysicsBodyComponent()
-                physicsBody.isAffectedByGravity = false
-                windowTitle.components.set(physicsBody)
-            }
-
-            // add the button
-            if let windowButton = attachments.entity(for: "WindowButton") {
-                window.addChild(windowButton)
-                windowButton.setPosition([0.102 , 0.08, 0], relativeTo: window)
-
-                let collision = CollisionComponent(shapes: [ShapeResource.generateBox(width: 0.05, height: 0.03, depth: 0.001)])
-                windowButton.components.set(collision)
-
-                var physicsBody = PhysicsBodyComponent()
-                physicsBody.isAffectedByGravity = false
-                windowButton.components.set(physicsBody)
-            }
-
-            // add the list
-            if let windowList = attachments.entity(for: "WindowList") {
-                window.addChild(windowList)
-                windowList.setPosition([0 , -0.02, 0], relativeTo: window)
-
-                let collision = CollisionComponent(shapes: [ShapeResource.generateBox(width: 0.26, height: 0.12, depth: 0.001)])
-                windowList.components.set(collision)
-
-                var physicsBody = PhysicsBodyComponent()
-                physicsBody.isAffectedByGravity = false
-                windowList.components.set(physicsBody)
-            }
-
-            // Add the list rows
-            if let windowListRow1 = attachments.entity(for: "WindowRow1") {
-                window.addChild(windowListRow1)
-                windowListRow1.setPosition([0 , 0.024, 0.0001], relativeTo: window)
-
-                let collision = CollisionComponent(shapes: [ShapeResource.generateBox(width: 0.26, height: 0.04, depth: 0.001)])
-                windowListRow1.components.set(collision)
-
-                var physicsBody = PhysicsBodyComponent()
-                physicsBody.isAffectedByGravity = false
-                windowListRow1.components.set(physicsBody)
-            }
-
-            if let windowListRow2 = attachments.entity(for: "WindowRow2") {
-                window.addChild(windowListRow2)
-                windowListRow2.setPosition([0 , -0.0189, 0.0001], relativeTo: window)
-
-                let collision = CollisionComponent(shapes: [ShapeResource.generateBox(width: 0.26, height: 0.04, depth: 0.001)])
-                windowListRow2.components.set(collision)
-
-                var physicsBody = PhysicsBodyComponent()
-                physicsBody.isAffectedByGravity = false
-                windowListRow2.components.set(physicsBody)
-            }
-
-            if let windowListRow3 = attachments.entity(for: "WindowRow3") {
-                window.addChild(windowListRow3)
-                windowListRow3.setPosition([0 , -0.064, 0.0001], relativeTo: window)
-
-                let collision = CollisionComponent(shapes: [ShapeResource.generateBox(width: 0.26, height: 0.04, depth: 0.001)])
-                windowListRow3.components.set(collision)
-
-                var physicsBody = PhysicsBodyComponent()
-                physicsBody.isAffectedByGravity = false
-                windowListRow3.components.set(physicsBody)
-            }
-
-
-
-
         } update: { content, attachments in
 
             if enableGravity {
