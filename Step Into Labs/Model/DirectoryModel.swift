@@ -213,8 +213,8 @@ class ModelData {
              type: .SPACE,
              date: Date("1/16/2024"),
              isFeatured: true,
-             subtitle: "Moving Windows",
-             description: "Is this supposed to happend?")
+             subtitle: "Moving Windows Should Be Easy",
+             description: "Is this supposed to happen?")
 
     ]
 

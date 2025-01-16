@@ -2,11 +2,11 @@
 //
 //  Title: Lab025
 //
-//  Subtitle:
+//  Subtitle: Moving Windows Should Be Easy
 //
-//  Description:
+//  Description: Is this supposed to happen?
 //
-//  Type:
+//  Type: Space
 //
 //  Created by Joseph Simpson on 1/16/25.
 
@@ -220,6 +220,7 @@ struct Lab025: View {
 
                 var physicsBody = PhysicsBodyComponent()
                 physicsBody.isAffectedByGravity = false
+                physicsBody.mode = .dynamic
                 entity.components.set(physicsBody)
 
                 // Animate each entity back to its original position
