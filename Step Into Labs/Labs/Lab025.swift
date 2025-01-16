@@ -16,8 +16,6 @@ import RealityKitContent
 
 struct Lab025: View {
 
-    @State var enableGravity = false
-
     // Define a structure for blocks
     struct BlockData {
         let id: String
@@ -57,10 +55,8 @@ struct Lab025: View {
             window.components.set(PhysicsJointsComponent())
             content.add(window)
 
-            // Create a dictionary to store our entities
             var entityDict: [String: Entity] = [:]
 
-            // Refactored entity setup using loop
             for component in blocks {
                 if let entity = attachments.entity(for: component.id) {
                     window.addChild(entity)
@@ -81,21 +77,13 @@ struct Lab025: View {
                     entity.components.set(physicsBody)
                     
                     entity.components.set(InputTargetComponent())
-                    // Add InputTargetComponent only to WindowHandle
-//                    if component.id == "WindowHandle" {
-//                    }
-                    
-                    // Store entity in dictionary
+
                     entityDict[component.id] = entity
                 }
             }
 
 
         } update: { content, attachments in
-
-            if enableGravity {
-
-            }
 
         } attachments: {
 
@@ -122,9 +110,9 @@ struct Lab025: View {
             Attachment(id: "WindowButton") {
                 Button(action: {
                     print("button pressed")
-                    enableGravity = true
+                    // TODO: Reset the position and orientation of all entities
                 }, label: {
-                    Image(systemName: "plus")
+                    Image(systemName: "arrow.clockwise")
                 })
                 .glassBackgroundEffect()
             }
