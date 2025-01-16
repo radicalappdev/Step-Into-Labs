@@ -54,8 +54,6 @@ struct Lab025: View {
             let window = Entity()
             window.setPosition([1, 1.5, -2], relativeTo: nil)
             window.setScale([3, 3, 3], relativeTo: nil)
-            window.components.set(PhysicsSimulationComponent())
-            window.components.set(PhysicsJointsComponent())
             content.add(window)
             
             // Store window entity in state
@@ -191,6 +189,10 @@ struct Lab025: View {
             .onEnded { value in
                 if value.entity.name == "WindowButton" {
                     resetEntities()
+                } else {
+                    var physicsBody = PhysicsBodyComponent()
+                    physicsBody.isAffectedByGravity = true
+                    value.entity.components.set(physicsBody)
                 }
             }
     }
@@ -215,6 +217,11 @@ struct Lab025: View {
         // Reset all child entities relative positions
         for block in blocks {
             if let entity = window.findEntity(named: block.id) {
+
+                var physicsBody = PhysicsBodyComponent()
+                physicsBody.isAffectedByGravity = false
+                entity.components.set(physicsBody)
+
                 // Animate each entity back to its original position
                 entity.move(
                     to: Transform(
