@@ -117,7 +117,6 @@ struct Lab025: View {
             Attachment(id: "WindowButton") {
                 Button(action: {
                     print("button pressed")
-//                    resetEntities()
                 }, label: {
                     Image(systemName: "arrow.clockwise")
                 })
@@ -200,17 +199,33 @@ struct Lab025: View {
     private func resetEntities() {
         print("reset pressed")
         guard let window = windowEntity else { return }
-
-        // Reset window position and rotation
-        window.setPosition([1, 1.5, -2], relativeTo: nil)
-        window.setOrientation(.init(angle: 0, axis: [0, 1, 0]), relativeTo: nil)
-
-
+        
+        // Animate window position and rotation
+        window.move(
+            to: Transform(
+                scale: .init(repeating: 3),
+                rotation: .init(angle: 0, axis: [0, 1, 0]),
+                translation: [1, 1.5, -2]
+            ),
+            relativeTo: nil,
+            duration: 0.5,
+            timingFunction: .easeInOut
+        )
+        
         // Reset all child entities relative positions
         for block in blocks {
             if let entity = window.findEntity(named: block.id) {
-                entity.setPosition(block.position, relativeTo: window)
-                entity.setOrientation(.init(angle: 0, axis: [0, 1, 0]), relativeTo: window)
+                // Animate each entity back to its original position
+                entity.move(
+                    to: Transform(
+                        scale: .one,
+                        rotation: .init(angle: 0, axis: [0, 1, 0]),
+                        translation: block.position
+                    ),
+                    relativeTo: window,
+                    duration: 0.5,
+                    timingFunction: .easeInOut
+                )
                 
                 // Reset physics motion
                 var motion = PhysicsMotionComponent()
