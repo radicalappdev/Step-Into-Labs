@@ -208,6 +208,14 @@ class ModelData {
              isFeatured: true,
              subtitle: "Be careful with Windows",
              description: "They can be tricky!")
+
+        ,Lab(title: "Lab 025",
+             type: .SPACE,
+             date: Date("1/16/2024"),
+             isFeatured: true,
+             subtitle: "Moving Windows",
+             description: "Is this supposed to happend?")
+
     ]
 
 }
