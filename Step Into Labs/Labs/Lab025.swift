@@ -34,6 +34,9 @@ struct Lab025: View {
         BlockData(id: "WindowRow3", position: [0, -0.064, 0.0001], collisionSize: (0.26, 0.04, 0.001))
     ]
 
+    // Add state to store the window entity
+    @State private var windowEntity: Entity?
+
     var body: some View {
         RealityView { content, attachments in
 
@@ -54,6 +57,9 @@ struct Lab025: View {
             window.components.set(PhysicsSimulationComponent())
             window.components.set(PhysicsJointsComponent())
             content.add(window)
+            
+            // Store window entity in state
+            windowEntity = window
 
             var entityDict: [String: Entity] = [:]
 
@@ -61,7 +67,8 @@ struct Lab025: View {
                 if let entity = attachments.entity(for: component.id) {
                     window.addChild(entity)
                     entity.setPosition(component.position, relativeTo: window)
-                    
+                    entity.name = component.id
+
                     let collision = CollisionComponent(shapes: [
                         ShapeResource.generateBox(
                             width: component.collisionSize.width,
@@ -84,7 +91,7 @@ struct Lab025: View {
 
 
         } update: { content, attachments in
-
+            // Add update closure for handling reset
         } attachments: {
 
             Attachment(id: "WindowHandle") {
@@ -110,7 +117,7 @@ struct Lab025: View {
             Attachment(id: "WindowButton") {
                 Button(action: {
                     print("button pressed")
-                    // TODO: Reset the position and orientation of all entities
+//                    resetEntities()
                 }, label: {
                     Image(systemName: "arrow.clockwise")
                 })
@@ -175,6 +182,43 @@ struct Lab025: View {
 
         }
         .modifier(DragGestureImproved())
+        .gesture(tapExample)
+
+    }
+
+    var tapExample: some Gesture {
+        TapGesture()
+            .targetedToAnyEntity()
+            .onEnded { value in
+                if value.entity.name == "WindowButton" {
+                    resetEntities()
+                }
+            }
+    }
+
+    // Add reset function
+    private func resetEntities() {
+        print("reset pressed")
+        guard let window = windowEntity else { return }
+
+        // Reset window position and rotation
+        window.setPosition([1, 1.5, -2], relativeTo: nil)
+        window.setOrientation(.init(angle: 0, axis: [0, 1, 0]), relativeTo: nil)
+
+
+        // Reset all child entities relative positions
+        for block in blocks {
+            if let entity = window.findEntity(named: block.id) {
+                entity.setPosition(block.position, relativeTo: window)
+                entity.setOrientation(.init(angle: 0, axis: [0, 1, 0]), relativeTo: window)
+                
+                // Reset physics motion
+                var motion = PhysicsMotionComponent()
+                motion.linearVelocity = .zero
+                motion.angularVelocity = .zero
+                entity.components.set(motion)
+            }
+        }
     }
 }
 
