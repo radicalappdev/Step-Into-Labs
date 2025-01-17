@@ -216,6 +216,13 @@ class ModelData {
              subtitle: "Moving Windows Should Be Easy",
              description: "Is this supposed to happen?")
 
+        ,Lab(title: "Lab 026",
+             type: .SPACE,
+             date: Date("1/17/2024"),
+             isFeatured: true,
+             subtitle: "Using Dynamic Lights and Shadows with Passthrough",
+             description: "We can use ShadowReceivingOcclusionSurface to enable virtual lights and shadows to affect our real space.")
+
     ]
 
 }

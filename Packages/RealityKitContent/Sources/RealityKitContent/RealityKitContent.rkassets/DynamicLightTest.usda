@@ -1,0 +1,307 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 2.0 (448.60.4)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    reorder nameChildren = ["DemoContent", "Cube"]
+    def Xform "DemoContent" (
+        active = true
+    )
+    {
+        reorder nameChildren = ["FloorOcclusion", "FloorPBR", "Cube_1", "Cube_2", "LightSphere"]
+        float3 xformOp:translate = (0, 0, -1)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Cube "Cube_1" (
+            active = true
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Root/DemoContent/Cube_1/DefaultMaterial>
+            double size = 0.2
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:translate = (0.19473997, 0.36725903, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def Material "DefaultMaterial"
+            {
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+                token outputs:surface.connect = </Root/DemoContent/Cube_1/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+                def Shader "DefaultSurfaceShader"
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    color3f inputs:diffuseColor = (0.99215686, 0.98039216, 0.98039216) (
+                        colorSpace = "srgb_displayp3"
+                    )
+                    float inputs:roughness = 0.75
+                    token outputs:surface
+                }
+            }
+
+            def RealityKitComponent "InputTarget"
+            {
+                uniform token info:id = "RealityKit.InputTarget"
+            }
+
+            def RealityKitComponent "Collider"
+            {
+                uint group = 1
+                uniform token info:id = "RealityKit.Collider"
+                uint mask = 4294967295
+                token type = "Default"
+
+                def RealityKitStruct "Shape"
+                {
+                    float3 extent = (0.2, 0.2, 0.2)
+                    token shapeType = "Box"
+
+                    def RealityKitStruct "pose"
+                    {
+                    }
+                }
+            }
+        }
+
+        def Cube "FloorOcclusion" (
+            active = true
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Root/DemoContent/FloorOcclusion/DefaultMaterial>
+            double size = 1
+            float2 ui:nodegraph:node:pos = (20, 20)
+            int ui:nodegraph:node:stackingOrder = 1
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 0.1, 1)
+            float3 xformOp:translate = (0.5, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def Material "DefaultMaterial"
+            {
+                token outputs:mtlx:surface.connect = </Root/DemoContent/FloorOcclusion/DefaultMaterial/ShadowReceivingOcclusionSurface.outputs:out>
+                token outputs:realitykit:vertex
+                token outputs:surface.connect = </Root/DemoContent/FloorOcclusion/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+                float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (-102.17387, 81.6316)
+                int ui:nodegraph:realitykit:subgraphOutputs:stackingOrder = 51
+
+                def Shader "DefaultSurfaceShader" (
+                    active = false
+                )
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    color3f inputs:diffuseColor = (1, 1, 1)
+                    float inputs:roughness = 0.75
+                    token outputs:surface
+                }
+
+                def Shader "ShadowReceivingOcclusionSurface"
+                {
+                    uniform token info:id = "ND_realitykit_shadowreceiver_surfaceshader"
+                    token outputs:out
+                    float2 ui:nodegraph:node:pos = (-388.78146, 81.89731)
+                    int ui:nodegraph:node:stackingOrder = 48
+                }
+            }
+        }
+
+        def Cube "Cube_2" (
+            active = true
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Root/DemoContent/Cube_2/DefaultMaterial>
+            double size = 0.2
+            float2 ui:nodegraph:node:pos = (-126.125, 109)
+            int ui:nodegraph:node:stackingOrder = 1
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:translate = (-0.06049511, 0.55726403, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def Material "DefaultMaterial"
+            {
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+                token outputs:surface.connect = </Root/DemoContent/Cube_2/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+                def Shader "DefaultSurfaceShader"
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    color3f inputs:diffuseColor = (0.83137256, 0.73333335, 0.73333335) (
+                        colorSpace = "srgb_displayp3"
+                    )
+                    float inputs:roughness = 0.75
+                    token outputs:surface
+                }
+            }
+
+            def RealityKitComponent "InputTarget"
+            {
+                uniform token info:id = "RealityKit.InputTarget"
+            }
+
+            def RealityKitComponent "Collider"
+            {
+                uint group = 1
+                uniform token info:id = "RealityKit.Collider"
+                uint mask = 4294967295
+                token type = "Default"
+
+                def RealityKitStruct "Shape"
+                {
+                    float3 extent = (0.2, 0.2, 0.2)
+                    token shapeType = "Box"
+
+                    def RealityKitStruct "pose"
+                    {
+                    }
+                }
+            }
+        }
+
+        def Sphere "LightSphere" (
+            active = true
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            reorder nameChildren = ["DefaultMaterial", "SpotLight", "OccCube_1", "InputTarget", "Collider"]
+            rel material:binding = </Root/DemoContent/LightSphere/DefaultMaterial>
+            double radius = 0.05
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:translate = (0.09194559, 1, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def Material "DefaultMaterial"
+            {
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+                token outputs:surface.connect = </Root/DemoContent/LightSphere/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+                def Shader "DefaultSurfaceShader"
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    color3f inputs:diffuseColor = (0.83137256, 0.73333335, 0.73333335) (
+                        colorSpace = "srgb_displayp3"
+                    )
+                    color3f inputs:emissiveColor = (0.83137256, 0.73333335, 0.73333335) (
+                        colorSpace = "srgb_displayp3"
+                    )
+                    float inputs:roughness = 0.75
+                    token outputs:surface
+                }
+            }
+
+            def Xform "SpotLight" (
+                customData = {
+                    float3 rotationEulerHint = (-1.2687583, 3.1415927, 0)
+                }
+            )
+            {
+                quatf xformOp:orient = (-3.52069e-8, 9.41958e-9, 0.8054398, 0.5926777)
+                float3 xformOp:scale = (1, 1, 1)
+                float3 xformOp:translate = (-3.958121e-9, 0, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                def RealityKitComponent "SpotLight"
+                {
+                    float3 color = (0.69469965, 0.49013752, 0.4937647)
+                    token info:id = "RealityKit.SpotLight"
+
+                    def RealityKitStruct "Shadow"
+                    {
+                        bool isEnabled = 1
+                    }
+                }
+            }
+
+            def RealityKitComponent "InputTarget"
+            {
+                uniform token info:id = "RealityKit.InputTarget"
+            }
+
+            def RealityKitComponent "Collider"
+            {
+                uint group = 1
+                uniform token info:id = "RealityKit.Collider"
+                uint mask = 4294967295
+                token type = "Default"
+
+                def RealityKitStruct "Shape"
+                {
+                    float3 extent = (0.1, 0.1, 0.1)
+                    float radius = 0.05
+                    token shapeType = "Sphere"
+
+                    def RealityKitStruct "pose"
+                    {
+                    }
+                }
+            }
+        }
+
+        def Cube "FloorPBR" (
+            active = true
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Root/DemoContent/FloorPBR/DefaultMaterial>
+            double size = 1
+            float2 ui:nodegraph:node:pos = (40, 40)
+            int ui:nodegraph:node:stackingOrder = 2
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 0.1, 1)
+            float3 xformOp:translate = (-0.5, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def Material "DefaultMaterial"
+            {
+                token outputs:mtlx:surface.connect = </Root/DemoContent/FloorPBR/DefaultMaterial/ShadowReceivingOcclusionSurface.outputs:out>
+                token outputs:realitykit:vertex
+                token outputs:surface.connect = </Root/DemoContent/FloorPBR/DefaultMaterial/UsdPreviewSurface.outputs:surface>
+                float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (-102.17387, 81.6316)
+                int ui:nodegraph:realitykit:subgraphOutputs:stackingOrder = 51
+
+                def Shader "DefaultSurfaceShader" (
+                    active = false
+                )
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    color3f inputs:diffuseColor = (1, 1, 1)
+                    float inputs:roughness = 0.75
+                    token outputs:surface
+                }
+
+                def Shader "ShadowReceivingOcclusionSurface" (
+                    active = false
+                )
+                {
+                    uniform token info:id = "ND_realitykit_shadowreceiver_surfaceshader"
+                    token outputs:out
+                    float2 ui:nodegraph:node:pos = (-388.78146, 81.89731)
+                    int ui:nodegraph:node:stackingOrder = 48
+                }
+
+                def Shader "UsdPreviewSurface"
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    color3f inputs:diffuseColor = (0.99215686, 0.98039216, 0.98039216) (
+                        colorSpace = "srgb_displayp3"
+                    )
+                    token outputs:surface
+                }
+            }
+        }
+    }
+}
+
