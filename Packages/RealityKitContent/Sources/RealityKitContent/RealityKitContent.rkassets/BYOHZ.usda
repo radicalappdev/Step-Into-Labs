@@ -69,7 +69,7 @@ def Xform "Root"
         int ui:nodegraph:node:stackingOrder = 2
         quatf xformOp:orient = (0.9603446, 0.21576896, 0.015449418, -0.1759071)
         float3 xformOp:scale = (10, 10, 10)
-        float3 xformOp:translate = (0, 20, 0)
+        float3 xformOp:translate = (0, 30, -30)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         def RealityKitComponent "HierarchicalFade"
