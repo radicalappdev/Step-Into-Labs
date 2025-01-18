@@ -1,0 +1,375 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 2.0 (448.60.4)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    reorder nameChildren = ["StackBounce", "StackLoop", "BlockRotate"]
+    quatf xformOp:orient = (1, 0, 0, 0)
+    float3 xformOp:scale = (1, 1, 1)
+    float3 xformOp:translate = (0, 0, 0)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+    def Xform "Stack" (
+        active = true
+    )
+    {
+        reorder nameChildren = ["Skymat", "SmoothConcrete", "Cube_1", "Cube_2", "Cube_3"]
+        def Cube "Cube_1" (
+            active = true
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Root/Stack/SmoothConcrete> (
+                bindMaterialAs = "weakerThanDescendants"
+            )
+            double size = 1
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1.5, 1)
+            float3 xformOp:translate = (0, 0.75, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Cube "Cube_2" (
+            active = true
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Root/Stack/Skymat> (
+                bindMaterialAs = "weakerThanDescendants"
+            )
+            double size = 1
+            float2 ui:nodegraph:node:pos = (192.8064, 15.889938)
+            int ui:nodegraph:node:stackingOrder = 1
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:translate = (0, 2, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def RealityKitComponent "HierarchicalFade"
+            {
+                uniform token info:id = "RealityKit.HierarchicalFade"
+            }
+        }
+
+        def Cube "Cube_3" (
+            active = true
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Root/Stack/SmoothConcrete> (
+                bindMaterialAs = "weakerThanDescendants"
+            )
+            double size = 1
+            float2 ui:nodegraph:node:pos = (192.8064, 15.889938)
+            int ui:nodegraph:node:stackingOrder = 1
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1.5, 1)
+            float3 xformOp:translate = (0, 3.25, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def "SmoothConcrete" (
+            active = true
+            references = @Materials/SmoothConcrete.usdz@
+        )
+        {
+            color3f inputs:Basecolor_Tint = (0.921431, 0.92145264, 0.921441) (
+                colorSpace = "srgb_texture"
+            )
+        }
+
+        def Material "Skymat"
+        {
+            token cullMode = "back" (
+                allowedTokens = ["unspecified", "none", "front", "back"]
+            )
+            token outputs:mtlx:surface.connect = </Root/Stack/Skymat/PreviewSurface.outputs:out>
+            token outputs:realitykit:vertex
+            float2 ui:nodegraph:node:pos = (40, 40)
+            int ui:nodegraph:node:stackingOrder = 2
+            float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (1365.0085, -66.683044)
+            int ui:nodegraph:realitykit:subgraphOutputs:stackingOrder = 1054
+
+            def Shader "PreviewSurface"
+            {
+                uniform token info:id = "ND_UsdPreviewSurface_surfaceshader"
+                float inputs:clearcoat
+                float inputs:clearcoatRoughness
+                color3f inputs:diffuseColor.connect = </Root/Stack/Skymat/Mix.outputs:out>
+                color3f inputs:emissiveColor.connect = </Root/Stack/Skymat/Mix.outputs:out>
+                float inputs:ior
+                float inputs:metallic
+                float3 inputs:normal
+                float inputs:opacity
+                float inputs:roughness
+                token outputs:out
+                float2 ui:nodegraph:node:pos = (916.49976, -23.688818)
+                int ui:nodegraph:node:stackingOrder = 1184
+                string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["Advanced"]
+            }
+
+            def Shader "Mix"
+            {
+                uniform token info:id = "ND_mix_color3"
+                color3f inputs:bg = (0, 0, 0) (
+                    colorSpace = "srgb_texture"
+                )
+                color3f inputs:fg = (0.999996, 1, 1) (
+                    colorSpace = "srgb_texture"
+                )
+                float inputs:mix.connect = </Root/Stack/Skymat/Abs.outputs:out>
+                color3f outputs:out
+                float2 ui:nodegraph:node:pos = (504.23123, -56.12378)
+                int ui:nodegraph:node:stackingOrder = 1183
+            }
+
+            def Shader "Fractal3D"
+            {
+                uniform token info:id = "ND_fractal3d_float"
+                float inputs:diminish
+                float inputs:lacunarity = 3
+                int inputs:octaves = 10
+                float3 inputs:position.connect = </Root/Stack/Skymat/Add.outputs:out>
+                float outputs:out
+                float2 ui:nodegraph:node:pos = (-171.64656, 133.83972)
+                int ui:nodegraph:node:stackingOrder = 1182
+            }
+
+            def Shader "Abs"
+            {
+                uniform token info:id = "ND_absval_float"
+                float inputs:in.connect = </Root/Stack/Skymat/Multiply_1.outputs:out>
+                float outputs:out
+                float2 ui:nodegraph:node:pos = (246.7175, -16.648075)
+                int ui:nodegraph:node:stackingOrder = 1182
+            }
+
+            def Shader "Position"
+            {
+                uniform token info:id = "ND_position_vector3"
+                string inputs:space
+                float3 outputs:out
+                float2 ui:nodegraph:node:pos = (-889.56067, -78.71135)
+                int ui:nodegraph:node:stackingOrder = 1182
+            }
+
+            def Shader "Time"
+            {
+                uniform token info:id = "ND_time_float"
+                float outputs:out
+                float2 ui:nodegraph:node:pos = (-1013.39575, 58.733982)
+                int ui:nodegraph:node:stackingOrder = 1182
+            }
+
+            def Shader "Add"
+            {
+                uniform token info:id = "ND_add_vector3FA"
+                float3 inputs:in1.connect = </Root/Stack/Skymat/Position.outputs:out>
+                float inputs:in2.connect = </Root/Stack/Skymat/Multiply.outputs:out>
+                float3 outputs:out
+                float2 ui:nodegraph:node:pos = (-402.3489, -3.455211)
+                int ui:nodegraph:node:stackingOrder = 1182
+            }
+
+            def Shader "Multiply"
+            {
+                uniform token info:id = "ND_multiply_float"
+                float inputs:in1.connect = </Root/Stack/Skymat/Time.outputs:out>
+                float inputs:in2 = 0.02
+                float outputs:out
+                float2 ui:nodegraph:node:pos = (-813.85254, 110.43184)
+                int ui:nodegraph:node:stackingOrder = 1182
+            }
+
+            def Shader "Fractal3D_1"
+            {
+                uniform token info:id = "ND_fractal3d_float"
+                float inputs:amplitude = 2
+                float inputs:diminish = 0.5
+                float inputs:lacunarity = 4
+                int inputs:octaves = 2
+                float3 inputs:position.connect = </Root/Stack/Skymat/Add_1.outputs:out>
+                float outputs:out
+                float2 ui:nodegraph:node:pos = (-166.65047, -103.414185)
+                int ui:nodegraph:node:stackingOrder = 1182
+            }
+
+            def Shader "Multiply_1"
+            {
+                uniform token info:id = "ND_multiply_float"
+                float inputs:in1.connect = </Root/Stack/Skymat/Fractal3D_1.outputs:out>
+                float inputs:in2.connect = </Root/Stack/Skymat/Fractal3D.outputs:out>
+                float outputs:out
+                float2 ui:nodegraph:node:pos = (40.052654, 4.171752)
+                int ui:nodegraph:node:stackingOrder = 1182
+            }
+
+            def Shader "Multiply_2"
+            {
+                uniform token info:id = "ND_multiply_vector3"
+                float3 inputs:in1.connect = </Root/Stack/Skymat/Position.outputs:out>
+                float3 inputs:in2 = (0.4, 0.4, 0.4)
+                float3 outputs:out
+                float2 ui:nodegraph:node:pos = (-609.7861, -183.55984)
+                int ui:nodegraph:node:stackingOrder = 1182
+                string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["inputs:in2"]
+            }
+
+            def Shader "Add_1"
+            {
+                uniform token info:id = "ND_add_vector3FA"
+                float3 inputs:in1.connect = </Root/Stack/Skymat/Multiply_2.outputs:out>
+                float inputs:in2.connect = </Root/Stack/Skymat/Multiply_3.outputs:out>
+                float3 outputs:out
+                float2 ui:nodegraph:node:pos = (-409.00894, -120.79473)
+                int ui:nodegraph:node:stackingOrder = 1182
+            }
+
+            def Shader "Multiply_3"
+            {
+                uniform token info:id = "ND_multiply_float"
+                float inputs:in1.connect = </Root/Stack/Skymat/Multiply.outputs:out>
+                float inputs:in2 = 0.4
+                float outputs:out
+                float2 ui:nodegraph:node:pos = (-689.2447, 18.601591)
+                int ui:nodegraph:node:stackingOrder = 1182
+            }
+        }
+    }
+
+    def RealityKitComponent "RCP_BehaviorsContainer"
+    {
+        rel behaviors = </Root/OnAddedToScene>
+        uniform token info:id = "RCP.BehaviorsContainer"
+    }
+
+    def Preliminary_Behavior "OnAddedToScene"
+    {
+        rel actions = </Root/OnAddedToScene/Action>
+        uniform bool exclusive
+        rel triggers = </Root/OnAddedToScene/Trigger>
+
+        def Preliminary_Trigger "Trigger"
+        {
+            rel affectedObjects = </Root>
+            token info:id = "SceneTransition"
+        }
+
+        def Preliminary_Action "Action"
+        {
+            rel affectedObjects = </Root>
+            rel animationLibraryKey = </Root/StackLoop>
+            rel animationLibraryKeyOverrideKey = </Root/OnAddedToScene/Trigger>
+            token info:id = "PlayTimeline"
+            int loops = 0
+            int performCount = 1
+            token type = "serial"
+        }
+    }
+
+    def RealityKitTimeline "StackBounce"
+    {
+        reorder nameChildren = ["Track", "Track2", "Track3"]
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Transform_By"
+            {
+                string actionKind = "moveBy"
+                int blendLayer = 300
+                double duration = 2.5
+                uniform token info:id = "FCDE6A73-F68D-47A9-8E48-411F6DF35FC2"
+                float3 position = (0, 0.2, 0)
+                double startTime = 0
+                rel target = </Root>
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "linear"
+                }
+            }
+
+            def RealityKitAction "Transform_By2"
+            {
+                string actionKind = "moveBy"
+                int blendLayer = 300
+                double duration = 2.5
+                uniform token info:id = "FCDE6A73-F68D-47A9-8E48-411F6DF35FC2"
+                float3 position = (0, -0.2, 0)
+                double startTime = 2.5000000001
+                rel target = </Root>
+                float2 ui:nodegraph:node:pos = (20, 20)
+                int ui:nodegraph:node:stackingOrder = 1
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "linear"
+                }
+            }
+        }
+    }
+
+    def RealityKitTimeline "StackLoop"
+    {
+        reorder nameChildren = ["Track", "Track2"]
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Play_Timeline"
+            {
+                string actionKind = "timeline"
+                int blendLayer = 500
+                double duration = 5.0000000001
+                uniform token info:id = "FB28CCD9-06DF-438C-810E-3281DA82439D"
+                double loopCount = 0
+                double startTime = 0
+                rel timeline = </Root/StackBounce>
+            }
+        }
+
+        def RealityKitTrack "Track2"
+        {
+            def RealityKitAction "Play_Timeline"
+            {
+                string actionKind = "timeline"
+                int blendLayer = 500
+                double duration = 2.5
+                uniform token info:id = "0E48C61E-B399-460C-8A37-12D3756B9F93"
+                double loopCount = 0
+                double startTime = 0
+                rel timeline = </Root/BlockRotate>
+            }
+        }
+    }
+
+    def RealityKitTimeline "BlockRotate"
+    {
+        reorder nameChildren = ["Track", "Track2"]
+        float2 ui:nodegraph:node:pos = (192.8064, 103.13994)
+        int ui:nodegraph:node:stackingOrder = 1
+
+        def RealityKitTrack "Track2"
+        {
+            def RealityKitAction "Spin"
+            {
+                string actionKind = "spin"
+                int blendLayer = 400
+                double duration = 0.15
+                uniform token info:id = "BA19CBCA-01F0-4CCB-B426-9D00D3EBCC5D"
+                token spinDirection = "counterclockwise"
+                double startTime = 2.35
+                rel target = </Root/Stack/Cube_2>
+
+                def RealityKitStruct "timingFunction"
+                {
+                }
+            }
+        }
+    }
+}
+

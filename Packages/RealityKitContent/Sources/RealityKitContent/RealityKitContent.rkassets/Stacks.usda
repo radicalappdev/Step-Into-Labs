@@ -1,0 +1,143 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 2.0 (448.60.4)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    reorder nameChildren = ["StackSkyBlocks_1", "StackSkyBlocks_2", "StackSkyBlocks_3", "StackSkyBlocks_4", "StackSkyBlocks_5", "StackSkyBlocks_6", "Roof", "SmoothConcrete", "Floor"]
+    def "StackSkyBlocks_1" (
+        active = true
+        references = @StackSkyBlocks.usda@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (-4.5, 0.05, -4.5)
+    }
+
+    def "SmoothConcrete" (
+        active = true
+        references = @Materials/SmoothConcrete.usdz@
+    )
+    {
+        float2 inputs:UV_Scale = (2, 2)
+    }
+
+    def Cube "Floor" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </Root/SmoothConcrete> (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        double size = 12
+        float3 xformOp:scale = (1, 0.01, 1)
+        float3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/Floor/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+    }
+
+    def "StackSkyBlocks_2" (
+        active = true
+        references = @StackSkyBlocks.usda@
+    )
+    {
+        float2 ui:nodegraph:node:pos = (32.36331, 471.47977)
+        int ui:nodegraph:node:stackingOrder = 1
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 0.05, -4.5)
+    }
+
+    def "StackSkyBlocks_3" (
+        active = true
+        references = @StackSkyBlocks.usda@
+    )
+    {
+        float2 ui:nodegraph:node:pos = (52.36331, 491.47977)
+        int ui:nodegraph:node:stackingOrder = 2
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (4.5, 0.05, -4.5)
+    }
+
+    def "StackSkyBlocks_4" (
+        active = true
+        references = @StackSkyBlocks.usda@
+    )
+    {
+        float2 ui:nodegraph:node:pos = (32.36331, 471.47977)
+        int ui:nodegraph:node:stackingOrder = 1
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (-4.5, 0.05, 4.5)
+    }
+
+    def "StackSkyBlocks_5" (
+        active = true
+        references = @StackSkyBlocks.usda@
+    )
+    {
+        float2 ui:nodegraph:node:pos = (52.36331, 491.47977)
+        int ui:nodegraph:node:stackingOrder = 2
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 0.05, 4.5)
+    }
+
+    def "StackSkyBlocks_6" (
+        active = true
+        references = @StackSkyBlocks.usda@
+    )
+    {
+        float2 ui:nodegraph:node:pos = (72.36331, 511.47977)
+        int ui:nodegraph:node:stackingOrder = 3
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (4.5, 0.05, 4.5)
+    }
+
+    def Cube "Roof" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </Root/SmoothConcrete> (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        double size = 12
+        float2 ui:nodegraph:node:pos = (32.36331, 471.47977)
+        int ui:nodegraph:node:stackingOrder = 1
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (1, 0.01, 1)
+        float3 xformOp:translate = (0, 4.3, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/Roof/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+    }
+}
+

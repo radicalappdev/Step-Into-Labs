@@ -170,21 +170,21 @@ class ModelData {
         ,Lab(title: "Lab 019",
              type: .SPACE,
              date: Date("12/17/2024"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Material Sandbox",
              description: "Just a lab I'm using to view various materials in visionOS")
 
         ,Lab(title: "Lab 020",
              type: .SPACE,
              date: Date("12/19/2024"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Exploring Collision Triggers",
              description: "Starting with simple triggers to perform actions in a scene.")
 
         ,Lab(title: "Lab 021",
              type: .SPACE,
              date: Date("12/19/2024"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Collision Triggers with AnchorEntity Hands",
              description: "Do collision triggers fire from hand anchored entities without ARKit?")
 
@@ -222,6 +222,13 @@ class ModelData {
              isFeatured: true,
              subtitle: "Using Dynamic Lights and Shadows with Passthrough",
              description: "We can use ShadowReceivingOcclusionSurface to enable virtual lights and shadows to affect our real space.")
+
+        ,Lab(title: "Lab 027",
+             type: .SPACE_FULL,
+            date: Date("1/18/2024"),
+            isFeatured: true,
+            subtitle: "Stacks",
+            description: "")
 
     ]
 
