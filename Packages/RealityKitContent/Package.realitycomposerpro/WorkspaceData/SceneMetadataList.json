@@ -778,6 +778,75 @@
       }
     ]
   },
+  "98043A2D-E996-4BE7-8F15-47AAB1E1E57E" : {
+    "objectMetadataList" : [
+      [
+        "98043A2D-E996-4BE7-8F15-47AAB1E1E57E",
+        "Root",
+        "Loop"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "98043A2D-E996-4BE7-8F15-47AAB1E1E57E",
+        "Root",
+        "Cube"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "98043A2D-E996-4BE7-8F15-47AAB1E1E57E",
+        "Root",
+        "Spin",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "98043A2D-E996-4BE7-8F15-47AAB1E1E57E",
+        "Root",
+        "Loop",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "98043A2D-E996-4BE7-8F15-47AAB1E1E57E",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "98043A2D-E996-4BE7-8F15-47AAB1E1E57E",
+        "Root",
+        "Timeline",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "98043A2D-E996-4BE7-8F15-47AAB1E1E57E",
+        "Root",
+        "Spin"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  },
   "A663AED0-1B6F-4397-8352-0750877DD28E" : {
     "objectMetadataList" : [
       [
