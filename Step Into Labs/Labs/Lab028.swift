@@ -22,20 +22,20 @@ struct Lab028: View {
     @State private var animationPhase = 0
     
     func startAutoMode() {
-        // Reset to starting position
+
         ornamentAnchor = UnitPoint(x: 0, y: 0)
         animationPhase = 0
         
         autoModeTimer = Timer.scheduledTimer(withTimeInterval: 2.5, repeats: true) { _ in
             withAnimation(.easeInOut(duration: 2.0)) {
                 switch animationPhase {
-                case 0: // Top left to top right
+                case 0: // Start from Top left and move to top right
                     ornamentAnchor = UnitPoint(x: 1, y: 0)
-                case 1: // Top right to bottom right
+                case 1: // Move from top right to bottom right
                     ornamentAnchor = UnitPoint(x: 1, y: 1)
-                case 2: // Bottom right to bottom left
+                case 2: // Move from bottom right to bottom left
                     ornamentAnchor = UnitPoint(x: 0, y: 1)
-                case 3: // Bottom left to top left
+                case 3: // Move from bottom left to top left
                     ornamentAnchor = UnitPoint(x: 0, y: 0)
                 default:
                     break
