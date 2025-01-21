@@ -2,11 +2,11 @@
 //
 //  Title: Lab028
 //
-//  Subtitle:
+//  Subtitle: Custom Ornament Anchor Positions
 //
-//  Description:
+//  Description: Creating a dynamic anchor that can be moved around a window.
 //
-//  Type:
+//  Type: Window
 //
 //  Created by Joseph Simpson on 1/21/25.
 

@@ -234,8 +234,8 @@ class ModelData {
              type: .WINDOW,
              date: Date("1/21/2024"),
              isFeatured: true,
-             subtitle: "Custom Ornament Anchor",
-             description: "Creating a dynamic anchor that can be moved around in the scene.")
+             subtitle: "Custom Ornament Anchor Positions",
+             description: "Creating a dynamic anchor that can be moved around a window.")
 
     ]
 
