@@ -17,6 +17,38 @@ import RealityKitContent
 struct Lab028: View {
 
     @State var ornamentAnchor: UnitPoint = .init(x: 0.0, y: 0.0)
+    @State private var isAutoMode = false
+    @State private var autoModeTimer: Timer?
+    @State private var animationPhase = 0
+    
+    func startAutoMode() {
+        // Reset to starting position
+        ornamentAnchor = UnitPoint(x: 0, y: 0)
+        animationPhase = 0
+        
+        autoModeTimer = Timer.scheduledTimer(withTimeInterval: 2.5, repeats: true) { _ in
+            withAnimation(.easeInOut(duration: 2.0)) {
+                switch animationPhase {
+                case 0: // Top left to top right
+                    ornamentAnchor = UnitPoint(x: 1, y: 0)
+                case 1: // Top right to bottom right
+                    ornamentAnchor = UnitPoint(x: 1, y: 1)
+                case 2: // Bottom right to bottom left
+                    ornamentAnchor = UnitPoint(x: 0, y: 1)
+                case 3: // Bottom left to top left
+                    ornamentAnchor = UnitPoint(x: 0, y: 0)
+                default:
+                    break
+                }
+                animationPhase = (animationPhase + 1) % 4
+            }
+        }
+    }
+    
+    func stopAutoMode() {
+        autoModeTimer?.invalidate()
+        autoModeTimer = nil
+    }
 
     var body: some View {
         VStack {
@@ -24,6 +56,19 @@ struct Lab028: View {
             VStack(alignment: .leading, spacing: 20) {
                 Text("Ornament Position")
                     .font(.headline)
+                
+                Toggle("Auto Mode", isOn: Binding(
+                    get: { isAutoMode },
+                    set: { newValue in
+                        isAutoMode = newValue
+                        if newValue {
+                            startAutoMode()
+                        } else {
+                            stopAutoMode()
+                        }
+                    }
+                ))
+                .padding(.bottom, 8)
                 
                 HStack {
                     Text("X:")
@@ -37,6 +82,7 @@ struct Lab028: View {
                     Text(String(format: "%.2f", ornamentAnchor.x))
                 }
                 .fontDesign(.monospaced)
+                .disabled(isAutoMode)
                 
                 HStack {
                     Text("Y:")
@@ -50,6 +96,7 @@ struct Lab028: View {
                     Text(String(format: "%.2f", ornamentAnchor.y))
                 }
                 .fontDesign(.monospaced)
+                .disabled(isAutoMode)
             }
             .frame(width: 300)
             .padding()
