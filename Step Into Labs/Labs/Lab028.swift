@@ -16,10 +16,39 @@ import RealityKitContent
 
 struct Lab028: View {
 
-    @State var ornamentAnchor: UnitPoint = .top
+    @State var ornamentAnchor: UnitPoint = .init(x: 0.0, y: 0.0)
 
     var body: some View {
         VStack {
+
+            VStack(alignment: .leading, spacing: 20) {
+                Text("Ornament Position")
+                    .font(.headline)
+                
+                HStack {
+                    Text("X:")
+                    Slider(
+                        value: Binding(
+                            get: { ornamentAnchor.x },
+                            set: { ornamentAnchor = UnitPoint(x: $0, y: ornamentAnchor.y) }
+                        ),
+                        in: 0...1
+                    )
+                }
+                
+                HStack {
+                    Text("Y:")
+                    Slider(
+                        value: Binding(
+                            get: { ornamentAnchor.y },
+                            set: { ornamentAnchor = UnitPoint(x: ornamentAnchor.x, y: $0) }
+                        ),
+                        in: 0...1
+                    )
+                }
+            }
+            .frame(width: 300)
+            .padding()
 
         }
         .ornament(attachmentAnchor: .scene(ornamentAnchor)) {

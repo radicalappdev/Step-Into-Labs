@@ -230,7 +230,7 @@ class ModelData {
             subtitle: "Stacks",
             description: "")
 
-        ,Lab(title: "Lab 027",
+        ,Lab(title: "Lab 028",
              type: .WINDOW,
              date: Date("1/21/2024"),
              isFeatured: true,
