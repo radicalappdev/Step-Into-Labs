@@ -34,7 +34,9 @@ struct Lab028: View {
                         ),
                         in: 0...1
                     )
+                    Text(String(format: "%.2f", ornamentAnchor.x))
                 }
+                .fontDesign(.monospaced)
                 
                 HStack {
                     Text("Y:")
@@ -45,7 +47,9 @@ struct Lab028: View {
                         ),
                         in: 0...1
                     )
+                    Text(String(format: "%.2f", ornamentAnchor.y))
                 }
+                .fontDesign(.monospaced)
             }
             .frame(width: 300)
             .padding()
