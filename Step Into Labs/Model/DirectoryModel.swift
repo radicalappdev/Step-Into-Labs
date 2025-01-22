@@ -238,7 +238,7 @@ class ModelData {
              description: "Creating a dynamic anchor that can be moved around a window.")
 
         ,Lab(title: "Lab 029",
-             type: .WINDOW,
+             type: .SPACE,
              date: Date("1/22/2024"),
              isFeatured: true,
              subtitle: "Baggage Claim",

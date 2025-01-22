@@ -39,14 +39,25 @@ struct Lab029: View {
     ]
 
     var body: some View {
-        List {
-            ForEach(Array(colors.enumerated()), id: \.offset) { index, color in
-                HStack {
-                    RoundedRectangle(cornerRadius: 8)
-                        .fill(color)
-                        .frame(width: 50, height: 30)
-                    Text("Color \(index + 1)")
-                }
+        RealityView { content, attachments in
+            let colorGroup = Entity()
+            colorGroup.name = "ColorGroup"
+            colorGroup.position = SIMD3(x: 0, y: 1, z: -2)
+            content.add(colorGroup)
+            for (index, color) in colors.enumerated() {
+                let cube = ModelEntity(mesh: .generateBox(size: 0.2))
+
+                let uiColor = UIColor(color)
+                cube.model?.materials = [SimpleMaterial(color: uiColor, isMetallic: false)]
+
+                cube.position = SIMD3(x: -0.4 * Float(index), y: 0, z: 0)
+                colorGroup.addChild(cube)
+            }
+        } update: { content, attachments in
+            // Empty update closure is fine
+        } attachments: {
+            Attachment(id: "AttachmentContent") {
+                Text("")
             }
         }
     }
