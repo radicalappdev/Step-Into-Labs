@@ -40,19 +40,26 @@ struct Lab029: View {
 
     var body: some View {
         RealityView { content, attachments in
-            let colorGroup = Entity()
-            colorGroup.name = "ColorGroup"
-            colorGroup.position = SIMD3(x: 0, y: 1, z: -2)
-            content.add(colorGroup)
-            for (index, color) in colors.enumerated() {
-                let cube = ModelEntity(mesh: .generateBox(size: 0.2))
 
-                let uiColor = UIColor(color)
-                cube.model?.materials = [SimpleMaterial(color: uiColor, isMetallic: false)]
+            if let scene = try? await Entity(named: "BaggageClaim", in: realityKitContentBundle) {
+                content.add(scene)
 
-                cube.position = SIMD3(x: -0.4 * Float(index), y: 0, z: 0)
-                colorGroup.addChild(cube)
+                let colorGroup = Entity()
+                colorGroup.name = "ColorGroup"
+                colorGroup.position = SIMD3(x: 0, y: 1, z: -2)
+                scene.addChild(colorGroup)
+                for (index, color) in colors.enumerated() {
+                    let cube = ModelEntity(mesh: .generateBox(size: 0.2))
+                    cube.name = "Color_\(index)"
+
+                    let uiColor = UIColor(color)
+                    cube.model?.materials = [SimpleMaterial(color: uiColor, isMetallic: false)]
+
+                    cube.position = SIMD3(x: -0.4 * Float(index), y: 0, z: 0)
+                    colorGroup.addChild(cube)
+                }
             }
+
         } update: { content, attachments in
             // Empty update closure is fine
         } attachments: {
