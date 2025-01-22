@@ -54,25 +54,24 @@ struct Lab029: View {
                 let totalColors = Float(colors.count)
 
                 for (index, color) in colors.enumerated() {
-                    let cube = ModelEntity(mesh: .generateBox(size: 0.3))
-                    cube.name = "Color_\(index)"
+                    let colorEntity = ModelEntity(mesh: .generateSphere(radius: 0.25))
+                    colorEntity.name = "Color_\(index)"
 
-                    let uiColor = UIColor(color)
-                    cube.model?.materials = [SimpleMaterial(color: uiColor, isMetallic: false)]
+                    var material = PhysicallyBasedMaterial()
+                    material.baseColor.tint = .init(color)
+                    material.roughness = 0.5
+                    material.metallic = 0.0
 
+                    colorEntity.model?.materials = [material]
 
                     // Calculate position on circle
                     let angle = (Float(index) / totalColors) * 2 * .pi
                     let x = radius * sin(angle)
                     let z = radius * cos(angle)
 
-                    //                        cube.setPosition([-x, 0, z], relativeTo: colorGroup)
-                    cube.position = SIMD3(x: -x, y: 0, z: z)
-                    colorGroup.addChild(cube)
+                    colorEntity.position = SIMD3(x: -x, y: 0, z: z)
+                    colorGroup.addChild(colorEntity)
                 }
-
-
-
 
             }
         } update: { content, attachments in

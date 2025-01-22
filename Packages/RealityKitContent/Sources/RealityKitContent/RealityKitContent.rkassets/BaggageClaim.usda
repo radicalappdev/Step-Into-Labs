@@ -11,13 +11,37 @@
 def Xform "Root"
 {
     reorder nameChildren = ["SkyDome", "ColorGroup"]
-    def "SkyDome" (
+    def Cylinder "Cylinder" (
         active = true
-        references = @BuildingBlocks/SkyDome.usdz@
+        prepend apiSchemas = ["MaterialBindingAPI"]
     )
     {
-        float3 xformOp:scale = (0.003, 0.003, 0.003)
+        uniform token axis = "Y"
+        double height = 4
+        rel material:binding = </Root/Cylinder/DefaultMaterial>
+        double radius = 3
+        float3 xformOp:translate = (0, 2, 0)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token cullMode = "front" (
+                allowedTokens = ["unspecified", "none", "front", "back"]
+            )
+            token outputs:mtlx:surface
+            token outputs:realitykit:vertex
+            prepend token outputs:surface.connect = </Root/Cylinder/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0, 0, 0) (
+                    colorSpace = "srgb_texture"
+                )
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
     }
 }
 
