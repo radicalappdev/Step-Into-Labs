@@ -58,6 +58,11 @@ struct Lab029: View {
                 for (index, color) in colors.enumerated() {
                     let colorEntity = ModelEntity(mesh: .generateSphere(radius: 0.25))
                     colorEntity.name = "Color_\(index)"
+                    colorEntity.components.set(HoverEffectComponent())
+                    colorEntity.components.set(InputTargetComponent())
+                    let collision = CollisionComponent(shapes: [.generateSphere(radius: 0.25)])
+                    colorEntity.components.set(collision)
+
 
                     var material = PhysicallyBasedMaterial()
                     material.baseColor.tint = .init(color)
@@ -95,6 +100,7 @@ struct Lab029: View {
                 .glassBackgroundEffect()
             }
         }
+        .gesture(tapGesture)
         .task {
             while true {
                 try? await Task.sleep(for: .milliseconds(16)) // ~60fps
@@ -103,6 +109,16 @@ struct Lab029: View {
                 }
             }
         }
+    }
+
+    var tapGesture: some Gesture {
+        TapGesture(count: 2)
+            .targetedToAnyEntity()
+            .onEnded { value in
+                let name = value.entity.name
+                let index = Int(name.split(separator: "_")[1])!
+                selectedColorIndex = index
+            }
     }
 }
 
