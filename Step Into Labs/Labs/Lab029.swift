@@ -41,6 +41,8 @@ struct Lab029: View {
     @State var isSpinning: Bool = true
     @State var colorGroup = Entity()
 
+    @State var selectedColorIndex: Int = 0
+
     var body: some View {
         RealityView { content, attachments in
             if let scene = try? await Entity(named: "BaggageClaim", in: realityKitContentBundle) {
@@ -73,12 +75,24 @@ struct Lab029: View {
                     colorGroup.addChild(colorEntity)
                 }
 
+                if let panel = attachments.entity(for: "Panel") {
+                    panel.position = SIMD3(x: 0, y: 1.5, z: -1.5)
+                    content.add(panel)
+                }
+
             }
         } update: { content, attachments in
             // Empty update closure is fine
         } attachments: {
-            Attachment(id: "AttachmentContent") {
-                Text("")
+            Attachment(id: "Panel") {
+                VStack {
+                    Text("Selected Color")
+                    RoundedRectangle(cornerRadius: 5)
+                        .fill(Color(colors[selectedColorIndex]))
+                        .padding()
+                }
+                .frame(width: 300, height: 200)
+                .glassBackgroundEffect()
             }
         }
         .task {
