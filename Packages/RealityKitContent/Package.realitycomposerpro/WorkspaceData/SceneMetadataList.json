@@ -129,7 +129,37 @@
     "objectMetadataList" : [
       [
         "106DA8C8-A319-4AC4-9CCD-0933D53E7FF1",
+        "Root",
+        "Spin",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "106DA8C8-A319-4AC4-9CCD-0933D53E7FF1",
         "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "106DA8C8-A319-4AC4-9CCD-0933D53E7FF1",
+        "Root",
+        "Loop",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "106DA8C8-A319-4AC4-9CCD-0933D53E7FF1",
+        "Root",
+        "Timeline",
+        "Track"
       ],
       {
         "isExpanded" : true,

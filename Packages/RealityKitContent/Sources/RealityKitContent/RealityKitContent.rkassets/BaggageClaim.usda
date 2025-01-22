@@ -10,12 +10,13 @@
 
 def Xform "Root"
 {
+    reorder nameChildren = ["SkyDome", "ColorGroup"]
     def "SkyDome" (
         active = true
-        prepend references = @BuildingBlocks/SkyDome.usdz@
+        references = @BuildingBlocks/SkyDome.usdz@
     )
     {
-        float3 xformOp:scale = (0.005, 0.005, 0.005)
+        float3 xformOp:scale = (0.003, 0.003, 0.003)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 }

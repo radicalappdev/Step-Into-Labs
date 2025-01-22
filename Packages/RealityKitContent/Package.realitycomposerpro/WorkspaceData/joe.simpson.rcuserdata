@@ -1,5 +1,5 @@
 {
-  "advancedEditorSelectedIdentifier" : "ProjectBrowser",
+  "advancedEditorSelectedIdentifier" : "BehaviorsPluginID",
   "openSceneRelativePaths" : [
     "JiggleLabs.usda",
     "DynamicLightTest.usda",
@@ -744,6 +744,28 @@
       }
     ],
     "106DA8C8-A319-4AC4-9CCD-0933D53E7FF1" : [
+      {
+        "date" : 759256713.072052,
+        "title" : "Untitled",
+        "transform" : [
+          0.97404903,
+          1.6818154e-09,
+          -0.22633739,
+          0,
+          -0.14687821,
+          0.76084393,
+          -0.6320944,
+          0,
+          0.17220742,
+          0.64893496,
+          0.7410993,
+          0,
+          0.44538003,
+          1.6783403,
+          1.916705,
+          1
+        ]
+      },
       {
         "date" : 759256593.1815,
         "title" : "Untitled",
