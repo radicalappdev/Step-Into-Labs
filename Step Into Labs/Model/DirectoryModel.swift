@@ -237,6 +237,13 @@ class ModelData {
              subtitle: "Custom Ornament Anchor Positions",
              description: "Creating a dynamic anchor that can be moved around a window.")
 
+        ,Lab(title: "Lab 029",
+             type: .WINDOW,
+             date: Date("1/22/2024"),
+             isFeatured: true,
+             subtitle: "Baggage Claim",
+             description: "What if a using a color picker was like waiting at baggage claim?")
+
     ]
 
 }
