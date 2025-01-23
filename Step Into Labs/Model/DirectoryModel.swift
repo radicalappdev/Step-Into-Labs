@@ -244,6 +244,13 @@ class ModelData {
              subtitle: "Baggage Claim",
              description: "What if a using a color picker was like waiting at baggage claim?")
 
+        ,Lab(title: "Lab 030",
+             type: .SPACE,
+             date: Date("1/23/2024"),
+             isFeatured: true,
+             subtitle: "Lab 030 - The Basics of RealityKit Behaviors",
+             description: "A few simple examples of RealityKit behaviors in Reality Composer Pro.")
+
     ]
 
 }
