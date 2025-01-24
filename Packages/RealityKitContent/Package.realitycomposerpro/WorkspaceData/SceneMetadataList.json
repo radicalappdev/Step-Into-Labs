@@ -650,6 +650,27 @@
       }
     ]
   },
+  "8927C89E-AA92-4E6D-B496-CC831CA8BADF" : {
+    "objectMetadataList" : [
+      [
+        "8927C89E-AA92-4E6D-B496-CC831CA8BADF",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "8927C89E-AA92-4E6D-B496-CC831CA8BADF",
+        "Root",
+        "Demo_2"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  },
   "90C235E0-C99C-42E7-9D0D-5E131743A0A7" : {
     "objectMetadataList" : [
       [
@@ -950,6 +971,18 @@
       }
     ]
   },
+  "B7890F28-2D7B-4FE1-BD1F-DC717DA52CAF" : {
+    "objectMetadataList" : [
+      [
+        "B7890F28-2D7B-4FE1-BD1F-DC717DA52CAF",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  },
   "C357334B-7677-46D9-8B3E-C43BB77916EE" : {
     "objectMetadataList" : [
       [
@@ -1028,6 +1061,16 @@
       [
         "CB5E1518-DE38-44CA-8492-6104DC9F4794",
         "Root",
+        "Subject_2_Collision_Wall_2",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "CB5E1518-DE38-44CA-8492-6104DC9F4794",
+        "Root",
         "Subject_1_Loop"
       ],
       {
@@ -1056,16 +1099,8 @@
       [
         "CB5E1518-DE38-44CA-8492-6104DC9F4794",
         "Root",
-        "Subject_2_Move"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "CB5E1518-DE38-44CA-8492-6104DC9F4794",
-        "Root",
-        "Demo_2"
+        "Wall_1_Collision_Subject_2",
+        "Track"
       ],
       {
         "isExpanded" : true,
@@ -1086,15 +1121,6 @@
         "Root",
         "Subject_2_Loop",
         "Track"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "CB5E1518-DE38-44CA-8492-6104DC9F4794",
-        "Root",
-        "Subject_2_Collision_Wall_2"
       ],
       {
         "isExpanded" : true,
@@ -1131,26 +1157,8 @@
       [
         "CB5E1518-DE38-44CA-8492-6104DC9F4794",
         "Root",
-        "Subject_2_Collision_Wall_1"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "CB5E1518-DE38-44CA-8492-6104DC9F4794",
-        "Root",
         "Subject_1_Loop_1",
         "Track"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "CB5E1518-DE38-44CA-8492-6104DC9F4794",
-        "Root",
-        "Subject_2_Loop"
       ],
       {
         "isExpanded" : true,
