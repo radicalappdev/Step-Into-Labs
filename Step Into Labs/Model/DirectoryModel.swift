@@ -191,35 +191,35 @@ class ModelData {
         ,Lab(title: "Lab 022",
              type: .SPACE,
              date: Date("1/4/2024"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "A simple hand menu idea",
              description: "Building a simple hand menu with hand anchors and attachments.")
 
         ,Lab(title: "Lab 023",
              type: .SPACE,
              date: Date("1/14/2024"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Anchored Bounce Box",
              description: "A mini-game that uses a hand anchor to control a box to bounce a ball toward a target.")
 
         ,Lab(title: "Lab 024",
              type: .SPACE,
              date: Date("1/15/2024"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Be careful with Windows",
              description: "They can be tricky!")
 
         ,Lab(title: "Lab 025",
              type: .SPACE,
              date: Date("1/16/2024"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Moving Windows Should Be Easy",
              description: "Is this supposed to happen?")
 
         ,Lab(title: "Lab 026",
              type: .SPACE,
              date: Date("1/17/2024"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Using Dynamic Lights and Shadows with Passthrough",
              description: "We can use ShadowReceivingOcclusionSurface to enable virtual lights and shadows to affect our real space.")
 
@@ -233,14 +233,14 @@ class ModelData {
         ,Lab(title: "Lab 028",
              type: .WINDOW,
              date: Date("1/21/2024"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Custom Ornament Anchor Positions",
              description: "Creating a dynamic anchor that can be moved around a window.")
 
         ,Lab(title: "Lab 029",
              type: .SPACE,
              date: Date("1/22/2024"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Baggage Claim",
              description: "What if a using a color picker was like waiting at baggage claim?")
 
@@ -248,8 +248,15 @@ class ModelData {
              type: .SPACE,
              date: Date("1/23/2024"),
              isFeatured: true,
-             subtitle: "Lab 030 - The Basics of RealityKit Behaviors",
+             subtitle: "The Basics of RealityKit Behaviors",
              description: "A few simple examples of RealityKit behaviors in Reality Composer Pro.")
+
+        ,Lab(title: "Lab 031",
+             type: .SPACE,
+             date: Date("1/24/2024"),
+             isFeatured: true,
+             subtitle: "TBD",
+             description: "")
 
     ]
 
