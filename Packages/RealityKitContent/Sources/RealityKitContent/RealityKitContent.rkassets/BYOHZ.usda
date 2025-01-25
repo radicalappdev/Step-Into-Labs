@@ -129,6 +129,45 @@ def Xform "Root"
         }
     }
 
+    def RealityKitTimeline "Spin"
+    {
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Spin"
+            {
+                string actionKind = "spin"
+                int blendLayer = 400
+                double duration = 60
+                uniform token info:id = "45319667-69EB-4D59-BEDE-D66BCBCF849C"
+                token spinDirection = "counterclockwise"
+                double startTime = 0
+                rel target = </Root/Cube>
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "linear"
+                }
+            }
+        }
+    }
+
+    def RealityKitTimeline "Loop"
+    {
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Play_Timeline"
+            {
+                string actionKind = "timeline"
+                int blendLayer = 500
+                double duration = 60
+                uniform token info:id = "91F24E79-1CA3-4966-8F29-60B0E615BB3D"
+                double loopCount = 0
+                double startTime = 0
+                rel timeline = </Root/Spin>
+            }
+        }
+    }
+
     def Material "Skymat"
     {
         token cullMode = "back" (
@@ -200,8 +239,8 @@ def Xform "Root"
             uniform token info:id = "ND_position_vector3"
             string inputs:space
             float3 outputs:out
-            float2 ui:nodegraph:node:pos = (-889.56067, -78.71135)
-            int ui:nodegraph:node:stackingOrder = 1182
+            float2 ui:nodegraph:node:pos = (-896.5237, -134.79832)
+            int ui:nodegraph:node:stackingOrder = 1186
         }
 
         def Shader "Time"
@@ -284,45 +323,6 @@ def Xform "Root"
             float outputs:out
             float2 ui:nodegraph:node:pos = (-689.2447, 18.601591)
             int ui:nodegraph:node:stackingOrder = 1182
-        }
-    }
-
-    def RealityKitTimeline "Spin"
-    {
-        def RealityKitTrack "Track"
-        {
-            def RealityKitAction "Spin"
-            {
-                string actionKind = "spin"
-                int blendLayer = 400
-                double duration = 60
-                uniform token info:id = "45319667-69EB-4D59-BEDE-D66BCBCF849C"
-                token spinDirection = "counterclockwise"
-                double startTime = 0
-                rel target = </Root/Cube>
-
-                def RealityKitStruct "timingFunction"
-                {
-                    token type = "linear"
-                }
-            }
-        }
-    }
-
-    def RealityKitTimeline "Loop"
-    {
-        def RealityKitTrack "Track"
-        {
-            def RealityKitAction "Play_Timeline"
-            {
-                string actionKind = "timeline"
-                int blendLayer = 500
-                double duration = 60
-                uniform token info:id = "91F24E79-1CA3-4966-8F29-60B0E615BB3D"
-                double loopCount = 0
-                double startTime = 0
-                rel timeline = </Root/Spin>
-            }
         }
     }
 }

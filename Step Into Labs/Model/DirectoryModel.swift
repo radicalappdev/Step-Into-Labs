@@ -252,7 +252,7 @@ class ModelData {
              description: "A few simple examples of RealityKit behaviors in Reality Composer Pro.")
 
         ,Lab(title: "Lab 031",
-             type: .SPACE,
+             type: .SPACE_FULL,
              date: Date("1/24/2024"),
              isFeatured: true,
              subtitle: "TBD",

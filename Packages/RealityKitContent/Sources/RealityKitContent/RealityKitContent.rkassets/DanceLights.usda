@@ -1,0 +1,442 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 2.0 (448.60.4)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    reorder nameChildren = ["Floor", "Light_1", "Light_1_Spin", "Light_2", "Light_2_Spin", "Loop", "RCP_BehaviorsContainer", "OnAddedToScene", "Light_3_Spin"]
+    float3 xformOp:translate = (0, 0, -4)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+    def Xform "Light_1" (
+        active = true
+    )
+    {
+        float3 xformOp:translate = (0, 4, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Cone "Cone" (
+            active = true
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            reorder nameChildren = ["DefaultMaterial", "SpotLight"]
+            uniform token axis = "Y"
+            double height = 10
+            rel material:binding = </Root/Light_1/Cone/DefaultMaterial>
+            double radius = 1
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:translate = (0, -5, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def Material "DefaultMaterial"
+            {
+                token cullMode = "front" (
+                    allowedTokens = ["unspecified", "none", "front", "back"]
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+                token outputs:surface.connect = </Root/Light_1/Cone/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+                def Shader "DefaultSurfaceShader"
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    float inputs:clearcoat = 0
+                    color3f inputs:diffuseColor = (1, 0.5212053, 1) (
+                        colorSpace = "srgb_texture"
+                    )
+                    color3f inputs:emissiveColor = (1, 0.5212053, 1) (
+                        colorSpace = "srgb_texture"
+                    )
+                    float inputs:metallic = 0.5
+                    float inputs:opacity = 0.2
+                    float inputs:roughness = 0.9
+                    token outputs:surface
+                }
+            }
+
+            def Xform "SpotLight" (
+                customData = {
+                    float3 rotationEulerHint = (1.5707964, -7.993959e-8, 3.1415927)
+                }
+            )
+            {
+                quatf xformOp:orient = (-5.917153e-8, -2.6457112e-9, 0.70710677, 0.70710677)
+                float3 xformOp:scale = (1, 1, 1)
+                float3 xformOp:translate = (0, 2, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                def RealityKitComponent "SpotLight"
+                {
+                    float attenuationFalloffExponent = 0
+                    float attenuationRadius = 10
+                    float3 color = (0.6823043, 0.22777611, 1)
+                    token info:id = "RealityKit.SpotLight"
+                    float innerAngle = 30
+                    float outerAngle = 60
+
+                    def RealityKitStruct "Shadow"
+                    {
+                        bool isEnabled = 1
+                    }
+                }
+            }
+        }
+    }
+
+    def RealityKitTimeline "Light_1_Spin"
+    {
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Spin"
+            {
+                string actionKind = "spin"
+                int blendLayer = 400
+                double duration = 2
+                uniform token info:id = "C855B25A-08D8-4FC9-AFB8-582625202204"
+                float3 localAxis = (0.2, 1, 0)
+                float revolutions = 1
+                double startTime = 0
+                rel target = </Root/Light_1>
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "linear"
+                }
+            }
+        }
+    }
+
+    def Xform "Light_2" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-0.402635, 1.5707963, 0)
+        }
+    )
+    {
+        float2 ui:nodegraph:node:pos = (20, 20)
+        int ui:nodegraph:node:stackingOrder = 1
+        quatf xformOp:orient = (0.69282603, -0.14139335, 0.692826, 0.14139333)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 4, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Cone "Cone" (
+            active = true
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            reorder nameChildren = ["DefaultMaterial", "SpotLight"]
+            uniform token axis = "Y"
+            double height = 10
+            rel material:binding = </Root/Light_2/Cone/DefaultMaterial>
+            double radius = 1
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:translate = (0, -5, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def Material "DefaultMaterial"
+            {
+                token cullMode = "front" (
+                    allowedTokens = ["unspecified", "none", "front", "back"]
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+                token outputs:surface.connect = </Root/Light_2/Cone/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+                def Shader "DefaultSurfaceShader"
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    float inputs:clearcoat = 0
+                    color3f inputs:diffuseColor = (0, 0.98106676, 0.5736914) (
+                        colorSpace = "srgb_texture"
+                    )
+                    color3f inputs:emissiveColor = (0, 0.98106676, 0.5736914) (
+                        colorSpace = "srgb_texture"
+                    )
+                    float inputs:metallic = 0.5
+                    float inputs:opacity = 0.2
+                    float inputs:roughness = 0.9
+                    token outputs:surface
+                }
+            }
+
+            def Xform "SpotLight" (
+                customData = {
+                    float3 rotationEulerHint = (1.5707964, -7.993959e-8, 3.1415927)
+                }
+            )
+            {
+                quatf xformOp:orient = (-5.917153e-8, -2.6457112e-9, 0.70710677, 0.70710677)
+                float3 xformOp:scale = (1, 1, 1)
+                float3 xformOp:translate = (0, 2, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                def RealityKitComponent "SpotLight"
+                {
+                    float attenuationFalloffExponent = 0
+                    float attenuationRadius = 10
+                    float3 color = (0, 0.95746875, 0.28869826)
+                    token info:id = "RealityKit.SpotLight"
+                    float innerAngle = 30
+                    float outerAngle = 60
+
+                    def RealityKitStruct "Shadow"
+                    {
+                        bool isEnabled = 1
+                    }
+                }
+            }
+        }
+    }
+
+    def RealityKitTimeline "Light_2_Spin"
+    {
+        float2 ui:nodegraph:node:pos = (20, 20)
+        int ui:nodegraph:node:stackingOrder = 1
+
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Spin"
+            {
+                string actionKind = "spin"
+                int blendLayer = 400
+                double duration = 2
+                uniform token info:id = "C855B25A-08D8-4FC9-AFB8-582625202204"
+                float3 localAxis = (0.2, 1, 0)
+                float revolutions = 1
+                token spinDirection = "counterclockwise"
+                double startTime = 0
+                rel target = </Root/Light_2>
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "linear"
+                }
+            }
+        }
+    }
+
+    def RealityKitTimeline "Loop"
+    {
+        reorder nameChildren = ["Track", "Track2", "Track3"]
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Play_Timeline"
+            {
+                string actionKind = "timeline"
+                int blendLayer = 500
+                double duration = 2
+                uniform token info:id = "68BCA0F7-0F1E-4D27-BA62-03502FCBA2E4"
+                double loopCount = 0
+                double startTime = 0
+                rel timeline = </Root/Light_2_Spin>
+            }
+        }
+
+        def RealityKitTrack "Track2"
+        {
+            def RealityKitAction "Play_Timeline"
+            {
+                string actionKind = "timeline"
+                int blendLayer = 500
+                double duration = 2
+                uniform token info:id = "2C7F74FE-1AC7-4385-937F-624359F4BB6D"
+                double loopCount = 0
+                double startTime = 0
+                rel timeline = </Root/Light_1_Spin>
+            }
+        }
+
+        def RealityKitTrack "Track3"
+        {
+            def RealityKitAction "Play_Timeline"
+            {
+                string actionKind = "timeline"
+                int blendLayer = 500
+                double duration = 2
+                uniform token info:id = "BCE3365F-BD0E-49D7-8D0A-7E3522C1592E"
+                double loopCount = 0
+                double startTime = 0
+                rel timeline = </Root/Light_3_Spin>
+            }
+        }
+    }
+
+    def RealityKitComponent "RCP_BehaviorsContainer"
+    {
+        rel behaviors = </Root/OnAddedToScene>
+        uniform token info:id = "RCP.BehaviorsContainer"
+    }
+
+    def Preliminary_Behavior "OnAddedToScene"
+    {
+        rel actions = </Root/OnAddedToScene/Action>
+        uniform bool exclusive
+        rel triggers = </Root/OnAddedToScene/Trigger>
+
+        def Preliminary_Trigger "Trigger"
+        {
+            rel affectedObjects = </Root>
+            token info:id = "SceneTransition"
+        }
+
+        def Preliminary_Action "Action"
+        {
+            rel affectedObjects = </Root>
+            rel animationLibraryKey = </Root/Loop>
+            rel animationLibraryKeyOverrideKey = </Root/OnAddedToScene/Trigger>
+            token info:id = "PlayTimeline"
+            int loops = 0
+            int performCount = 1
+            token type = "serial"
+        }
+    }
+
+    def Cube "Floor" (
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </Root/Floor/DefaultMaterial>
+        double size = 10
+        float3 xformOp:scale = (2, 0.01, 2)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:mtlx:surface
+            token outputs:realitykit:vertex
+            token outputs:surface.connect = </Root/Floor/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.6642242, 0.66424006, 0.66423154) (
+                    colorSpace = "srgb_texture"
+                )
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+    }
+
+    def Xform "Light_3" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-0.34906584, 0, 0)
+        }
+    )
+    {
+        float2 ui:nodegraph:node:pos = (40, 40)
+        int ui:nodegraph:node:stackingOrder = 2
+        quatf xformOp:orient = (0.9848077, -0.17364818, 0, 0)
+        float3 xformOp:scale = (1, 0.9999999, 1)
+        float3 xformOp:translate = (0, 4, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Cone "Cone" (
+            active = true
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            reorder nameChildren = ["DefaultMaterial", "SpotLight"]
+            uniform token axis = "Y"
+            double height = 10
+            rel material:binding = </Root/Light_3/Cone/DefaultMaterial>
+            double radius = 1
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:translate = (0, -5, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def Material "DefaultMaterial"
+            {
+                token cullMode = "front" (
+                    allowedTokens = ["unspecified", "none", "front", "back"]
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+                token outputs:surface.connect = </Root/Light_3/Cone/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+                def Shader "DefaultSurfaceShader"
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    float inputs:clearcoat = 0
+                    color3f inputs:diffuseColor = (0, 0.5898009, 1) (
+                        colorSpace = "srgb_texture"
+                    )
+                    color3f inputs:emissiveColor = (0, 0.5898009, 1) (
+                        colorSpace = "srgb_texture"
+                    )
+                    float inputs:metallic = 0.5
+                    float inputs:opacity = 0.2
+                    float inputs:roughness = 0.9
+                    token outputs:surface
+                }
+            }
+
+            def Xform "SpotLight" (
+                customData = {
+                    float3 rotationEulerHint = (1.5707964, -7.993959e-8, 3.1415927)
+                }
+            )
+            {
+                quatf xformOp:orient = (-5.917153e-8, -2.6457112e-9, 0.70710677, 0.70710677)
+                float3 xformOp:scale = (1, 1, 1)
+                float3 xformOp:translate = (0, 2, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                def RealityKitComponent "SpotLight"
+                {
+                    float attenuationFalloffExponent = 0
+                    float attenuationRadius = 10
+                    float3 color = (0, 0.3067719, 1)
+                    token info:id = "RealityKit.SpotLight"
+                    float innerAngle = 30
+                    float outerAngle = 60
+
+                    def RealityKitStruct "Shadow"
+                    {
+                        bool isEnabled = 1
+                    }
+                }
+            }
+        }
+    }
+
+    def RealityKitTimeline "Light_3_Spin"
+    {
+        float2 ui:nodegraph:node:pos = (40, 40)
+        int ui:nodegraph:node:stackingOrder = 2
+
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Spin"
+            {
+                string actionKind = "spin"
+                int blendLayer = 400
+                double duration = 2
+                uniform token info:id = "C855B25A-08D8-4FC9-AFB8-582625202204"
+                float3 localAxis = (-0.3, 1, 0)
+                float revolutions = 1
+                token spinDirection = "clockwise"
+                double startTime = 0
+                rel target = </Root/Light_3>
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "linear"
+                }
+            }
+        }
+    }
+}
+
