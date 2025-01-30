@@ -18,13 +18,13 @@ struct Lab027: View {
     var body: some View {
         RealityView { content, attachments in
 
-//            if let scene = try? await Entity(named: "Stacks", in: realityKitContentBundle) {
-//                content.add(scene)
-//            }
-
-            if let scene = try? await Entity(named: "BYOHZ", in: realityKitContentBundle) {
+            if let scene = try? await Entity(named: "Stacks", in: realityKitContentBundle) {
                 content.add(scene)
             }
+
+//            if let scene = try? await Entity(named: "BYOHZ", in: realityKitContentBundle) {
+//                content.add(scene)
+//            }
 
 
         } update: { content, attachments in

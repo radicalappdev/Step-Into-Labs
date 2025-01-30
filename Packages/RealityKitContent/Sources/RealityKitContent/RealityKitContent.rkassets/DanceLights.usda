@@ -10,7 +10,7 @@
 
 def Xform "Root"
 {
-    reorder nameChildren = ["Floor", "Light_1", "Light_1_Spin", "Light_2", "Light_2_Spin", "Loop", "RCP_BehaviorsContainer", "OnAddedToScene", "Light_3_Spin"]
+    reorder nameChildren = ["Floor", "Light_3", "Light_1", "Light_1_Spin", "Light_2", "Light_2_Spin", "Loop", "RCP_BehaviorsContainer", "OnAddedToScene", "Light_3_Spin", "DanceTube"]
     float3 xformOp:translate = (0, 0, -4)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
@@ -79,8 +79,8 @@ def Xform "Root"
                     float attenuationRadius = 10
                     float3 color = (0.6823043, 0.22777611, 1)
                     token info:id = "RealityKit.SpotLight"
-                    float innerAngle = 30
-                    float outerAngle = 60
+                    float innerAngle = 60
+                    float outerAngle = 100
 
                     def RealityKitStruct "Shadow"
                     {
@@ -99,7 +99,7 @@ def Xform "Root"
             {
                 string actionKind = "spin"
                 int blendLayer = 400
-                double duration = 2
+                double duration = 5
                 uniform token info:id = "C855B25A-08D8-4FC9-AFB8-582625202204"
                 float3 localAxis = (0.2, 1, 0)
                 float revolutions = 1
@@ -186,8 +186,8 @@ def Xform "Root"
                     float attenuationRadius = 10
                     float3 color = (0, 0.95746875, 0.28869826)
                     token info:id = "RealityKit.SpotLight"
-                    float innerAngle = 30
-                    float outerAngle = 60
+                    float innerAngle = 40
+                    float outerAngle = 70
 
                     def RealityKitStruct "Shadow"
                     {
@@ -209,7 +209,7 @@ def Xform "Root"
             {
                 string actionKind = "spin"
                 int blendLayer = 400
-                double duration = 2
+                double duration = 5
                 uniform token info:id = "C855B25A-08D8-4FC9-AFB8-582625202204"
                 float3 localAxis = (0.2, 1, 0)
                 float revolutions = 1
@@ -234,7 +234,7 @@ def Xform "Root"
             {
                 string actionKind = "timeline"
                 int blendLayer = 500
-                double duration = 2
+                double duration = 5
                 uniform token info:id = "68BCA0F7-0F1E-4D27-BA62-03502FCBA2E4"
                 double loopCount = 0
                 double startTime = 0
@@ -248,7 +248,7 @@ def Xform "Root"
             {
                 string actionKind = "timeline"
                 int blendLayer = 500
-                double duration = 2
+                double duration = 5
                 uniform token info:id = "2C7F74FE-1AC7-4385-937F-624359F4BB6D"
                 double loopCount = 0
                 double startTime = 0
@@ -262,7 +262,7 @@ def Xform "Root"
             {
                 string actionKind = "timeline"
                 int blendLayer = 500
-                double duration = 2
+                double duration = 5
                 uniform token info:id = "BCE3365F-BD0E-49D7-8D0A-7E3522C1592E"
                 double loopCount = 0
                 double startTime = 0
@@ -400,8 +400,8 @@ def Xform "Root"
                     float attenuationRadius = 10
                     float3 color = (0, 0.3067719, 1)
                     token info:id = "RealityKit.SpotLight"
-                    float innerAngle = 30
-                    float outerAngle = 60
+                    float innerAngle = 40
+                    float outerAngle = 80
 
                     def RealityKitStruct "Shadow"
                     {
@@ -423,7 +423,7 @@ def Xform "Root"
             {
                 string actionKind = "spin"
                 int blendLayer = 400
-                double duration = 2
+                double duration = 5
                 uniform token info:id = "C855B25A-08D8-4FC9-AFB8-582625202204"
                 float3 localAxis = (-0.3, 1, 0)
                 float revolutions = 1

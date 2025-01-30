@@ -253,10 +253,10 @@ class ModelData {
 
         ,Lab(title: "Lab 031",
              type: .SPACE_FULL,
-             date: Date("1/24/2024"),
+             date: Date("1/30/2024"),
              isFeatured: true,
-             subtitle: "TBD",
-             description: "")
+             subtitle: "Faking some Stage Lights",
+             description: "Using a cone shape, material alpha, and a spotlight to create a fake stage light effect.")
 
     ]
 
