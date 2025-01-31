@@ -318,20 +318,6 @@ def Xform "Root"
     def RealityKitTimeline "StackLoop"
     {
         reorder nameChildren = ["Track", "Track2"]
-        def RealityKitTrack "Track"
-        {
-            def RealityKitAction "Play_Timeline"
-            {
-                string actionKind = "timeline"
-                int blendLayer = 500
-                double duration = 5.0000000001
-                uniform token info:id = "FB28CCD9-06DF-438C-810E-3281DA82439D"
-                double loopCount = 0
-                double startTime = 0
-                rel timeline = </Root/StackBounce>
-            }
-        }
-
         def RealityKitTrack "Track2"
         {
             def RealityKitAction "Play_Timeline"

@@ -10,14 +10,14 @@
 
 def Xform "Root"
 {
-    reorder nameChildren = ["StackSkyBlocks_1", "StackSkyBlocks_2", "StackSkyBlocks_3", "StackSkyBlocks_4", "StackSkyBlocks_5", "StackSkyBlocks_6", "Roof", "SmoothConcrete", "Floor"]
+    reorder nameChildren = ["StackSkyBlocks_1", "StackSkyBlocks_2", "StackSkyBlocks_3", "StackSkyBlocks_4", "StackSkyBlocks_5", "StackSkyBlocks_6", "StackSkyBlocks_7", "StackSkyBlocks_8", "StackSkyBlocks_9", "StackSkyBlocks_10", "StackSkyBlocks_11", "StackSkyBlocks_12", "Cube", "Cube_1", "Door", "SmoothConcrete", "Floor", "DoorwayCycle", "DoorwayLoop"]
     def "StackSkyBlocks_1" (
         active = true
         references = @StackSkyBlocks.usda@
     )
     {
         float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (-4.5, 0.05, -4.5)
+        float3 xformOp:translate = (-4, 0.05, -5)
     }
 
     def "SmoothConcrete" (
@@ -25,7 +25,7 @@ def Xform "Root"
         references = @Materials/SmoothConcrete.usdz@
     )
     {
-        float2 inputs:UV_Scale = (2, 2)
+        float2 inputs:UV_Scale = (5, 5)
     }
 
     def Cube "Floor" (
@@ -37,22 +37,9 @@ def Xform "Root"
             bindMaterialAs = "weakerThanDescendants"
         )
         double size = 12
-        float3 xformOp:scale = (1, 0.01, 1)
+        float3 xformOp:scale = (10, 0.01, 10)
         float3 xformOp:translate = (0, 0, 0)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-
-        def Material "DefaultMaterial"
-        {
-            token outputs:surface.connect = </Root/Floor/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
-
-            def Shader "DefaultSurfaceShader"
-            {
-                uniform token info:id = "UsdPreviewSurface"
-                color3f inputs:diffuseColor = (1, 1, 1)
-                float inputs:roughness = 0.75
-                token outputs:surface
-            }
-        }
     }
 
     def "StackSkyBlocks_2" (
@@ -60,10 +47,10 @@ def Xform "Root"
         references = @StackSkyBlocks.usda@
     )
     {
-        float2 ui:nodegraph:node:pos = (32.36331, 471.47977)
-        int ui:nodegraph:node:stackingOrder = 1
+        float2 ui:nodegraph:node:pos = (52.36331, 491.47977)
+        int ui:nodegraph:node:stackingOrder = 2
         float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (0, 0.05, -4.5)
+        float3 xformOp:translate = (4, 0.05, -5)
     }
 
     def "StackSkyBlocks_3" (
@@ -71,10 +58,10 @@ def Xform "Root"
         references = @StackSkyBlocks.usda@
     )
     {
-        float2 ui:nodegraph:node:pos = (52.36331, 491.47977)
-        int ui:nodegraph:node:stackingOrder = 2
+        float2 ui:nodegraph:node:pos = (20, 20)
+        int ui:nodegraph:node:stackingOrder = 1
         float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (4.5, 0.05, -4.5)
+        float3 xformOp:translate = (-4, 0.049999997, -15)
     }
 
     def "StackSkyBlocks_4" (
@@ -82,10 +69,10 @@ def Xform "Root"
         references = @StackSkyBlocks.usda@
     )
     {
-        float2 ui:nodegraph:node:pos = (32.36331, 471.47977)
-        int ui:nodegraph:node:stackingOrder = 1
+        float2 ui:nodegraph:node:pos = (72.36331, 511.47977)
+        int ui:nodegraph:node:stackingOrder = 3
         float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (-4.5, 0.05, 4.5)
+        float3 xformOp:translate = (4, 0.049999997, -15)
     }
 
     def "StackSkyBlocks_5" (
@@ -93,10 +80,10 @@ def Xform "Root"
         references = @StackSkyBlocks.usda@
     )
     {
-        float2 ui:nodegraph:node:pos = (52.36331, 491.47977)
+        float2 ui:nodegraph:node:pos = (40, 40)
         int ui:nodegraph:node:stackingOrder = 2
         float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (0, 0.05, 4.5)
+        float3 xformOp:translate = (-4, 0.049999997, -25)
     }
 
     def "StackSkyBlocks_6" (
@@ -104,38 +91,251 @@ def Xform "Root"
         references = @StackSkyBlocks.usda@
     )
     {
-        float2 ui:nodegraph:node:pos = (72.36331, 511.47977)
-        int ui:nodegraph:node:stackingOrder = 3
+        reorder nameChildren = ["StackSkyBlocks_7", "StackSkyBlocks_8", "Stack", "RCP_BehaviorsContainer", "OnAddedToScene", "StackBounce", "StackLoop", "BlockRotate"]
+        float2 ui:nodegraph:node:pos = (92.36331, 531.47974)
+        int ui:nodegraph:node:stackingOrder = 4
         float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (4.5, 0.05, 4.5)
+        float3 xformOp:translate = (4, 0.049999997, -25)
     }
 
-    def Cube "Roof" (
+    def "StackSkyBlocks_7" (
         active = true
-        prepend apiSchemas = ["MaterialBindingAPI"]
+        references = @StackSkyBlocks.usda@
     )
     {
-        rel material:binding = </Root/SmoothConcrete> (
-            bindMaterialAs = "weakerThanDescendants"
-        )
-        double size = 12
-        float2 ui:nodegraph:node:pos = (32.36331, 471.47977)
-        int ui:nodegraph:node:stackingOrder = 1
+        float2 ui:nodegraph:node:pos = (60, 60)
+        int ui:nodegraph:node:stackingOrder = 3
         quatf xformOp:orient = (1, 0, 0, 0)
-        float3 xformOp:scale = (1, 0.01, 1)
-        float3 xformOp:translate = (0, 4.3, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (-4, 0.049999997, 5)
+    }
+
+    def "StackSkyBlocks_8" (
+        active = true
+        references = @StackSkyBlocks.usda@
+    )
+    {
+        float2 ui:nodegraph:node:pos = (112.36331, 551.47974)
+        int ui:nodegraph:node:stackingOrder = 5
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (4, 0.049999997, 5)
+    }
+
+    def "StackSkyBlocks_9" (
+        active = true
+        references = @StackSkyBlocks.usda@
+    )
+    {
+        float2 ui:nodegraph:node:pos = (80, 80)
+        int ui:nodegraph:node:stackingOrder = 4
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (-4, 0.049999997, 15)
+    }
+
+    def "StackSkyBlocks_10" (
+        active = true
+        references = @StackSkyBlocks.usda@
+    )
+    {
+        float2 ui:nodegraph:node:pos = (132.36331, 571.47974)
+        int ui:nodegraph:node:stackingOrder = 6
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (4, 0.049999997, 15)
+    }
+
+    def "StackSkyBlocks_11" (
+        active = true
+        references = @StackSkyBlocks.usda@
+    )
+    {
+        float2 ui:nodegraph:node:pos = (100, 100)
+        int ui:nodegraph:node:stackingOrder = 5
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (-4, 0.049999997, 25)
+    }
+
+    def "StackSkyBlocks_12" (
+        active = true
+        references = @StackSkyBlocks.usda@
+    )
+    {
+        float2 ui:nodegraph:node:pos = (152.36331, 591.47974)
+        int ui:nodegraph:node:stackingOrder = 7
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (4, 0.049999997, 25)
+    }
+
+    def Xform "Door" (
+        active = true
+    )
+    {
+        reorder nameChildren = ["Cube", "Cube_1"]
+        float3 xformOp:translate = (0, 3.2, -35)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
-        def Material "DefaultMaterial"
+        def Cube "Cube" (
+            active = true
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
         {
-            token outputs:surface.connect = </Root/Roof/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+            rel material:binding = </Root/Door/Cube/DefaultMaterial>
+            double size = 6
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (0.6, 1, 0.3)
+            float3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
-            def Shader "DefaultSurfaceShader"
+            def Material "DefaultMaterial"
             {
-                uniform token info:id = "UsdPreviewSurface"
-                color3f inputs:diffuseColor = (1, 1, 1)
-                float inputs:roughness = 0.75
-                token outputs:surface
+                token cullMode = "front" (
+                    allowedTokens = ["unspecified", "none", "front", "back"]
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+                token outputs:surface.connect = </Root/Door/Cube/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+                def Shader "DefaultSurfaceShader"
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    float inputs:clearcoat = 0.1
+                    color3f inputs:diffuseColor = (0, 0, 0) (
+                        colorSpace = "srgb_texture"
+                    )
+                    float inputs:metallic = 1
+                    float inputs:roughness = 0
+                    token outputs:surface
+                }
+            }
+        }
+
+        def Cube "Cube_1" (
+            active = true
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Root/Door/Cube_1/DefaultMaterial>
+            double size = 6.2
+            float2 ui:nodegraph:node:pos = (32.36331, 471.47977)
+            int ui:nodegraph:node:stackingOrder = 1
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (0.6, 1, 0.3)
+            float3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def Material "DefaultMaterial"
+            {
+                token cullMode = "front" (
+                    allowedTokens = ["unspecified", "none", "front", "back"]
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+                token outputs:surface.connect = </Root/Door/Cube_1/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+                def Shader "DefaultSurfaceShader"
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    float inputs:clearcoat = 0.1
+                    color3f inputs:diffuseColor = (0.999996, 1, 1) (
+                        colorSpace = "srgb_texture"
+                    )
+                    color3f inputs:emissiveColor = (0.999996, 1, 1) (
+                        colorSpace = "srgb_texture"
+                    )
+                    float inputs:metallic = 1
+                    float inputs:roughness = 0
+                    token outputs:surface
+                }
+            }
+        }
+
+        def RealityKitComponent "HierarchicalFade"
+        {
+            uniform token info:id = "RealityKit.HierarchicalFade"
+        }
+
+        def RealityKitComponent "RCP_BehaviorsContainer"
+        {
+            rel behaviors = </Root/Door/OnAddedToScene>
+            uniform token info:id = "RCP.BehaviorsContainer"
+        }
+
+        def Preliminary_Behavior "OnAddedToScene"
+        {
+            rel actions = </Root/Door/OnAddedToScene/Action>
+            uniform bool exclusive
+            rel triggers = </Root/Door/OnAddedToScene/Trigger>
+
+            def Preliminary_Trigger "Trigger"
+            {
+                rel affectedObjects = </Root/Door>
+                token info:id = "SceneTransition"
+            }
+
+            def Preliminary_Action "Action"
+            {
+                rel affectedObjects = </Root>
+                rel animationLibraryKey = </Root/DoorwayLoop>
+                rel animationLibraryKeyOverrideKey = </Root/Door/OnAddedToScene/Trigger>
+                token info:id = "PlayTimeline"
+                int loops = 0
+                int performCount = 1
+                token type = "serial"
+            }
+        }
+    }
+
+    def RealityKitTimeline "DoorwayCycle"
+    {
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Hide"
+            {
+                string actionKind = "hide"
+                int blendLayer = 300
+                double duration = 0.15
+                uniform token info:id = "665A1C5A-5893-4B3A-AD9A-BDDEEFC8DFDA"
+                double startTime = 2.35
+                rel target = </Root/Door>
+
+                def RealityKitStruct "timingFunction"
+                {
+                }
+            }
+
+            def RealityKitAction "Show"
+            {
+                string actionKind = "show"
+                int blendLayer = 300
+                double duration = 0.15
+                uniform token info:id = "AF3EF3CD-868B-4EBF-89D0-B0F178D5356B"
+                double startTime = 9.85
+                rel target = </Root/Door>
+
+                def RealityKitStruct "timingFunction"
+                {
+                }
+            }
+        }
+    }
+
+    def RealityKitTimeline "DoorwayLoop"
+    {
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Play_Timeline"
+            {
+                string actionKind = "timeline"
+                int blendLayer = 500
+                double duration = 10
+                uniform token info:id = "681D448C-7996-4786-B7B1-7816185680CE"
+                double loopCount = 0
+                double startTime = 0
+                rel timeline = </Root/DoorwayCycle>
             }
         }
     }

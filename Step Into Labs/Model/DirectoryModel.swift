@@ -227,8 +227,8 @@ class ModelData {
              type: .SPACE_FULL,
             date: Date("1/18/2024"),
             isFeatured: true,
-            subtitle: "Stacks",
-            description: "")
+            subtitle: "When a door appears",
+            description: "Enter.")
 
         ,Lab(title: "Lab 028",
              type: .WINDOW,
