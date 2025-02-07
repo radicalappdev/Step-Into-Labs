@@ -2,11 +2,11 @@
 //
 //  Title: Lab032
 //
-//  Subtitle:
+//  Subtitle: The Probe
 //
-//  Description:
+//  Description: I've been very clear about what I want. Just let me talk to the whales.
 //
-//  Type:
+//  Type: Space
 //
 //  Created by Joseph Simpson on 2/7/25.
 

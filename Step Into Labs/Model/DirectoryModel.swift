@@ -262,8 +262,8 @@ class ModelData {
              type: .SPACE_FULL,
              date: Date("2/7/2025"),
              isFeatured: true,
-             subtitle: "Let me talk to the whales",
-             description: "")
+             subtitle: "The Probe",
+             description: "I've been very clear about what I want. Just let me talk to the whales.")
 
     ]
 
