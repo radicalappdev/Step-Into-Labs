@@ -190,70 +190,77 @@ class ModelData {
 
         ,Lab(title: "Lab 022",
              type: .SPACE,
-             date: Date("1/4/2024"),
+             date: Date("1/4/2025"),
              isFeatured: false,
              subtitle: "A simple hand menu idea",
              description: "Building a simple hand menu with hand anchors and attachments.")
 
         ,Lab(title: "Lab 023",
              type: .SPACE,
-             date: Date("1/14/2024"),
+             date: Date("1/14/2025"),
              isFeatured: false,
              subtitle: "Anchored Bounce Box",
              description: "A mini-game that uses a hand anchor to control a box to bounce a ball toward a target.")
 
         ,Lab(title: "Lab 024",
              type: .SPACE,
-             date: Date("1/15/2024"),
+             date: Date("1/15/2025"),
              isFeatured: false,
              subtitle: "Be careful with Windows",
              description: "They can be tricky!")
 
         ,Lab(title: "Lab 025",
              type: .SPACE,
-             date: Date("1/16/2024"),
+             date: Date("1/16/2025"),
              isFeatured: false,
              subtitle: "Moving Windows Should Be Easy",
              description: "Is this supposed to happen?")
 
         ,Lab(title: "Lab 026",
              type: .SPACE,
-             date: Date("1/17/2024"),
+             date: Date("1/17/2025"),
              isFeatured: false,
              subtitle: "Using Dynamic Lights and Shadows with Passthrough",
              description: "We can use ShadowReceivingOcclusionSurface to enable virtual lights and shadows to affect our real space.")
 
         ,Lab(title: "Lab 027",
              type: .SPACE_FULL,
-            date: Date("1/18/2024"),
+            date: Date("1/18/2025"),
             isFeatured: true,
             subtitle: "When a door appears",
             description: "Enter.")
 
         ,Lab(title: "Lab 028",
              type: .WINDOW,
-             date: Date("1/21/2024"),
+             date: Date("1/21/2025"),
              isFeatured: false,
              subtitle: "Custom Ornament Anchor Positions",
              description: "Creating a dynamic anchor that can be moved around a window.")
 
         ,Lab(title: "Lab 029",
              type: .SPACE,
-             date: Date("1/22/2024"),
+             date: Date("1/22/2025"),
              isFeatured: false,
              subtitle: "Baggage Claim",
              description: "What if a using a color picker was like waiting at baggage claim?")
 
         ,Lab(title: "Lab 030",
              type: .SPACE,
-             date: Date("1/23/2024"),
+             date: Date("1/23/2025"),
              isFeatured: true,
              subtitle: "The Basics of RealityKit Behaviors",
              description: "A few simple examples of RealityKit behaviors in Reality Composer Pro.")
 
         ,Lab(title: "Lab 031",
              type: .SPACE_FULL,
-             date: Date("1/30/2024"),
+             date: Date("1/30/2025"),
+             isFeatured: true,
+             subtitle: "Faking some Stage Lights",
+             description: "Using a cone shape, material alpha, and a spotlight to create a fake stage light effect.")
+
+        ,Lab(title: "Lab 033",
+             type: .SPACE_FULL,
+             date: Date("2/7/2025"),
              isFeatured: true,
              subtitle: "Faking some Stage Lights",
              description: "Using a cone shape, material alpha, and a spotlight to create a fake stage light effect.")

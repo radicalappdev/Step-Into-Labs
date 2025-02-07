@@ -1,24 +1,24 @@
 //  Step Into Vision - Labs
 //
-//  Title: Lab031
+//  Title: Lab032
 //
-//  Subtitle: Faking some Stage Lights
+//  Subtitle:
 //
 //  Description:
 //
 //  Type:
 //
-//  Created by Joseph Simpson on 1/24/25.
+//  Created by Joseph Simpson on 2/7/25.
 
 import SwiftUI
 import RealityKit
 import RealityKitContent
 
-struct Lab031: View {
+struct Lab032: View {
     var body: some View {
         RealityView { content, attachments in
 
-            if let scene = try? await Entity(named: "DanceLights", in: realityKitContentBundle) {
+            if let scene = try? await Entity(named: "Whales", in: realityKitContentBundle) {
                 content.add(scene)
 
             }
@@ -34,5 +34,5 @@ struct Lab031: View {
 }
 
 #Preview {
-    Lab031()
+    Lab032()
 }
