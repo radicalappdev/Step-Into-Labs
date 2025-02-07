@@ -258,12 +258,12 @@ class ModelData {
              subtitle: "Faking some Stage Lights",
              description: "Using a cone shape, material alpha, and a spotlight to create a fake stage light effect.")
 
-        ,Lab(title: "Lab 033",
+        ,Lab(title: "Lab 032",
              type: .SPACE_FULL,
              date: Date("2/7/2025"),
              isFeatured: true,
-             subtitle: "Faking some Stage Lights",
-             description: "Using a cone shape, material alpha, and a spotlight to create a fake stage light effect.")
+             subtitle: "Let me talk to the whales",
+             description: "")
 
     ]
 

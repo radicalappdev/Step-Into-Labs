@@ -1,0 +1,249 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 2.0 (448.60.4)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    reorder nameChildren = ["Cylinder", "ProbeParent"]
+    def Xform "ProbeParent" (
+        active = true
+    )
+    {
+        reorder nameChildren = ["Probe", "LightBarInside", "Sphere"]
+        def Cylinder "Probe" (
+            active = true
+            prepend apiSchemas = ["MaterialBindingAPI"]
+            customData = {
+                float3 rotationEulerHint = (0.7853982, -5.9604645e-8, 1.5707965)
+            }
+        )
+        {
+            reorder nameChildren = ["SmoothConcrete", "SpotLight", "LightBarOutside", "InputTarget", "Collider", "LightBarBase", "LightBarInside", "Sphere"]
+            uniform token axis = "Y"
+            double height = 24
+            rel material:binding = </Root/ProbeParent/Probe/SmoothConcrete> (
+                bindMaterialAs = "weakerThanDescendants"
+            )
+            double radius = 3
+            quatf xformOp:orient = (0.65328145, 0.27059805, 0.27059805, 0.65328157)
+            float3 xformOp:scale = (0.99999994, 0.99999994, 0.99999994)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def "SmoothConcrete" (
+                active = true
+                references = @SmoothConcrete.usdz@
+            )
+            {
+                color3f inputs:Basecolor_Tint = (0, 0, 0) (
+                    colorSpace = "srgb_texture"
+                )
+                float2 inputs:UV_Scale = (5, 5)
+            }
+
+            def Cylinder "LightBarInside" (
+                active = true
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                uniform token axis = "Y"
+                double height = 1.5
+                rel material:binding = </Root/ProbeParent/Probe/LightBarInside/DefaultMaterial>
+                double radius = 0.25
+                quatf xformOp:orient = (0.70710677, 0, 0, -0.70710677)
+                float3 xformOp:scale = (1.0000002, 1.0000002, 1.0000002)
+                float3 xformOp:translate = (-3.500002, 11.000003, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                def Material "DefaultMaterial"
+                {
+                    token outputs:mtlx:surface
+                    token outputs:realitykit:vertex
+                    token outputs:surface.connect = </Root/ProbeParent/Probe/LightBarInside/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+                    def Shader "DefaultSurfaceShader"
+                    {
+                        uniform token info:id = "UsdPreviewSurface"
+                        color3f inputs:diffuseColor = (0.53562504, 0.79624015, 0.8637409) (
+                            colorSpace = "lin_srgb"
+                        )
+                        color3f inputs:emissiveColor = (0.53562504, 0.79624015, 0.8637409) (
+                            colorSpace = "lin_srgb"
+                        )
+                        float inputs:opacity = 0.8
+                        float inputs:roughness = 0.75
+                        token outputs:surface
+                    }
+                }
+            }
+
+            def Sphere "Sphere" (
+                active = true
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </Root/ProbeParent/Probe/Sphere/DefaultMaterial>
+                double radius = 0.5
+                quatf xformOp:orient = (0.70710677, 0, 0, -0.70710677)
+                float3 xformOp:scale = (1.0000002, 1.0000002, 1.0000002)
+                float3 xformOp:translate = (-4.600002, 11.000003, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                def Material "DefaultMaterial"
+                {
+                    token outputs:mtlx:surface
+                    token outputs:realitykit:vertex
+                    token outputs:surface.connect = </Root/ProbeParent/Probe/Sphere/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+                    def Shader "DefaultSurfaceShader"
+                    {
+                        uniform token info:id = "UsdPreviewSurface"
+                        color3f inputs:diffuseColor = (0, 0.3285209, 0.57488495) (
+                            colorSpace = "srgb_texture"
+                        )
+                        float inputs:roughness = 0.75
+                        token outputs:surface
+                    }
+                }
+            }
+
+            def Xform "SpotLight" (
+                customData = {
+                    float3 rotationEulerHint = (-2.3841858e-7, 1.5707963, 0)
+                }
+            )
+            {
+                quatf xformOp:orient = (0.70710677, -8.87796e-8, 0.70710677, 2.5559325e-8)
+                float3 xformOp:scale = (1.0000002, 1.0000002, 1.0000002)
+                float3 xformOp:translate = (-3.0175915, 11.000124, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                def RealityKitComponent "SpotLight"
+                {
+                    float attenuationFalloffExponent = 0
+                    float attenuationRadius = 2
+                    float3 color = (0.53562504, 0.79624015, 0.8637409)
+                    token info:id = "RealityKit.SpotLight"
+                    float innerAngle = 0
+                    float outerAngle = 100
+
+                    def RealityKitStruct "Shadow"
+                    {
+                        bool isEnabled = 0
+                    }
+                }
+            }
+
+            def Cylinder "LightBarOutside" (
+                active = true
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                uniform token axis = "Y"
+                double height = 1.5
+                rel material:binding = </Root/ProbeParent/Probe/LightBarOutside/DefaultMaterial>
+                double radius = 0.35
+                float2 ui:nodegraph:node:pos = (32.36331, 471.47977)
+                int ui:nodegraph:node:stackingOrder = 1
+                quatf xformOp:orient = (0.7068626, 0, 0, -0.7073509)
+                float3 xformOp:scale = (1, 1, 1)
+                float3 xformOp:translate = (-3.500002, 11.000004, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                def Material "DefaultMaterial"
+                {
+                    token cullMode = "front" (
+                        allowedTokens = ["unspecified", "none", "front", "back"]
+                    )
+                    token outputs:mtlx:surface
+                    token outputs:realitykit:vertex
+                    token outputs:surface.connect = </Root/ProbeParent/Probe/LightBarOutside/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+                    def Shader "DefaultSurfaceShader"
+                    {
+                        uniform token info:id = "UsdPreviewSurface"
+                        color3f inputs:diffuseColor = (0.53562504, 0.79624015, 0.8637409) (
+                            colorSpace = "lin_srgb"
+                        )
+                        color3f inputs:emissiveColor = (0.53562504, 0.79624015, 0.8637409) (
+                            colorSpace = "lin_srgb"
+                        )
+                        float inputs:opacity = 0.2
+                        float inputs:roughness = 0.75
+                        token outputs:surface
+                    }
+                }
+            }
+
+            def RealityKitComponent "InputTarget"
+            {
+                uniform token info:id = "RealityKit.InputTarget"
+            }
+
+            def RealityKitComponent "Collider"
+            {
+                uint group = 1
+                uniform token info:id = "RealityKit.Collider"
+                uint mask = 4294967295
+                token type = "Default"
+
+                def RealityKitStruct "Shape"
+                {
+                    float3 extent = (8.100002, 24, 6)
+                    float height = 24
+                    float radius = 4.050001
+                    token shapeType = "Capsule"
+
+                    def RealityKitStruct "pose"
+                    {
+                        float3 position = (-1.0500009, 0, 0)
+                    }
+                }
+            }
+
+            def Cylinder "LightBarBase" (
+                active = true
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                uniform token axis = "Y"
+                double height = 0.25
+                rel material:binding = </Root/ProbeParent/Probe/LightBarBase/DefaultMaterial>
+                double radius = 0.4
+                float2 ui:nodegraph:node:pos = (32.36331, 471.47977)
+                int ui:nodegraph:node:stackingOrder = 1
+                quatf xformOp:orient = (0.70710677, -4.20254e-8, -4.2025402e-8, -0.70710677)
+                float3 xformOp:scale = (1, 1, 1.0000001)
+                float3 xformOp:translate = (-2.9178772, 10.999658, -0.00018501282)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                def Material "DefaultMaterial"
+                {
+                    token cullMode = "unspecified" (
+                        allowedTokens = ["unspecified", "none", "front", "back"]
+                    )
+                    token outputs:mtlx:surface
+                    token outputs:realitykit:vertex
+                    token outputs:surface.connect = </Root/ProbeParent/Probe/LightBarBase/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+                    def Shader "DefaultSurfaceShader"
+                    {
+                        uniform token info:id = "UsdPreviewSurface"
+                        color3f inputs:diffuseColor = (0.53562504, 0.79624015, 0.8637409) (
+                            colorSpace = "lin_srgb"
+                        )
+                        float inputs:opacity = 0.8
+                        float inputs:roughness = 0.75
+                        token outputs:surface
+                    }
+                }
+            }
+        }
+    }
+}
+

@@ -18,8 +18,12 @@ struct Lab032: View {
     var body: some View {
         RealityView { content, attachments in
 
-            if let scene = try? await Entity(named: "Whales", in: realityKitContentBundle) {
+            if let scene = try? await Entity(named: "LetMeTalkToWhales", in: realityKitContentBundle) {
                 content.add(scene)
+
+                if let probe = scene.findEntity(named: "Probe") {
+                    probe.setPosition([10, 12, -20], relativeTo: nil)
+                }
 
             }
 
@@ -30,6 +34,9 @@ struct Lab032: View {
                 Text("")
             }
         }
+        .modifier(DragGestureImproved())
+        .modifier(MagnifyGestureImproved())
+        .modifier(RotateGesture3DImproved())
     }
 }
 
