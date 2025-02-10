@@ -45,7 +45,8 @@ struct LabRouter: View {
         case "Lab 030": Lab030()
         case "Lab 031": Lab031()
         case "Lab 032": Lab032()
-
+        case "Lab 033": Lab033()
+        
         case .none, .some:
 
             VStack {

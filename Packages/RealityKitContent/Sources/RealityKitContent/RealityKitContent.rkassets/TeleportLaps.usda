@@ -1,0 +1,109 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 2.0 (448.60.4)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    def "StepDome" (
+        active = true
+        prepend references = @BuildingBlocks/StepDome.usda@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "SkyDome"
+        {
+            over "Ground_01"
+            {
+                def RealityKitComponent "InputTarget"
+                {
+                    uniform token info:id = "RealityKit.InputTarget"
+                }
+
+                def RealityKitComponent "Collider"
+                {
+                    uint group = 1
+                    uniform token info:id = "RealityKit.Collider"
+                    uint mask = 4294967295
+                    token type = "Default"
+
+                    def RealityKitStruct "Shape"
+                    {
+                        float3 extent = (2392.6138, 0.00004786253, 2392.614)
+                        token shapeType = "Box"
+
+                        def RealityKitStruct "pose"
+                        {
+                            float3 position = (-0.00018310547, -0.47707692, -0.00024414062)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    def "StepSphereBlue" (
+        active = true
+        prepend references = @BuildingBlocks/StepSphereBlue.usda@
+    )
+    {
+        double radius = 1
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 1, -5)
+
+        over "Collider"
+        {
+            over "Shape"
+            {
+                float radius = 1
+                token shapeType = "Sphere"
+            }
+        }
+    }
+
+    def "StepSphereGreen" (
+        active = true
+        prepend references = @BuildingBlocks/StepSphereGreen.usda@
+    )
+    {
+        double radius = 1
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (5, 1, 0)
+
+        over "Collider"
+        {
+            over "Shape"
+            {
+                float radius = 1
+                token shapeType = "Sphere"
+            }
+        }
+    }
+
+    def "StepSphereRed" (
+        active = true
+        prepend references = @BuildingBlocks/StepSphereRed.usda@
+    )
+    {
+        double radius = 1
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (-5, 1, 0)
+
+        over "Collider"
+        {
+            over "Shape"
+            {
+                float radius = 1
+                token shapeType = "Sphere"
+            }
+        }
+    }
+}
+

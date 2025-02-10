@@ -10,7 +10,7 @@
 
 def Xform "Root"
 {
-    reorder nameChildren = ["Cylinder", "ProbeParent"]
+    reorder nameChildren = ["SkyDome", "ProbeParent"]
     def Xform "ProbeParent" (
         active = true
     )
@@ -244,6 +244,15 @@ def Xform "Root"
                 }
             }
         }
+    }
+
+    def "SkyDome" (
+        active = true
+        prepend references = @BuildingBlocks/SkyDome.usdz@
+    )
+    {
+        float3 xformOp:scale = (0.05, 0.05, 0.05)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 }
 

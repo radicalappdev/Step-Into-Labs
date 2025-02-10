@@ -265,6 +265,13 @@ class ModelData {
              subtitle: "The Probe",
              description: "I've been very clear about what I want. Just let me talk to the whales.")
 
+        ,Lab(title: "Lab 033",
+             type: .SPACE_FULL,
+             date: Date("2/10/2025"),
+             isFeatured: true,
+             subtitle: "Teleportation Basics",
+             description: "Moving the World instead of the Player.")
+
     ]
 
 }
