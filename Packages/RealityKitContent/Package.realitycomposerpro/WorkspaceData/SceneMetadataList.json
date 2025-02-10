@@ -385,16 +385,6 @@
     "objectMetadataList" : [
       [
         "6CF9F98D-FEB2-4CD2-A36D-E65ED723B51F",
-        "Root",
-        "StepDome",
-        "SkyDome"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "6CF9F98D-FEB2-4CD2-A36D-E65ED723B51F",
         "Root"
       ],
       {
@@ -404,7 +394,7 @@
       [
         "6CF9F98D-FEB2-4CD2-A36D-E65ED723B51F",
         "Root",
-        "StepDome"
+        "SceneContent"
       ],
       {
         "isExpanded" : true,
