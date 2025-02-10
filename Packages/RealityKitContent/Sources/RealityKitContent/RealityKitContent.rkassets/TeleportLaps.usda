@@ -10,110 +10,104 @@
 
 def Xform "Root"
 {
-    reorder nameChildren = ["SceneContent", "StepDome", "StepSphereBlue", "StepSphereGreen", "StepSphereRed"]
-    def Xform "SceneContent" (
+    reorder nameChildren = ["StepDome", "StepSphereBlue", "StepSphereGreen", "StepSphereRed", "SceneContent"]
+    def "StepDome" (
         active = true
+        references = @BuildingBlocks/StepDome.usda@
     )
     {
-        reorder nameChildren = ["StepDome", "StepSphereBlue", "StepSphereGreen", "StepSphereRed"]
-        def "StepDome" (
-            active = true
-            references = @BuildingBlocks/StepDome.usda@
-        )
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "SkyDome"
         {
-            quatf xformOp:orient = (1, 0, 0, 0)
-            float3 xformOp:scale = (1, 1, 1)
-            float3 xformOp:translate = (0, 0, 0)
-            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-
-            over "SkyDome"
+            over "Ground_01"
             {
-                over "Ground_01"
+                def RealityKitComponent "InputTarget"
                 {
-                    def RealityKitComponent "InputTarget"
-                    {
-                        uniform token info:id = "RealityKit.InputTarget"
-                    }
+                    uniform token info:id = "RealityKit.InputTarget"
+                }
 
-                    def RealityKitComponent "Collider"
-                    {
-                        uint group = 1
-                        uniform token info:id = "RealityKit.Collider"
-                        uint mask = 4294967295
-                        token type = "Default"
+                def RealityKitComponent "Collider"
+                {
+                    uint group = 1
+                    uniform token info:id = "RealityKit.Collider"
+                    uint mask = 4294967295
+                    token type = "Default"
 
-                        def RealityKitStruct "Shape"
+                    def RealityKitStruct "Shape"
+                    {
+                        float3 extent = (2392.6138, 0.00004786253, 2392.614)
+                        token shapeType = "Box"
+
+                        def RealityKitStruct "pose"
                         {
-                            float3 extent = (2392.6138, 0.00004786253, 2392.614)
-                            token shapeType = "Box"
-
-                            def RealityKitStruct "pose"
-                            {
-                                float3 position = (-0.00018310547, -0.47707692, -0.00024414062)
-                            }
+                            float3 position = (-0.00018310547, -0.47707692, -0.00024414062)
                         }
                     }
                 }
             }
         }
+    }
 
-        def "StepSphereBlue" (
-            active = true
-            references = @BuildingBlocks/StepSphereBlue.usda@
-        )
+    def "StepSphereBlue" (
+        active = true
+        references = @BuildingBlocks/StepSphereBlue.usda@
+    )
+    {
+        double radius = 0.5
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (5, 1, -5)
+
+        over "Collider"
         {
-            double radius = 0.5
-            quatf xformOp:orient = (1, 0, 0, 0)
-            float3 xformOp:scale = (1, 1, 1)
-            float3 xformOp:translate = (5, 1, -5)
-
-            over "Collider"
+            over "Shape"
             {
-                over "Shape"
-                {
-                    float radius = 0.5
-                    token shapeType = "Sphere"
-                }
+                float radius = 0.5
+                token shapeType = "Sphere"
             }
         }
+    }
 
-        def "StepSphereGreen" (
-            active = true
-            references = @BuildingBlocks/StepSphereGreen.usda@
-        )
+    def "StepSphereGreen" (
+        active = true
+        references = @BuildingBlocks/StepSphereGreen.usda@
+    )
+    {
+        double radius = 0.5
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 1, -5)
+
+        over "Collider"
         {
-            double radius = 0.5
-            quatf xformOp:orient = (1, 0, 0, 0)
-            float3 xformOp:scale = (1, 1, 1)
-            float3 xformOp:translate = (0, 1, -5)
-
-            over "Collider"
+            over "Shape"
             {
-                over "Shape"
-                {
-                    float radius = 0.5
-                    token shapeType = "Sphere"
-                }
+                float radius = 0.5
+                token shapeType = "Sphere"
             }
         }
+    }
 
-        def "StepSphereRed" (
-            active = true
-            references = @BuildingBlocks/StepSphereRed.usda@
-        )
+    def "StepSphereRed" (
+        active = true
+        references = @BuildingBlocks/StepSphereRed.usda@
+    )
+    {
+        double radius = 0.5
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (-5, 1, -5)
+
+        over "Collider"
         {
-            double radius = 0.5
-            quatf xformOp:orient = (1, 0, 0, 0)
-            float3 xformOp:scale = (1, 1, 1)
-            float3 xformOp:translate = (-5, 1, -5)
-
-            over "Collider"
+            over "Shape"
             {
-                over "Shape"
-                {
-                    float radius = 0.5
-                    token shapeType = "Sphere"
-                }
+                float radius = 0.5
+                token shapeType = "Sphere"
             }
         }
     }

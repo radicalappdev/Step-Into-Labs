@@ -56,7 +56,7 @@ struct Lab033: View {
                 content.add(scene)
 
                 // Get the scene content and stash it in state
-                if let sceneContent = scene.findEntity(named: "SceneContent") {
+                if let sceneContent = scene.findEntity(named: "Root") {
                     self.sceneContent = sceneContent
                 }
             }
