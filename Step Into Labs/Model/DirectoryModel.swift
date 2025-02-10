@@ -269,9 +269,8 @@ class ModelData {
              type: .SPACE_FULL,
              date: Date("2/10/2025"),
              isFeatured: true,
-             subtitle: "Teleportation Basics",
-             description: "Moving the World instead of the Player.")
-
+             subtitle: "Teleportation with SpatialTapGesture",
+             description: "We can't move the player/user entity in RealityKit, but we can move the world around them instead.")
     ]
 
 }

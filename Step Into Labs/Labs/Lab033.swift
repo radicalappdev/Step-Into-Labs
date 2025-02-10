@@ -2,11 +2,11 @@
 //
 //  Title: Lab033
 //
-//  Subtitle:
+//  Subtitle: Teleportation with SpatialTapGesture
 //
-//  Description:
+//  Description: We can't move the player/user entity in RealityKit, but we can move the world around them instead.
 //
-//  Type:
+//  Type: Space
 //
 //  Created by Joseph Simpson on 2/10/25.
 
@@ -17,10 +17,32 @@ import RealityKitContent
 struct Lab033: View {
 
     @State var sceneContent: Entity?
+    @State var groundEntity: Entity = Entity()
+
+    var body: some View {
+        RealityView { content in
+
+            if let scene = try? await Entity(named: "TeleportLabs", in: realityKitContentBundle) {
+                content.add(scene)
+
+                // Get the scene content and stash it in state
+                if let sceneContent = scene.findEntity(named: "Root") {
+                    self.sceneContent = sceneContent
+                }
+
+                // Get the ground entity from the dome. We'll use this to target our gesture on this entity only.
+                if let groundEntity = scene.findEntity(named: "Ground_01") {
+                    self.groundEntity = groundEntity
+                }
+            }
+
+        }
+        .gesture(teleportTap)
+    }
 
     var teleportTap: some Gesture {
         SpatialTapGesture()
-            .targetedToAnyEntity()
+            .targetedToEntity(groundEntity)
             .onEnded { value in
 
                 print("TELEPORTING TO: \(value.entity.name)" )
@@ -47,22 +69,6 @@ struct Lab033: View {
 
 
             }
-    }
-
-    var body: some View {
-        RealityView { content in
-
-            if let scene = try? await Entity(named: "TeleportLaps", in: realityKitContentBundle) {
-                content.add(scene)
-
-                // Get the scene content and stash it in state
-                if let sceneContent = scene.findEntity(named: "Root") {
-                    self.sceneContent = sceneContent
-                }
-            }
-
-        }
-        .gesture(teleportTap)
     }
 }
 
