@@ -49,8 +49,9 @@ struct Lab033: View {
 
                 guard let sceneContent = self.sceneContent else { return }
 
-                // Calculate the vector from the origin to the tapped position
+                //Calculate the vector from the origin to the tapped position
                 let vectorToTap = value.convert(value.location3D, from: .local, to: sceneContent)
+                print("TELEPORTING vectorToTap: \(vectorToTap)" )
 
                 // Normalize the vector to get a direction from the origin to the tapped position
                 let direction = normalize(vectorToTap)
@@ -60,13 +61,13 @@ struct Lab033: View {
 
                 // Calculate the new position by inverting the direction multiplied by the distance
                 let newPosition = -direction * distance
+                print("TELEPORTING newPosition: \(newPosition)" )
 
                 // Update sceneOffset's X and Z components, leave Y as it is
                 let teleportPosition: SIMD3<Float> = [newPosition.x, 0, newPosition.z]
 
                 print("TELEPORTING POS: \(teleportPosition)" )
                 sceneContent.position = teleportPosition
-
 
             }
     }
