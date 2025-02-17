@@ -20,7 +20,6 @@ struct Lab030: View {
 
             if let scene = try? await Entity(named: "BehaviorBasics", in: realityKitContentBundle) {
                 content.add(scene)
-
             }
 
         } update: { content, attachments in

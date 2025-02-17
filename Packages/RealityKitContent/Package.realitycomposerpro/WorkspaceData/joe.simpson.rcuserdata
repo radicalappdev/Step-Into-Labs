@@ -1,7 +1,7 @@
 {
   "advancedEditorSelectedIdentifier" : "ProjectBrowser",
   "openSceneRelativePaths" : [
-    "TeleportLaps.usda"
+    "TeleportLabs.usda"
   ],
   "recentIdentifiers" : {
     "031AB4B8-A98D-4B94-9361-640C4AAEFEC5" : [
@@ -96,6 +96,30 @@
     ]
   },
   "sceneCameraHistory" : {
+    "00AC74E2-A464-4F74-A445-36CD76630287" : [
+      {
+        "date" : 761222046.238028,
+        "title" : "Untitled",
+        "transform" : [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0.7071069,
+          -0.70710677,
+          0,
+          0,
+          0.70710677,
+          0.7071069,
+          0,
+          0,
+          2.0524135,
+          2.0524137,
+          1
+        ]
+      }
+    ],
     "031AB4B8-A98D-4B94-9361-640C4AAEFEC5" : [
       {
         "date" : 757977722.025484,
@@ -4464,5 +4488,5 @@
   "sceneViewportBackgroundColors" : {
 
   },
-  "selectedSceneRelativePath" : "TeleportLaps.usda"
+  "selectedSceneRelativePath" : "TeleportLabs.usda"
 }
