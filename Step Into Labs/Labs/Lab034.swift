@@ -49,6 +49,14 @@ struct Lab034: View {
 
                 guard let sceneContent = self.sceneContent else { return }
 
+                guard let teleportTC = value.entity.components[TeleportTargetComponent.self] else { return }
+
+                if(teleportTC.targetType == .waypoint) {
+
+                } else if (teleportTC.targetType == .pointofinterest) {
+
+                }
+
                 // Calculate the vector from the origin to the tapped position
                 let vectorToTap = value.entity.position
 
