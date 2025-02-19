@@ -53,7 +53,7 @@ struct Lab034: View {
 
                 if(teleportTC.targetType == .waypoint) {
 
-                } else if (teleportTC.targetType == .pointofinterest) {
+                } else if (teleportTC.targetType == .viewpoint) {
 
                 }
 

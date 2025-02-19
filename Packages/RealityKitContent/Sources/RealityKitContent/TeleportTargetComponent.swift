@@ -13,7 +13,7 @@ public struct TeleportTargetComponent: Component, Codable {
 
     public enum TargetType: String, Codable {
         case waypoint
-        case pointofinterest
+        case viewpoint
 
     }
 
