@@ -271,6 +271,15 @@ class ModelData {
              isFeatured: true,
              subtitle: "Teleportation with SpatialTapGesture",
              description: "We can't move the player/user entity in RealityKit, but we can move the world around them instead.")
+
+        ,Lab(title: "Lab 034",
+             type: .SPACE_FULL,
+             date: Date("2/19/2025"),
+             isFeatured: true,
+             subtitle: "Teleport to waypoints",
+             description: "We can teleport to fixed locations without changing the users orientation in the scene.")
+
+
     ]
 
 }
