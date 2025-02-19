@@ -432,6 +432,38 @@ def Xform "Root"
                 }
             }
         }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.8, 0.10000001, 0.89724684)
+                float height = 0.10000001
+                float radius = 0.44862342
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                    float3 position = (0, 3.7252903e-9, -0.048623398)
+                }
+            }
+        }
+
+        def RealityKitCustomComponent "RealityKitContent_TeleportTargetComponent"
+        {
+            uniform token info:id = "RealityKitContent.TeleportTargetComponent"
+            token targetType = "viewpoint"
+        }
     }
 
     def Cylinder "Viewpoint_2" (
@@ -504,6 +536,38 @@ def Xform "Root"
                     token outputs:surface
                 }
             }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.8, 0.10000001, 0.89724684)
+                float height = 0.10000001
+                float radius = 0.44862342
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                    float3 position = (0, 3.7252903e-9, -0.048623398)
+                }
+            }
+        }
+
+        def RealityKitCustomComponent "RealityKitContent_TeleportTargetComponent"
+        {
+            uniform token info:id = "RealityKitContent.TeleportTargetComponent"
+            token targetType = "viewpoint"
         }
     }
 
@@ -578,6 +642,38 @@ def Xform "Root"
                 }
             }
         }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.8, 0.10000001, 0.89724684)
+                float height = 0.10000001
+                float radius = 0.44862342
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                    float3 position = (0, 3.7252903e-9, -0.048623398)
+                }
+            }
+        }
+
+        def RealityKitCustomComponent "RealityKitContent_TeleportTargetComponent"
+        {
+            uniform token info:id = "RealityKitContent.TeleportTargetComponent"
+            token targetType = "viewpoint"
+        }
     }
 
     def Cylinder "Viewpoint_4" (
@@ -649,6 +745,58 @@ def Xform "Root"
                     float inputs:roughness = 0.75
                     token outputs:surface
                 }
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.8, 0.10000001, 0.89724684)
+                float height = 0.10000001
+                float radius = 0.44862342
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                    float3 position = (0, 3.7252903e-9, -0.048623398)
+                }
+            }
+        }
+
+        def RealityKitCustomComponent "RealityKitContent_TeleportTargetComponent"
+        {
+            uniform token info:id = "RealityKitContent.TeleportTargetComponent"
+            token targetType = "viewpoint"
+        }
+    }
+
+    def Xform "DirectionalLight" (
+        customData = {
+            float3 rotationEulerHint = (-0.7732941, 0, 0)
+        }
+    )
+    {
+        quatf xformOp:orient = (0.9261786, -0.3770851, 0, 0)
+        float3 xformOp:translate = (0, 0.29778102, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "DirectionalLight"
+        {
+            token info:id = "RealityKit.DirectionalLight"
+
+            def RealityKitStruct "Shadow"
+            {
             }
         }
     }

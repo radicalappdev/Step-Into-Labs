@@ -2,11 +2,11 @@
 //
 //  Title: Lab034
 //
-//  Subtitle:
+//  Subtitle: Teleport to waypoints
 //
-//  Description:
+//  Description: We can teleport to fixed locations without changing the users orientation in the scene.
 //
-//  Type:
+//  Type: Space
 //
 //  Created by Joseph Simpson on 2/19/25.
 
@@ -16,16 +16,10 @@ import RealityKitContent
 
 struct Lab034: View {
 
-    init() {
-        // Make sure to register the component!
-        TeleportTargetComponent.registerComponent()
-    }
-
     @State var sceneContent: Entity?
 
     var body: some View {
         RealityView { content in
-
             if let scene = try? await Entity(named: "TeleportLabs", in: realityKitContentBundle) {
                 content.add(scene)
 
@@ -34,28 +28,17 @@ struct Lab034: View {
                     self.sceneContent = sceneContent
                 }
 
-                
             }
-
         }
-        .gesture(tapExample)
-
+        .gesture(teleportTapWaypoint)
     }
 
-    var tapExample: some Gesture {
-        SpatialTapGesture()
+    var teleportTapWaypoint: some Gesture {
+        TapGesture()
             .targetedToEntity(where: .has(TeleportTargetComponent.self))
             .onEnded { value in
 
                 guard let sceneContent = self.sceneContent else { return }
-
-                guard let teleportTC = value.entity.components[TeleportTargetComponent.self] else { return }
-
-                if(teleportTC.targetType == .waypoint) {
-
-                } else if (teleportTC.targetType == .viewpoint) {
-
-                }
 
                 // Calculate the vector from the origin to the tapped position
                 let vectorToTap = value.entity.position
@@ -72,7 +55,6 @@ struct Lab034: View {
                 // Update sceneOffset's X and Z components, leave Y as it is
                 sceneContent.position.x = newPosition.x
                 sceneContent.position.z = newPosition.z
-
             }
     }
 }
