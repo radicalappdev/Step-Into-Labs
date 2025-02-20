@@ -279,6 +279,13 @@ class ModelData {
              subtitle: "Teleport to waypoints",
              description: "We can teleport to fixed locations without changing the users orientation in the scene.")
 
+        ,Lab(title: "Lab 035",
+             type: .SPACE_FULL,
+             date: Date("2/10/2025"),
+             isFeatured: true,
+             subtitle: "Teleport to viewpoints",
+             description: "We can teleport to viewpoints to adjust the users view of the scene based on a transform.")
+
 
     ]
 
