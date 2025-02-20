@@ -284,7 +284,7 @@ class ModelData {
              date: Date("2/10/2025"),
              isFeatured: true,
              subtitle: "Teleport to viewpoints",
-             description: "We can teleport to viewpoints to adjust the users view of the scene based on a transform.")
+             description: "We can adjust the users orientation in the scene by rotating a pivot entity.")
 
 
     ]

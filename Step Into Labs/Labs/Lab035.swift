@@ -2,11 +2,11 @@
 //
 //  Title: Lab035
 //
-//  Subtitle:
+//  Subtitle: Teleport to viewpoints
 //
-//  Description:
+//  Description: We can adjust the users orientation in the scene by rotating a pivot entity.
 //
-//  Type:
+//  Type: Space
 //
 //  Created by Joseph Simpson on 2/20/25.
 
@@ -28,6 +28,7 @@ struct Lab035: View {
 
                 // Get the scene content and stash it in state
                 if let sceneContent = scene.findEntity(named: "Root") {
+                    // Add the root level scene content as a child of the scene pivot
                     self.scenePivot.addChild(sceneContent)
                     self.sceneContent = sceneContent
                 }
@@ -38,7 +39,7 @@ struct Lab035: View {
     }
 
     var teleportTapViewpoint: some Gesture {
-        SpatialTapGesture()
+        TapGesture()
             .targetedToAnyEntity()
             .onEnded { value in
 
