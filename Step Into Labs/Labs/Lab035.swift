@@ -38,15 +38,11 @@ struct Lab035: View {
     }
 
     var teleportTapViewpoint: some Gesture {
-        TapGesture()
+        SpatialTapGesture()
             .targetedToAnyEntity()
             .onEnded { value in
 
-                print("teleporting")
-
                 guard let sceneContent = self.sceneContent else { return }
-
-                print("teleporting sceneContent")
 
                 // Calculate the vector from the origin to the tapped position
                 let vectorToTap = value.entity.position
@@ -60,17 +56,14 @@ struct Lab035: View {
                 // Calculate the new position by inverting the direction multiplied by the distance
                 let newPosition = -direction * distance
 
-
                 // Move the sceneContent relative to the scenePivot
                 // Update sceneOffset's X and Z components, leave Y as it is
                 sceneContent.setPosition([newPosition.x, 0, newPosition.z], relativeTo: scenePivot)
 
-
-                // Get the viewpoint's orientation in world space
+                // Get the orientation of the tapped entity
                 let entityOrientation = value.entity.transform.rotation
 
-                // To make the player face the same direction as the viewpoint,
-                // we need to rotate the world in the opposite direction
+                // To make the use face the same direction as the entity we need to rotate the world in the opposite direction
                 let inverseOrientation = entityOrientation.inverse
 
                 // set the orientation on the pivot entity to handle scene rotation
