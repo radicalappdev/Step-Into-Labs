@@ -62,7 +62,7 @@ struct Lab035: View {
                 sceneContent.setPosition([newPosition.x, 0, newPosition.z], relativeTo: scenePivot)
 
                 // Get the orientation of the tapped entity
-                let entityOrientation = value.entity.transform.rotation
+                let entityOrientation = value.entity.orientation
 
                 // To make the use face the same direction as the entity we need to rotate the world in the opposite direction
                 let inverseOrientation = entityOrientation.inverse
@@ -78,3 +78,6 @@ struct Lab035: View {
 #Preview {
     Lab035()
 }
+
+
+
