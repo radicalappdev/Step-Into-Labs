@@ -1,0 +1,266 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 2.0 (448.60.4)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    reorder nameChildren = ["Offset", "glasses_01", "StepDome", "Spin", "Loop"]
+    def "StepDome" (
+        active = true
+        references = @BuildingBlocks/StepDome.usda@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def Xform "Offset" (
+        active = true
+    )
+    {
+        float3 xformOp:translate = (0, 1.4, -0.5)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def "glasses_01" (
+            active = true
+            references = @glasses_01.usdz@
+        )
+        {
+            reorder nameChildren = ["GlassMat", "Cylinder", "Cylinder_1", "Cylinder_2", "Geom", "Materials"]
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:translate = (0, 0, 0.053887576)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def Cylinder "Cylinder" (
+                active = true
+                prepend apiSchemas = ["MaterialBindingAPI"]
+                customData = {
+                    float3 rotationEulerHint = (1.546658, 0, 0)
+                }
+            )
+            {
+                uniform token axis = "Y"
+                double height = 0.001
+                rel material:binding = </Root/Offset/glasses_01/GlassMat>
+                double radius = 0.03
+                quatf xformOp:orient = (0.7155892, 0.6985213, 0, 0)
+                float3 xformOp:scale = (0.9, 1, 0.7)
+                float3 xformOp:translate = (-0.037881885, -0.0067670345, -0.00024104118)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+            }
+
+            def Material "GlassMat"
+            {
+                token outputs:mtlx:surface.connect = </Root/Offset/glasses_01/GlassMat/OcclusionSurface.outputs:out>
+                token outputs:realitykit:vertex
+                token outputs:surface.connect = </Root/Offset/glasses_01/GlassMat/DefaultSurfaceShader.outputs:surface>
+                float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (0, 110.5)
+
+                def Shader "DefaultSurfaceShader" (
+                    active = false
+                )
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    color3f inputs:diffuseColor = (1, 1, 1)
+                    float inputs:roughness = 0.75
+                    token outputs:surface
+                }
+
+                def Shader "PreviewSurface"
+                {
+                    uniform token info:id = "ND_UsdPreviewSurface_surfaceshader"
+                    color3f inputs:diffuseColor
+                    float inputs:metallic
+                    float inputs:roughness
+                    token outputs:out
+                    float2 ui:nodegraph:node:pos = (-237.48438, 248.63672)
+                    int ui:nodegraph:node:stackingOrder = 38
+                }
+
+                def Shader "OcclusionSurface"
+                {
+                    uniform token info:id = "ND_realitykit_occlusion_surfaceshader"
+                    token outputs:out
+                    float2 ui:nodegraph:node:pos = (-296.51953, 51.09375)
+                    int ui:nodegraph:node:stackingOrder = 38
+                }
+            }
+
+            def Cylinder "Cylinder_1" (
+                active = true
+                prepend apiSchemas = ["MaterialBindingAPI"]
+                customData = {
+                    float3 rotationEulerHint = (1.546658, 0, 0)
+                }
+            )
+            {
+                uniform token axis = "Y"
+                double height = 0.001
+                rel material:binding = </Root/Offset/glasses_01/GlassMat>
+                double radius = 0.03
+                float2 ui:nodegraph:node:pos = (20, 20)
+                int ui:nodegraph:node:stackingOrder = 1
+                quatf xformOp:orient = (0.7155892, 0.6985214, 0, 0)
+                float3 xformOp:scale = (0.5, 1, 0.7)
+                float3 xformOp:translate = (-0.050444134, -0.0042042136, -0.00030368567)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+            }
+
+            def Cylinder "Cylinder_2" (
+                active = true
+                prepend apiSchemas = ["MaterialBindingAPI"]
+                customData = {
+                    float3 rotationEulerHint = (1.546658, 0, 0)
+                }
+            )
+            {
+                uniform token axis = "Y"
+                double height = 0.001
+                rel material:binding = </Root/Offset/glasses_01/GlassMat>
+                double radius = 0.03
+                float2 ui:nodegraph:node:pos = (40, 40)
+                int ui:nodegraph:node:stackingOrder = 2
+                quatf xformOp:orient = (0.7155892, 0.6985214, 0, 0)
+                float3 xformOp:scale = (0.6, 1, 0.4)
+                float3 xformOp:translate = (-0.02817659, 0.0021759272, -0.0004569888)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+            }
+
+            def Cylinder "Cylinder_3" (
+                active = true
+                prepend apiSchemas = ["MaterialBindingAPI"]
+                customData = {
+                    float3 rotationEulerHint = (1.546658, 0, 0)
+                }
+            )
+            {
+                uniform token axis = "Y"
+                double height = 0.001
+                rel material:binding = </Root/Offset/glasses_01/GlassMat>
+                double radius = 0.03
+                float2 ui:nodegraph:node:pos = (20, 20)
+                int ui:nodegraph:node:stackingOrder = 1
+                quatf xformOp:orient = (0.7155892, 0.6985214, 0, 0)
+                float3 xformOp:scale = (0.9, 1, 0.7)
+                float3 xformOp:translate = (0.037547324, -0.0067670345, -0.00024104118)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+            }
+
+            def Cylinder "Cylinder_4" (
+                active = true
+                prepend apiSchemas = ["MaterialBindingAPI"]
+                customData = {
+                    float3 rotationEulerHint = (1.546658, 0, 0)
+                }
+            )
+            {
+                uniform token axis = "Y"
+                double height = 0.001
+                rel material:binding = </Root/Offset/glasses_01/GlassMat>
+                double radius = 0.03
+                float2 ui:nodegraph:node:pos = (40, 40)
+                int ui:nodegraph:node:stackingOrder = 2
+                quatf xformOp:orient = (0.7155892, 0.6985214, 0, 0)
+                float3 xformOp:scale = (0.5, 1, 0.7)
+                float3 xformOp:translate = (0.049686328, -0.0042042136, -0.00030368567)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+            }
+
+            def Cylinder "Cylinder_5" (
+                active = true
+                prepend apiSchemas = ["MaterialBindingAPI"]
+                customData = {
+                    float3 rotationEulerHint = (1.546658, 0, 0)
+                }
+            )
+            {
+                uniform token axis = "Y"
+                double height = 0.001
+                rel material:binding = </Root/Offset/glasses_01/GlassMat>
+                double radius = 0.03
+                float2 ui:nodegraph:node:pos = (60, 60)
+                int ui:nodegraph:node:stackingOrder = 3
+                quatf xformOp:orient = (0.7155892, 0.6985214, 0, 0)
+                float3 xformOp:scale = (0.6, 1, 0.4)
+                float3 xformOp:translate = (0.026098378, 0.0021759272, -0.0004569888)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+            }
+        }
+
+        def RealityKitComponent "RCP_BehaviorsContainer"
+        {
+            uniform token info:id = "RCP.BehaviorsContainer"
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.149616, 0.046891, 0.13982801)
+                token shapeType = "Box"
+
+                def RealityKitStruct "pose"
+                {
+                    float3 position = (0, -0.0061444994, -0.014660427)
+                }
+            }
+        }
+    }
+
+    def RealityKitTimeline "Spin"
+    {
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Spin"
+            {
+                string actionKind = "spin"
+                int blendLayer = 400
+                double duration = 10
+                uniform token info:id = "244A3998-6672-4821-8E7A-5FE68CE12B14"
+                float3 localAxis = (0.2, 1, 0)
+                double startTime = 0
+                rel target = </Root/Offset>
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "linear"
+                }
+            }
+        }
+    }
+
+    def RealityKitTimeline "Loop"
+    {
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Play_Timeline"
+            {
+                string actionKind = "timeline"
+                int blendLayer = 500
+                double duration = 10
+                uniform token info:id = "FD047CA1-EFCC-40DD-A2A6-26AA3BD85FBF"
+                double loopCount = 0
+                double startTime = 0
+                rel timeline = </Root/Spin>
+            }
+        }
+    }
+}
+

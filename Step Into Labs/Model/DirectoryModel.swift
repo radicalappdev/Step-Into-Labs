@@ -281,10 +281,17 @@ class ModelData {
 
         ,Lab(title: "Lab 035",
              type: .SPACE_FULL,
-             date: Date("2/10/2025"),
+             date: Date("2/20/2025"),
              isFeatured: true,
              subtitle: "Teleport to viewpoints",
              description: "We can adjust the users orientation in the scene by rotating a pivot entity.")
+
+        ,Lab(title: "Lab 036",
+             type: .SPACE,
+             date: Date("2/24/2025"),
+             isFeatured: true,
+             subtitle: "Virtual \"Reality\" Glasses",
+             description: "Wait, what?")
 
 
     ]
