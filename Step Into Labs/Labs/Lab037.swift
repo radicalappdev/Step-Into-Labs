@@ -23,6 +23,7 @@ struct Lab037: View {
             content.add(rootEntity)
 
             // 2. The root for the content that will appear *inside* the portal
+            // We need a WorldComponent here
             let portalContentRoot = Entity()
             portalContentRoot.components.set(WorldComponent())
             rootEntity.addChild(portalContentRoot)
@@ -48,8 +49,6 @@ struct Lab037: View {
 
         }
     }
-
-
 }
 
 #Preview {

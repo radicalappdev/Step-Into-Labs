@@ -298,7 +298,7 @@ class ModelData {
              date: Date("3/6/2025"),
              isFeatured: true,
              subtitle: "Portal in a Window",
-             description: "")
+             description: "Learning the basics of how to use PortalComponent to render one scene inside another.")
 
 
     ]
