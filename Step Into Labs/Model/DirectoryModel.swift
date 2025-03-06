@@ -293,6 +293,13 @@ class ModelData {
              subtitle: "Virtual \"Reality\" Glasses",
              description: "Wait, what?")
 
+        ,Lab(title: "Lab 037",
+             type: .WINDOW,
+             date: Date("3/6/2025"),
+             isFeatured: true,
+             subtitle: "Portal in a Window",
+             description: "")
+
 
     ]
 
