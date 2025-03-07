@@ -300,6 +300,13 @@ class ModelData {
              subtitle: "Portal in a Window",
              description: "Learning the basics of how to use PortalComponent to render one scene inside another.")
 
+        ,Lab(title: "Lab 038",
+             type: .VOLUME,
+             date: Date("3/7/2025"),
+             isFeatured: true,
+             subtitle: "Portal in a Volume",
+             description: "Building on Lab 037, let's add a portal to a 3D shape in a volume.")
+
 
     ]
 
