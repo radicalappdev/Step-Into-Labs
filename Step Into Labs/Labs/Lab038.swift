@@ -71,12 +71,23 @@ struct Lab038: View {
             .onEnded { value in
                 let subject = value.entity
                 orbIsActive.toggle()
-
-                if var mat = subject.components[ModelComponent.self]?.materials.first as? PhysicallyBasedMaterial {
-                    mat.blending = .transparent(opacity: orbIsActive ? 0.2 : 1.0)
-                    subject.components[ModelComponent.self]?.materials[0] = mat
+                
+                Task {
+                    let startOpacity: Float = orbIsActive ? 1.0 : 0.2
+                    let endOpacity: Float = orbIsActive ? 0.2 : 1.0
+                    
+                    for step in 0...10 {
+                        let progress = Float(step) / 10.0
+                        let currentOpacity = startOpacity + (endOpacity - startOpacity) * progress
+                        
+                        if var mat = subject.components[ModelComponent.self]?.materials.first as? PhysicallyBasedMaterial {
+                            mat.blending = 
+                                .transparent(opacity: PhysicallyBasedMaterial.Opacity(floatLiteral: currentOpacity))
+                            subject.components[ModelComponent.self]?.materials[0] = mat
+                        }
+                        try? await Task.sleep(for: .milliseconds(50))
+                    }
                 }
-
             }
     }
 }
