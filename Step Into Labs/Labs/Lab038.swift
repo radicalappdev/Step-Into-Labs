@@ -18,7 +18,7 @@ struct Lab038: View {
     @State var orbIsActive: Bool = false
     @State var orbOverlay = Entity()
     var body: some View {
-        RealityView { content, attachments in
+        RealityView { content in
 
             // 1. The root for our scene *outside* of the portal
             let rootEntity = Entity()
@@ -30,11 +30,13 @@ struct Lab038: View {
             portalContentRoot.components.set(WorldComponent())
             rootEntity.addChild(portalContentRoot)
 
-            // 3. An entity that will render the portal
             guard let portalSphereScene = try? await Entity(named: "PortalBall", in: realityKitContentBundle) else { return }
             rootEntity.addChild(portalSphereScene)
             portalSphereScene.position.y = -0.28
+
+            // 3. An entity that will render the portal
             if let portalSphere = portalSphereScene.findEntity(named: "PortalSphere") {
+
                 // Replace the material with PortalMaterial
                 portalSphere.components[ModelComponent.self]?.materials[0] = PortalMaterial()
 
@@ -48,19 +50,12 @@ struct Lab038: View {
                 orbOverlay = overlay
             }
 
-
             // 4. We'll load some content to add to the portalContentRoot
             guard let scene = try? await Entity(named: "TeleportLabs", in: realityKitContentBundle) else { return }
 
             portalContentRoot.addChild(scene)
             scene.position.y = -1.4
 
-        } update: { content, attachments in
-
-        } attachments: {
-            Attachment(id: "AttachmentContent") {
-                Text("")
-            }
         }
         .gesture(longPressGesture)
     }
@@ -76,7 +71,7 @@ struct Lab038: View {
                     let startOpacity: Float = orbIsActive ? 1.0 : 0.2
                     let endOpacity: Float = orbIsActive ? 0.2 : 1.0
                     
-                    for step in 0...10 {
+                    for step in 0...20 {
                         let progress = Float(step) / 10.0
                         let currentOpacity = startOpacity + (endOpacity - startOpacity) * progress
                         
@@ -85,7 +80,7 @@ struct Lab038: View {
                                 .transparent(opacity: PhysicallyBasedMaterial.Opacity(floatLiteral: currentOpacity))
                             subject.components[ModelComponent.self]?.materials[0] = mat
                         }
-                        try? await Task.sleep(for: .milliseconds(50))
+                        try? await Task.sleep(for: .milliseconds(25))
                     }
                 }
             }
