@@ -247,42 +247,42 @@ class ModelData {
         ,Lab(title: "Lab 030",
              type: .SPACE,
              date: Date("1/23/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "The Basics of RealityKit Behaviors",
              description: "A few simple examples of RealityKit behaviors in Reality Composer Pro.")
 
         ,Lab(title: "Lab 031",
              type: .SPACE_FULL,
              date: Date("1/30/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Faking some Stage Lights",
              description: "Using a cone shape, material alpha, and a spotlight to create a fake stage light effect.")
 
         ,Lab(title: "Lab 032",
              type: .SPACE_FULL,
              date: Date("2/7/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "The Probe",
              description: "I've been very clear about what I want. Just let me talk to the whales.")
 
         ,Lab(title: "Lab 033",
              type: .SPACE_FULL,
              date: Date("2/10/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Teleportation with SpatialTapGesture",
              description: "We can't move the player/user entity in RealityKit, but we can move the world around them instead.")
 
         ,Lab(title: "Lab 034",
              type: .SPACE_FULL,
              date: Date("2/19/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Teleport to waypoints",
              description: "We can teleport to fixed locations without changing the users orientation in the scene.")
 
         ,Lab(title: "Lab 035",
              type: .SPACE_FULL,
              date: Date("2/20/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Teleport to viewpoints",
              description: "We can adjust the users orientation in the scene by rotating a pivot entity.")
 
@@ -306,6 +306,13 @@ class ModelData {
              isFeatured: true,
              subtitle: "Portal in a Volume",
              description: "Building on Lab 037, let's add a portal to a 3D shape in a volume.")
+
+        ,Lab(title: "Lab 039",
+             type: .SPACE,
+             date: Date("3/9/2025"),
+             isFeatured: true,
+             subtitle: "Portal in a Space",
+             description: "In immersive spaces, portal contents share the same coordinate space as the main scene.")
 
 
     ]
