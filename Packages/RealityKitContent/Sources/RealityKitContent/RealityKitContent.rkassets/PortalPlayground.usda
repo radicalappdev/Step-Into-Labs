@@ -10,14 +10,17 @@
 
 def Xform "Root"
 {
-    reorder nameChildren = ["DefaultMaterial", "Portals", "PortalSphere"]
+    reorder nameChildren = ["DefaultMaterial", "Capsule", "Portals", "CubeSpin", "SphereScale", "SceneLoop", "RCP_BehaviorsContainer", "OnAddedToScene"]
     def Material "DefaultMaterial"
     {
-        token outputs:mtlx:surface
+        token outputs:mtlx:surface.connect = </Root/DefaultMaterial/PreviewSurface.outputs:out>
         token outputs:realitykit:vertex
         token outputs:surface.connect = </Root/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+        float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (0, 110.5)
 
-        def Shader "DefaultSurfaceShader"
+        def Shader "DefaultSurfaceShader" (
+            active = true
+        )
         {
             uniform token info:id = "UsdPreviewSurface"
             color3f inputs:diffuseColor = (0.41960785, 0.003921569, 0.17254902) (
@@ -26,24 +29,34 @@ def Xform "Root"
             float inputs:roughness = 0.75
             token outputs:surface
         }
+
+        def Shader "PreviewSurface" (
+            active = false
+        )
+        {
+            uniform token info:id = "ND_UsdPreviewSurface_surfaceshader"
+            token outputs:out
+            float2 ui:nodegraph:node:pos = (-255, 105)
+        }
     }
 
     def Xform "Portals" (
         active = true
     )
     {
+        reorder nameChildren = ["PortalSphere", "Sphere", "Cube", "Capsule"]
         def Sphere "PortalSphere" (
             active = true
             prepend apiSchemas = ["MaterialBindingAPI"]
         )
         {
             rel material:binding = </Root/DefaultMaterial>
-            double radius = 0.15
+            double radius = 0.5
             float2 ui:nodegraph:node:pos = (20, 20)
             int ui:nodegraph:node:stackingOrder = 1
             quatf xformOp:orient = (1, 0, 0, 0)
             float3 xformOp:scale = (1, 1, 1)
-            float3 xformOp:translate = (0, 1.4, -1)
+            float3 xformOp:translate = (0, 1, -2)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
             def RealityKitComponent "InputTarget"
@@ -71,18 +84,18 @@ def Xform "Root"
             }
         }
 
-        def Sphere "PortalSphere_1" (
+        def Sphere "Sphere" (
             active = true
             prepend apiSchemas = ["MaterialBindingAPI"]
         )
         {
             rel material:binding = </Root/DefaultMaterial>
-            double radius = 0.15
+            double radius = 0.5
             float2 ui:nodegraph:node:pos = (40, 40)
             int ui:nodegraph:node:stackingOrder = 2
             quatf xformOp:orient = (1, 0, 0, 0)
-            float3 xformOp:scale = (1, 1, 1)
-            float3 xformOp:translate = (-0.32565853, 1.4, -1)
+            float3 xformOp:scale = (1, 2.220446e-16, 1)
+            float3 xformOp:translate = (-2, 1, -2)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
             def RealityKitComponent "InputTarget"
@@ -108,6 +121,179 @@ def Xform "Root"
                     }
                 }
             }
+        }
+
+        def Cube "Cube" (
+            active = true
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Root/DefaultMaterial> (
+                bindMaterialAs = "weakerThanDescendants"
+            )
+            double size = 1
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:translate = (2, 1, -2)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+    }
+
+    def RealityKitTimeline "CubeSpin"
+    {
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Spin"
+            {
+                string actionKind = "spin"
+                int blendLayer = 400
+                double duration = 4
+                uniform token info:id = "FA9D7CAB-CF24-442C-A49E-5401C94CE6C7"
+                float3 localAxis = (0.1, 1, 0)
+                double startTime = 0
+                rel target = </Root/Portals/Cube>
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "linear"
+                }
+            }
+        }
+    }
+
+    def RealityKitTimeline "SphereScale"
+    {
+        reorder nameChildren = ["Track", "Track2"]
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Transform_To"
+            {
+                string actionKind = "moveTo"
+                int blendLayer = 300
+                double duration = 3
+                uniform token info:id = "4F7D0D2A-7FCA-455C-BBA5-348279924FCB"
+                float3 position = (-2, 1, -2)
+                quatf rotation = (1, 0, 0, 0)
+                float3 scale = (1, 3, 1)
+                double startTime = 0
+                rel target = </Root/Portals/Sphere>
+
+                def RealityKitStruct "transformMode"
+                {
+                    rel referenceEntity = </Root>
+                    token type = "parent"
+                }
+
+                def RealityKitStruct "timingFunction"
+                {
+                }
+            }
+
+            def RealityKitAction "Transform_To2"
+            {
+                string actionKind = "moveTo"
+                int blendLayer = 300
+                double duration = 3
+                uniform token info:id = "05E92FA9-B2CD-45F4-8CE0-3BD2A1B530BD"
+                float3 position = (-2, 1, -2)
+                quatf rotation = (1, 0, 0, 0)
+                float3 scale = (1, 2.220446e-16, 1)
+                double startTime = 3.0000000001
+                rel target = </Root/Portals/Sphere>
+
+                def RealityKitStruct "transformMode"
+                {
+                    rel referenceEntity = </Root>
+                    token type = "parent"
+                }
+
+                def RealityKitStruct "timingFunction"
+                {
+                }
+            }
+        }
+
+        def RealityKitTrack "Track2"
+        {
+            def RealityKitAction "Spin"
+            {
+                string actionKind = "spin"
+                int blendLayer = 400
+                double duration = 6
+                uniform token info:id = "FA9D7CAB-CF24-442C-A49E-5401C94CE6C7"
+                float3 localAxis = (0, 1, 0.4)
+                double startTime = 0
+                rel target = </Root/Portals/Sphere>
+                float2 ui:nodegraph:node:pos = (-140, 137)
+                int ui:nodegraph:node:stackingOrder = 1
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "linear"
+                }
+            }
+        }
+    }
+
+    def RealityKitTimeline "SceneLoop"
+    {
+        reorder nameChildren = ["Track", "Track2", "Track3"]
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Play_Timeline"
+            {
+                string actionKind = "timeline"
+                int blendLayer = 500
+                double duration = 4
+                uniform token info:id = "18C1A5E7-FB92-4600-961C-5D1C211D3D5C"
+                double loopCount = 0
+                double startTime = 0
+                rel timeline = </Root/CubeSpin>
+            }
+        }
+
+        def RealityKitTrack "Track2"
+        {
+            def RealityKitAction "Play_Timeline"
+            {
+                string actionKind = "timeline"
+                int blendLayer = 500
+                double duration = 6.0000000001
+                uniform token info:id = "2B8CCFD6-724F-47C4-AF61-FF8929A2D448"
+                double loopCount = 0
+                double startTime = 0
+                rel timeline = </Root/SphereScale>
+            }
+        }
+    }
+
+    def RealityKitComponent "RCP_BehaviorsContainer"
+    {
+        rel behaviors = </Root/OnAddedToScene>
+        uniform token info:id = "RCP.BehaviorsContainer"
+    }
+
+    def Preliminary_Behavior "OnAddedToScene"
+    {
+        rel actions = </Root/OnAddedToScene/Action>
+        uniform bool exclusive
+        rel triggers = </Root/OnAddedToScene/Trigger>
+
+        def Preliminary_Trigger "Trigger"
+        {
+            rel affectedObjects = </Root>
+            token info:id = "SceneTransition"
+        }
+
+        def Preliminary_Action "Action"
+        {
+            rel affectedObjects = </Root>
+            rel animationLibraryKey = </Root/SceneLoop>
+            rel animationLibraryKeyOverrideKey = </Root/OnAddedToScene/Trigger>
+            token info:id = "PlayTimeline"
+            int loops = 0
+            int performCount = 1
+            token type = "serial"
         }
     }
 }

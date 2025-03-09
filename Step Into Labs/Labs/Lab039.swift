@@ -2,11 +2,11 @@
 //
 //  Title: Lab039
 //
-//  Subtitle:
+//  Subtitle: Portals in Immersive Spaces
 //
-//  Description:
+//  Description: In immersive spaces, portal contents share the same coordinate space as the main scene.
 //
-//  Type:
+//  Type: Space
 //
 //  Created by Joseph Simpson on 3/9/25.
 
@@ -32,23 +32,19 @@ struct Lab039: View {
             guard let portalSphereScene = try? await Entity(named: "PortalPlayground", in: realityKitContentBundle) else { return }
             rootEntity.addChild(portalSphereScene)
 
-            // 3. An entity that will render the portal
-            if let portalSphere = portalSphereScene.findEntity(named: "PortalSphere") {
+            // 3. We need something to render the portal on
+            // We'll get the portals entity use each child
+            if let portals = portalSphereScene.findEntity(named: "Portals")?.children {
+                print(portals)
 
-                // Replace the material with PortalMaterial
-                portalSphere.components[ModelComponent.self]?.materials[0] = PortalMaterial()
+                for portal in portals {
+                    // Replace the material with PortalMaterial
+                    portal.components[ModelComponent.self]?.materials[0] = PortalMaterial()
 
-                // We also need to add a PortalComponent that targets the portalContentRoot
-                portalSphere.components.set(PortalComponent(target: portalContentRoot))
+                    // We also need to add a PortalComponent that targets the portalContentRoot
+                    portal.components.set(PortalComponent(target: portalContentRoot))
 
-//                let portalSphere2 = portalSphere.clone(recursive: true)
-//                portalSphere2.position = SIMD3<Float>(-0.5, 1.4, -1)
-//                rootEntity.addChild(portalSphere2)
-//
-//                let portalSphere3 = portalSphere.clone(recursive: true)
-//                portalSphere3.position = SIMD3<Float>(0.5, 1.4, -1)
-//                rootEntity.addChild(portalSphere3)
-
+                }
             }
 
             // 4. We'll load some content to add to the portalContentRoot

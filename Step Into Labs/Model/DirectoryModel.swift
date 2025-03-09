@@ -311,7 +311,7 @@ class ModelData {
              type: .SPACE,
              date: Date("3/9/2025"),
              isFeatured: true,
-             subtitle: "Portal in a Space",
+             subtitle: "Portals in Immersive Spaces",
              description: "In immersive spaces, portal contents share the same coordinate space as the main scene.")
 
 
