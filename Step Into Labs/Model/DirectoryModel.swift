@@ -318,8 +318,8 @@ class ModelData {
              type: .SPACE,
              date: Date("3/14/2025"),
              isFeatured: true,
-             subtitle: "Using Portals to Swap Scenes",
-             description: "")
+             subtitle: "Portal Swap",
+             description: "Using a portal to switch between two worlds.")
 
 
     ]
