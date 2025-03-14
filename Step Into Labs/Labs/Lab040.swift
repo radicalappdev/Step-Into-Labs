@@ -58,18 +58,27 @@ struct Lab040: View {
 
 
             // 4. We'll load some content to add to the portalContentRoot
-
             portalContentRoot.addChild(sceneBlue)
 
         }
         .gesture(doubleTap)
+        .modifier(DragGestureImproved())
     }
 
     var doubleTap: some Gesture {
         TapGesture(count: 2)
             .targetedToEntity(portalEntity)
             .onEnded { value in
-                print("double tap")
+                if let portalContentRed = portalContentRed, let portalContentBlue = portalContentBlue {
+
+                    print("double tap")
+                    outerContent.removeChild(portalContentRed)
+                    outerContent.addChild(portalContentBlue)
+                    portalContentRoot.removeChild(portalContentBlue)
+                    portalContentRoot.addChild(portalContentRed)
+                    portalEntity.components.set(PortalComponent(target: portalContentRoot))
+                }
+
             }
     }
 }
