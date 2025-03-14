@@ -314,6 +314,13 @@ class ModelData {
              subtitle: "Portals in Immersive Spaces",
              description: "In immersive spaces, portal contents share the same coordinate space as the main scene.")
 
+        ,Lab(title: "Lab 040",
+             type: .SPACE,
+             date: Date("3/14/2025"),
+             isFeatured: true,
+             subtitle: "Using Portals to Swap Scenes",
+             description: "")
+
 
     ]
 
