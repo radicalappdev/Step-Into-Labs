@@ -56,10 +56,11 @@ struct Lab041: View {
             portalContentFront.addChild(sceneRed)
             portalContentFront.components.set(WorldComponent())
 
+            portalEntityFront.name = "Front"
             portalEntityFront.position = [-1.2, 1, -0.99]
             portalEntityFront.components.set(PortalComponent(target: portalContentFront))
 
-            let portalCollisionFront = CollisionComponent(shapes: [.generateBox(width: 0.5, height: 0.8, depth: 0.05)])
+            let portalCollisionFront = CollisionComponent(shapes: [.generateBox(width: 0.8, height: 2, depth: 0.05)])
             portalEntityFront.components.set(portalCollisionFront)
             portalEntityFront.components.set(InputTargetComponent())
             rootEntity.addChild(portalEntityFront)
@@ -68,19 +69,20 @@ struct Lab041: View {
             portalContentBack.addChild(sceneBlue)
             portalContentBack.components.set(WorldComponent())
 
+            portalEntityBack.name = "Back"
             portalEntityBack.position = [1.2, 1, -0.99]
             portalEntityBack.components.set(PortalComponent(target: portalContentBack))
 
-            let portalCollisionBack = CollisionComponent(shapes: [.generateBox(width: 0.5, height: 0.8, depth: 0.05)])
+            let portalCollisionBack = CollisionComponent(shapes: [.generateBox(width: 0.8, height: 2, depth: 0.05)])
             portalEntityBack.components.set(portalCollisionBack)
             portalEntityBack.components.set(InputTargetComponent())
             rootEntity.addChild(portalEntityBack)
 
 
-
+            occEntity.name = "Occlusion"
             occEntity.position = [0, 1, -1.01]
 //            occEntity.transform.rotation = simd_quatf(angle: .pi , axis: [0, 1, 0])
-            let occCollision = CollisionComponent(shapes: [.generateBox(width: 0.5, height: 0.8, depth: 0.05)])
+            let occCollision = CollisionComponent(shapes: [.generateBox(width: 0.8, height: 2, depth: 0.05)])
             occEntity.components.set(occCollision)
             occEntity.components.set(InputTargetComponent())
 
@@ -91,20 +93,32 @@ struct Lab041: View {
     }
 
     var doubleTap: some Gesture {
-        TapGesture(count: 2)
+        TapGesture()
             .targetedToAnyEntity()
             .onEnded { value in
 
-                // Swap the outer and portal content
-                if let outerContentFirstChild = outerContent.children.first,
-                   let portalContentFirstChild = portalContentFront.children.first {
+                print(value.entity.name)
 
-                    outerContent.removeChild(outerContentFirstChild)
-                    portalContentFront.removeChild(portalContentFirstChild)
+                let name = value.entity
 
-                    outerContent.addChild(portalContentFirstChild)
-                    portalContentFront.addChild(outerContentFirstChild)
+                if(name == occEntity) {
+                    outerContent.children.removeAll()
+                } else {
+                    outerContent.addChild(value.entity)
                 }
+
+
+
+                // Swap the outer and portal content
+//                if let outerContentFirstChild = outerContent.children.first,
+//                   let portalContentFirstChild = portalContentFront.children.first {
+//
+//                    outerContent.removeChild(outerContentFirstChild)
+//                    portalContentFront.removeChild(portalContentFirstChild)
+//
+//                    outerContent.addChild(portalContentFirstChild)
+//                    portalContentFront.addChild(outerContentFirstChild)
+//                }
 
 
             }
