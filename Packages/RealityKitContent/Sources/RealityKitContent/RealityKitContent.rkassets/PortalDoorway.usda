@@ -105,5 +105,14 @@ def Xform "Root"
             }
         }
     }
+
+    def "SkyDome" (
+        active = true
+        prepend references = @BuildingBlocks/SkyDome.usdz@
+    )
+    {
+        float3 xformOp:scale = (0.01, 0.01, 0.01)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
 }
 
