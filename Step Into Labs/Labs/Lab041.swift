@@ -54,16 +54,24 @@ struct Lab041: View {
     private let occlusionMaterial = OcclusionMaterial()
     private let disabledMaterial = SimpleMaterial(color: .clear, isMetallic: false)
     
-    // Helper function to update portal states
+    // Add constants for portal positioning
+    private let frontPosition: SIMD3<Float> = [0, 1, -0.99]  // Slightly in front of doorway
+    private let backPosition: SIMD3<Float> = [0, 1, -1.01]   // Slightly behind doorway
+    
+    // Helper function to update portal states and positions
     private func updatePortalStates() {
         switch currentScene {
         case .passthrough:
             // Front portal to red scene
+            portalEntityFront.position = frontPosition
+            portalEntityFront.transform.rotation = simd_quatf(angle: 0, axis: [0, 1, 0])
             portalEntityFront.components.set(PortalComponent(target: portalContentFront))
             portalEntityFront.model?.materials = [portalMaterial]
             portalEntityFront.components.set(InputTargetComponent())
             
             // Back portal to blue scene
+            portalEntityBack.position = backPosition
+            portalEntityBack.transform.rotation = simd_quatf(angle: 0, axis: [0, 1, 0])
             portalEntityBack.components.set(PortalComponent(target: portalContentBack))
             portalEntityBack.model?.materials = [portalMaterial]
             portalEntityBack.components.set(InputTargetComponent())
@@ -74,11 +82,15 @@ struct Lab041: View {
             
         case .red:
             // Front portal to blue scene
+            portalEntityFront.position = frontPosition
+            portalEntityFront.transform.rotation = simd_quatf(angle: 0, axis: [0, 1, 0])
             portalEntityFront.components.set(PortalComponent(target: portalContentFront))
             portalEntityFront.model?.materials = [portalMaterial]
             portalEntityFront.components.set(InputTargetComponent())
             
             // Back portal as occlusion
+            portalEntityBack.position = backPosition
+            portalEntityBack.transform.rotation = simd_quatf(angle: .pi, axis: [0, 1, 0])
             portalEntityBack.components.remove(PortalComponent.self)
             portalEntityBack.model?.materials = [occlusionMaterial]
             portalEntityBack.components.set(InputTargetComponent())
@@ -89,11 +101,15 @@ struct Lab041: View {
             
         case .blue:
             // Front portal as occlusion
+            portalEntityFront.position = frontPosition
+            portalEntityFront.transform.rotation = simd_quatf(angle: 0, axis: [0, 1, 0])
             portalEntityFront.components.remove(PortalComponent.self)
             portalEntityFront.model?.materials = [occlusionMaterial]
             portalEntityFront.components.set(InputTargetComponent())
             
             // Back portal to red scene
+            portalEntityBack.position = backPosition
+            portalEntityBack.transform.rotation = simd_quatf(angle: 0, axis: [0, 1, 0])
             portalEntityBack.components.set(PortalComponent(target: portalContentBack))
             portalEntityBack.model?.materials = [portalMaterial]
             portalEntityBack.components.set(InputTargetComponent())
@@ -128,7 +144,7 @@ struct Lab041: View {
             portalContentFront.components.set(WorldComponent())
 
             portalEntityFront.name = "Front"
-            portalEntityFront.position = [-1.2, 1, -0.99]
+            portalEntityFront.position = frontPosition
             portalEntityFront.components.set(PortalComponent(target: portalContentFront))
 
             let portalCollisionFront = CollisionComponent(shapes: [.generateBox(width: 0.8, height: 2, depth: 0.05)])
@@ -141,7 +157,7 @@ struct Lab041: View {
             portalContentBack.components.set(WorldComponent())
 
             portalEntityBack.name = "Back"
-            portalEntityBack.position = [1.2, 1, -0.99]
+            portalEntityBack.position = backPosition
             portalEntityBack.components.set(PortalComponent(target: portalContentBack))
 
             let portalCollisionBack = CollisionComponent(shapes: [.generateBox(width: 0.8, height: 2, depth: 0.05)])
@@ -149,12 +165,8 @@ struct Lab041: View {
             portalEntityBack.components.set(InputTargetComponent())
             rootEntity.addChild(portalEntityBack)
 
-            occEntity.name = "Occlusion"
-            occEntity.position = [0, 1, -1.01]
-//            occEntity.transform.rotation = simd_quatf(angle: .pi , axis: [0, 1, 0])
-            let occCollision = CollisionComponent(shapes: [.generateBox(width: 0.8, height: 2, depth: 0.05)])
-            occEntity.components.set(occCollision)
-            occEntity.components.set(InputTargetComponent())
+            // Call updatePortalStates to set initial state
+            updatePortalStates()
         }
         .gesture(doubleTap)
         .modifier(DragGestureImproved())
