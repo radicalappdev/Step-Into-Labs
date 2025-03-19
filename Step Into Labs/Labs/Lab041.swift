@@ -49,6 +49,61 @@ struct Lab041: View {
         case blue
     }
 
+    // Add materials as properties for easy access
+    private let portalMaterial = PortalMaterial()
+    private let occlusionMaterial = OcclusionMaterial()
+    private let disabledMaterial = SimpleMaterial(color: .clear, isMetallic: false)
+    
+    // Helper function to update portal states
+    private func updatePortalStates() {
+        switch currentScene {
+        case .passthrough:
+            // Front portal to red scene
+            portalEntityFront.components.set(PortalComponent(target: portalContentFront))
+            portalEntityFront.model?.materials = [portalMaterial]
+            portalEntityFront.components.set(InputTargetComponent())
+            
+            // Back portal to blue scene
+            portalEntityBack.components.set(PortalComponent(target: portalContentBack))
+            portalEntityBack.model?.materials = [portalMaterial]
+            portalEntityBack.components.set(InputTargetComponent())
+            
+            // Disable occlusion
+            occEntity.model?.materials = [disabledMaterial]
+            occEntity.components.remove(InputTargetComponent.self)
+            
+        case .red:
+            // Front portal to blue scene
+            portalEntityFront.components.set(PortalComponent(target: portalContentFront))
+            portalEntityFront.model?.materials = [portalMaterial]
+            portalEntityFront.components.set(InputTargetComponent())
+            
+            // Back portal as occlusion
+            portalEntityBack.components.remove(PortalComponent.self)
+            portalEntityBack.model?.materials = [occlusionMaterial]
+            portalEntityBack.components.set(InputTargetComponent())
+            
+            // Disable middle portal
+            occEntity.model?.materials = [disabledMaterial]
+            occEntity.components.remove(InputTargetComponent.self)
+            
+        case .blue:
+            // Front portal as occlusion
+            portalEntityFront.components.remove(PortalComponent.self)
+            portalEntityFront.model?.materials = [occlusionMaterial]
+            portalEntityFront.components.set(InputTargetComponent())
+            
+            // Back portal to red scene
+            portalEntityBack.components.set(PortalComponent(target: portalContentBack))
+            portalEntityBack.model?.materials = [portalMaterial]
+            portalEntityBack.components.set(InputTargetComponent())
+            
+            // Disable middle portal
+            occEntity.model?.materials = [disabledMaterial]
+            occEntity.components.remove(InputTargetComponent.self)
+        }
+    }
+
     var body: some View {
         RealityView { content in
             guard let doorway = try? await Entity(named: "PortalDoorway", in: realityKitContentBundle) else { return }
@@ -115,23 +170,19 @@ struct Lab041: View {
                 switch currentScene {
                 case .passthrough:
                     if tappedEntity == portalEntityFront {
-                        // Tapped front portal (red scene)
                         currentScene = .red
                         outerContent.children.removeAll()
                         outerContent.addChild(redScene)
                         
-                        // Update portals for red scene
                         portalContentFront.children.removeAll()
                         portalContentFront.addChild(blueScene)
                         portalContentBack.children.removeAll()
                         
                     } else if tappedEntity == portalEntityBack {
-                        // Tapped back portal (blue scene)
                         currentScene = .blue
                         outerContent.children.removeAll()
                         outerContent.addChild(blueScene)
                         
-                        // Update portals for blue scene
                         portalContentFront.children.removeAll()
                         portalContentBack.children.removeAll()
                         portalContentBack.addChild(redScene)
@@ -139,22 +190,18 @@ struct Lab041: View {
                     
                 case .red:
                     if tappedEntity == portalEntityFront {
-                        // Tapped front portal (to blue scene)
                         currentScene = .blue
                         outerContent.children.removeAll()
                         outerContent.addChild(blueScene)
                         
-                        // Update portals for blue scene
                         portalContentFront.children.removeAll()
                         portalContentBack.children.removeAll()
                         portalContentBack.addChild(redScene)
                         
                     } else if tappedEntity == portalEntityBack {
-                        // Tapped back portal (occlusion)
                         currentScene = .passthrough
                         outerContent.children.removeAll()
                         
-                        // Reset portals to initial state
                         portalContentFront.children.removeAll()
                         portalContentFront.addChild(redScene)
                         portalContentBack.children.removeAll()
@@ -163,28 +210,27 @@ struct Lab041: View {
                     
                 case .blue:
                     if tappedEntity == portalEntityFront {
-                        // Tapped front portal (occlusion)
                         currentScene = .passthrough
                         outerContent.children.removeAll()
                         
-                        // Reset portals to initial state
                         portalContentFront.children.removeAll()
                         portalContentFront.addChild(redScene)
                         portalContentBack.children.removeAll()
                         portalContentBack.addChild(blueScene)
                         
                     } else if tappedEntity == portalEntityBack {
-                        // Tapped back portal (to red scene)
                         currentScene = .red
                         outerContent.children.removeAll()
                         outerContent.addChild(redScene)
                         
-                        // Update portals for red scene
                         portalContentFront.children.removeAll()
                         portalContentFront.addChild(blueScene)
                         portalContentBack.children.removeAll()
                     }
                 }
+                
+                // Update portal states after scene change
+                updatePortalStates()
             }
     }
 }
