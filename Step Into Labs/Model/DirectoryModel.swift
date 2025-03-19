@@ -326,7 +326,7 @@ class ModelData {
              date: Date("3/19/2025"),
              isFeatured: true,
              subtitle: "Impossible Doorway",
-             description: "More fund with portals and occlusion material.")
+             description: "More fun with portals and occlusion material.")
 
 
     ]

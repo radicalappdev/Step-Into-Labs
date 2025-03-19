@@ -2,11 +2,11 @@
 //
 //  Title: Lab041
 //
-//  Subtitle:
+//  Subtitle: Impossible Doorway
 //
-//  Description:
+//  Description: More fun with portals and occlusion material.
 //
-//  Type:
+//  Type: Space
 //
 //  Created by Joseph Simpson on 3/19/25.
 
@@ -30,16 +30,9 @@ struct Lab041: View {
         materials: [PortalMaterial()]
     )
 
-    @State var occEntity = ModelEntity(
-        mesh: .generatePlane(width: 0.8, height: 2, cornerRadius: 0.01),
-        materials: [OcclusionMaterial()]
-    )
-
-    // Add state to store scene references
     @State private var sceneRed: Entity?
     @State private var sceneBlue: Entity?
-    
-    // Add state to track current scene
+
     @State private var currentScene: SceneType = .passthrough
     
     // Add enum to track scene types
@@ -49,74 +42,13 @@ struct Lab041: View {
         case blue
     }
 
-    // Add materials as properties for easy access
     private let portalMaterial = PortalMaterial()
     private let occlusionMaterial = OcclusionMaterial()
-    private let disabledMaterial = SimpleMaterial(color: .clear, isMetallic: false)
-    
+    private let disabledMaterial = SimpleMaterial(color: .clear, isMetallic: false) // debugging only
+
     // Add constants for portal positioning
-    private let frontPosition: SIMD3<Float> = [0, 1, -0.99]  // Slightly in front of doorway
-    private let backPosition: SIMD3<Float> = [0, 1, -1.01]   // Slightly behind doorway
-    
-    // Helper function to update portal states and positions
-    private func updatePortalStates() {
-        switch currentScene {
-        case .passthrough:
-            // Front portal to red scene
-            portalEntityFront.transform.rotation = simd_quatf(angle: 0, axis: [0, 1, 0])  // Face forward
-            portalEntityFront.position = frontPosition
-            portalEntityFront.components.set(PortalComponent(target: portalContentFront))
-            portalEntityFront.model?.materials = [portalMaterial]
-            portalEntityFront.components.set(InputTargetComponent())
-            portalContentFront.children.removeAll()
-            portalContentFront.addChild(sceneRed!)  // Show red through front
-            
-            // Back portal to blue scene
-            portalEntityBack.transform.rotation = simd_quatf(angle: .pi, axis: [0, 1, 0])  // Face backward
-            portalEntityBack.position = backPosition
-            portalEntityBack.components.set(PortalComponent(target: portalContentBack))
-            portalEntityBack.model?.materials = [portalMaterial]
-            portalEntityBack.components.set(InputTargetComponent())
-            portalContentBack.children.removeAll()
-            portalContentBack.addChild(sceneBlue!)  // Show blue through back
-            
-        case .red:
-            // Front portal to blue scene
-            portalEntityFront.transform.rotation = simd_quatf(angle: 0, axis: [0, 1, 0])  // Face forward
-            portalEntityFront.position = frontPosition
-            portalEntityFront.components.set(PortalComponent(target: portalContentFront))
-            portalEntityFront.model?.materials = [portalMaterial]
-            portalEntityFront.components.set(InputTargetComponent())
-            portalContentFront.children.removeAll()
-            portalContentFront.addChild(sceneBlue!)  // Show blue through front
-            
-            // Back portal as occlusion
-            portalEntityBack.transform.rotation = simd_quatf(angle: .pi, axis: [0, 1, 0])  // Face backward
-            portalEntityBack.position = backPosition
-            portalEntityBack.components.remove(PortalComponent.self)
-            portalEntityBack.model?.materials = [occlusionMaterial]
-            portalEntityBack.components.set(InputTargetComponent())
-            portalContentBack.children.removeAll()
-            
-        case .blue:
-            // Front portal as occlusion
-            portalEntityFront.transform.rotation = simd_quatf(angle: 0, axis: [0, 1, 0])  // Face forward
-            portalEntityFront.position = frontPosition
-            portalEntityFront.components.remove(PortalComponent.self)
-            portalEntityFront.model?.materials = [occlusionMaterial]
-            portalEntityFront.components.set(InputTargetComponent())
-            portalContentFront.children.removeAll()
-            
-            // Back portal to red scene
-            portalEntityBack.transform.rotation = simd_quatf(angle: .pi, axis: [0, 1, 0])  // Face backward
-            portalEntityBack.position = backPosition
-            portalEntityBack.components.set(PortalComponent(target: portalContentBack))
-            portalEntityBack.model?.materials = [portalMaterial]
-            portalEntityBack.components.set(InputTargetComponent())
-            portalContentBack.children.removeAll()
-            portalContentBack.addChild(sceneRed!)  // Show red through back
-        }
-    }
+    private let frontPosition: SIMD3<Float> = [0, 1, -0.99]
+    private let backPosition: SIMD3<Float> = [0, 1, -1.01]
 
     var body: some View {
         RealityView { content in
@@ -135,7 +67,6 @@ struct Lab041: View {
             rootEntity.addChild(outerContent)
             rootEntity.addChild(portalContentFront)
             rootEntity.addChild(portalContentBack)
-            rootEntity.addChild(occEntity)
 
             // Front portal - RED SCENE
             portalContentFront.components.set(WorldComponent())
@@ -163,11 +94,10 @@ struct Lab041: View {
             portalEntityBack.components.set(InputTargetComponent())
             rootEntity.addChild(portalEntityBack)
         }
-        .gesture(doubleTap)
-        .modifier(DragGestureImproved())
+        .gesture(tap)
     }
 
-    var doubleTap: some Gesture {
+    var tap: some Gesture {
         TapGesture()
             .targetedToAnyEntity()
             .onEnded { value in
@@ -216,6 +146,66 @@ struct Lab041: View {
                 // Update portal states after scene change
                 updatePortalStates()
             }
+    }
+
+    // Helper function to update portal states and positions
+    private func updatePortalStates() {
+        switch currentScene {
+        case .passthrough:
+            // Front portal to red scene
+            portalEntityFront.transform.rotation = simd_quatf(angle: 0, axis: [0, 1, 0])  // Face forward
+            portalEntityFront.position = frontPosition
+            portalEntityFront.components.set(PortalComponent(target: portalContentFront))
+            portalEntityFront.model?.materials = [portalMaterial]
+            portalEntityFront.components.set(InputTargetComponent())
+            portalContentFront.children.removeAll()
+            portalContentFront.addChild(sceneRed!)
+
+            // Back portal to blue scene
+            portalEntityBack.transform.rotation = simd_quatf(angle: .pi, axis: [0, 1, 0])  // Face backward
+            portalEntityBack.position = backPosition
+            portalEntityBack.components.set(PortalComponent(target: portalContentBack))
+            portalEntityBack.model?.materials = [portalMaterial]
+            portalEntityBack.components.set(InputTargetComponent())
+            portalContentBack.children.removeAll()
+            portalContentBack.addChild(sceneBlue!)
+
+        case .red:
+            // Front portal to blue scene
+            portalEntityFront.transform.rotation = simd_quatf(angle: 0, axis: [0, 1, 0])  // Face forward
+            portalEntityFront.position = frontPosition
+            portalEntityFront.components.set(PortalComponent(target: portalContentFront))
+            portalEntityFront.model?.materials = [portalMaterial]
+            portalEntityFront.components.set(InputTargetComponent())
+            portalContentFront.children.removeAll()
+            portalContentFront.addChild(sceneBlue!)
+
+            // Back portal as occlusion
+            portalEntityBack.transform.rotation = simd_quatf(angle: .pi, axis: [0, 1, 0])  // Face backward
+            portalEntityBack.position = backPosition
+            portalEntityBack.components.remove(PortalComponent.self)
+            portalEntityBack.model?.materials = [occlusionMaterial]
+            portalEntityBack.components.set(InputTargetComponent())
+            portalContentBack.children.removeAll()
+
+        case .blue:
+            // Front portal as occlusion
+            portalEntityFront.transform.rotation = simd_quatf(angle: 0, axis: [0, 1, 0])  // Face forward
+            portalEntityFront.position = frontPosition
+            portalEntityFront.components.remove(PortalComponent.self)
+            portalEntityFront.model?.materials = [occlusionMaterial]
+            portalEntityFront.components.set(InputTargetComponent())
+            portalContentFront.children.removeAll()
+
+            // Back portal to red scene
+            portalEntityBack.transform.rotation = simd_quatf(angle: .pi, axis: [0, 1, 0])  // Face backward
+            portalEntityBack.position = backPosition
+            portalEntityBack.components.set(PortalComponent(target: portalContentBack))
+            portalEntityBack.model?.materials = [portalMaterial]
+            portalEntityBack.components.set(InputTargetComponent())
+            portalContentBack.children.removeAll()
+            portalContentBack.addChild(sceneRed!)
+        }
     }
 }
 
