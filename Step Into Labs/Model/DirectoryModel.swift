@@ -321,6 +321,13 @@ class ModelData {
              subtitle: "Portal Swap",
              description: "Using a portal to switch between two worlds.")
 
+        ,Lab(title: "Lab 041",
+             type: .SPACE,
+             date: Date("3/19/2025"),
+             isFeatured: true,
+             subtitle: "Impossible Doorway",
+             description: "More fund with portals and occlusion material.")
+
 
     ]
 
