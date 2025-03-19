@@ -63,60 +63,58 @@ struct Lab041: View {
         switch currentScene {
         case .passthrough:
             // Front portal to red scene
+            portalEntityFront.transform.rotation = simd_quatf(angle: 0, axis: [0, 1, 0])  // Face forward
             portalEntityFront.position = frontPosition
-            portalEntityFront.transform.rotation = simd_quatf(angle: 0, axis: [0, 1, 0])
             portalEntityFront.components.set(PortalComponent(target: portalContentFront))
             portalEntityFront.model?.materials = [portalMaterial]
             portalEntityFront.components.set(InputTargetComponent())
+            portalContentFront.children.removeAll()
+            portalContentFront.addChild(sceneRed!)  // Show red through front
             
             // Back portal to blue scene
+            portalEntityBack.transform.rotation = simd_quatf(angle: .pi, axis: [0, 1, 0])  // Face backward
             portalEntityBack.position = backPosition
-            portalEntityBack.transform.rotation = simd_quatf(angle: 0, axis: [0, 1, 0])
             portalEntityBack.components.set(PortalComponent(target: portalContentBack))
             portalEntityBack.model?.materials = [portalMaterial]
             portalEntityBack.components.set(InputTargetComponent())
-            
-            // Disable occlusion
-            occEntity.model?.materials = [disabledMaterial]
-            occEntity.components.remove(InputTargetComponent.self)
+            portalContentBack.children.removeAll()
+            portalContentBack.addChild(sceneBlue!)  // Show blue through back
             
         case .red:
             // Front portal to blue scene
+            portalEntityFront.transform.rotation = simd_quatf(angle: 0, axis: [0, 1, 0])  // Face forward
             portalEntityFront.position = frontPosition
-            portalEntityFront.transform.rotation = simd_quatf(angle: 0, axis: [0, 1, 0])
             portalEntityFront.components.set(PortalComponent(target: portalContentFront))
             portalEntityFront.model?.materials = [portalMaterial]
             portalEntityFront.components.set(InputTargetComponent())
+            portalContentFront.children.removeAll()
+            portalContentFront.addChild(sceneBlue!)  // Show blue through front
             
             // Back portal as occlusion
+            portalEntityBack.transform.rotation = simd_quatf(angle: .pi, axis: [0, 1, 0])  // Face backward
             portalEntityBack.position = backPosition
-            portalEntityBack.transform.rotation = simd_quatf(angle: .pi, axis: [0, 1, 0])
             portalEntityBack.components.remove(PortalComponent.self)
             portalEntityBack.model?.materials = [occlusionMaterial]
             portalEntityBack.components.set(InputTargetComponent())
-            
-            // Disable middle portal
-            occEntity.model?.materials = [disabledMaterial]
-            occEntity.components.remove(InputTargetComponent.self)
+            portalContentBack.children.removeAll()
             
         case .blue:
             // Front portal as occlusion
+            portalEntityFront.transform.rotation = simd_quatf(angle: 0, axis: [0, 1, 0])  // Face forward
             portalEntityFront.position = frontPosition
-            portalEntityFront.transform.rotation = simd_quatf(angle: 0, axis: [0, 1, 0])
             portalEntityFront.components.remove(PortalComponent.self)
             portalEntityFront.model?.materials = [occlusionMaterial]
             portalEntityFront.components.set(InputTargetComponent())
+            portalContentFront.children.removeAll()
             
             // Back portal to red scene
+            portalEntityBack.transform.rotation = simd_quatf(angle: .pi, axis: [0, 1, 0])  // Face backward
             portalEntityBack.position = backPosition
-            portalEntityBack.transform.rotation = simd_quatf(angle: 0, axis: [0, 1, 0])
             portalEntityBack.components.set(PortalComponent(target: portalContentBack))
             portalEntityBack.model?.materials = [portalMaterial]
             portalEntityBack.components.set(InputTargetComponent())
-            
-            // Disable middle portal
-            occEntity.model?.materials = [disabledMaterial]
-            occEntity.components.remove(InputTargetComponent.self)
+            portalContentBack.children.removeAll()
+            portalContentBack.addChild(sceneRed!)  // Show red through back
         }
     }
 
@@ -139,34 +137,31 @@ struct Lab041: View {
             rootEntity.addChild(portalContentBack)
             rootEntity.addChild(occEntity)
 
-            // Front portal
-            portalContentFront.addChild(redScene)
+            // Front portal - RED SCENE
             portalContentFront.components.set(WorldComponent())
+            portalContentFront.children.removeAll()
+            portalContentFront.addChild(redScene)  // RED in front
 
             portalEntityFront.name = "Front"
             portalEntityFront.position = frontPosition
+            portalEntityFront.transform.rotation = simd_quatf(angle: 0, axis: [0, 1, 0])  // Face forward
             portalEntityFront.components.set(PortalComponent(target: portalContentFront))
-
-            let portalCollisionFront = CollisionComponent(shapes: [.generateBox(width: 0.8, height: 2, depth: 0.05)])
-            portalEntityFront.components.set(portalCollisionFront)
+            portalEntityFront.components.set(CollisionComponent(shapes: [.generateBox(width: 0.8, height: 2, depth: 0.05)]))
             portalEntityFront.components.set(InputTargetComponent())
             rootEntity.addChild(portalEntityFront)
 
-            // Back portal
-            portalContentBack.addChild(blueScene)
+            // Back portal - BLUE SCENE
             portalContentBack.components.set(WorldComponent())
+            portalContentBack.children.removeAll()
+            portalContentBack.addChild(blueScene)  // BLUE in back
 
             portalEntityBack.name = "Back"
             portalEntityBack.position = backPosition
+            portalEntityBack.transform.rotation = simd_quatf(angle: .pi, axis: [0, 1, 0])  // Rotate 180 degrees to face back
             portalEntityBack.components.set(PortalComponent(target: portalContentBack))
-
-            let portalCollisionBack = CollisionComponent(shapes: [.generateBox(width: 0.8, height: 2, depth: 0.05)])
-            portalEntityBack.components.set(portalCollisionBack)
+            portalEntityBack.components.set(CollisionComponent(shapes: [.generateBox(width: 0.8, height: 2, depth: 0.05)]))
             portalEntityBack.components.set(InputTargetComponent())
             rootEntity.addChild(portalEntityBack)
-
-            // Call updatePortalStates to set initial state
-            updatePortalStates()
         }
         .gesture(doubleTap)
         .modifier(DragGestureImproved())
@@ -182,62 +177,39 @@ struct Lab041: View {
                 switch currentScene {
                 case .passthrough:
                     if tappedEntity == portalEntityFront {
+                        // Tapped front portal - enter red scene
                         currentScene = .red
                         outerContent.children.removeAll()
                         outerContent.addChild(redScene)
-                        
-                        portalContentFront.children.removeAll()
-                        portalContentFront.addChild(blueScene)
-                        portalContentBack.children.removeAll()
-                        
                     } else if tappedEntity == portalEntityBack {
+                        // Tapped back portal - enter blue scene
                         currentScene = .blue
                         outerContent.children.removeAll()
                         outerContent.addChild(blueScene)
-                        
-                        portalContentFront.children.removeAll()
-                        portalContentBack.children.removeAll()
-                        portalContentBack.addChild(redScene)
                     }
                     
                 case .red:
                     if tappedEntity == portalEntityFront {
+                        // Tapped front portal - enter blue scene
                         currentScene = .blue
                         outerContent.children.removeAll()
                         outerContent.addChild(blueScene)
-                        
-                        portalContentFront.children.removeAll()
-                        portalContentBack.children.removeAll()
-                        portalContentBack.addChild(redScene)
-                        
                     } else if tappedEntity == portalEntityBack {
+                        // Tapped back occlusion - return to passthrough
                         currentScene = .passthrough
                         outerContent.children.removeAll()
-                        
-                        portalContentFront.children.removeAll()
-                        portalContentFront.addChild(redScene)
-                        portalContentBack.children.removeAll()
-                        portalContentBack.addChild(blueScene)
                     }
                     
                 case .blue:
                     if tappedEntity == portalEntityFront {
+                        // Tapped front occlusion - return to passthrough
                         currentScene = .passthrough
                         outerContent.children.removeAll()
-                        
-                        portalContentFront.children.removeAll()
-                        portalContentFront.addChild(redScene)
-                        portalContentBack.children.removeAll()
-                        portalContentBack.addChild(blueScene)
-                        
                     } else if tappedEntity == portalEntityBack {
+                        // Tapped back portal - enter red scene
                         currentScene = .red
                         outerContent.children.removeAll()
                         outerContent.addChild(redScene)
-                        
-                        portalContentFront.children.removeAll()
-                        portalContentFront.addChild(blueScene)
-                        portalContentBack.children.removeAll()
                     }
                 }
                 
