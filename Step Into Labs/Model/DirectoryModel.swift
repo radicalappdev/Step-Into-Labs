@@ -328,6 +328,13 @@ class ModelData {
              subtitle: "Impossible Doorway",
              description: "More fun with portals and occlusion material.")
 
+        ,Lab(title: "Lab 042",
+             type: .SPACE,
+             date: Date("3/121/2025"),
+             isFeatured: true,
+             subtitle: "Entity Spawning",
+             description: "")
+
 
     ]
 

@@ -1,7 +1,8 @@
 {
   "advancedEditorSelectedIdentifier" : "ProjectBrowser",
   "openSceneRelativePaths" : [
-    "Lab016Scene.usda"
+    "Lab016Scene.usda",
+    "SpawnerLab.usda"
   ],
   "recentIdentifiers" : {
     "00AC74E2-A464-4F74-A445-36CD76630287" : [
@@ -74,6 +75,9 @@
 
     ],
     "98043A2D-E996-4BE7-8F15-47AAB1E1E57E" : [
+
+    ],
+    "A40DA96E-0E21-4324-9AF2-06410FAB9851" : [
 
     ],
     "B4860F40-B1DE-42EA-9488-423A581F8D6E" : [
@@ -4304,6 +4308,30 @@
         ]
       }
     ],
+    "A40DA96E-0E21-4324-9AF2-06410FAB9851" : [
+      {
+        "date" : 764267952.284884,
+        "title" : "Untitled",
+        "transform" : [
+          1,
+          0,
+          -0,
+          0,
+          -0,
+          0.7071069,
+          -0.7071067,
+          0,
+          0,
+          0.7071067,
+          0.7071069,
+          0,
+          1.1920929e-07,
+          1.4551938,
+          -1.7448065,
+          1
+        ]
+      }
+    ],
     "B4860F40-B1DE-42EA-9488-423A581F8D6E" : [
       {
         "date" : 763645549.064047,
@@ -6066,5 +6094,5 @@
   "sceneViewportBackgroundColors" : {
 
   },
-  "selectedSceneRelativePath" : "Lab016Scene.usda"
+  "selectedSceneRelativePath" : "SpawnerLab.usda"
 }

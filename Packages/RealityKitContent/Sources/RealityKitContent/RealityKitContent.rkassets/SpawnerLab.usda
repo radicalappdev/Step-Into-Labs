@@ -1,0 +1,37 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 2.0 (448.60.4)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    def "StepDome" (
+        active = true
+        prepend references = @BuildingBlocks/StepDome.usda@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "StepSphereBlue" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (1.3162087, 1.1611724e-8, -4.504593e-9)
+        }
+        prepend references = @BuildingBlocks/StepSphereBlue.usda@
+    )
+    {
+        float2 ui:nodegraph:node:pos = (20, 20)
+        int ui:nodegraph:node:stackingOrder = 1
+        quatf xformOp:orient = (0.7911531, 0.61161816, 3.2157803e-9, -5.3328817e-9)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 1.2, -2)
+    }
+}
+
