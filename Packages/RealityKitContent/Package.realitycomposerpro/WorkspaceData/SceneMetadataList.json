@@ -1344,6 +1344,16 @@
       {
         "isExpanded" : true,
         "isLocked" : false
+      },
+      [
+        "A40DA96E-0E21-4324-9AF2-06410FAB9851",
+        "Root",
+        "CollideWithFloor",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
       }
     ]
   },

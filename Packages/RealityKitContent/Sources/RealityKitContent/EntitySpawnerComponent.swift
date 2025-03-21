@@ -125,20 +125,7 @@ public class EntitySpawnerSystem: System {
             root = parent
         }
         
-        // Then search down through the hierarchy
-        func search(in entity: Entity) -> Entity? {
-            if entity.name == name {
-                return entity
-            }
-            for child in entity.children {
-                if let found = search(in: child) {
-                    return found
-                }
-            }
-            return nil
-        }
-        
-        return search(in: root)
+        return root.findEntity(named: name)
     }
 
     public func update(context: SceneUpdateContext) {
