@@ -332,8 +332,8 @@ class ModelData {
              type: .SPACE,
              date: Date("3/121/2025"),
              isFeatured: true,
-             subtitle: "Entity Spawning",
-             description: "")
+             subtitle: "Second pass at an Entity Spawner",
+             description: "Using Components and Systems to create an entity spawner system.")
 
 
     ]

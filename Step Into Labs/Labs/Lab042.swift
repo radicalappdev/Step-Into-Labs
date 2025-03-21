@@ -2,11 +2,11 @@
 //
 //  Title: Lab042
 //
-//  Subtitle:
+//  Subtitle: Second pass at an Entity Spawner
 //
-//  Description:
+//  Description: Using Components and Systems to create an entity spawner system
 //
-//  Type:
+//  Type: Space
 //
 //  Created by Joseph Simpson on 3/21/25.
 
