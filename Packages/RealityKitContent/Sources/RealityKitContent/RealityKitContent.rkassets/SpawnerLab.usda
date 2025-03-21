@@ -10,9 +10,10 @@
 
 def Xform "Root"
 {
+    reorder nameChildren = ["StepDome", "StepSphereBlue", "Spawner"]
     def "StepDome" (
         active = true
-        prepend references = @BuildingBlocks/StepDome.usda@
+        references = @BuildingBlocks/StepDome.usda@
     )
     {
         float3 xformOp:scale = (1, 1, 1)
@@ -24,7 +25,7 @@ def Xform "Root"
         customData = {
             float3 rotationEulerHint = (1.3162087, 1.1611724e-8, -4.504593e-9)
         }
-        prepend references = @BuildingBlocks/StepSphereBlue.usda@
+        references = @BuildingBlocks/StepSphereBlue.usda@
     )
     {
         float2 ui:nodegraph:node:pos = (20, 20)
@@ -32,6 +33,21 @@ def Xform "Root"
         quatf xformOp:orient = (0.7911531, 0.61161816, 3.2157803e-9, -5.3328817e-9)
         float3 xformOp:scale = (1, 1, 1)
         float3 xformOp:translate = (0, 1.2, -2)
+    }
+
+    def Xform "Spawner" (
+        active = true
+    )
+    {
+        float3 xformOp:translate = (0, 1, -2)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitCustomComponent "RealityKitContent_EntitySpawnerComponent"
+        {
+            uniform token info:id = "RealityKitContent.EntitySpawnerComponent"
+            token SpawnShape = "plane"
+            string TargetEntityName = "StepSphereBlue"
+        }
     }
 }
 

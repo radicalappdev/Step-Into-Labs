@@ -41,7 +41,8 @@ public struct EntitySpawnerComponent: Component, Codable {
     /// Whether to continuously check for disabled entities to respawn
     public var EnableRespawning: Bool = true
 
-    //    public var TargetEntity: Entity = Entity()
+    /// The name of the entity to clone
+    public var TargetEntityName: String = ""
 
     public init() {
 
@@ -117,19 +118,48 @@ public class EntitySpawnerSystem: System {
         }
     }
 
+    @MainActor private func findTargetEntity(from entity: Entity, name: String) -> Entity? {
+        // First find the root entity by traversing up
+        var root = entity
+        while let parent = root.parent {
+            root = parent
+        }
+        
+        // Then search down through the hierarchy
+        func search(in entity: Entity) -> Entity? {
+            if entity.name == name {
+                return entity
+            }
+            for child in entity.children {
+                if let found = search(in: child) {
+                    return found
+                }
+            }
+            return nil
+        }
+        
+        return search(in: root)
+    }
+
     public func update(context: SceneUpdateContext) {
         for entity in context.entities(
             matching: Self.query,
             updatingSystemWhen: .rendering
         ) {
             guard var spawnerComponent = entity.components[EntitySpawnerComponent.self] else { continue }
+            
+            // Skip if we don't have a target name
+            guard !spawnerComponent.TargetEntityName.isEmpty else { continue }
+            
+            // Find target entity using our spawner entity as the starting point
+            guard let targetEntity = findTargetEntity(from: entity, name: spawnerComponent.TargetEntityName) else { continue }
 
             if !spawnerComponent.HasSpawned {
                 // Initial spawn
-                spawnInitialEntities(entity: entity, component: &spawnerComponent)
+                spawnInitialEntities(spawner: entity, target: targetEntity, component: &spawnerComponent)
             } else if spawnerComponent.EnableRespawning {
                 // Check for disabled entities to respawn
-                respawnDisabledEntities(entity: entity, component: &spawnerComponent)
+                respawnDisabledEntities(spawner: entity, component: &spawnerComponent)
             }
 
             entity.components[EntitySpawnerComponent.self] = spawnerComponent
@@ -137,40 +167,46 @@ public class EntitySpawnerSystem: System {
     }
 
     @MainActor private func spawnInitialEntities(
-        entity: Entity,
+        spawner: Entity,
+        target: Entity,
         component: inout EntitySpawnerComponent
     ) {
         for _ in 1...component.Copies {
-            spawnEntity(entity: entity, component: component)
+            spawnEntity(spawner: spawner, target: target, component: component)
         }
         component.HasSpawned = true
         component.ActiveEntities = component.Copies
     }
 
     @MainActor private func respawnDisabledEntities(
-        entity: Entity,
+        spawner: Entity,
         component: inout EntitySpawnerComponent
     ) {
-        for child in entity.children {
+        for child in spawner.children {
             if !child.isEnabled {
-                child.position = positionForShape(component.SpawnShape, component: component)
+                // Transform the local position to spawner's space
+                let localOffset = positionForShape(component.SpawnShape, component: component)
+                child.position = localOffset
                 child.isEnabled = true
             }
         }
     }
 
     @MainActor private func spawnEntity(
-        entity: Entity,
+        spawner: Entity,
+        target: Entity,
         component: EntitySpawnerComponent
     ) {
-        let clone = entity.clone(recursive: false)
-        clone.components.remove(EntitySpawnerComponent.self)
-
+        let clone = target.clone(recursive: true)
+        
+        // Transform the local position to spawner's space
         let localOffset = positionForShape(component.SpawnShape, component: component)
         clone.position = localOffset
-        clone.orientation = entity.orientation
-
-        entity.addChild(clone)
+        
+        // Use spawner's orientation
+        clone.orientation = .init()  // Reset to identity since we're in spawner's space
+        
+        spawner.addChild(clone)
     }
 }
 
