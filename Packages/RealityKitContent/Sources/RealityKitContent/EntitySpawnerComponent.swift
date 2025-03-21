@@ -50,15 +50,15 @@ public struct EntitySpawnerComponent: Component, Codable {
 
 public class EntitySpawnerSystem: System {
     // Define a query to return all entities with a EntitySpawnerComponent.
-    private static let query = EntityQuery(where: .has(EntitySpawnerComponentLab016.self))
+    private static let query = EntityQuery(where: .has(EntitySpawnerComponent.self))
 
     // init is required even when not used
     required public init(scene: Scene) {
         // Perform required initialization or setup.
     }
 
-    private func positionForShape(_ shape: EntitySpawnerComponentLab016.SpawnShape,
-                                  component: EntitySpawnerComponentLab016) -> SIMD3<Float> {
+    private func positionForShape(_ shape: EntitySpawnerComponent.SpawnShape,
+                                  component: EntitySpawnerComponent) -> SIMD3<Float> {
         switch shape {
         case .domeUpper:
             let distance = Float.random(in: 1...component.Radius)
@@ -122,7 +122,7 @@ public class EntitySpawnerSystem: System {
             matching: Self.query,
             updatingSystemWhen: .rendering
         ) {
-            guard var spawnerComponent = entity.components[EntitySpawnerComponentLab016.self] else { continue }
+            guard var spawnerComponent = entity.components[EntitySpawnerComponent.self] else { continue }
 
             if !spawnerComponent.HasSpawned {
                 // Initial spawn
@@ -132,13 +132,13 @@ public class EntitySpawnerSystem: System {
                 respawnDisabledEntities(entity: entity, component: &spawnerComponent)
             }
 
-            entity.components[EntitySpawnerComponentLab016.self] = spawnerComponent
+            entity.components[EntitySpawnerComponent.self] = spawnerComponent
         }
     }
 
     @MainActor private func spawnInitialEntities(
         entity: Entity,
-        component: inout EntitySpawnerComponentLab016
+        component: inout EntitySpawnerComponent
     ) {
         for _ in 1...component.Copies {
             spawnEntity(entity: entity, component: component)
@@ -149,7 +149,7 @@ public class EntitySpawnerSystem: System {
 
     @MainActor private func respawnDisabledEntities(
         entity: Entity,
-        component: inout EntitySpawnerComponentLab016
+        component: inout EntitySpawnerComponent
     ) {
         for child in entity.children {
             if !child.isEnabled {
@@ -161,10 +161,10 @@ public class EntitySpawnerSystem: System {
 
     @MainActor private func spawnEntity(
         entity: Entity,
-        component: EntitySpawnerComponentLab016
+        component: EntitySpawnerComponent
     ) {
         let clone = entity.clone(recursive: false)
-        clone.components.remove(EntitySpawnerComponentLab016.self)
+        clone.components.remove(EntitySpawnerComponent.self)
 
         let localOffset = positionForShape(component.SpawnShape, component: component)
         clone.position = localOffset
