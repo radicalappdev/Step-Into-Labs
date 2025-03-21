@@ -17,8 +17,8 @@ import RealityKitContent
 struct Lab016: View {
 
     init() {
-        EntitySpawnerComponent.registerComponent()
-        EntitySpawnerSystem.registerSystem()
+        EntitySpawnerComponentLab016.registerComponent()
+        EntitySpawnerSystemLab016.registerSystem()
     }
 
 
@@ -53,7 +53,7 @@ struct Lab016: View {
             .targetedToAnyEntity()
             .onEnded { value in
                 // Skip if this is the original (spawner) entity
-                if value.entity.components[EntitySpawnerComponent.self] != nil {
+                if value.entity.components[EntitySpawnerComponentLab016.self] != nil {
                     return
                 }
                 value.entity.isEnabled = false

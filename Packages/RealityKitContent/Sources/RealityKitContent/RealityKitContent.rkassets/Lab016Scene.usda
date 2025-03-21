@@ -42,14 +42,9 @@ def Xform "Root"
             }
         }
 
-        def RealityKitCustomComponent "RealityKitContent_EntitySpawnerComponent"
+        def RealityKitCustomComponent "RealityKitContent_EntitySpawnerComponentLab016"
         {
-            float3 BoxDimensions = (2, 1, 2)
-            int Copies = 10
-            uniform token info:id = "RealityKitContent.EntitySpawnerComponent"
-            float2 PlaneDimensions = (3, 1)
-            float Radius = 1
-            token SpawnShape = "box"
+            uniform token info:id = "RealityKitContent.EntitySpawnerComponentLab016"
         }
     }
 
@@ -65,10 +60,9 @@ def Xform "Root"
         float3 xformOp:scale = (1, 1, 1)
         float3 xformOp:translate = (0, 1.2, -2)
 
-        def RealityKitCustomComponent "RealityKitContent_EntitySpawnerComponent"
+        def RealityKitCustomComponent "RealityKitContent_EntitySpawnerComponentLab016"
         {
-            uniform token info:id = "RealityKitContent.EntitySpawnerComponent"
-            float2 PlaneDimensions = (1.5, 1.5)
+            uniform token info:id = "RealityKitContent.EntitySpawnerComponentLab016"
             token SpawnShape = "plane"
         }
     }
@@ -81,10 +75,9 @@ def Xform "Root"
         float3 xformOp:scale = (1, 1, 1)
         float3 xformOp:translate = (-2.130386, 1.2, -2)
 
-        def RealityKitCustomComponent "RealityKitContent_EntitySpawnerComponent"
+        def RealityKitCustomComponent "RealityKitContent_EntitySpawnerComponentLab016"
         {
-            uniform token info:id = "RealityKitContent.EntitySpawnerComponent"
-            float Radius = 1
+            uniform token info:id = "RealityKitContent.EntitySpawnerComponentLab016"
         }
     }
 }

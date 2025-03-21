@@ -1,12 +1,7 @@
 {
   "advancedEditorSelectedIdentifier" : "ProjectBrowser",
   "openSceneRelativePaths" : [
-    "PortalPlayground.usda",
-    "PortalBall.usda",
-    "PortalSwapRed.usda",
-    "PortalSwapBlue.usda",
-    "PortalDoorway.usda",
-    "Lab011Scene.usda"
+    "Lab016Scene.usda"
   ],
   "recentIdentifiers" : {
     "00AC74E2-A464-4F74-A445-36CD76630287" : [
@@ -6071,5 +6066,5 @@
   "sceneViewportBackgroundColors" : {
 
   },
-  "selectedSceneRelativePath" : "PortalDoorway.usda"
+  "selectedSceneRelativePath" : "Lab016Scene.usda"
 }
