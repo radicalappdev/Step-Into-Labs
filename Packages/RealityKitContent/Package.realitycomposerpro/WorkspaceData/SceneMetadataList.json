@@ -1462,6 +1462,15 @@
       {
         "isExpanded" : true,
         "isLocked" : false
+      },
+      [
+        "B4860F40-B1DE-42EA-9488-423A581F8D6E",
+        "Root",
+        "StepDome"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
       }
     ]
   },
@@ -2054,6 +2063,25 @@
   },
   "EA8D1646-C694-44B7-9909-9B2659F2661C" : {
     "objectMetadataList" : [
+      [
+        "EA8D1646-C694-44B7-9909-9B2659F2661C",
+        "Root",
+        "StepDome",
+        "SkyDome"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "EA8D1646-C694-44B7-9909-9B2659F2661C",
+        "Root",
+        "StepDome"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
       [
         "EA8D1646-C694-44B7-9909-9B2659F2661C",
         "Root"

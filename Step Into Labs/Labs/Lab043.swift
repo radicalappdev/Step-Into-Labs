@@ -27,7 +27,8 @@ struct Lab043: View {
             content.add(scene)
 
             guard let baseMaterial = scene.findEntity(named: "Base")?.components[ModelComponent.self]?.materials.first,
-                  let shapeVisMaterial = scene.findEntity(named: "ShapeVis")?.components[ModelComponent.self]?.materials.first 
+                  let shapeVisMaterial = scene.findEntity(named: "ShapeVis")?.components[ModelComponent.self]?.materials.first,
+                  let domeVis = scene.findEntity(named: "DomeVis") 
             else { return }
 
             // Behind player (z = 2)
@@ -68,21 +69,24 @@ struct Lab043: View {
             )
             scene.addChild(sphereSpawner)
 
+            // Upper dome spawner
             let upperDomeSpawner = createSpawnerSetup(
                 position: [0, 1.5, -2],
                 baseMaterial: baseMaterial as! PhysicallyBasedMaterial,
                 shapeVisMaterial: shapeVisMaterial as! PhysicallyBasedMaterial,
                 spawnShape: .domeUpper,
-                visualizationMesh: .generateSphere(radius: 0.55)
+                visualizationEntity: domeVis.clone(recursive: true)
             )
             scene.addChild(upperDomeSpawner)
 
+            // Lower dome spawner - clone and rotate the dome visualization
             let lowerDomeSpawner = createSpawnerSetup(
                 position: [2, 1.5, -2],
                 baseMaterial: baseMaterial as! PhysicallyBasedMaterial,
                 shapeVisMaterial: shapeVisMaterial as! PhysicallyBasedMaterial,
                 spawnShape: .domeLower,
-                visualizationMesh: .generateSphere(radius: 0.55)
+                visualizationEntity: domeVis.clone(recursive: true),
+                rotateVisualization: true
             )
             scene.addChild(lowerDomeSpawner)
         } update: { content, attachments in
@@ -100,7 +104,9 @@ struct Lab043: View {
         baseMaterial: PhysicallyBasedMaterial,
         shapeVisMaterial: PhysicallyBasedMaterial,
         spawnShape: EntitySpawnerComponent.SpawnShape,
-        visualizationMesh: MeshResource
+        visualizationMesh: MeshResource? = nil,
+        visualizationEntity: Entity? = nil,
+        rotateVisualization: Bool = false
     ) -> Entity {
         // Create the base platform - this will be our parent entity
         let base = ModelEntity(
@@ -165,11 +171,21 @@ struct Lab043: View {
         base.addChild(rightWall)
 
         // Create spawn volume visualization
-        let shapeVis = ModelEntity(
-            mesh: visualizationMesh,
-            materials: [shapeVisMaterial]
-        )
+        let shapeVis: Entity
+        if let visualizationEntity = visualizationEntity {
+            shapeVis = visualizationEntity
+            if rotateVisualization {
+                // Rotate 180 degrees for lower dome
+                shapeVis.orientation = simd_quatf(angle: .pi, axis: [1, 0, 0])
+            }
+        } else {
+            shapeVis = ModelEntity(
+                mesh: visualizationMesh!,
+                materials: [shapeVisMaterial]
+            )
+        }
         shapeVis.position = [0, 1, 0]
+        shapeVis.components.remove(InputTargetComponent.self)
         base.addChild(shapeVis)
 
         // Create and setup spawner
