@@ -55,7 +55,7 @@ public class EntitySpawnerSystem: System {
                                   component: EntitySpawnerComponent) -> SIMD3<Float> {
         switch shape {
         case .domeUpper:
-            let distance = Float.random(in: 1...component.Radius)
+            let distance = Float.random(in: 0...component.Radius)
             let theta = Float.random(in: 0...(2 * .pi))
             let phi = Float.random(in: 0...(Float.pi / 2))
             return SIMD3(
@@ -65,7 +65,7 @@ public class EntitySpawnerSystem: System {
             )
 
         case .domeLower:
-            let distance = Float.random(in: 1...component.Radius)
+            let distance = Float.random(in: 0...component.Radius)
             let theta = Float.random(in: 0...(2 * .pi))
             let phi = Float.random(in: (Float.pi / 2)...Float.pi)
             return SIMD3(
@@ -75,7 +75,7 @@ public class EntitySpawnerSystem: System {
             )
 
         case .sphere:
-            let distance = Float.random(in: 1...component.Radius)
+            let distance = Float.random(in: 0...component.Radius)
             let theta = Float.random(in: 0...(2 * .pi))
             let phi = Float.random(in: 0...Float.pi)
             return SIMD3(

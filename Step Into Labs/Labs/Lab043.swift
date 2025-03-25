@@ -30,9 +30,9 @@ struct Lab043: View {
                   let shapeVisMaterial = scene.findEntity(named: "ShapeVis")?.components[ModelComponent.self]?.materials.first 
             else { return }
 
-            // Box spawner (moved to the left)
+            // Behind player (z = 2)
             let boxSpawner = createSpawnerSetup(
-                position: [-2, 1.5, -2],
+                position: [-2, 1.5, 2],
                 baseMaterial: baseMaterial as! PhysicallyBasedMaterial,
                 shapeVisMaterial: shapeVisMaterial as! PhysicallyBasedMaterial,
                 spawnShape: .box,
@@ -40,9 +40,8 @@ struct Lab043: View {
             )
             scene.addChild(boxSpawner)
 
-            // Plane spawner
             let planeSpawner = createSpawnerSetup(
-                position: [0, 1.5, -2],
+                position: [0, 1.5, 2],
                 baseMaterial: baseMaterial as! PhysicallyBasedMaterial,
                 shapeVisMaterial: shapeVisMaterial as! PhysicallyBasedMaterial,
                 spawnShape: .plane,
@@ -50,15 +49,42 @@ struct Lab043: View {
             )
             scene.addChild(planeSpawner)
 
-            // Circle spawner
             let circleSpawner = createSpawnerSetup(
-                position: [2, 1.5, -2],
+                position: [2, 1.5, 2],
                 baseMaterial: baseMaterial as! PhysicallyBasedMaterial,
                 shapeVisMaterial: shapeVisMaterial as! PhysicallyBasedMaterial,
                 spawnShape: .circle,
                 visualizationMesh: .generateCylinder(height: 0.01, radius: 0.55)
             )
             scene.addChild(circleSpawner)
+
+            // In front of player (z = -2)
+            let sphereSpawner = createSpawnerSetup(
+                position: [-2, 1.5, -2],
+                baseMaterial: baseMaterial as! PhysicallyBasedMaterial,
+                shapeVisMaterial: shapeVisMaterial as! PhysicallyBasedMaterial,
+                spawnShape: .sphere,
+                visualizationMesh: .generateSphere(radius: 0.55)
+            )
+            scene.addChild(sphereSpawner)
+
+            let upperDomeSpawner = createSpawnerSetup(
+                position: [0, 1.5, -2],
+                baseMaterial: baseMaterial as! PhysicallyBasedMaterial,
+                shapeVisMaterial: shapeVisMaterial as! PhysicallyBasedMaterial,
+                spawnShape: .domeUpper,
+                visualizationMesh: .generateSphere(radius: 0.55)
+            )
+            scene.addChild(upperDomeSpawner)
+
+            let lowerDomeSpawner = createSpawnerSetup(
+                position: [2, 1.5, -2],
+                baseMaterial: baseMaterial as! PhysicallyBasedMaterial,
+                shapeVisMaterial: shapeVisMaterial as! PhysicallyBasedMaterial,
+                spawnShape: .domeLower,
+                visualizationMesh: .generateSphere(radius: 0.55)
+            )
+            scene.addChild(lowerDomeSpawner)
         } update: { content, attachments in
         } attachments: {
             Attachment(id: "AttachmentContent") {
@@ -157,11 +183,11 @@ struct Lab043: View {
         case .plane:
             spawnerComponent.PlaneDimensions = [1, 1]
         case .circle:
-            spawnerComponent.Radius = 0.5 
+            spawnerComponent.Radius = 0.5
         case .box:
             spawnerComponent.BoxDimensions = [1, 1, 1]
-        default:
-            break
+        case .sphere, .domeUpper, .domeLower:
+            spawnerComponent.Radius = 0.5
         }
 
         spawnerComponent.Copies = 10
