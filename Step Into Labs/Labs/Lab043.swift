@@ -126,7 +126,7 @@ struct Lab043: View {
         )
         base.components.set(InputTargetComponent())
 
-        // Create a template wall
+        // Create walls for the base
         let wallHeight: Float = 0.1
         let wallThickness: Float = 0.05
         let wallWidth: Float = 1.1
@@ -145,38 +145,21 @@ struct Lab043: View {
             mode: .static
         ))
 
-        // Front wall
         let frontWall = wallTemplate.clone(recursive: true)
         frontWall.position = [0, wallHeight/2, 0.55 - wallThickness/2]
         base.addChild(frontWall)
 
-        // Back wall
         let backWall = wallTemplate.clone(recursive: true)
         backWall.position = [0, wallHeight/2, -0.55 + wallThickness/2]
         base.addChild(backWall)
 
-        // Side walls - need different dimensions
-        let sideWallTemplate = Entity()
-        sideWallTemplate.components.set(ModelComponent(
-            mesh: .generateBox(width: wallThickness, height: wallHeight, depth: wallWidth),
-            materials: [baseMaterial]
-        ))
-        sideWallTemplate.components.set(CollisionComponent(
-            shapes: [.generateBox(width: wallThickness, height: wallHeight, depth: wallWidth)]
-        ))
-        sideWallTemplate.components.set(PhysicsBodyComponent(
-            massProperties: .init(mass: 1.0),
-            material: .default,
-            mode: .static
-        ))
-
-        // Left wall
-        let leftWall = sideWallTemplate.clone(recursive: true)
+        let leftWall = wallTemplate.clone(recursive: true)
+        leftWall.orientation = simd_quatf(angle: .pi/2, axis: [0, 1, 0])
         leftWall.position = [-0.55 + wallThickness/2, wallHeight/2, 0]
         base.addChild(leftWall)
 
-        // Right wall
-        let rightWall = sideWallTemplate.clone(recursive: true)
+        let rightWall = wallTemplate.clone(recursive: true)
+        rightWall.orientation = simd_quatf(angle: -.pi/2, axis: [0, 1, 0])
         rightWall.position = [0.55 - wallThickness/2, wallHeight/2, 0]
         base.addChild(rightWall)
 
