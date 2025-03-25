@@ -2065,25 +2065,6 @@
     "objectMetadataList" : [
       [
         "EA8D1646-C694-44B7-9909-9B2659F2661C",
-        "Root",
-        "StepDome",
-        "SkyDome"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "EA8D1646-C694-44B7-9909-9B2659F2661C",
-        "Root",
-        "StepDome"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "EA8D1646-C694-44B7-9909-9B2659F2661C",
         "Root"
       ],
       {

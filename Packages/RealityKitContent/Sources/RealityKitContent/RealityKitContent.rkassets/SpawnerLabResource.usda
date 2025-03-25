@@ -61,6 +61,11 @@ def Xform "Root"
                 token shapeType = "Sphere"
             }
         }
+
+        def RealityKitComponent "MotionState"
+        {
+            uniform token info:id = "RealityKit.MotionState"
+        }
     }
 
     def Cube "Base" (

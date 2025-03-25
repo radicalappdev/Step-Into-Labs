@@ -21,6 +21,8 @@ struct Lab043: View {
         EntitySpawnerSystem.registerSystem()
     }
 
+    @State var collisionEvent: EventSubscription?
+
     var body: some View {
         RealityView { content in
             guard let scene = try? await Entity(named: "SpawnerLabResource", in: realityKitContentBundle)  else { return }
@@ -29,7 +31,8 @@ struct Lab043: View {
             guard let baseTemplate = scene.findEntity(named: "Base"),
                   let shapeVisTemplate = scene.findEntity(named: "ShapeVis"),
                   let domeVis = scene.findEntity(named: "DomeVis"),
-                  let subject = scene.findEntity(named: "Subject")
+                  let subject = scene.findEntity(named: "Subject"),
+                  let floor = scene.findEntity(named: "Floor")
             else { return }
 
             guard let baseMaterial = baseTemplate.components[ModelComponent.self]?.materials.first as? PhysicallyBasedMaterial,
@@ -90,6 +93,13 @@ struct Lab043: View {
                 rotateVisualization: true
             )
             scene.addChild(lowerDomeSpawner)
+
+            // Disable any spheres that reach the floor
+            collisionEvent = content
+                .subscribe(to: CollisionEvents.Began.self, on: floor)  { event in
+                    event.entityB.isEnabled = false
+                    event.entityB.components.set(PhysicsMotionComponent())
+                }
 
             // Disable all template entities after using them
             baseTemplate.isEnabled = false
@@ -209,11 +219,8 @@ struct Lab043: View {
 
     var tap: some Gesture {
         TapGesture()
-            .targetedToAnyEntity()
+            .targetedToEntity(where: .has(PhysicsMotionComponent.self))
             .onEnded { value in
-                if value.entity.components[EntitySpawnerComponent.self] != nil {
-                    return
-                }
                 value.entity.isEnabled = false
             }
     }
