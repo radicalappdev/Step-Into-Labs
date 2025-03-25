@@ -18,8 +18,7 @@ public struct EntitySpawnerComponent: Component, Codable {
         case circle
     }
 
-
-    /// The number of entities to manage in the pool
+    /// The number of entities to spawn
     public var Copies: Int = 12
     /// The shape to spawn entities in
     public var SpawnShape: SpawnShape = .domeUpper
@@ -32,11 +31,8 @@ public struct EntitySpawnerComponent: Component, Codable {
     /// Dimensions for plane spawning (width, depth)
     public var PlaneDimensions: SIMD2<Float> = [2.0, 2.0]
 
-    /// Track if we've already spawned copies
+    /// Track if we've already spawned initial copies
     public var HasSpawned: Bool = false
-
-    /// Track active entities for pool management
-    public var ActiveEntities: Int = 0
 
     /// Whether to continuously check for disabled entities to respawn
     public var EnableRespawning: Bool = true
@@ -44,9 +40,7 @@ public struct EntitySpawnerComponent: Component, Codable {
     /// The name of the entity to clone
     public var TargetEntityName: String = ""
 
-    public init() {
-
-    }
+    public init() { }
 }
 
 public class EntitySpawnerSystem: System {
@@ -162,7 +156,6 @@ public class EntitySpawnerSystem: System {
             spawnEntity(spawner: spawner, target: target, component: component)
         }
         component.HasSpawned = true
-        component.ActiveEntities = component.Copies
     }
 
     @MainActor private func respawnDisabledEntities(

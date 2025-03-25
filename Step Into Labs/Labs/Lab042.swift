@@ -52,8 +52,8 @@ struct Lab042: View {
         TapGesture()
             .targetedToAnyEntity()
             .onEnded { value in
-                // Skip if this is the original (spawner) entity
-                if value.entity.components[EntitySpawnerComponentLab016.self] != nil {
+                // Skip if this is the spawner entity
+                if value.entity.components[EntitySpawnerComponent.self] != nil {
                     return
                 }
                 value.entity.isEnabled = false
