@@ -30,13 +30,25 @@ struct Lab043: View {
                   let shapeVisMaterial = scene.findEntity(named: "ShapeVis")?.components[ModelComponent.self]?.materials.first 
             else { return }
 
-            let spawnerSetup = createSpawnerSetup(
-                position: [0, 1.5, -2],
+            // Box spawner (moved to the left)
+            let boxSpawner = createSpawnerSetup(
+                position: [-2, 1.5, -2],
                 baseMaterial: baseMaterial as! PhysicallyBasedMaterial,
-                shapeVisMaterial: shapeVisMaterial as! PhysicallyBasedMaterial
+                shapeVisMaterial: shapeVisMaterial as! PhysicallyBasedMaterial,
+                spawnShape: .box,
+                visualizationMesh: .generateBox(width: 1.1, height: 1.1, depth: 1.1)
             )
-            scene.addChild(spawnerSetup)
+            scene.addChild(boxSpawner)
 
+            // Plane spawner
+            let planeSpawner = createSpawnerSetup(
+                position: [2, 1.5, -2],
+                baseMaterial: baseMaterial as! PhysicallyBasedMaterial,
+                shapeVisMaterial: shapeVisMaterial as! PhysicallyBasedMaterial,
+                spawnShape: .plane,
+                visualizationMesh: .generatePlane(width: 1.1, depth: 1.1)
+            )
+            scene.addChild(planeSpawner)
         } update: { content, attachments in
         } attachments: {
             Attachment(id: "AttachmentContent") {
@@ -50,7 +62,9 @@ struct Lab043: View {
     private func createSpawnerSetup(
         position: SIMD3<Float>,
         baseMaterial: PhysicallyBasedMaterial,
-        shapeVisMaterial: PhysicallyBasedMaterial
+        shapeVisMaterial: PhysicallyBasedMaterial,
+        spawnShape: EntitySpawnerComponent.SpawnShape,
+        visualizationMesh: MeshResource
     ) -> Entity {
         // Create the base platform - this will be our parent entity
         let base = ModelEntity(
@@ -114,20 +128,24 @@ struct Lab043: View {
         rightWall.position = [0.55 - wallThickness/2, wallHeight/2, 0]
         base.addChild(rightWall)
 
-        // Create spawn volume visualization as child of base
+        // Create spawn volume visualization
         let shapeVis = ModelEntity(
-            mesh: .generateBox(width: 1.1, height: 1.1, depth: 1.1),
+            mesh: visualizationMesh,
             materials: [shapeVisMaterial]
         )
         shapeVis.position = [0, 1, 0]
         base.addChild(shapeVis)
 
-        // Create and setup spawner as child of base
+        // Create and setup spawner
         let spawner = Entity()
         spawner.position = [0, 1, 0]
         var spawnerComponent = EntitySpawnerComponent()
-        spawnerComponent.SpawnShape = .box
-        spawnerComponent.BoxDimensions = [1, 1, 1]
+        spawnerComponent.SpawnShape = spawnShape
+        if spawnShape == .plane {
+            spawnerComponent.PlaneDimensions = [1, 1]
+        } else {
+            spawnerComponent.BoxDimensions = [1, 1, 1]
+        }
         spawnerComponent.Copies = 10
         spawnerComponent.TargetEntityName = "Subject"
         spawner.components[EntitySpawnerComponent.self] = spawnerComponent
@@ -140,6 +158,9 @@ struct Lab043: View {
         TapGesture()
             .targetedToAnyEntity()
             .onEnded { value in
+                if value.entity.components[EntitySpawnerComponent.self] != nil {
+                    return
+                }
                 value.entity.isEnabled = false
             }
     }
