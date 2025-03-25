@@ -61,7 +61,9 @@ def Xform "Root"
 
         def RealityKitCustomComponent "RealityKitContent_EntitySpawnerComponent"
         {
+            bool EnableRespawning = 1
             uniform token info:id = "RealityKitContent.EntitySpawnerComponent"
+            token SpawnShape = "box"
             string TargetEntityName = "StepSphereBlue"
         }
     }

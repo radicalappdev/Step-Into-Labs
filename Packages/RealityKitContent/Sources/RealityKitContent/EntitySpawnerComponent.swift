@@ -20,8 +20,10 @@ public struct EntitySpawnerComponent: Component, Codable {
 
     /// The number of entities to spawn
     public var Copies: Int = 12
+   
     /// The shape to spawn entities in
     public var SpawnShape: SpawnShape = .domeUpper
+   
     /// Radius for spherical shapes (dome, sphere, circle)
     public var Radius: Float = 5.0
 
@@ -30,9 +32,6 @@ public struct EntitySpawnerComponent: Component, Codable {
 
     /// Dimensions for plane spawning (width, depth)
     public var PlaneDimensions: SIMD2<Float> = [2.0, 2.0]
-
-    /// Track if we've already spawned initial copies
-    public var HasSpawned: Bool = false
 
     /// Whether to continuously check for disabled entities to respawn
     public var EnableRespawning: Bool = true
@@ -128,18 +127,14 @@ public class EntitySpawnerSystem: System {
             updatingSystemWhen: .rendering
         ) {
             guard var spawnerComponent = entity.components[EntitySpawnerComponent.self] else { continue }
-            
-            // Skip if we don't have a target name
             guard !spawnerComponent.TargetEntityName.isEmpty else { continue }
-            
-            // Find target entity using our spawner entity as the starting point
             guard let targetEntity = findTargetEntity(from: entity, name: spawnerComponent.TargetEntityName) else { continue }
 
-            if !spawnerComponent.HasSpawned {
-                // Initial spawn
-                spawnInitialEntities(spawner: entity, target: targetEntity, component: &spawnerComponent)
+            // Spawn if we don't have enough children
+            if entity.children.count < spawnerComponent.Copies {
+                let needed = spawnerComponent.Copies - entity.children.count
+                spawnEntities(spawner: entity, target: targetEntity, count: needed, component: &spawnerComponent)
             } else if spawnerComponent.EnableRespawning {
-                // Check for disabled entities to respawn
                 respawnDisabledEntities(spawner: entity, component: &spawnerComponent)
             }
 
@@ -147,15 +142,15 @@ public class EntitySpawnerSystem: System {
         }
     }
 
-    @MainActor private func spawnInitialEntities(
+    @MainActor private func spawnEntities(
         spawner: Entity,
         target: Entity,
+        count: Int,
         component: inout EntitySpawnerComponent
     ) {
-        for _ in 1...component.Copies {
+        for _ in 0..<count {
             spawnEntity(spawner: spawner, target: target, component: component)
         }
-        component.HasSpawned = true
     }
 
     @MainActor private func respawnDisabledEntities(
