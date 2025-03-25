@@ -186,12 +186,9 @@ public class EntitySpawnerSystem: System {
     ) {
         let clone = target.clone(recursive: true)
         
-        // Transform the local position to spawner's space
         let localOffset = positionForShape(component.SpawnShape, component: component)
         clone.position = localOffset
-        
-        // Use spawner's orientation
-        clone.orientation = .init()  // Reset to identity since we're in spawner's space
+        clone.orientation = .init()
         
         spawner.addChild(clone)
     }
