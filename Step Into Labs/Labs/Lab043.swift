@@ -89,6 +89,18 @@ struct Lab043: View {
                 rotateVisualization: true
             )
             scene.addChild(lowerDomeSpawner)
+
+            // Disable template/resource entities after using them
+            if let baseTemplate = scene.findEntity(named: "Base") {
+                baseTemplate.isEnabled = false
+            }
+            if let shapeVisTemplate = scene.findEntity(named: "ShapeVis") {
+                shapeVisTemplate.isEnabled = false
+            }
+            domeVis.isEnabled = false
+            if let subject = scene.findEntity(named: "Subject") {
+                subject.isEnabled = false
+            }
         } update: { content, attachments in
         } attachments: {
             Attachment(id: "AttachmentContent") {
