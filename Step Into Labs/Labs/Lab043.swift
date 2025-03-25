@@ -54,11 +54,11 @@ struct Lab043: View {
     ) -> Entity {
         // Create the base platform - this will be our parent entity
         let base = ModelEntity(
-            mesh: .generateBox(width: 1, height: 0.1, depth: 1),
+            mesh: .generateBox(width: 1.1, height: 0.1, depth: 1.1),
             materials: [baseMaterial]
         )
         base.position = position
-        base.collision = CollisionComponent(shapes: [.generateBox(width: 1, height: 0.1, depth: 1)])
+        base.collision = CollisionComponent(shapes: [.generateBox(width: 1.1, height: 0.1, depth: 1.1)])
         base.physicsBody = PhysicsBodyComponent(
             massProperties: .init(mass: 1.0),
             material: .default,
@@ -66,17 +66,65 @@ struct Lab043: View {
         )
         base.components.set(InputTargetComponent())
 
+        // Add walls to the base
+        let wallHeight: Float = 0.1
+        let wallThickness: Float = 0.05
+        
+        // Front wall
+        let frontWall = Entity()
+        frontWall.components.set(ModelComponent(
+            mesh: .generateBox(width: 1.1, height: wallHeight, depth: wallThickness),
+            materials: [baseMaterial]
+        ))
+        frontWall.components.set(CollisionComponent(shapes: [.generateBox(width: 1.1, height: wallHeight, depth: wallThickness)]))
+        frontWall.components.set(PhysicsBodyComponent(massProperties: .init(mass: 1.0), material: .default, mode: .static))
+        frontWall.position = [0, wallHeight/2, 0.55 - wallThickness/2]
+        base.addChild(frontWall)
+        
+        // Back wall
+        let backWall = Entity()
+        backWall.components.set(ModelComponent(
+            mesh: .generateBox(width: 1.1, height: wallHeight, depth: wallThickness),
+            materials: [baseMaterial]
+        ))
+        backWall.components.set(CollisionComponent(shapes: [.generateBox(width: 1.1, height: wallHeight, depth: wallThickness)]))
+        backWall.components.set(PhysicsBodyComponent(massProperties: .init(mass: 1.0), material: .default, mode: .static))
+        backWall.position = [0, wallHeight/2, -0.55 + wallThickness/2]
+        base.addChild(backWall)
+        
+        // Left wall
+        let leftWall = Entity()
+        leftWall.components.set(ModelComponent(
+            mesh: .generateBox(width: wallThickness, height: wallHeight, depth: 1.1),
+            materials: [baseMaterial]
+        ))
+        leftWall.components.set(CollisionComponent(shapes: [.generateBox(width: wallThickness, height: wallHeight, depth: 1.1)]))
+        leftWall.components.set(PhysicsBodyComponent(massProperties: .init(mass: 1.0), material: .default, mode: .static))
+        leftWall.position = [-0.55 + wallThickness/2, wallHeight/2, 0]
+        base.addChild(leftWall)
+        
+        // Right wall
+        let rightWall = Entity()
+        rightWall.components.set(ModelComponent(
+            mesh: .generateBox(width: wallThickness, height: wallHeight, depth: 1.1),
+            materials: [baseMaterial]
+        ))
+        rightWall.components.set(CollisionComponent(shapes: [.generateBox(width: wallThickness, height: wallHeight, depth: 1.1)]))
+        rightWall.components.set(PhysicsBodyComponent(massProperties: .init(mass: 1.0), material: .default, mode: .static))
+        rightWall.position = [0.55 - wallThickness/2, wallHeight/2, 0]
+        base.addChild(rightWall)
+
         // Create spawn volume visualization as child of base
         let shapeVis = ModelEntity(
             mesh: .generateBox(width: 1.1, height: 1.1, depth: 1.1),
             materials: [shapeVisMaterial]
         )
-        shapeVis.position = [0, 1, 0]  // 1m above base
+        shapeVis.position = [0, 1, 0]
         base.addChild(shapeVis)
 
         // Create and setup spawner as child of base
         let spawner = Entity()
-        spawner.position = [0, 1, 0]  // Same height as visualization
+        spawner.position = [0, 1, 0]
         var spawnerComponent = EntitySpawnerComponent()
         spawnerComponent.SpawnShape = .box
         spawnerComponent.BoxDimensions = [1, 1, 1]
