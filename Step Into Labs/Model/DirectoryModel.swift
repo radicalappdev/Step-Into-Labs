@@ -330,9 +330,16 @@ class ModelData {
 
         ,Lab(title: "Lab 042",
              type: .SPACE,
-             date: Date("3/121/2025"),
+             date: Date("3/21/2025"),
              isFeatured: true,
              subtitle: "Second pass at an Entity Spawner",
+             description: "Using Components and Systems to create an entity spawner system.")
+
+        ,Lab(title: "Lab 043",
+             type: .SPACE,
+             date: Date("3/25/2025"),
+             isFeatured: true,
+             subtitle: "Visualize the Entity Spawner",
              description: "Using Components and Systems to create an entity spawner system.")
 
 

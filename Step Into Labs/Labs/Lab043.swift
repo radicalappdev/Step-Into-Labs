@@ -24,7 +24,7 @@ struct Lab043: View {
     var body: some View {
         RealityView { content, attachments in
 
-            if let scene = try? await Entity(named: "SpawnerLabResources", in: realityKitContentBundle) {
+            if let scene = try? await Entity(named: "SpawnerLabResource", in: realityKitContentBundle) {
                 content.add(scene)
 
                 // The entity we'll clone in the different spawners.
