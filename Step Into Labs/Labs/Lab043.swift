@@ -22,23 +22,20 @@ struct Lab043: View {
     }
 
     var body: some View {
-        RealityView { content, attachments in
+        RealityView { content in
             guard let scene = try? await Entity(named: "SpawnerLabResource", in: realityKitContentBundle)  else { return }
             content.add(scene)
 
-            // Find all template entities first
             guard let baseTemplate = scene.findEntity(named: "Base"),
                   let shapeVisTemplate = scene.findEntity(named: "ShapeVis"),
                   let domeVis = scene.findEntity(named: "DomeVis"),
                   let subject = scene.findEntity(named: "Subject")
             else { return }
 
-            // Get materials from templates
             guard let baseMaterial = baseTemplate.components[ModelComponent.self]?.materials.first as? PhysicallyBasedMaterial,
                   let shapeVisMaterial = shapeVisTemplate.components[ModelComponent.self]?.materials.first as? PhysicallyBasedMaterial
             else { return }
 
-            // Behind player (z = 2)
             let boxSpawner = createSpawnerSetup(
                 position: [-2, 1.5, 2],
                 baseMaterial: baseMaterial,
@@ -66,7 +63,6 @@ struct Lab043: View {
             )
             scene.addChild(circleSpawner)
 
-            // In front of player (z = -2)
             let sphereSpawner = createSpawnerSetup(
                 position: [-2, 1.5, -2],
                 baseMaterial: baseMaterial,
@@ -76,7 +72,6 @@ struct Lab043: View {
             )
             scene.addChild(sphereSpawner)
 
-            // Upper dome spawner
             let upperDomeSpawner = createSpawnerSetup(
                 position: [0, 1.5, -2],
                 baseMaterial: baseMaterial,
@@ -86,7 +81,6 @@ struct Lab043: View {
             )
             scene.addChild(upperDomeSpawner)
 
-            // Lower dome spawner - clone and rotate the dome visualization
             let lowerDomeSpawner = createSpawnerSetup(
                 position: [2, 1.5, -2],
                 baseMaterial: baseMaterial,
@@ -102,11 +96,7 @@ struct Lab043: View {
             shapeVisTemplate.isEnabled = false
             domeVis.isEnabled = false
             subject.isEnabled = false
-        } update: { content, attachments in
-        } attachments: {
-            Attachment(id: "AttachmentContent") {
-                Text("wow")
-            }
+
         }
         .gesture(tap)
         .modifier(DragGestureImproved())
@@ -121,7 +111,8 @@ struct Lab043: View {
         visualizationEntity: Entity? = nil,
         rotateVisualization: Bool = false
     ) -> Entity {
-        // Create the base platform - this will be our parent entity
+
+        // Create the base platform as a parent entity
         let base = ModelEntity(
             mesh: .generateBox(width: 1.1, height: 0.1, depth: 1.1),
             materials: [baseMaterial]
