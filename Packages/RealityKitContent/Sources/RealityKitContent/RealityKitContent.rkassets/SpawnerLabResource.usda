@@ -49,7 +49,7 @@ def Xform "Root"
 
             def RealityKitStruct "material"
             {
-                double restitution = 1
+                double restitution = 0.2
             }
         }
 

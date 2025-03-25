@@ -2054,7 +2054,14 @@
   },
   "EA8D1646-C694-44B7-9909-9B2659F2661C" : {
     "objectMetadataList" : [
-
+      [
+        "EA8D1646-C694-44B7-9909-9B2659F2661C",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
     ]
   },
   "EE4E9B65-08F0-49B1-A553-D543CC6E0965" : {
