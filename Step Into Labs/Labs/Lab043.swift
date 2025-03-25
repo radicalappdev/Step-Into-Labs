@@ -26,16 +26,23 @@ struct Lab043: View {
             guard let scene = try? await Entity(named: "SpawnerLabResource", in: realityKitContentBundle)  else { return }
             content.add(scene)
 
-            guard let baseMaterial = scene.findEntity(named: "Base")?.components[ModelComponent.self]?.materials.first,
-                  let shapeVisMaterial = scene.findEntity(named: "ShapeVis")?.components[ModelComponent.self]?.materials.first,
-                  let domeVis = scene.findEntity(named: "DomeVis") 
+            // Find all template entities first
+            guard let baseTemplate = scene.findEntity(named: "Base"),
+                  let shapeVisTemplate = scene.findEntity(named: "ShapeVis"),
+                  let domeVis = scene.findEntity(named: "DomeVis"),
+                  let subject = scene.findEntity(named: "Subject")
+            else { return }
+
+            // Get materials from templates
+            guard let baseMaterial = baseTemplate.components[ModelComponent.self]?.materials.first as? PhysicallyBasedMaterial,
+                  let shapeVisMaterial = shapeVisTemplate.components[ModelComponent.self]?.materials.first as? PhysicallyBasedMaterial
             else { return }
 
             // Behind player (z = 2)
             let boxSpawner = createSpawnerSetup(
                 position: [-2, 1.5, 2],
-                baseMaterial: baseMaterial as! PhysicallyBasedMaterial,
-                shapeVisMaterial: shapeVisMaterial as! PhysicallyBasedMaterial,
+                baseMaterial: baseMaterial,
+                shapeVisMaterial: shapeVisMaterial,
                 spawnShape: .box,
                 visualizationMesh: .generateBox(width: 1.1, height: 1.1, depth: 1.1)
             )
@@ -43,8 +50,8 @@ struct Lab043: View {
 
             let planeSpawner = createSpawnerSetup(
                 position: [0, 1.5, 2],
-                baseMaterial: baseMaterial as! PhysicallyBasedMaterial,
-                shapeVisMaterial: shapeVisMaterial as! PhysicallyBasedMaterial,
+                baseMaterial: baseMaterial,
+                shapeVisMaterial: shapeVisMaterial,
                 spawnShape: .plane,
                 visualizationMesh: .generatePlane(width: 1.1, depth: 1.1)
             )
@@ -52,8 +59,8 @@ struct Lab043: View {
 
             let circleSpawner = createSpawnerSetup(
                 position: [2, 1.5, 2],
-                baseMaterial: baseMaterial as! PhysicallyBasedMaterial,
-                shapeVisMaterial: shapeVisMaterial as! PhysicallyBasedMaterial,
+                baseMaterial: baseMaterial,
+                shapeVisMaterial: shapeVisMaterial,
                 spawnShape: .circle,
                 visualizationMesh: .generateCylinder(height: 0.01, radius: 0.55)
             )
@@ -62,8 +69,8 @@ struct Lab043: View {
             // In front of player (z = -2)
             let sphereSpawner = createSpawnerSetup(
                 position: [-2, 1.5, -2],
-                baseMaterial: baseMaterial as! PhysicallyBasedMaterial,
-                shapeVisMaterial: shapeVisMaterial as! PhysicallyBasedMaterial,
+                baseMaterial: baseMaterial,
+                shapeVisMaterial: shapeVisMaterial,
                 spawnShape: .sphere,
                 visualizationMesh: .generateSphere(radius: 0.55)
             )
@@ -72,8 +79,8 @@ struct Lab043: View {
             // Upper dome spawner
             let upperDomeSpawner = createSpawnerSetup(
                 position: [0, 1.5, -2],
-                baseMaterial: baseMaterial as! PhysicallyBasedMaterial,
-                shapeVisMaterial: shapeVisMaterial as! PhysicallyBasedMaterial,
+                baseMaterial: baseMaterial,
+                shapeVisMaterial: shapeVisMaterial,
                 spawnShape: .domeUpper,
                 visualizationEntity: domeVis.clone(recursive: true)
             )
@@ -82,25 +89,19 @@ struct Lab043: View {
             // Lower dome spawner - clone and rotate the dome visualization
             let lowerDomeSpawner = createSpawnerSetup(
                 position: [2, 1.5, -2],
-                baseMaterial: baseMaterial as! PhysicallyBasedMaterial,
-                shapeVisMaterial: shapeVisMaterial as! PhysicallyBasedMaterial,
+                baseMaterial: baseMaterial,
+                shapeVisMaterial: shapeVisMaterial,
                 spawnShape: .domeLower,
                 visualizationEntity: domeVis.clone(recursive: true),
                 rotateVisualization: true
             )
             scene.addChild(lowerDomeSpawner)
 
-            // Disable template/resource entities after using them
-            if let baseTemplate = scene.findEntity(named: "Base") {
-                baseTemplate.isEnabled = false
-            }
-            if let shapeVisTemplate = scene.findEntity(named: "ShapeVis") {
-                shapeVisTemplate.isEnabled = false
-            }
+            // Disable all template entities after using them
+            baseTemplate.isEnabled = false
+            shapeVisTemplate.isEnabled = false
             domeVis.isEnabled = false
-            if let subject = scene.findEntity(named: "Subject") {
-                subject.isEnabled = false
-            }
+            subject.isEnabled = false
         } update: { content, attachments in
         } attachments: {
             Attachment(id: "AttachmentContent") {

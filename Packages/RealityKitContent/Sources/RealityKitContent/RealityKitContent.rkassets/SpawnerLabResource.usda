@@ -10,7 +10,7 @@
 
 def Xform "Root"
 {
-    reorder nameChildren = ["StepDome", "Subject", "Base", "ShapeVis", "DomeVis"]
+    reorder nameChildren = ["StepDome", "Subject", "Base", "ShapeVis", "DomeVis", "Floor"]
     def "StepDome" (
         active = true
         references = @BuildingBlocks/StepDome.usda@
@@ -156,6 +156,47 @@ def Xform "Root"
         float3 xformOp:scale = (0.0005, 0.0005, 0.0005)
         float3 xformOp:translate = (0, 0, 0)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def Xform "Floor" (
+        active = true
+    )
+    {
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (10, 0.01, 10)
+                token shapeType = "Box"
+
+                def RealityKitStruct "pose"
+                {
+                }
+            }
+        }
+
+        def RealityKitComponent "RigidBody"
+        {
+            bool gravityEnabled = 0
+            uniform token info:id = "RealityKit.RigidBody"
+            token motionType = "Static"
+
+            def RealityKitStruct "massFrame"
+            {
+                def RealityKitStruct "m_pose"
+                {
+                }
+            }
+
+            def RealityKitStruct "material"
+            {
+            }
+        }
     }
 }
 
