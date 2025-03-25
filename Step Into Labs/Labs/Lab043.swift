@@ -42,13 +42,23 @@ struct Lab043: View {
 
             // Plane spawner
             let planeSpawner = createSpawnerSetup(
-                position: [2, 1.5, -2],
+                position: [0, 1.5, -2],
                 baseMaterial: baseMaterial as! PhysicallyBasedMaterial,
                 shapeVisMaterial: shapeVisMaterial as! PhysicallyBasedMaterial,
                 spawnShape: .plane,
                 visualizationMesh: .generatePlane(width: 1.1, depth: 1.1)
             )
             scene.addChild(planeSpawner)
+
+            // Circle spawner
+            let circleSpawner = createSpawnerSetup(
+                position: [2, 1.5, -2],
+                baseMaterial: baseMaterial as! PhysicallyBasedMaterial,
+                shapeVisMaterial: shapeVisMaterial as! PhysicallyBasedMaterial,
+                spawnShape: .circle,
+                visualizationMesh: .generateCylinder(height: 0.01, radius: 0.55)
+            )
+            scene.addChild(circleSpawner)
         } update: { content, attachments in
         } attachments: {
             Attachment(id: "AttachmentContent") {
@@ -141,11 +151,19 @@ struct Lab043: View {
         spawner.position = [0, 1, 0]
         var spawnerComponent = EntitySpawnerComponent()
         spawnerComponent.SpawnShape = spawnShape
-        if spawnShape == .plane {
+
+        // Set appropriate dimensions based on spawn shape
+        switch spawnShape {
+        case .plane:
             spawnerComponent.PlaneDimensions = [1, 1]
-        } else {
+        case .circle:
+            spawnerComponent.Radius = 0.5 
+        case .box:
             spawnerComponent.BoxDimensions = [1, 1, 1]
+        default:
+            break
         }
+
         spawnerComponent.Copies = 10
         spawnerComponent.TargetEntityName = "Subject"
         spawner.components[EntitySpawnerComponent.self] = spawnerComponent
