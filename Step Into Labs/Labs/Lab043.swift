@@ -126,51 +126,57 @@ struct Lab043: View {
         )
         base.components.set(InputTargetComponent())
 
-        // Add walls to the base
+        // Create a template wall
         let wallHeight: Float = 0.1
         let wallThickness: Float = 0.05
-        
-        // Front wall
-        let frontWall = Entity()
-        frontWall.components.set(ModelComponent(
-            mesh: .generateBox(width: 1.1, height: wallHeight, depth: wallThickness),
+        let wallWidth: Float = 1.1
+
+        let wallTemplate = Entity()
+        wallTemplate.components.set(ModelComponent(
+            mesh: .generateBox(width: wallWidth, height: wallHeight, depth: wallThickness),
             materials: [baseMaterial]
         ))
-        frontWall.components.set(CollisionComponent(shapes: [.generateBox(width: 1.1, height: wallHeight, depth: wallThickness)]))
-        frontWall.components.set(PhysicsBodyComponent(massProperties: .init(mass: 1.0), material: .default, mode: .static))
+        wallTemplate.components.set(CollisionComponent(
+            shapes: [.generateBox(width: wallWidth, height: wallHeight, depth: wallThickness)]
+        ))
+        wallTemplate.components.set(PhysicsBodyComponent(
+            massProperties: .init(mass: 1.0),
+            material: .default,
+            mode: .static
+        ))
+
+        // Front wall
+        let frontWall = wallTemplate.clone(recursive: true)
         frontWall.position = [0, wallHeight/2, 0.55 - wallThickness/2]
         base.addChild(frontWall)
-        
+
         // Back wall
-        let backWall = Entity()
-        backWall.components.set(ModelComponent(
-            mesh: .generateBox(width: 1.1, height: wallHeight, depth: wallThickness),
-            materials: [baseMaterial]
-        ))
-        backWall.components.set(CollisionComponent(shapes: [.generateBox(width: 1.1, height: wallHeight, depth: wallThickness)]))
-        backWall.components.set(PhysicsBodyComponent(massProperties: .init(mass: 1.0), material: .default, mode: .static))
+        let backWall = wallTemplate.clone(recursive: true)
         backWall.position = [0, wallHeight/2, -0.55 + wallThickness/2]
         base.addChild(backWall)
-        
-        // Left wall
-        let leftWall = Entity()
-        leftWall.components.set(ModelComponent(
-            mesh: .generateBox(width: wallThickness, height: wallHeight, depth: 1.1),
+
+        // Side walls - need different dimensions
+        let sideWallTemplate = Entity()
+        sideWallTemplate.components.set(ModelComponent(
+            mesh: .generateBox(width: wallThickness, height: wallHeight, depth: wallWidth),
             materials: [baseMaterial]
         ))
-        leftWall.components.set(CollisionComponent(shapes: [.generateBox(width: wallThickness, height: wallHeight, depth: 1.1)]))
-        leftWall.components.set(PhysicsBodyComponent(massProperties: .init(mass: 1.0), material: .default, mode: .static))
+        sideWallTemplate.components.set(CollisionComponent(
+            shapes: [.generateBox(width: wallThickness, height: wallHeight, depth: wallWidth)]
+        ))
+        sideWallTemplate.components.set(PhysicsBodyComponent(
+            massProperties: .init(mass: 1.0),
+            material: .default,
+            mode: .static
+        ))
+
+        // Left wall
+        let leftWall = sideWallTemplate.clone(recursive: true)
         leftWall.position = [-0.55 + wallThickness/2, wallHeight/2, 0]
         base.addChild(leftWall)
-        
+
         // Right wall
-        let rightWall = Entity()
-        rightWall.components.set(ModelComponent(
-            mesh: .generateBox(width: wallThickness, height: wallHeight, depth: 1.1),
-            materials: [baseMaterial]
-        ))
-        rightWall.components.set(CollisionComponent(shapes: [.generateBox(width: wallThickness, height: wallHeight, depth: 1.1)]))
-        rightWall.components.set(PhysicsBodyComponent(massProperties: .init(mass: 1.0), material: .default, mode: .static))
+        let rightWall = sideWallTemplate.clone(recursive: true)
         rightWall.position = [0.55 - wallThickness/2, wallHeight/2, 0]
         base.addChild(rightWall)
 
