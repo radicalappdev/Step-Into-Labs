@@ -2,11 +2,11 @@
 //
 //  Title: Lab043
 //
-//  Subtitle:
+//  Subtitle: Visualize the Entity Spawner
 //
-//  Description:
+//  Description: Using Components and Systems to create an entity spawner system.
 //
-//  Type:
+//  Type: Space
 //
 //  Created by Joseph Simpson on 3/25/25.
 
@@ -40,7 +40,7 @@ struct Lab043: View {
             else { return }
 
             let boxSpawner = createSpawnerSetup(
-                position: [-2, 1.5, 2],
+                position: [-2, 1, 2],
                 baseMaterial: baseMaterial,
                 shapeVisMaterial: shapeVisMaterial,
                 spawnShape: .box,
@@ -49,7 +49,7 @@ struct Lab043: View {
             scene.addChild(boxSpawner)
 
             let planeSpawner = createSpawnerSetup(
-                position: [0, 1.5, 2],
+                position: [0, 1, 2],
                 baseMaterial: baseMaterial,
                 shapeVisMaterial: shapeVisMaterial,
                 spawnShape: .plane,
@@ -58,7 +58,7 @@ struct Lab043: View {
             scene.addChild(planeSpawner)
 
             let circleSpawner = createSpawnerSetup(
-                position: [2, 1.5, 2],
+                position: [2, 1, 2],
                 baseMaterial: baseMaterial,
                 shapeVisMaterial: shapeVisMaterial,
                 spawnShape: .circle,
@@ -67,7 +67,7 @@ struct Lab043: View {
             scene.addChild(circleSpawner)
 
             let sphereSpawner = createSpawnerSetup(
-                position: [-2, 1.5, -2],
+                position: [-2, 1, -2],
                 baseMaterial: baseMaterial,
                 shapeVisMaterial: shapeVisMaterial,
                 spawnShape: .sphere,
@@ -76,7 +76,7 @@ struct Lab043: View {
             scene.addChild(sphereSpawner)
 
             let upperDomeSpawner = createSpawnerSetup(
-                position: [0, 1.5, -2],
+                position: [0, 1, -2],
                 baseMaterial: baseMaterial,
                 shapeVisMaterial: shapeVisMaterial,
                 spawnShape: .domeUpper,
@@ -85,7 +85,7 @@ struct Lab043: View {
             scene.addChild(upperDomeSpawner)
 
             let lowerDomeSpawner = createSpawnerSetup(
-                position: [2, 1.5, -2],
+                position: [2, 1, -2],
                 baseMaterial: baseMaterial,
                 shapeVisMaterial: shapeVisMaterial,
                 spawnShape: .domeLower,
@@ -226,6 +226,7 @@ struct Lab043: View {
     }
 
 }
+
 #Preview {
     Lab043()
 }
