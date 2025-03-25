@@ -23,46 +23,19 @@ struct Lab043: View {
 
     var body: some View {
         RealityView { content, attachments in
-            guard let scene = try? await Entity(named: "SpawnerLabResource", in: realityKitContentBundle)  else { return}
+            guard let scene = try? await Entity(named: "SpawnerLabResource", in: realityKitContentBundle)  else { return }
             content.add(scene)
 
-            // Get the materials from the provided entities
-            guard let baseMaterial = scene.findEntity(named: "Base")?.components[ModelComponent.self]?.materials.first else { return }
-            guard let shapeVisMaterial = scene.findEntity(named: "ShapeVis")?.components[ModelComponent.self]?.materials.first else { return }
+            guard let baseMaterial = scene.findEntity(named: "Base")?.components[ModelComponent.self]?.materials.first,
+                  let shapeVisMaterial = scene.findEntity(named: "ShapeVis")?.components[ModelComponent.self]?.materials.first 
+            else { return }
 
-            // Create the base platform
-            let base = ModelEntity(
-                mesh: .generateBox(width: 1, height: 0.1, depth: 1),
-                materials: [baseMaterial]
+            let spawnerSetup = createSpawnerSetup(
+                position: [0, 1.5, -2],
+                baseMaterial: baseMaterial as! PhysicallyBasedMaterial,
+                shapeVisMaterial: shapeVisMaterial as! PhysicallyBasedMaterial
             )
-            base.position = [0, 1.5, -2]
-            base.collision = CollisionComponent(shapes: [.generateBox(width: 1, height: 0.1, depth: 1)])
-            base.physicsBody = PhysicsBodyComponent(
-                massProperties: .init(mass: 1.0),
-                material: .default,
-                mode: .static
-            )
-            scene.addChild(base)
-
-            // Create spawn volume visualization (slightly larger than 1m spawn volume)
-            let shapeVis = ModelEntity(
-                mesh: .generateBox(width: 1.1, height: 1.1, depth: 1.1),
-                materials: [shapeVisMaterial]
-            )
-            shapeVis.position = [0, 2.5, -2]
-            scene.addChild(shapeVis)
-
-            // Create and setup spawner
-            let spawner = Entity()
-            spawner.position = [0, 2.5, -2]
-            var spawnerComponent = EntitySpawnerComponent()
-            spawnerComponent.SpawnShape = .box
-            spawnerComponent.BoxDimensions = [1, 1, 1]  // 1m cube spawn volume
-            spawnerComponent.Copies = 10
-            spawnerComponent.TargetEntityName = "Subject"
-            spawner.components[EntitySpawnerComponent.self] = spawnerComponent
-            scene.addChild(spawner)
-
+            scene.addChild(spawnerSetup)
 
         } update: { content, attachments in
         } attachments: {
@@ -71,6 +44,48 @@ struct Lab043: View {
             }
         }
         .gesture(tap)
+        .modifier(DragGestureImproved())
+    }
+
+    private func createSpawnerSetup(
+        position: SIMD3<Float>,
+        baseMaterial: PhysicallyBasedMaterial,
+        shapeVisMaterial: PhysicallyBasedMaterial
+    ) -> Entity {
+        // Create the base platform - this will be our parent entity
+        let base = ModelEntity(
+            mesh: .generateBox(width: 1, height: 0.1, depth: 1),
+            materials: [baseMaterial]
+        )
+        base.position = position
+        base.collision = CollisionComponent(shapes: [.generateBox(width: 1, height: 0.1, depth: 1)])
+        base.physicsBody = PhysicsBodyComponent(
+            massProperties: .init(mass: 1.0),
+            material: .default,
+            mode: .static
+        )
+        base.components.set(InputTargetComponent())
+
+        // Create spawn volume visualization as child of base
+        let shapeVis = ModelEntity(
+            mesh: .generateBox(width: 1.1, height: 1.1, depth: 1.1),
+            materials: [shapeVisMaterial]
+        )
+        shapeVis.position = [0, 1, 0]  // 1m above base
+        base.addChild(shapeVis)
+
+        // Create and setup spawner as child of base
+        let spawner = Entity()
+        spawner.position = [0, 1, 0]  // Same height as visualization
+        var spawnerComponent = EntitySpawnerComponent()
+        spawnerComponent.SpawnShape = .box
+        spawnerComponent.BoxDimensions = [1, 1, 1]
+        spawnerComponent.Copies = 10
+        spawnerComponent.TargetEntityName = "Subject"
+        spawner.components[EntitySpawnerComponent.self] = spawnerComponent
+        base.addChild(spawner)
+
+        return base
     }
 
     var tap: some Gesture {
