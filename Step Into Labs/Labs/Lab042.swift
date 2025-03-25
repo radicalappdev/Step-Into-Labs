@@ -30,7 +30,6 @@ struct Lab042: View {
 
                 print("Scene added")
 
-
             }
 
         } update: { content, attachments in

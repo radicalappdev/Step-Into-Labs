@@ -1339,15 +1339,6 @@
     "objectMetadataList" : [
       [
         "A40DA96E-0E21-4324-9AF2-06410FAB9851",
-        "Root",
-        "SpawnerCube"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "A40DA96E-0E21-4324-9AF2-06410FAB9851",
         "Root"
       ],
       {
@@ -1360,15 +1351,6 @@
         "SpawnerCube",
         "CubeBase",
         "Cube_1"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "A40DA96E-0E21-4324-9AF2-06410FAB9851",
-        "Root",
-        "SpawnerPlane"
       ],
       {
         "isExpanded" : true,
@@ -1411,26 +1393,6 @@
         "SpawnerCube",
         "CubeBase",
         "Cube_4"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "A40DA96E-0E21-4324-9AF2-06410FAB9851",
-        "Root",
-        "SpawnerPlane",
-        "CubeBase"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "A40DA96E-0E21-4324-9AF2-06410FAB9851",
-        "Root",
-        "SpawnerCube",
-        "CubeBase"
       ],
       {
         "isExpanded" : true,
@@ -2083,6 +2045,18 @@
         "Root",
         "DoorwayLoop",
         "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  },
+  "EA8D1646-C694-44B7-9909-9B2659F2661C" : {
+    "objectMetadataList" : [
+      [
+        "EA8D1646-C694-44B7-9909-9B2659F2661C",
+        "Root"
       ],
       {
         "isExpanded" : true,

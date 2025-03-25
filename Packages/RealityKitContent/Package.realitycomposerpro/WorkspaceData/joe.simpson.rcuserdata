@@ -1,7 +1,8 @@
 {
   "advancedEditorSelectedIdentifier" : "ProjectBrowser",
   "openSceneRelativePaths" : [
-    "SpawnerLab.usda"
+    "SpawnerLab.usda",
+    "SpawerLabResources.usda"
   ],
   "recentIdentifiers" : {
     "00AC74E2-A464-4F74-A445-36CD76630287" : [
@@ -107,6 +108,9 @@
 
     ],
     "E5A9429C-2ED0-42F1-88DD-34DE71A5656B" : [
+
+    ],
+    "EA8D1646-C694-44B7-9909-9B2659F2661C" : [
 
     ],
     "EE4E9B65-08F0-49B1-A553-D543CC6E0965" : [
@@ -4309,6 +4313,28 @@
     ],
     "A40DA96E-0E21-4324-9AF2-06410FAB9851" : [
       {
+        "date" : 764626178.83456,
+        "title" : "Untitled",
+        "transform" : [
+          0.9648651,
+          -2.2370209e-08,
+          -0.2627459,
+          0,
+          -0.014968182,
+          0.998376,
+          -0.054966483,
+          0,
+          0.26231918,
+          0.05696808,
+          0.963298,
+          0,
+          -1.0044067,
+          1.7011405,
+          -0.19117236,
+          1
+        ]
+      },
+      {
         "date" : 764626171.224499,
         "title" : "Untitled",
         "transform" : [
@@ -4503,28 +4529,6 @@
           -0.7045203,
           3.0231333,
           -1.9592187,
-          1
-        ]
-      },
-      {
-        "date" : 764625862.270004,
-        "title" : "Untitled",
-        "transform" : [
-          0.78392524,
-          -3.1731517e-08,
-          -0.6208551,
-          0,
-          -0.2958367,
-          0.87917507,
-          -0.37353936,
-          0,
-          0.5458404,
-          0.47649866,
-          0.6892077,
-          0,
-          0.14885658,
-          2.5646782,
-          -0.985443,
           1
         ]
       }
@@ -6291,5 +6295,5 @@
   "sceneViewportBackgroundColors" : {
 
   },
-  "selectedSceneRelativePath" : "SpawnerLab.usda"
+  "selectedSceneRelativePath" : "SpawerLabResources.usda"
 }
