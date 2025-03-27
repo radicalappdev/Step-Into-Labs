@@ -2,11 +2,11 @@
 //
 //  Title: Lab044
 //
-//  Subtitle:
+//  Subtitle: Component inheritance?
 //
-//  Description:
+//  Description: Exploring some oddness with RealityKit components.
 //
-//  Type:
+//  Type: Space
 //
 //  Created by Joseph Simpson on 3/27/25.
 
@@ -73,3 +73,5 @@ struct Lab044: View {
 #Preview {
     Lab044()
 }
+
+

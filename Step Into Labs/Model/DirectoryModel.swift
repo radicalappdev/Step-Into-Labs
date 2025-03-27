@@ -347,7 +347,7 @@ class ModelData {
              date: Date("3/27/2025"),
              isFeatured: true,
              subtitle: "Component inheritance?",
-             description: "")
+             description: "Exploring some oddness with RealityKit components.")
 
 
     ]
