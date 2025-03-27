@@ -26,19 +26,19 @@ struct Lab044: View {
             guard let scene = try? await Entity(named: "InputOddness", in: realityKitContentBundle)  else { return }
             content.add(scene)
 
-            if let standParentExample = scene.findEntity(named: "StandParentExample") {
-                standParentExample.components.set(HoverEffectComponent())
-                leftExample = standParentExample
-            }
+            guard let standParentExample = scene.findEntity(named: "StandParentExample") ,
+                    let standWithoutChildren = scene.findEntity(named: "StandWithoutChildren"),
+                    let transformParentExample = scene.findEntity(named: "TransformParentExample")
+            else { return }
 
-            if let standWithoutChildren = scene.findEntity(named: "StandWithoutChildren") {
-                standWithoutChildren.components.set(HoverEffectComponent())
-                rightExample = standWithoutChildren
-            }
+            
+            standParentExample.components.set(HoverEffectComponent())
+            leftExample = standParentExample
 
-            if let transformParentExample = scene.findEntity(named: "TransformParentExample") {
-                rightSyncExample = transformParentExample
-            }
+            standWithoutChildren.components.set(HoverEffectComponent())
+            rightExample = standWithoutChildren
+            rightSyncExample = transformParentExample
+
 
         } update: { content, attachments in
 
@@ -69,10 +69,6 @@ struct Lab044: View {
     }
 
 }
-
-
-
-
 
 #Preview {
     Lab044()
