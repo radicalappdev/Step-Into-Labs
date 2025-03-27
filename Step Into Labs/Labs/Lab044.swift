@@ -15,6 +15,11 @@ import RealityKit
 import RealityKitContent
 
 struct Lab044: View {
+
+    @State var leftExample = Entity()
+    @State var rightExample = Entity()
+    @State var rightSyncExample = Entity()
+
     var body: some View {
         RealityView { content, attachments in
 
@@ -23,10 +28,16 @@ struct Lab044: View {
 
             if let standParentExample = scene.findEntity(named: "StandParentExample") {
                 standParentExample.components.set(HoverEffectComponent())
+                leftExample = standParentExample
             }
 
             if let standWithoutChildren = scene.findEntity(named: "StandWithoutChildren") {
                 standWithoutChildren.components.set(HoverEffectComponent())
+                rightExample = standWithoutChildren
+            }
+
+            if let transformParentExample = scene.findEntity(named: "TransformParentExample") {
+                rightSyncExample = transformParentExample
             }
 
         } update: { content, attachments in
@@ -36,47 +47,31 @@ struct Lab044: View {
                 Text("")
             }
         }
-        .modifier(DragGestureExample())
+        .gesture(dragGestureLeft)
+        .gesture(dragGestureRight)
     }
 
+    var dragGestureLeft: some Gesture {
+        DragGesture()
+            .targetedToEntity(leftExample)
+            .onChanged { value in
+                value.entity.position = value.convert(value.location3D, from: .local, to: value.entity.parent!)
+            }
+    }
+
+    var dragGestureRight: some Gesture {
+        DragGesture()
+            .targetedToEntity(rightExample)
+            .onChanged { value in
+                value.entity.position = value.convert(value.location3D, from: .local, to: value.entity.parent!)
+                rightSyncExample.transform = value.entity.transform
+            }
+    }
 
 }
 
 
-fileprivate struct DragGestureExample: ViewModifier {
 
-    @State var isDragging: Bool = false
-    @State var initialPosition: SIMD3<Float> = .zero
-
-    func body(content: Content) -> some View {
-        content
-            .gesture(
-                DragGesture()
-                    .targetedToAnyEntity()
-                    .onChanged { value in
-
-                        // We we start the gesture, cache the entity position
-                        if !isDragging {
-                            isDragging = true
-                            initialPosition = value.entity.position
-                        }
-
-                        // Calculate vector by which to move the entity
-                        let movement = value.convert(value.gestureValue.translation3D, from: .local, to: .scene)
-
-                        // Add the initial position and the movement to get the new position
-                        value.entity.position = initialPosition + movement
-
-                    }
-                    .onEnded { value in
-                        // Clean up when the gesture has ended
-                        isDragging = false
-                        initialPosition = .zero
-                    }
-            )
-
-    }
-}
 
 
 #Preview {
