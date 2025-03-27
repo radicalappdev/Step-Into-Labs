@@ -19,8 +19,15 @@ struct Lab044: View {
         RealityView { content, attachments in
 
             guard let scene = try? await Entity(named: "InputOddness", in: realityKitContentBundle)  else { return }
-
             content.add(scene)
+
+            if let standParentExample = scene.findEntity(named: "StandParentExample") {
+                standParentExample.components.set(HoverEffectComponent())
+            }
+
+            if let standWithoutChildren = scene.findEntity(named: "StandWithoutChildren") {
+                standWithoutChildren.components.set(HoverEffectComponent())
+            }
 
         } update: { content, attachments in
 
