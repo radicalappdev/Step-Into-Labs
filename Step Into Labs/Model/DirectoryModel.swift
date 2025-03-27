@@ -342,6 +342,13 @@ class ModelData {
              subtitle: "Visualize the Entity Spawner",
              description: "Using Components and Systems to create an entity spawner system.")
 
+        ,Lab(title: "Lab 044",
+             type: .SPACE,
+             date: Date("3/27/2025"),
+             isFeatured: true,
+             subtitle: "Component inheritance?",
+             description: "")
+
 
     ]
 
