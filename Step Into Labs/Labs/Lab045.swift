@@ -2,11 +2,11 @@
 //
 //  Title: Lab045
 //
-//  Subtitle:
+//  Subtitle: Entity Actions
 //
-//  Description:
+//  Description: Byte sized actions we can animate on entities
 //
-//  Type:
+//  Type: Volume
 //
 //  Created by Joseph Simpson on 4/6/25.
 
@@ -30,6 +30,8 @@ struct Lab045: View {
         return entity
     }()
 
+    @State var isFaded: Bool = false
+
     var body: some View {
         RealityView { content in
 
@@ -51,6 +53,16 @@ struct Lab045: View {
                     }, label: {
                         Text("Emphasize")
                     })
+                    Button (action: {
+                        fadeSubject()
+                    }, label: {
+                        Text("Fade")
+                    })
+                    Button (action: {
+                        fadeBounceSubject()
+                    }, label: {
+                        Text("Delay Fade Bounce")
+                    })
                 }
             })
         }
@@ -60,28 +72,58 @@ struct Lab045: View {
     func spinSubject() {
         Task {
             // Create the action
-            let spinAction = SpinAction(revolutions: 1,
+            let action = SpinAction(revolutions: 1,
                                         localAxis: [0, 1, 0],
                                         timingFunction: .easeInOut,
                                         isAdditive: false)
 
             // Use the action in an animation
-            let spinAnimation = try AnimationResource.makeActionAnimation(for: spinAction,
+            let animation = try AnimationResource.makeActionAnimation(for: action,
                                                                           duration: 1,
                                                                           bindTarget: .transform)
 
             // Play the animation
-            subject.playAnimation(spinAnimation)
+            subject.playAnimation(animation)
         }
     }
 
     func emphasizeSubject() {
         Task {
-            let action = EmphasizeAction(motionType: .bounce, style: .playful)
+            let action = EmphasizeAction(motionType: .float, style: .basic)
 
             let animation = try! AnimationResource.makeActionAnimation(for: action,
                                                                        duration: 1,
                                                                        bindTarget: .transform)
+            subject.playAnimation(animation)
+        }
+    }
+
+    func fadeSubject() {
+        isFaded.toggle()
+        Task {
+            let action = FromToByAction<Float>(to: isFaded ? 0.1 : 1,
+                                               timing: .easeOut,
+                                               isAdditive: false)
+
+            let animation = try! AnimationResource.makeActionAnimation(for: action,
+                                                                       duration: 1,
+                                                                       bindTarget: .opacity)
+            subject.playAnimation(animation)
+        }
+    }
+
+    func fadeBounceSubject() {
+        Task {
+            let action = FromToByAction<Float>(to: 0.1,
+                                               timing: .easeOut,
+                                               isAdditive: false)
+
+            let animation = try! AnimationResource.makeActionAnimation(for: action,
+                                                                       duration: 1,
+                                                                       bindTarget: .opacity,
+                                                                       repeatMode: .autoReverse,
+                                                                       delay: 1)
+
             subject.playAnimation(animation)
         }
     }

@@ -354,7 +354,7 @@ class ModelData {
              date: Date("4/06/2025"),
              isFeatured: true,
              subtitle: "Entity Actions",
-             description: "")
+             description: "Byte sized actions we can animate on entities")
 
 
     ]
