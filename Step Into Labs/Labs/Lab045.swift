@@ -26,6 +26,7 @@ struct Lab045: View {
         let input = InputTargetComponent()
         let hover = HoverEffectComponent()
         entity.components.set([collision, input, hover])
+        entity.position.y = -0.3
         return entity
     }()
 
@@ -39,11 +40,18 @@ struct Lab045: View {
         // Create a toolbar with a button to perform the action
         .toolbar {
             ToolbarItem(placement: .bottomOrnament, content: {
-                Button(action: {
-                    spinSubject()
-                }, label: {
-                    Text("Spin")
-                })
+                HStack {
+                    Button(action: {
+                        spinSubject()
+                    }, label: {
+                        Text("Spin")
+                    })
+                    Button (action: {
+                        emphasizeSubject()
+                    }, label: {
+                        Text("Emphasize")
+                    })
+                }
             })
         }
 
@@ -64,6 +72,17 @@ struct Lab045: View {
 
             // Play the animation
             subject.playAnimation(spinAnimation)
+        }
+    }
+
+    func emphasizeSubject() {
+        Task {
+            let action = EmphasizeAction(motionType: .bounce, style: .playful)
+
+            let animation = try! AnimationResource.makeActionAnimation(for: action,
+                                                                       duration: 1,
+                                                                       bindTarget: .transform)
+            subject.playAnimation(animation)
         }
     }
 
