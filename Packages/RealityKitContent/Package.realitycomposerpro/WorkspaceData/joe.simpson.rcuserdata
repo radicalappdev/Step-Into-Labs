@@ -1,8 +1,7 @@
 {
   "advancedEditorSelectedIdentifier" : "ProjectBrowser",
   "openSceneRelativePaths" : [
-    "InputOddness.usda",
-    "PortalBall.usda"
+    "PhysicsPlayground.usda"
   ],
   "recentIdentifiers" : {
     "00AC74E2-A464-4F74-A445-36CD76630287" : [
@@ -3426,6 +3425,28 @@
     ],
     "8088479F-CE0C-4853-808C-58DB5763AAFA" : [
       {
+        "date" : 765370041.847145,
+        "title" : "Untitled",
+        "transform" : [
+          0.8522118,
+          1.2027893e-08,
+          -0.523197,
+          0,
+          -0.0660277,
+          0.9920048,
+          -0.10754939,
+          0,
+          0.51901394,
+          0.12620033,
+          0.8453981,
+          0,
+          0.7675533,
+          0.40947297,
+          2.1937413,
+          1
+        ]
+      },
+      {
         "date" : 758586455.703896,
         "title" : "Untitled",
         "transform" : [
@@ -3620,28 +3641,6 @@
           0.04626305,
           0.051809065,
           -0.19143188,
-          1
-        ]
-      },
-      {
-        "date" : 758586183.632942,
-        "title" : "Untitled",
-        "transform" : [
-          -0.9658969,
-          -1.7823509e-09,
-          -0.25892687,
-          0,
-          -0.08506861,
-          0.94448894,
-          0.31733868,
-          0,
-          0.2445536,
-          0.32854304,
-          -0.91227907,
-          0,
-          0.032883056,
-          0.036825076,
-          -0.13606678,
           1
         ]
       }
@@ -6654,5 +6653,5 @@
   "sceneViewportBackgroundColors" : {
 
   },
-  "selectedSceneRelativePath" : "InputOddness.usda"
+  "selectedSceneRelativePath" : "PhysicsPlayground.usda"
 }

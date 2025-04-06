@@ -289,42 +289,42 @@ class ModelData {
         ,Lab(title: "Lab 036",
              type: .SPACE,
              date: Date("2/24/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Virtual \"Reality\" Glasses",
              description: "Wait, what?")
 
         ,Lab(title: "Lab 037",
              type: .WINDOW,
              date: Date("3/6/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Portal in a Window",
              description: "Learning the basics of how to use PortalComponent to render one scene inside another.")
 
         ,Lab(title: "Lab 038",
              type: .VOLUME,
              date: Date("3/7/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Portal in a Volume",
              description: "Building on Lab 037, let's add a portal to a 3D shape in a volume.")
 
         ,Lab(title: "Lab 039",
              type: .SPACE,
              date: Date("3/9/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Portals in Immersive Spaces",
              description: "In immersive spaces, portal contents share the same coordinate space as the main scene.")
 
         ,Lab(title: "Lab 040",
              type: .SPACE,
              date: Date("3/14/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Portal Swap",
              description: "Using a portal to switch between two worlds.")
 
         ,Lab(title: "Lab 041",
              type: .SPACE,
              date: Date("3/19/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Impossible Doorway",
              description: "More fun with portals and occlusion material.")
 
@@ -345,9 +345,16 @@ class ModelData {
         ,Lab(title: "Lab 044",
              type: .SPACE,
              date: Date("3/27/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Component inheritance?",
              description: "Exploring some oddness with RealityKit components.")
+
+        ,Lab(title: "Lab 045",
+             type: .VOLUME,
+             date: Date("4/06/2025"),
+             isFeatured: true,
+             subtitle: "Entity Actions",
+             description: "")
 
 
     ]
