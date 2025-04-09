@@ -226,7 +226,7 @@ class ModelData {
         ,Lab(title: "Lab 027",
              type: .SPACE_FULL,
             date: Date("1/18/2025"),
-            isFeatured: true,
+            isFeatured: false,
             subtitle: "When a door appears",
             description: "Enter.")
 
@@ -355,6 +355,15 @@ class ModelData {
              isFeatured: true,
              subtitle: "Entity Actions",
              description: "Byte sized actions we can animate on entities")
+
+        ,Lab(title: "Lab 046",
+             type: .WINDOW,
+             date: Date("4/09/2025"),
+             isFeatured: true,
+             subtitle: "Portals can do what?",
+             description: "I'm not sure what to do with this information."),
+
+
 
 
     ]
