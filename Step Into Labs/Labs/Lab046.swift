@@ -56,19 +56,7 @@ struct Lab046: View {
         } update: { content in
             // Note: this is not an ideal way to adjust opacity, but it works as a quick hack
             if let portalEntity = content.entities.first?.findEntity(named: "Portal") {
-
-                Task {
-                    let action = FromToByAction<Float>(to: opacity,
-                                                       timing: .linear,
-                                                       isAdditive: false
-                    )
-
-                    let animation = try! AnimationResource.makeActionAnimation(for: action,
-                                                                               duration: 0.1,
-                                                                               bindTarget: .opacity,
-                    )
-                    portalEntity.playAnimation(animation)
-                }
+                portalEntity.components.set(OpacityComponent(opacity: opacity))
             }
 
         }
@@ -92,3 +80,4 @@ struct Lab046: View {
 #Preview {
     Lab046()
 }
+
