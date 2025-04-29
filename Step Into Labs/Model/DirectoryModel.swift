@@ -368,7 +368,7 @@ class ModelData {
              date: Date("4/29/2025"),
              isFeatured: true,
              subtitle: "Emoji Friends",
-             description: "")
+             description: "Making some little emoji spheres to bounce around my office.")
 
 
         

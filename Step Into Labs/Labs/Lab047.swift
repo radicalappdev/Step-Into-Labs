@@ -2,11 +2,11 @@
 //
 //  Title: Lab047
 //
-//  Subtitle:
+//  Subtitle: Emoji Friends
 //
-//  Description:
+//  Description: Making some little emoji spheres to bounce around my office.
 //
-//  Type:
+//  Type: Space
 //
 //  Created by Joseph Simpson on 4/29/25.
 
@@ -31,6 +31,8 @@ struct Lab047: View {
                 if let em = attachments.entity(for: em)  {
 
                     let parent = Entity()
+                    // Just a hack to have an inside-out sphere
+                    
                     let model = ModelEntity(
                         mesh: .generateSphere(radius: 0.1),
                         materials: [SimpleMaterial(color: .black, isMetallic: false)])
@@ -61,14 +63,8 @@ struct Lab047: View {
                     parent.addChild(em)
                     content.add(parent)
 
-                    applyMotion(entity: parent)
-
-
                 }
-
             }
-
-
         } update: { content, attachments in
             for (_, entity) in planeAnchorsSimple {
                 if !content.entities.contains(entity) {
@@ -126,10 +122,8 @@ struct Lab047: View {
 
         let entity = ModelEntity(mesh: mesh, materials: [material])
         entity.transform = Transform(matrix: matrix_multiply(anchor.originFromAnchorTransform, extent.anchorFromExtentTransform))
-
-        // We'll let RealityKit generate a simple collision shape based on the entity.
-        // For more detailed shapes see: https://stepinto.vision/example-code/arkit-planedetectionprovider-adding-collisions-and-physics/
         entity.generateCollisionShapes(recursive: true, static: true)
+
         let physicsMaterial = PhysicsMaterialResource.generate(friction: 0, restitution: 1)
         let physics = PhysicsBodyComponent(massProperties: .default, material: physicsMaterial, mode: .static)
         entity.components.set(physics)
@@ -146,7 +140,7 @@ struct Lab047: View {
             z: Float.random(in: -1...1)
         )
         var motion = PhysicsMotionComponent()
-        motion.linearVelocity = force * 3
+        motion.linearVelocity = force * 4
         entity.components.set(motion)
 
     }
