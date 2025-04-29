@@ -361,9 +361,17 @@ class ModelData {
              date: Date("4/09/2025"),
              isFeatured: true,
              subtitle: "Portals can do what?",
-             description: "I'm not sure what to do with this information."),
+             description: "I'm not sure what to do with this information.")
+
+        ,Lab(title: "Lab 047",
+             type: .SPACE_FULL,
+             date: Date("4/29/2025"),
+             isFeatured: true,
+             subtitle: "Flower Bubbles",
+             description: "")
 
 
+        
 
 
     ]
