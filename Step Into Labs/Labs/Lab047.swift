@@ -22,15 +22,20 @@ struct Lab047: View {
     @State var planeAnchorsSimple: [UUID: Entity] = [:]
 
     var body: some View {
-        
-        let flowers: [String] = ["🌼", "🌹", "🌷", "🌻", "🌸", "🪻", "🥀", "🪸", "🌾", "💐"]
+
+        let emoji = ["😀", "😃", "😄", "😁", "😆", "☺️", "😊", "🙃", "😌", "😛", "😝", "😜", "🤪", "🤓", "😎", "🙂‍↔️"]
 
         RealityView { content, attachments in
 
-            for flower in flowers {
-                if let flower = attachments.entity(for: flower)  {
+            for em in emoji {
+                if let em = attachments.entity(for: em)  {
 
                     let parent = Entity()
+                    let model = ModelEntity(
+                        mesh: .generateSphere(radius: 0.1),
+                        materials: [SimpleMaterial(color: .black, isMetallic: false)])
+                    model.scale = SIMD3(x: -1, y: 1, z: 1) // flip this inside out
+                    parent.addChild(model)
 
                     // Calculate a random position
                     let x: Float = Float.random(in: -1...1)
@@ -50,10 +55,10 @@ struct Lab047: View {
 
                     let input = InputTargetComponent()
                     parent.components.set([collision, physics, input])
-                    let billboard = BillboardComponent()
-                    flower.components.set([billboard])
 
-                    parent.addChild(flower)
+                    em.components.set([BillboardComponent(), HoverEffectComponent()])
+
+                    parent.addChild(em)
 
 
                     content.add(parent)
@@ -71,9 +76,9 @@ struct Lab047: View {
                 }
             }
         } attachments: {
-            ForEach(flowers, id: \.self) { flower in
-                Attachment(id: flower) {
-                    Text(flower)
+            ForEach(emoji, id: \.self) { em in
+                Attachment(id: em) {
+                    Text(em)
                         .font(.system(size: 144))
                 }
             }

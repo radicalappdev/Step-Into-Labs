@@ -367,7 +367,7 @@ class ModelData {
              type: .SPACE,
              date: Date("4/29/2025"),
              isFeatured: true,
-             subtitle: "Flower Bubbles",
+             subtitle: "Emoji Friends",
              description: "")
 
 
