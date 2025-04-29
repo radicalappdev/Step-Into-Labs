@@ -59,9 +59,9 @@ struct Lab047: View {
                     em.components.set([BillboardComponent(), HoverEffectComponent()])
 
                     parent.addChild(em)
-
-
                     content.add(parent)
+
+                    applyMotion(entity: parent)
 
 
                 }
@@ -86,15 +86,7 @@ struct Lab047: View {
         .gesture(TapGesture()
             .targetedToAnyEntity()
             .onEnded { value in
-                // Add some force when we tap on any of the flowers
-                let force = SIMD3<Float>(
-                    x: Float.random(in: -1...1),
-                    y: Float.random(in: -1...1),
-                    z: Float.random(in: -1...1)
-                )
-                var motion = PhysicsMotionComponent()
-                motion.linearVelocity = force * 3
-                value.entity.components.set(motion)
+                applyMotion(entity: value.entity)
             })
         .task {
             try! await setupAndRunPlaneDetection()
@@ -143,6 +135,20 @@ struct Lab047: View {
         entity.components.set(physics)
 
         return entity
+    }
+
+    func applyMotion(entity: Entity) {
+
+        // Add some force when we tap on any of the flowers
+        let force = SIMD3<Float>(
+            x: Float.random(in: -1...1),
+            y: Float.random(in: -1...1),
+            z: Float.random(in: -1...1)
+        )
+        var motion = PhysicsMotionComponent()
+        motion.linearVelocity = force * 3
+        entity.components.set(motion)
+
     }
 }
 
