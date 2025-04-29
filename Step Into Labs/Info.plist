@@ -4,6 +4,8 @@
 <dict>
 	<key>NSHandsTrackingUsageDescription</key>
 	<string>Hand tracking is required</string>
+	<key>NSWorldSensingUsageDescription</key>
+	<string>World and plane detection access is needed to explore the ARKit example code</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationPreferredDefaultSceneSessionRole</key>

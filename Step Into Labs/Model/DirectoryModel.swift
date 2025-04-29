@@ -364,7 +364,7 @@ class ModelData {
              description: "I'm not sure what to do with this information.")
 
         ,Lab(title: "Lab 047",
-             type: .SPACE_FULL,
+             type: .SPACE,
              date: Date("4/29/2025"),
              isFeatured: true,
              subtitle: "Flower Bubbles",
