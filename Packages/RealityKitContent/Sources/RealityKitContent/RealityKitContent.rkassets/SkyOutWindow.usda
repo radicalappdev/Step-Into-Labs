@@ -1,0 +1,140 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 2.0 (448.100.13)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    def "SkySphere" (
+        active = true
+        references = @SkySphere.usdz@
+    )
+    {
+        float3 xformOp:scale = (0.1, 0.1, 0.1)
+        float3 xformOp:translate = (0, 0, 0)
+
+        over "SkySphere_mat"
+        {
+            asset inputs:SkySphere_Texture = @Textures/sky_36_2k.png@
+        }
+    }
+
+    def Cylinder "Cylinder" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        uniform token axis = "Y"
+        double height = 0.01
+        rel material:binding = </Grass> (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        double radius = 10
+    }
+}
+
+def Material "Grass"
+{
+    float2 inputs:uv_scale = (5, 5) (
+        customData = {
+            dictionary realitykit = {
+                float2 positionInSubgraph = (-470.89453, 839.25)
+                int stackingOrderInSubgraph = 640
+            }
+        }
+    )
+    token outputs:mtlx:surface.connect = </Grass/PreviewSurface.outputs:out>
+    token outputs:realitykit:vertex
+    float2 ui:nodegraph:node:pos = (-351.0017, 314.515)
+    int ui:nodegraph:node:stackingOrder = 1
+    float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (1017.4922, 799.0625)
+    int ui:nodegraph:realitykit:subgraphOutputs:stackingOrder = 728
+
+    def Shader "PreviewSurface"
+    {
+        uniform token info:id = "ND_UsdPreviewSurface_surfaceshader"
+        float inputs:clearcoat
+        float inputs:clearcoatRoughness
+        color3f inputs:diffuseColor.connect = </Grass/TiledImage.outputs:out>
+        color3f inputs:emissiveColor
+        float inputs:ior
+        float inputs:metallic
+        float3 inputs:normal.connect = </Grass/TiledImage_2.outputs:out>
+        float inputs:occlusion.connect = </Grass/TiledImage_1.outputs:out>
+        float inputs:opacity
+        float inputs:opacityThreshold
+        float inputs:roughness.connect = </Grass/TiledImage_3.outputs:out>
+        token outputs:out
+        float2 ui:nodegraph:node:pos = (775.7422, 799.0625)
+        int ui:nodegraph:node:stackingOrder = 728
+        string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["Advanced"]
+    }
+
+    def Shader "TiledImage"
+    {
+        uniform token info:id = "ND_tiledimage_color3"
+        color3f inputs:default
+        asset inputs:file = @Textures/grass_01_color_1k.png@
+        string inputs:filtertype = "linear"
+        float2 inputs:realworldimagesize
+        float2 inputs:realworldtilesize = (1, 1)
+        float2 inputs:texcoord
+        float2 inputs:uvoffset
+        float2 inputs:uvtiling.connect = </Grass.inputs:uv_scale>
+        color3f outputs:out
+        float2 ui:nodegraph:node:pos = (311.25, 229.25)
+        int ui:nodegraph:node:stackingOrder = 730
+        string[] ui:nodegraph:realitykit:node:attributesShowingChildren = []
+    }
+
+    def Shader "TiledImage_1"
+    {
+        uniform token info:id = "ND_tiledimage_float"
+        float inputs:default
+        asset inputs:file = @Textures/grass_01_ambient_occlusion_1k.png@
+        string inputs:filtertype
+        float2 inputs:realworldimagesize
+        float2 inputs:realworldtilesize
+        float2 inputs:texcoord
+        float2 inputs:uvoffset
+        float2 inputs:uvtiling.connect = </Grass.inputs:uv_scale>
+        float outputs:out
+        float2 ui:nodegraph:node:pos = (311.25, 1784.75)
+        int ui:nodegraph:node:stackingOrder = 734
+    }
+
+    def Shader "TiledImage_3"
+    {
+        uniform token info:id = "ND_tiledimage_float"
+        float inputs:default
+        asset inputs:file = @Textures/grass_01_roughness_1k.png@
+        string inputs:filtertype
+        float2 inputs:realworldtilesize
+        float2 inputs:texcoord
+        float2 inputs:uvoffset
+        float2 inputs:uvtiling.connect = </Grass.inputs:uv_scale>
+        float outputs:out
+        float2 ui:nodegraph:node:pos = (311.25, 747.75)
+        int ui:nodegraph:node:stackingOrder = 732
+    }
+
+    def Shader "TiledImage_2"
+    {
+        uniform token info:id = "ND_tiledimage_vector3"
+        asset inputs:file = @Textures/grass_01_normal_dx_1k.png@
+        string inputs:filtertype
+        float2 inputs:realworldtilesize
+        float2 inputs:texcoord
+        float2 inputs:uvoffset
+        float2 inputs:uvtiling.connect = </Grass.inputs:uv_scale>
+        float3 outputs:out
+        float2 ui:nodegraph:node:pos = (311.25, 1266.25)
+        int ui:nodegraph:node:stackingOrder = 733
+    }
+}
+

@@ -10,7 +10,6 @@ import SwiftUI
 enum LabType: String {
     case WINDOW  = "Window Content"
     case WINDOW_ALT  = "Plain Window Content"
-    case WINDOW_CONTENT_VIEW = "Window Sized for Content"
     case VOLUME = "Volume Content"
     case SPACE = "Mixed Immersive Space"
     case SPACE_FULL = "Full Immersive Space"
@@ -375,8 +374,8 @@ class ModelData {
              type: .WINDOW,
              date: Date("4/30/2025"),
              isFeatured: true,
-             subtitle: "Opening Windows is Weird",
-             description: "")
+             subtitle: "No really, open a window",
+             description: "Playing with an idea to hide a portal behind some window content.")
 
 
         
