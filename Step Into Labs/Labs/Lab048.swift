@@ -16,54 +16,48 @@ import RealityKitContent
 
 struct Lab048: View {
 
-    @State var window = Entity()
-    @State var windowYPosition: Float = 0
+    // The root for our scene *outside* of the portal
+    private let rootEntity = Entity()
+
+    // An entity that will render the portal
+    private let portalPlane = ModelEntity(
+        mesh: .generatePlane(width: 1.0, height: 1.0),
+        materials: [PortalMaterial()]
+    )
 
     var body: some View {
-        RealityView { content, attachments in
+        ZStack {
+            GeometryReader3D { geometry in
+                RealityView { content in
 
-            content.add(window)
+                    // The root for the content that will appear *inside* the portal
+                    let portalContentRoot = Entity()
+                    portalContentRoot.scale *= 0.5
+                    portalContentRoot.position.y -= 0.5
+                    portalContentRoot.components.set(WorldComponent())
 
-            if let panel = attachments.entity(for: "NotAWindow") {
-                window.addChild(panel)
-                panel.setScale([0.5, 0.5, 0.5], relativeTo: window)
-                panel.setPosition([0, 0, 0], relativeTo: window)
-            }
+                    // We'll load some content to add to the portalContentRoot
+                    guard let scene = try? await Entity(named: "PortalSwapRed", in: realityKitContentBundle) else { return }
+                    portalContentRoot.addChild(scene)
+                    portalPlane.components.set(PortalComponent(target: portalContentRoot))
 
-        } update: { content, attachments in
+                    rootEntity.addChild(portalContentRoot)
+                    rootEntity.addChild(portalPlane)
+                    content.add(rootEntity)
+                } update: { content in
+                    // Resize the scene based on the size of the reality view content.
+                    // Based on the example from Apple https://developer.apple.com/documentation/visionos/displaying-a-3d-environment-through-a-portal
+                    let size = content.convert(geometry.size, from: .local, to: .scene)
 
-            if let panel = attachments.entity(for: "NotAWindow") {
-                panel.setPosition([0, windowYPosition, 0], relativeTo: window)
-            }
+                    portalPlane.model?.mesh = .generatePlane(width: size.x, height: size.y, cornerRadius: 0.03)
 
-        } attachments: {
-            Attachment(id: "NotAWindow") {
-                VStack {
-                    HStack {
-                        Text("Fruits")
-                            .font(.title)
-                            .frame(height: 60)
-                        Spacer()
-                        Button(action: {
-                            print("button pressed")
-                            windowYPosition = 0.1
-                        }, label: {
-                            Image(systemName: "plus")
-                        })
-                    }
-                    .padding(.horizontal, 24)
-                    .padding(.top, 12)
-                    List {
-                        Text("Apple")
-                        Text("Banana")
-                        Text("Orange")
-                    }
                 }
-                .frame(width: 400, height: 300)
-                .glassBackgroundEffect()
+                .frame(width: geometry.size.width, height: geometry.size.height)
+                .frame(depth: 0.4)
             }
         }
     }
+
 }
 
 #Preview {

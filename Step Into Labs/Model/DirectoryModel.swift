@@ -10,6 +10,7 @@ import SwiftUI
 enum LabType: String {
     case WINDOW  = "Window Content"
     case WINDOW_ALT  = "Plain Window Content"
+    case WINDOW_CONTENT_VIEW = "Window Sized for Content"
     case VOLUME = "Volume Content"
     case SPACE = "Mixed Immersive Space"
     case SPACE_FULL = "Full Immersive Space"
