@@ -370,6 +370,13 @@ class ModelData {
              subtitle: "Emoji Friends",
              description: "Making some little emoji spheres to bounce around my office.")
 
+        ,Lab(title: "Lab 048",
+             type: .WINDOW,
+             date: Date("4/30/2025"),
+             isFeatured: true,
+             subtitle: "Opening Windows is Weird",
+             description: "")
+
 
         
 
