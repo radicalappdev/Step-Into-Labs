@@ -377,6 +377,13 @@ class ModelData {
              subtitle: "No really, open a window",
              description: "Playing with an idea to hide a portal behind some window content.")
 
+        ,Lab(title: "Lab 049",
+             type: .VOLUME,
+             date: Date("5/03/2025"),
+             isFeatured: true,
+             subtitle: "Split Faces",
+             description: "Using a different material on each face of a box.")
+
 
         
 
