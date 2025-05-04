@@ -388,8 +388,8 @@ class ModelData {
              type: .WINDOW,
              date: Date("5/04/2025"),
              isFeatured: true,
-             subtitle: "Hover Effect Groups",
-             description: "We can apply multiple hover effects ")
+             subtitle: "Hover Effect Namespace",
+             description: "Show and hide a symbol with a hover effect, using the shape of the parent view to trigger the effect.")
 
 
         

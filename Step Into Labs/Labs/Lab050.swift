@@ -2,11 +2,11 @@
 //
 //  Title: Lab050
 //
-//  Subtitle:
+//  Subtitle: Hover Effect Namespace
 //
-//  Description:
+//  Description: Show and hide a symbol with a hover effect, using the shape of the parent view to trigger the effect.
 //
-//  Type:
+//  Type: Window
 //
 //  Created by Joseph Simpson on 5/4/25.
 
