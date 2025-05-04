@@ -384,6 +384,13 @@ class ModelData {
              subtitle: "Split Faces",
              description: "Using a different material on each face of a box.")
 
+        ,Lab(title: "Lab 050",
+             type: .WINDOW,
+             date: Date("5/04/2025"),
+             isFeatured: true,
+             subtitle: "Hover Effect Groups",
+             description: "We can apply multiple hover effects ")
+
 
         
 
