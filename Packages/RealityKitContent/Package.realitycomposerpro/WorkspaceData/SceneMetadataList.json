@@ -24,7 +24,17 @@
       },
       [
         "031AB4B8-A98D-4B94-9361-640C4AAEFEC5",
-        "Root"
+        "Root",
+        "SmoothConcrete"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "031AB4B8-A98D-4B94-9361-640C4AAEFEC5",
+        "Root",
+        "Sphere"
       ],
       {
         "isExpanded" : true,
@@ -50,17 +60,7 @@
       },
       [
         "031AB4B8-A98D-4B94-9361-640C4AAEFEC5",
-        "Root",
-        "SmoothConcrete"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "031AB4B8-A98D-4B94-9361-640C4AAEFEC5",
-        "Root",
-        "Sphere"
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -78,6 +78,15 @@
       [
         "06C5FFFA-7340-4E0D-B614-25C231069B5F",
         "Root",
+        "Overlay"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "06C5FFFA-7340-4E0D-B614-25C231069B5F",
+        "Root",
         "PortalSphere"
       ],
       {
@@ -88,15 +97,6 @@
         "06C5FFFA-7340-4E0D-B614-25C231069B5F",
         "Root",
         "Stand"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "06C5FFFA-7340-4E0D-B614-25C231069B5F",
-        "Root",
-        "Overlay"
       ],
       {
         "isExpanded" : true,
@@ -150,16 +150,6 @@
       [
         "0B1B0589-72ED-4935-8D32-700594B8B644",
         "Root",
-        "FalseFloor",
-        "DefaultMaterial"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "0B1B0589-72ED-4935-8D32-700594B8B644",
-        "Root",
         "FalseFloor"
       ],
       {
@@ -173,6 +163,16 @@
       {
         "isExpanded" : true,
         "isLocked" : false
+      },
+      [
+        "0B1B0589-72ED-4935-8D32-700594B8B644",
+        "Root",
+        "FalseFloor",
+        "DefaultMaterial"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
       }
     ]
   },
@@ -181,8 +181,8 @@
       [
         "106DA8C8-A319-4AC4-9CCD-0933D53E7FF1",
         "Root",
-        "Timeline",
-        "Track"
+        "StepDome",
+        "SkyDome"
       ],
       {
         "isExpanded" : true,
@@ -191,8 +191,8 @@
       [
         "106DA8C8-A319-4AC4-9CCD-0933D53E7FF1",
         "Root",
-        "StepDome",
-        "SkyDome"
+        "Timeline",
+        "Track"
       ],
       {
         "isExpanded" : true,
@@ -219,9 +219,7 @@
       },
       [
         "106DA8C8-A319-4AC4-9CCD-0933D53E7FF1",
-        "Root",
-        "Spin",
-        "Track"
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -229,7 +227,9 @@
       },
       [
         "106DA8C8-A319-4AC4-9CCD-0933D53E7FF1",
-        "Root"
+        "Root",
+        "Spin",
+        "Track"
       ],
       {
         "isExpanded" : true,
@@ -253,9 +253,7 @@
     "objectMetadataList" : [
       [
         "20745604-DECF-4F37-8881-1F01AE07047E",
-        "Root",
-        "Blast",
-        "Track"
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -263,7 +261,9 @@
       },
       [
         "20745604-DECF-4F37-8881-1F01AE07047E",
-        "Root"
+        "Root",
+        "Blast",
+        "Track"
       ],
       {
         "isExpanded" : true,
@@ -329,26 +329,7 @@
       [
         "26D9F6E1-E8F4-4491-8C5F-FE3B644D53F7",
         "Root",
-        "CubeSpin"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "26D9F6E1-E8F4-4491-8C5F-FE3B644D53F7",
-        "Root",
-        "StackSkyBlocks",
-        "Stack"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "26D9F6E1-E8F4-4491-8C5F-FE3B644D53F7",
-        "Root",
-        "CapsuleOrbit",
+        "SphereScale",
         "Track"
       ],
       {
@@ -358,25 +339,7 @@
       [
         "26D9F6E1-E8F4-4491-8C5F-FE3B644D53F7",
         "Root",
-        "SphereScale",
-        "Track2"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "26D9F6E1-E8F4-4491-8C5F-FE3B644D53F7",
-        "Root"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "26D9F6E1-E8F4-4491-8C5F-FE3B644D53F7",
-        "Root",
-        "CubeSpin",
+        "SceneLoop",
         "Track"
       ],
       {
@@ -395,7 +358,7 @@
       [
         "26D9F6E1-E8F4-4491-8C5F-FE3B644D53F7",
         "Root",
-        "SphereScale",
+        "CubeSpin",
         "Track"
       ],
       {
@@ -405,7 +368,33 @@
       [
         "26D9F6E1-E8F4-4491-8C5F-FE3B644D53F7",
         "Root",
+        "CubeSpin"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "26D9F6E1-E8F4-4491-8C5F-FE3B644D53F7",
+        "Root",
+        "SceneLoop"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "26D9F6E1-E8F4-4491-8C5F-FE3B644D53F7",
+        "Root",
         "SphereScale"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "26D9F6E1-E8F4-4491-8C5F-FE3B644D53F7",
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -424,7 +413,8 @@
       [
         "26D9F6E1-E8F4-4491-8C5F-FE3B644D53F7",
         "Root",
-        "SceneLoop"
+        "SphereScale",
+        "Track2"
       ],
       {
         "isExpanded" : true,
@@ -433,8 +423,18 @@
       [
         "26D9F6E1-E8F4-4491-8C5F-FE3B644D53F7",
         "Root",
-        "SceneLoop",
+        "CapsuleOrbit",
         "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "26D9F6E1-E8F4-4491-8C5F-FE3B644D53F7",
+        "Root",
+        "StackSkyBlocks",
+        "Stack"
       ],
       {
         "isExpanded" : true,
@@ -479,7 +479,8 @@
     "objectMetadataList" : [
       [
         "4E7393D3-3FFC-4BFB-8AC2-9243FE94CF44",
-        "Root"
+        "Root",
+        "Floor"
       ],
       {
         "isExpanded" : true,
@@ -487,8 +488,7 @@
       },
       [
         "4E7393D3-3FFC-4BFB-8AC2-9243FE94CF44",
-        "Root",
-        "Floor"
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -535,26 +535,17 @@
       [
         "69135388-7782-493A-B7EE-3B9F9169A20D",
         "Root",
+        "Loop"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "69135388-7782-493A-B7EE-3B9F9169A20D",
+        "Root",
         "glasses_01",
         "Cylinder"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "69135388-7782-493A-B7EE-3B9F9169A20D",
-        "Root",
-        "Offset"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "69135388-7782-493A-B7EE-3B9F9169A20D",
-        "Root",
-        "Spin"
       ],
       {
         "isExpanded" : true,
@@ -573,7 +564,8 @@
       [
         "69135388-7782-493A-B7EE-3B9F9169A20D",
         "Root",
-        "Loop"
+        "Spin",
+        "Track"
       ],
       {
         "isExpanded" : true,
@@ -581,9 +573,7 @@
       },
       [
         "69135388-7782-493A-B7EE-3B9F9169A20D",
-        "Root",
-        "Spin",
-        "Track"
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -601,7 +591,17 @@
       },
       [
         "69135388-7782-493A-B7EE-3B9F9169A20D",
-        "Root"
+        "Root",
+        "Offset"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "69135388-7782-493A-B7EE-3B9F9169A20D",
+        "Root",
+        "Spin"
       ],
       {
         "isExpanded" : true,
@@ -634,14 +634,6 @@
     "objectMetadataList" : [
       [
         "6CF9F98D-FEB2-4CD2-A36D-E65ED723B51F",
-        "Root"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "6CF9F98D-FEB2-4CD2-A36D-E65ED723B51F",
         "Root",
         "StepDome"
       ],
@@ -654,6 +646,14 @@
         "Root",
         "StepDome",
         "SkyDome"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "6CF9F98D-FEB2-4CD2-A36D-E65ED723B51F",
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -677,7 +677,8 @@
     "objectMetadataList" : [
       [
         "76613277-49F8-4842-91EC-5363D85CF245",
-        "Root"
+        "Root",
+        "SkyDome"
       ],
       {
         "isExpanded" : true,
@@ -685,8 +686,7 @@
       },
       [
         "76613277-49F8-4842-91EC-5363D85CF245",
-        "Root",
-        "SkyDome"
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -709,7 +709,30 @@
       [
         "76BD64D0-AFD9-4859-B3CB-B4DEB8DBAC32",
         "Root",
+        "Sun",
+        "geom",
+        "realistic",
+        "materials"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "76BD64D0-AFD9-4859-B3CB-B4DEB8DBAC32",
+        "Root",
         "Sun"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "76BD64D0-AFD9-4859-B3CB-B4DEB8DBAC32",
+        "Root",
+        "Sun",
+        "geom",
+        "realistic"
       ],
       {
         "isExpanded" : true,
@@ -745,29 +768,6 @@
       {
         "isExpanded" : true,
         "isLocked" : false
-      },
-      [
-        "76BD64D0-AFD9-4859-B3CB-B4DEB8DBAC32",
-        "Root",
-        "Sun",
-        "geom",
-        "realistic"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "76BD64D0-AFD9-4859-B3CB-B4DEB8DBAC32",
-        "Root",
-        "Sun",
-        "geom",
-        "realistic",
-        "materials"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
       }
     ]
   },
@@ -775,9 +775,17 @@
     "objectMetadataList" : [
       [
         "7FCCE3C2-26E6-4555-8625-122976883DA3",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "7FCCE3C2-26E6-4555-8625-122976883DA3",
         "Root",
-        "ProbeParent",
-        "Probe"
+        "Spin",
+        "Track"
       ],
       {
         "isExpanded" : true,
@@ -796,26 +804,8 @@
       [
         "7FCCE3C2-26E6-4555-8625-122976883DA3",
         "Root",
-        "Spin",
-        "Track"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "7FCCE3C2-26E6-4555-8625-122976883DA3",
-        "Root"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "7FCCE3C2-26E6-4555-8625-122976883DA3",
-        "Root",
-        "Timeline",
-        "Track"
+        "ProbeParent",
+        "Probe"
       ],
       {
         "isExpanded" : true,
@@ -840,6 +830,16 @@
       {
         "isExpanded" : true,
         "isLocked" : false
+      },
+      [
+        "7FCCE3C2-26E6-4555-8625-122976883DA3",
+        "Root",
+        "Timeline",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
       }
     ]
   },
@@ -848,8 +848,8 @@
       [
         "8088479F-CE0C-4853-808C-58DB5763AAFA",
         "Root",
-        "SpinChamber",
-        "Track3"
+        "Scale",
+        "Track2"
       ],
       {
         "isExpanded" : true,
@@ -859,16 +859,6 @@
         "8088479F-CE0C-4853-808C-58DB5763AAFA",
         "Root",
         "SpinZ",
-        "Track"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "8088479F-CE0C-4853-808C-58DB5763AAFA",
-        "Root",
-        "SpinChaber",
         "Track"
       ],
       {
@@ -888,45 +878,6 @@
       [
         "8088479F-CE0C-4853-808C-58DB5763AAFA",
         "Root",
-        "SpinY",
-        "Track"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "8088479F-CE0C-4853-808C-58DB5763AAFA",
-        "Root",
-        "StepDome"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "8088479F-CE0C-4853-808C-58DB5763AAFA",
-        "Root",
-        "Scale",
-        "Track2"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "8088479F-CE0C-4853-808C-58DB5763AAFA",
-        "Root",
-        "Blast",
-        "Track"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "8088479F-CE0C-4853-808C-58DB5763AAFA",
-        "Root",
         "BUmp",
         "BumpSubject"
       ],
@@ -938,7 +889,7 @@
         "8088479F-CE0C-4853-808C-58DB5763AAFA",
         "Root",
         "SpinChamber",
-        "Track4"
+        "Track3"
       ],
       {
         "isExpanded" : true,
@@ -947,8 +898,8 @@
       [
         "8088479F-CE0C-4853-808C-58DB5763AAFA",
         "Root",
-        "SpinX",
-        "Track"
+        "SpinChamber",
+        "Track2"
       ],
       {
         "isExpanded" : true,
@@ -957,6 +908,36 @@
       [
         "8088479F-CE0C-4853-808C-58DB5763AAFA",
         "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "8088479F-CE0C-4853-808C-58DB5763AAFA",
+        "Root",
+        "SpinChaber",
+        "Track2"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "8088479F-CE0C-4853-808C-58DB5763AAFA",
+        "Root",
+        "SpinChaber",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "8088479F-CE0C-4853-808C-58DB5763AAFA",
+        "Root",
+        "Blast",
+        "Track"
       ],
       {
         "isExpanded" : true,
@@ -976,7 +957,17 @@
         "8088479F-CE0C-4853-808C-58DB5763AAFA",
         "Root",
         "SpinChamber",
-        "Track2"
+        "Track4"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "8088479F-CE0C-4853-808C-58DB5763AAFA",
+        "Root",
+        "SpinY",
+        "Track"
       ],
       {
         "isExpanded" : true,
@@ -995,8 +986,7 @@
       [
         "8088479F-CE0C-4853-808C-58DB5763AAFA",
         "Root",
-        "SpinChaber",
-        "Track2"
+        "Chamber"
       ],
       {
         "isExpanded" : true,
@@ -1005,7 +995,17 @@
       [
         "8088479F-CE0C-4853-808C-58DB5763AAFA",
         "Root",
-        "Chamber"
+        "SpinX",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "8088479F-CE0C-4853-808C-58DB5763AAFA",
+        "Root",
+        "StepDome"
       ],
       {
         "isExpanded" : true,
@@ -1017,8 +1017,7 @@
     "objectMetadataList" : [
       [
         "835B1610-AB22-4775-95C9-44CD41AE334E",
-        "Root",
-        "Sphere_4"
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -1026,7 +1025,8 @@
       },
       [
         "835B1610-AB22-4775-95C9-44CD41AE334E",
-        "Root"
+        "Root",
+        "Sphere_4"
       ],
       {
         "isExpanded" : true,
@@ -1038,7 +1038,8 @@
     "objectMetadataList" : [
       [
         "8927C89E-AA92-4E6D-B496-CC831CA8BADF",
-        "Root"
+        "Root",
+        "Demo_2"
       ],
       {
         "isExpanded" : true,
@@ -1046,8 +1047,7 @@
       },
       [
         "8927C89E-AA92-4E6D-B496-CC831CA8BADF",
-        "Root",
-        "Demo_2"
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -1082,47 +1082,7 @@
       [
         "90C235E0-C99C-42E7-9D0D-5E131743A0A7",
         "Root",
-        "Roof_Move",
-        "Track"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "90C235E0-C99C-42E7-9D0D-5E131743A0A7",
-        "Root",
-        "Roof_1",
-        "Track"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "90C235E0-C99C-42E7-9D0D-5E131743A0A7",
-        "Root",
-        "SpinCube",
-        "Track"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "90C235E0-C99C-42E7-9D0D-5E131743A0A7",
-        "Root",
-        "Wall_1Move",
-        "Track"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "90C235E0-C99C-42E7-9D0D-5E131743A0A7",
-        "Root",
-        "CubeController"
+        "Subject"
       ],
       {
         "isExpanded" : true,
@@ -1140,23 +1100,6 @@
       },
       [
         "90C235E0-C99C-42E7-9D0D-5E131743A0A7",
-        "Root"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "90C235E0-C99C-42E7-9D0D-5E131743A0A7",
-        "Root",
-        "SpinCube"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "90C235E0-C99C-42E7-9D0D-5E131743A0A7",
         "Root",
         "Safety_Glasses",
         "geom",
@@ -1170,17 +1113,7 @@
       [
         "90C235E0-C99C-42E7-9D0D-5E131743A0A7",
         "Root",
-        "Safety_Glasses",
-        "geom"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "90C235E0-C99C-42E7-9D0D-5E131743A0A7",
-        "Root",
-        "Subject"
+        "Cone"
       ],
       {
         "isExpanded" : true,
@@ -1210,8 +1143,8 @@
       [
         "90C235E0-C99C-42E7-9D0D-5E131743A0A7",
         "Root",
-        "Subject",
-        "SubjectGlass"
+        "SpinCube",
+        "Track"
       ],
       {
         "isExpanded" : true,
@@ -1220,7 +1153,25 @@
       [
         "90C235E0-C99C-42E7-9D0D-5E131743A0A7",
         "Root",
-        "Cone"
+        "Cube"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "90C235E0-C99C-42E7-9D0D-5E131743A0A7",
+        "Root",
+        "Wall_1Move",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "90C235E0-C99C-42E7-9D0D-5E131743A0A7",
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -1230,6 +1181,55 @@
         "90C235E0-C99C-42E7-9D0D-5E131743A0A7",
         "Root",
         "Cylinder"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "90C235E0-C99C-42E7-9D0D-5E131743A0A7",
+        "Root",
+        "Roof_Move",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "90C235E0-C99C-42E7-9D0D-5E131743A0A7",
+        "Root",
+        "CubeController"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "90C235E0-C99C-42E7-9D0D-5E131743A0A7",
+        "Root",
+        "Safety_Glasses",
+        "geom"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "90C235E0-C99C-42E7-9D0D-5E131743A0A7",
+        "Root",
+        "Roof_1",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "90C235E0-C99C-42E7-9D0D-5E131743A0A7",
+        "Root",
+        "Subject",
+        "SubjectGlass"
       ],
       {
         "isExpanded" : true,
@@ -1248,7 +1248,8 @@
       [
         "90C235E0-C99C-42E7-9D0D-5E131743A0A7",
         "Root",
-        "Cube"
+        "Timeline",
+        "Track"
       ],
       {
         "isExpanded" : true,
@@ -1257,8 +1258,7 @@
       [
         "90C235E0-C99C-42E7-9D0D-5E131743A0A7",
         "Root",
-        "Timeline",
-        "Track"
+        "SpinCube"
       ],
       {
         "isExpanded" : true,
@@ -1270,16 +1270,9 @@
     "objectMetadataList" : [
       [
         "98043A2D-E996-4BE7-8F15-47AAB1E1E57E",
-        "Root"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "98043A2D-E996-4BE7-8F15-47AAB1E1E57E",
         "Root",
-        "Loop"
+        "Spin",
+        "Track"
       ],
       {
         "isExpanded" : true,
@@ -1298,8 +1291,15 @@
       [
         "98043A2D-E996-4BE7-8F15-47AAB1E1E57E",
         "Root",
-        "Spin",
-        "Track"
+        "Loop"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "98043A2D-E996-4BE7-8F15-47AAB1E1E57E",
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -1308,7 +1308,7 @@
       [
         "98043A2D-E996-4BE7-8F15-47AAB1E1E57E",
         "Root",
-        "Cube"
+        "Spin"
       ],
       {
         "isExpanded" : true,
@@ -1327,7 +1327,7 @@
       [
         "98043A2D-E996-4BE7-8F15-47AAB1E1E57E",
         "Root",
-        "Spin"
+        "Cube"
       ],
       {
         "isExpanded" : true,
@@ -1340,8 +1340,9 @@
       [
         "A40DA96E-0E21-4324-9AF2-06410FAB9851",
         "Root",
-        "Spawner",
-        "Cube_1"
+        "SpawnerCube",
+        "CubeBase",
+        "Cube_2"
       ],
       {
         "isExpanded" : true,
@@ -1352,7 +1353,7 @@
         "Root",
         "SpawnerCube",
         "CubeBase",
-        "Cube_2"
+        "Cube_4"
       ],
       {
         "isExpanded" : true,
@@ -1373,7 +1374,7 @@
         "Root",
         "SpawnerCube",
         "CubeBase",
-        "Cube_4"
+        "Cube_3"
       ],
       {
         "isExpanded" : true,
@@ -1381,10 +1382,7 @@
       },
       [
         "A40DA96E-0E21-4324-9AF2-06410FAB9851",
-        "Root",
-        "SpawnerCube",
-        "CubeBase",
-        "Cube_3"
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -1403,7 +1401,9 @@
       },
       [
         "A40DA96E-0E21-4324-9AF2-06410FAB9851",
-        "Root"
+        "Root",
+        "Spawner",
+        "Cube_1"
       ],
       {
         "isExpanded" : true,
@@ -1436,7 +1436,8 @@
       },
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
-        "Root"
+        "Root",
+        "Sphere_Right"
       ],
       {
         "isExpanded" : true,
@@ -1444,8 +1445,7 @@
       },
       [
         "AF09ED6F-1707-48FD-8720-65B998362C09",
-        "Root",
-        "Sphere_Right"
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -1457,7 +1457,8 @@
     "objectMetadataList" : [
       [
         "AFEEA4E5-CA98-4411-BA40-1EAA956BB9C0",
-        "Root"
+        "Root",
+        "StandParentExample"
       ],
       {
         "isExpanded" : true,
@@ -1465,8 +1466,7 @@
       },
       [
         "AFEEA4E5-CA98-4411-BA40-1EAA956BB9C0",
-        "Root",
-        "StandParentExample"
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -1516,6 +1516,18 @@
       }
     ]
   },
+  "BC102122-6C6C-4068-8676-0C4A6C3DB800" : {
+    "objectMetadataList" : [
+      [
+        "BC102122-6C6C-4068-8676-0C4A6C3DB800",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  },
   "C357334B-7677-46D9-8B3E-C43BB77916EE" : {
     "objectMetadataList" : [
       [
@@ -1557,7 +1569,7 @@
       [
         "CB5E1518-DE38-44CA-8492-6104DC9F4794",
         "Root",
-        "Subject_2_Move",
+        "Subject_2_Collision_Wall_2",
         "Track"
       ],
       {
@@ -1567,26 +1579,7 @@
       [
         "CB5E1518-DE38-44CA-8492-6104DC9F4794",
         "Root",
-        "Subject_2_Loop",
-        "Track"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "CB5E1518-DE38-44CA-8492-6104DC9F4794",
-        "Root",
-        "Demo_1"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "CB5E1518-DE38-44CA-8492-6104DC9F4794",
-        "Root",
-        "Wall_1_Collision_Subject_2",
+        "Subject_1_Loop_2",
         "Track"
       ],
       {
@@ -1607,7 +1600,24 @@
         "CB5E1518-DE38-44CA-8492-6104DC9F4794",
         "Root",
         "Subject_2_Collision_Wall_2",
-        "Track"
+        "Track2"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "CB5E1518-DE38-44CA-8492-6104DC9F4794",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "CB5E1518-DE38-44CA-8492-6104DC9F4794",
+        "Root",
+        "Demo_1"
       ],
       {
         "isExpanded" : true,
@@ -1617,35 +1627,6 @@
         "CB5E1518-DE38-44CA-8492-6104DC9F4794",
         "Root",
         "Subject_1_Loop"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "CB5E1518-DE38-44CA-8492-6104DC9F4794",
-        "Root",
-        "Subject_1_Move",
-        "Track"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "CB5E1518-DE38-44CA-8492-6104DC9F4794",
-        "Root",
-        "Subject_1_Loop",
-        "Track"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "CB5E1518-DE38-44CA-8492-6104DC9F4794",
-        "Root",
-        "Subject_1_Move"
       ],
       {
         "isExpanded" : true,
@@ -1664,25 +1645,7 @@
       [
         "CB5E1518-DE38-44CA-8492-6104DC9F4794",
         "Root",
-        "Subject_2_Collision_Wall_2",
-        "Track2"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "CB5E1518-DE38-44CA-8492-6104DC9F4794",
-        "Root"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "CB5E1518-DE38-44CA-8492-6104DC9F4794",
-        "Root",
-        "Subject_1_Loop_2",
+        "Subject_1_Loop",
         "Track"
       ],
       {
@@ -1702,7 +1665,56 @@
       [
         "CB5E1518-DE38-44CA-8492-6104DC9F4794",
         "Root",
+        "Subject_1_Move",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "CB5E1518-DE38-44CA-8492-6104DC9F4794",
+        "Root",
+        "Subject_1_Move"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "CB5E1518-DE38-44CA-8492-6104DC9F4794",
+        "Root",
+        "Subject_2_Move",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "CB5E1518-DE38-44CA-8492-6104DC9F4794",
+        "Root",
         "Subject_2_Collision_Wall_1",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "CB5E1518-DE38-44CA-8492-6104DC9F4794",
+        "Root",
+        "Wall_1_Collision_Subject_2",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "CB5E1518-DE38-44CA-8492-6104DC9F4794",
+        "Root",
+        "Subject_2_Loop",
         "Track"
       ],
       {
@@ -1715,7 +1727,8 @@
     "objectMetadataList" : [
       [
         "CB766F92-EE55-4A63-9401-E7B8C009764D",
-        "Root"
+        "Root",
+        "GridMaterial"
       ],
       {
         "isExpanded" : true,
@@ -1723,8 +1736,7 @@
       },
       [
         "CB766F92-EE55-4A63-9401-E7B8C009764D",
-        "Root",
-        "GridMaterial"
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -1748,7 +1760,9 @@
     "objectMetadataList" : [
       [
         "D300FA75-1D09-4A36-A08D-6114D5A82A9B",
-        "Root_1"
+        "Root_1",
+        "Sphere",
+        "DefaultMaterial"
       ],
       {
         "isExpanded" : true,
@@ -1756,9 +1770,7 @@
       },
       [
         "D300FA75-1D09-4A36-A08D-6114D5A82A9B",
-        "Root_1",
-        "Sphere",
-        "DefaultMaterial"
+        "Root_1"
       ],
       {
         "isExpanded" : true,
@@ -1775,7 +1787,9 @@
     "objectMetadataList" : [
       [
         "D66134B1-3681-4A8E-AFE5-29F257229F3B",
-        "Root"
+        "Root",
+        "GridMaterial",
+        "GridMaterial"
       ],
       {
         "isExpanded" : true,
@@ -1783,9 +1797,7 @@
       },
       [
         "D66134B1-3681-4A8E-AFE5-29F257229F3B",
-        "Root",
-        "GridMaterial",
-        "GridMaterial"
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -1799,7 +1811,7 @@
         "DED916C6-0CB0-4CBD-91F7-68ADC71C48D4",
         "ScenePivot",
         "Timeline",
-        "Track"
+        "Track2"
       ],
       {
         "isExpanded" : true,
@@ -1816,7 +1828,18 @@
       [
         "DED916C6-0CB0-4CBD-91F7-68ADC71C48D4",
         "ScenePivot",
-        "Timeline"
+        "Timeline2",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "DED916C6-0CB0-4CBD-91F7-68ADC71C48D4",
+        "ScenePivot",
+        "Timeline",
+        "Track"
       ],
       {
         "isExpanded" : true,
@@ -1844,18 +1867,7 @@
       [
         "DED916C6-0CB0-4CBD-91F7-68ADC71C48D4",
         "ScenePivot",
-        "Timeline2",
-        "Track"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "DED916C6-0CB0-4CBD-91F7-68ADC71C48D4",
-        "ScenePivot",
-        "Timeline",
-        "Track2"
+        "Timeline"
       ],
       {
         "isExpanded" : true,
@@ -1865,6 +1877,16 @@
   },
   "E2C1523E-C5DA-4EAF-B131-6EAEC1E74847" : {
     "objectMetadataList" : [
+      [
+        "E2C1523E-C5DA-4EAF-B131-6EAEC1E74847",
+        "Root",
+        "StackLoop",
+        "Track2"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
       [
         "E2C1523E-C5DA-4EAF-B131-6EAEC1E74847",
         "Root",
@@ -1888,24 +1910,6 @@
       [
         "E2C1523E-C5DA-4EAF-B131-6EAEC1E74847",
         "Root",
-        "StackBounce"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "E2C1523E-C5DA-4EAF-B131-6EAEC1E74847",
-        "Root",
-        "StackLoop"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "E2C1523E-C5DA-4EAF-B131-6EAEC1E74847",
-        "Root",
         "BlockRotate",
         "Track2"
       ],
@@ -1916,8 +1920,26 @@
       [
         "E2C1523E-C5DA-4EAF-B131-6EAEC1E74847",
         "Root",
-        "StackLoop",
-        "Track2"
+        "StackBounce"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "E2C1523E-C5DA-4EAF-B131-6EAEC1E74847",
+        "Root",
+        "BlockRotate"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "E2C1523E-C5DA-4EAF-B131-6EAEC1E74847",
+        "Root",
+        "TransformStack",
+        "Track"
       ],
       {
         "isExpanded" : true,
@@ -1934,8 +1956,7 @@
       },
       [
         "E2C1523E-C5DA-4EAF-B131-6EAEC1E74847",
-        "Root",
-        "BlockRotate"
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -1954,16 +1975,7 @@
       [
         "E2C1523E-C5DA-4EAF-B131-6EAEC1E74847",
         "Root",
-        "TransformStack",
-        "Track"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "E2C1523E-C5DA-4EAF-B131-6EAEC1E74847",
-        "Root"
+        "StackLoop"
       ],
       {
         "isExpanded" : true,
@@ -1975,56 +1987,8 @@
     "objectMetadataList" : [
       [
         "E5A9429C-2ED0-42F1-88DD-34DE71A5656B",
-        "Root"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "E5A9429C-2ED0-42F1-88DD-34DE71A5656B",
         "Root",
-        "DoorwayCycle"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "E5A9429C-2ED0-42F1-88DD-34DE71A5656B",
-        "Root",
-        "MegaLoop",
-        "Track"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "E5A9429C-2ED0-42F1-88DD-34DE71A5656B",
-        "Root",
-        "SkyDome"
-      ],
-      {
-        "disallowsFraming" : true,
-        "isExpanded" : false,
-        "isLocked" : false
-      },
-      [
-        "E5A9429C-2ED0-42F1-88DD-34DE71A5656B",
-        "Root",
-        "DoorwayLoop",
-        "Track"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "E5A9429C-2ED0-42F1-88DD-34DE71A5656B",
-        "Root",
-        "MetaRotate",
-        "Track"
+        "DoorwayLoop"
       ],
       {
         "isExpanded" : true,
@@ -2042,8 +2006,27 @@
       },
       [
         "E5A9429C-2ED0-42F1-88DD-34DE71A5656B",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "E5A9429C-2ED0-42F1-88DD-34DE71A5656B",
         "Root",
-        "DoorwayLoop"
+        "Mega",
+        "Doorway_1"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "E5A9429C-2ED0-42F1-88DD-34DE71A5656B",
+        "Root",
+        "MetaRotate",
+        "Track"
       ],
       {
         "isExpanded" : true,
@@ -2063,10 +2046,29 @@
       [
         "E5A9429C-2ED0-42F1-88DD-34DE71A5656B",
         "Root",
+        "DoorwayCycle"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "E5A9429C-2ED0-42F1-88DD-34DE71A5656B",
+        "Root",
         "Floor"
       ],
       {
         "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "E5A9429C-2ED0-42F1-88DD-34DE71A5656B",
+        "Root",
+        "SkyDome"
+      ],
+      {
+        "disallowsFraming" : true,
+        "isExpanded" : false,
         "isLocked" : false
       },
       [
@@ -2082,8 +2084,18 @@
       [
         "E5A9429C-2ED0-42F1-88DD-34DE71A5656B",
         "Root",
-        "Mega",
-        "Doorway_1"
+        "DoorwayLoop",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "E5A9429C-2ED0-42F1-88DD-34DE71A5656B",
+        "Root",
+        "MegaLoop",
+        "Track"
       ],
       {
         "isExpanded" : true,
@@ -2095,8 +2107,7 @@
     "objectMetadataList" : [
       [
         "EA8D1646-C694-44B7-9909-9B2659F2661C",
-        "Root",
-        "ShapeVis"
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -2104,7 +2115,8 @@
       },
       [
         "EA8D1646-C694-44B7-9909-9B2659F2661C",
-        "Root"
+        "Root",
+        "ShapeVis"
       ],
       {
         "isExpanded" : true,
@@ -2117,82 +2129,7 @@
       [
         "EE4E9B65-08F0-49B1-A553-D543CC6E0965",
         "Root",
-        "Light_1"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "EE4E9B65-08F0-49B1-A553-D543CC6E0965",
-        "Root",
-        "Loop",
-        "Track2"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "EE4E9B65-08F0-49B1-A553-D543CC6E0965",
-        "Root",
-        "Light_1",
-        "Cone"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "EE4E9B65-08F0-49B1-A553-D543CC6E0965",
-        "Root"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "EE4E9B65-08F0-49B1-A553-D543CC6E0965",
-        "Root",
-        "Light_3_Spin"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "EE4E9B65-08F0-49B1-A553-D543CC6E0965",
-        "Root",
-        "Loop",
-        "Track3"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "EE4E9B65-08F0-49B1-A553-D543CC6E0965",
-        "Root",
-        "Light_1_Spin"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "EE4E9B65-08F0-49B1-A553-D543CC6E0965",
-        "Root",
-        "Light_2"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "EE4E9B65-08F0-49B1-A553-D543CC6E0965",
-        "Root",
-        "Light_3_Spin",
-        "Track"
+        "Light_3"
       ],
       {
         "isExpanded" : true,
@@ -2211,16 +2148,8 @@
       [
         "EE4E9B65-08F0-49B1-A553-D543CC6E0965",
         "Root",
-        "Loop"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "EE4E9B65-08F0-49B1-A553-D543CC6E0965",
-        "Root",
-        "Light_2_Spin"
+        "Light_1_Spin",
+        "Track"
       ],
       {
         "isExpanded" : true,
@@ -2230,27 +2159,7 @@
         "EE4E9B65-08F0-49B1-A553-D543CC6E0965",
         "Root",
         "Loop",
-        "Track"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "EE4E9B65-08F0-49B1-A553-D543CC6E0965",
-        "Root",
-        "Light_1_Spin_1",
-        "Track"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "EE4E9B65-08F0-49B1-A553-D543CC6E0965",
-        "Root",
-        "Light_1_Spin",
-        "Track"
+        "Track2"
       ],
       {
         "isExpanded" : true,
@@ -2269,8 +2178,54 @@
       [
         "EE4E9B65-08F0-49B1-A553-D543CC6E0965",
         "Root",
-        "Light_1_Spin_2",
+        "Light_2_Spin"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "EE4E9B65-08F0-49B1-A553-D543CC6E0965",
+        "Root",
+        "Light_3_Spin"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "EE4E9B65-08F0-49B1-A553-D543CC6E0965",
+        "Root",
+        "Light_1_Spin"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "EE4E9B65-08F0-49B1-A553-D543CC6E0965",
+        "Root",
+        "Loop",
         "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "EE4E9B65-08F0-49B1-A553-D543CC6E0965",
+        "Root",
+        "Loop",
+        "Track3"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "EE4E9B65-08F0-49B1-A553-D543CC6E0965",
+        "Root",
+        "Light_2"
       ],
       {
         "isExpanded" : true,
@@ -2299,7 +2254,64 @@
       [
         "EE4E9B65-08F0-49B1-A553-D543CC6E0965",
         "Root",
-        "Light_3"
+        "Light_1_Spin_2",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "EE4E9B65-08F0-49B1-A553-D543CC6E0965",
+        "Root",
+        "Loop"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "EE4E9B65-08F0-49B1-A553-D543CC6E0965",
+        "Root",
+        "Light_3_Spin",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "EE4E9B65-08F0-49B1-A553-D543CC6E0965",
+        "Root",
+        "Light_1"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "EE4E9B65-08F0-49B1-A553-D543CC6E0965",
+        "Root",
+        "Light_1",
+        "Cone"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "EE4E9B65-08F0-49B1-A553-D543CC6E0965",
+        "Root",
+        "Light_1_Spin_1",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "EE4E9B65-08F0-49B1-A553-D543CC6E0965",
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -2311,7 +2323,8 @@
     "objectMetadataList" : [
       [
         "EF7EEC0C-5DBF-4E32-8A84-4A83A2B4924D",
-        "Root"
+        "Root",
+        "Chain"
       ],
       {
         "isExpanded" : true,
@@ -2328,8 +2341,7 @@
       },
       [
         "EF7EEC0C-5DBF-4E32-8A84-4A83A2B4924D",
-        "Root",
-        "Chain"
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -2375,16 +2387,6 @@
       [
         "FD2D623C-445B-4B4B-99A8-4F66CF4C17F3",
         "Root",
-        "SkySphere"
-      ],
-      {
-        "disallowsFraming" : true,
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "FD2D623C-445B-4B4B-99A8-4F66CF4C17F3",
-        "Root",
         "Cylinder"
       ],
       {
@@ -2398,30 +2400,21 @@
       {
         "isExpanded" : true,
         "isLocked" : false
+      },
+      [
+        "FD2D623C-445B-4B4B-99A8-4F66CF4C17F3",
+        "Root",
+        "SkySphere"
+      ],
+      {
+        "disallowsFraming" : true,
+        "isExpanded" : true,
+        "isLocked" : false
       }
     ]
   },
   "FD46CB38-D383-49B0-BECF-828C0268C32B" : {
     "objectMetadataList" : [
-      [
-        "FD46CB38-D383-49B0-BECF-828C0268C32B",
-        "Root",
-        "Sphere",
-        "DefaultMaterial"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "FD46CB38-D383-49B0-BECF-828C0268C32B",
-        "Root",
-        "SkySphere"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
       [
         "FD46CB38-D383-49B0-BECF-828C0268C32B",
         "Root",
@@ -2452,7 +2445,26 @@
       },
       [
         "FD46CB38-D383-49B0-BECF-828C0268C32B",
+        "Root",
+        "SkySphere"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "FD46CB38-D383-49B0-BECF-828C0268C32B",
         "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "FD46CB38-D383-49B0-BECF-828C0268C32B",
+        "Root",
+        "Sphere",
+        "DefaultMaterial"
       ],
       {
         "isExpanded" : true,

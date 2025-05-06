@@ -391,7 +391,12 @@ class ModelData {
              subtitle: "Hover Effect Namespace",
              description: "Show and hide a symbol with a hover effect, using the shape of the parent view to trigger the effect.")
 
-
+        ,Lab(title: "Lab 051",
+             type: .SPACE,
+             date: Date("5/05/2025"),
+             isFeatured: true,
+             subtitle: "Issues with World Tracking",
+             description: "Reproducing an issue with world tracking.")
         
 
 

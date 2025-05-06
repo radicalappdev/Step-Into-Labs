@@ -3,7 +3,8 @@
   "openSceneRelativePaths" : [
     "SpawnerLab.usda",
     "PortalSwapRed.usda",
-    "SkyOutWindow.usda"
+    "SkyOutWindow.usda",
+    "WorldTracking.usda"
   ],
   "recentIdentifiers" : {
     "00AC74E2-A464-4F74-A445-36CD76630287" : [
@@ -7036,5 +7037,5 @@
   "sceneViewportBackgroundColors" : {
 
   },
-  "selectedSceneRelativePath" : "SkyOutWindow.usda"
+  "selectedSceneRelativePath" : "WorldTracking.usda"
 }
