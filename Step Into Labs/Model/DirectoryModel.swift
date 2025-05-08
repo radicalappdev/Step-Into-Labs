@@ -352,21 +352,21 @@ class ModelData {
         ,Lab(title: "Lab 045",
              type: .VOLUME,
              date: Date("4/06/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Entity Actions",
              description: "Byte sized actions we can animate on entities")
 
         ,Lab(title: "Lab 046",
              type: .WINDOW,
              date: Date("4/09/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Portals can do what?",
              description: "I'm not sure what to do with this information.")
 
         ,Lab(title: "Lab 047",
              type: .SPACE,
              date: Date("4/29/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Emoji Friends",
              description: "Making some little emoji spheres to bounce around my office.")
 
@@ -397,7 +397,14 @@ class ModelData {
              isFeatured: true,
              subtitle: "Issues with World Tracking",
              description: "Reproducing an issue with world tracking.")
-        
+
+        ,Lab(title: "Lab 052",
+             type: .WINDOW_ALT,
+             date: Date("5/08/2025"),
+             isFeatured: true,
+             subtitle: "A 3D text countdown timer",
+             description: "Originally created for Looming Deadlines.")
+
 
 
     ]
