@@ -409,8 +409,8 @@ class ModelData {
              type: .WINDOW,
              date: Date("5/22/2025"),
              isFeatured: true,
-             subtitle: "Attachments in Portals",
-             description: "")
+             subtitle: "Using Attachments in Portals",
+             description: "We can render SwiftUI views as attachments inside portals, but they are not interactive.")
 
 
 

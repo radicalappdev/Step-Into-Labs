@@ -11,7 +11,7 @@
 def Xform "Root"
 {
     def "StepDome" (
-        active = true
+        active = false
         prepend references = @BuildingBlocks/StepDome.usda@
     )
     {
@@ -134,6 +134,22 @@ def Xform "Root"
                     float3 position = (0.0000014305115, 22.499996, 9.536743e-7)
                 }
             }
+        }
+    }
+
+    def "SkySphere" (
+        active = true
+        references = @SkySphere.usdz@
+    )
+    {
+        float2 ui:nodegraph:node:pos = (20, 20)
+        int ui:nodegraph:node:stackingOrder = 1
+        float3 xformOp:scale = (0.1, 0.1, 0.1)
+        float3 xformOp:translate = (0, 0, 0)
+
+        over "SkySphere_mat"
+        {
+            asset inputs:SkySphere_Texture = @Textures/sky_36_2k.png@
         }
     }
 }

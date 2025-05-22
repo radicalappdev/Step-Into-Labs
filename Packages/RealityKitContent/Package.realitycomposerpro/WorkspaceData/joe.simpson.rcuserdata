@@ -2,7 +2,8 @@
   "advancedEditorSelectedIdentifier" : "ProjectBrowser",
   "openSceneRelativePaths" : [
     "Glasses.usda",
-    "NoFloor.usda"
+    "NoFloor.usda",
+    "SkyOutWindow.usda"
   ],
   "recentIdentifiers" : {
     "00AC74E2-A464-4F74-A445-36CD76630287" : [
@@ -5742,6 +5743,28 @@
       }
     ],
     "E370BFC6-7A53-4D4F-9BFA-7ACE9227C2CD" : [
+      {
+        "date" : 769605730.663171,
+        "title" : "Untitled",
+        "transform" : [
+          0.94036084,
+          -5.4460237e-08,
+          -0.34017852,
+          0,
+          -0.07988303,
+          0.97203714,
+          -0.22082217,
+          0,
+          0.33066618,
+          0.23482713,
+          0.9140657,
+          0,
+          1.0918111,
+          0.24638218,
+          -1.0623958,
+          1
+        ]
+      },
       {
         "date" : 769604396.669195,
         "title" : "Untitled",
