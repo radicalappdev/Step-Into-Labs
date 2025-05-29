@@ -331,13 +331,13 @@ class ModelData {
         ,Lab(title: "Lab 042",
              type: .SPACE,
              date: Date("3/21/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Second pass at an Entity Spawner",
              description: "Using Components and Systems to create an entity spawner system.")
 
         ,Lab(title: "Lab 043",
              type: .SPACE,
-             date: Date("3/25/2025"),
+             date: Date("3/false/2025"),
              isFeatured: true,
              subtitle: "Visualize the Entity Spawner",
              description: "Using Components and Systems to create an entity spawner system.")
@@ -373,35 +373,35 @@ class ModelData {
         ,Lab(title: "Lab 048",
              type: .WINDOW,
              date: Date("4/30/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "No really, open a window",
              description: "Playing with an idea to hide a portal behind some window content.")
 
         ,Lab(title: "Lab 049",
              type: .VOLUME,
              date: Date("5/03/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Split Faces",
              description: "Using a different material on each face of a box.")
 
         ,Lab(title: "Lab 050",
              type: .WINDOW,
              date: Date("5/04/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Hover Effect Namespace",
              description: "Show and hide a symbol with a hover effect, using the shape of the parent view to trigger the effect.")
 
         ,Lab(title: "Lab 051",
              type: .SPACE,
              date: Date("5/05/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Issues with World Tracking",
              description: "Reproducing an issue with world tracking.")
 
         ,Lab(title: "Lab 052",
              type: .WINDOW_ALT,
              date: Date("5/08/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "A 3D text countdown timer",
              description: "Originally created for Looming Deadlines.")
 
@@ -411,6 +411,13 @@ class ModelData {
              isFeatured: true,
              subtitle: "Using Attachments in Portals",
              description: "We can render SwiftUI views as attachments inside portals, but they are not interactive.")
+
+        ,Lab(title: "Lab 054",
+             type: .WINDOW_ALT,
+             date: Date("5/29/2025"),
+             isFeatured: true,
+             subtitle: "Hover Effect",
+             description: "")
 
 
 
