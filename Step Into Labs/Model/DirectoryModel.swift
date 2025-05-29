@@ -416,8 +416,8 @@ class ModelData {
              type: .WINDOW_ALT,
              date: Date("5/29/2025"),
              isFeatured: true,
-             subtitle: "Hover Effect",
-             description: "")
+             subtitle: "Oops all Hover Effects",
+             description: "Just a bit of fun with hover effect namespaces.")
 
 
 

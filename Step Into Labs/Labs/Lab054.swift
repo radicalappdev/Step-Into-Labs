@@ -2,11 +2,11 @@
 //
 //  Title: Lab054
 //
-//  Subtitle:
+//  Subtitle: Oops all Hover Effects
 //
-//  Description:
+//  Description: Just a bit of fun with hover effect namespaces.
 //
-//  Type:
+//  Type: Window
 //
 //  Created by Joseph Simpson on 5/29/25.
 
@@ -20,8 +20,9 @@ struct Lab054: View {
     var body: some View {
         ZStack {
             LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 4), count: 12), spacing: 4) {
-                ForEach(0..<96, id: \.self) { _ in
+                ForEach(0..<96, id: \.self) { index in
                     Shrug(hoverNamespace: hoverNamespace)
+                        .offset(y: index % 2 == 0 ? 24 : 0)
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -31,7 +32,7 @@ struct Lab054: View {
                     print("")
                 }, label: {
                     HStack {
-                        Text("What tilt hover effect?")
+                        Text("Hover Me")
                     }
                 })
                 .glassBackgroundEffect()
@@ -41,6 +42,7 @@ struct Lab054: View {
 
                     }
                 }
+
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -48,9 +50,9 @@ struct Lab054: View {
     }
 }
 
-
 fileprivate struct Shrug: View {
-    @State var hoverNamespace: Namespace.ID
+    // There may be a better way to pass the namespace to this view, but this works
+    var hoverNamespace: Namespace.ID
 
     var body: some View {
         Text("🤷🏻‍♂️")
@@ -60,8 +62,6 @@ fileprivate struct Shrug: View {
             }
     }
 }
-
-
 
 #Preview {
     Lab054()
