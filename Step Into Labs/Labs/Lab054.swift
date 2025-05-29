@@ -24,16 +24,14 @@ struct Lab054: View {
             }, label: {
                 HStack {
                     Text("Hover Me")
-                    Text("🤷🏻‍♂️")
-                        .hoverEffect(in: HoverEffectGroup(hoverNamespace)) { effect, isActive, _ in
-                            effect.opacity(isActive ? 1.0 : 0)
-                        }
+                    
                 }
             })
             .hoverEffect(in: HoverEffectGroup(hoverNamespace)) { effect, isActive, proxy in
                 effect.animation(.easeOut) {
-                    
+
                     $0.rotationEffect(.degrees(isActive ? -15 : 0), anchor: .bottomTrailing)
+                        .scaleEffect(isActive ? 2 : 1)
                 }
             }
         }
@@ -42,7 +40,7 @@ struct Lab054: View {
         .hoverEffect(in: HoverEffectGroup(hoverNamespace)) { effect, isActive, _ in
             effect.animation(.easeOut) {
                 $0.rotationEffect(.degrees(isActive ? 15 : 0), anchor: .center)
-                .scaleEffect(isActive ? 0.75 : 1)
+                .scaleEffect(isActive ? 0.5 : 1)
             }
         }
     }
