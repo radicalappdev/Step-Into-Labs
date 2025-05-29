@@ -41,7 +41,8 @@ struct Lab054: View {
         .glassBackgroundEffect()
         .hoverEffect(in: HoverEffectGroup(hoverNamespace)) { effect, isActive, _ in
             effect.animation(.easeOut) {
-                $0.rotationEffect(.degrees(isActive ? 15 : 0), anchor: .bottomTrailing)
+                $0.rotationEffect(.degrees(isActive ? 15 : 0), anchor: .center)
+                .scaleEffect(isActive ? 0.75 : 1)
             }
         }
     }
