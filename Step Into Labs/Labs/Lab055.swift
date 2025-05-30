@@ -39,6 +39,8 @@ struct Lab055: View {
             particleSystem.mainEmitter.birthRate = 25
             particleSystem.mainEmitter.size = 0.1
 
+            
+
             // Add the component to the entity
             subject.components.set(particleSystem)
 
@@ -57,10 +59,13 @@ struct Lab055: View {
                     ForEach(symbols, id: \.self) { symbol in
                         Image(systemName: symbol)
                             .frame(width: 32, height: 32)
-                            .foregroundColor(selectedSymbol == symbol ? .blue : .white)
+                            .foregroundColor(.white)
                             .onTapGesture {
                                 selectedSymbol = symbol
                             }
+                            .padding(6)
+                            .background( selectedSymbol == symbol ? .stepRed : Color.clear)
+                            .clipShape(.circle)
                     }
                 }
             })
@@ -70,8 +75,6 @@ struct Lab055: View {
     // Credit: Apple provided this function in the example project called "Simulating particles in your visionOS app"
     // Sources: https://developer.apple.com/documentation/realitykit/simulating-particles-in-your-visionos-app
     func generateTextureFromSystemName( _ name: String) -> TextureResource? {
-        let imageSize = CGSize(width: 128, height: 128)
-
         // Create a UIImage from a symbol name.
         guard var symbolImage = UIImage(systemName: name) else {
             return nil
@@ -79,6 +82,31 @@ struct Lab055: View {
 
         // Create a new version that always uses the template rendering mode.
         symbolImage = symbolImage.withRenderingMode(.alwaysTemplate)
+        
+        // Get the natural size of the symbol
+        let symbolSize = symbolImage.size
+        print("symbol size \(symbolSize)")
+        
+        // Create a square texture
+        let textureSize: CGFloat = 128
+        let imageSize = CGSize(width: textureSize, height: textureSize)
+        
+        // Calculate the aspect ratio and scaled size
+        let aspectRatio = symbolSize.width / symbolSize.height
+        let scaledSize: CGSize
+        if aspectRatio > 1 {
+            // Wider than tall
+            scaledSize = CGSize(width: textureSize, height: textureSize / aspectRatio)
+        } else {
+            // Taller than wide or square
+            scaledSize = CGSize(width: textureSize * aspectRatio, height: textureSize)
+        }
+        
+        // Calculate the position to center the symbol
+        let x = (textureSize - scaledSize.width) / 2
+        let y = (textureSize - scaledSize.height) / 2
+        let drawRect = CGRect(origin: CGPoint(x: x, y: y), size: scaledSize)
+        print("draw rect \(drawRect)")
 
         // Start the graphics context.
         UIGraphicsBeginImageContextWithOptions(imageSize, false, 0)
@@ -87,9 +115,8 @@ struct Lab055: View {
         // on top of the image.
         UIColor.white.set()
 
-        // Draw the image with the context.
-        let rectangle = CGRect(origin: CGPoint.zero, size: imageSize)
-        symbolImage.draw(in: rectangle, blendMode: .normal, alpha: 1.0)
+        // Draw the image with the context, centered in the square
+        symbolImage.draw(in: drawRect, blendMode: .normal, alpha: 1.0)
 
         // Retrieve the image from the context.
         let contextImage = UIGraphicsGetImageFromCurrentImageContext()
