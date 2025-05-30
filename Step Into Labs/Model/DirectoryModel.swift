@@ -421,10 +421,10 @@ class ModelData {
 
         ,Lab(title: "Lab 055",
              type: .VOLUME,
-             date: Date("5/30/2025"),
+             date: Date("6/01/2025"),
              isFeatured: true,
              subtitle: "Using SF Symbols in Particle Emitters",
-             description: "")
+             description: "We can create Texture Resources to be used in our Particle Emitters.")
 
 
 

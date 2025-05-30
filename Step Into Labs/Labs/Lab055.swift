@@ -2,13 +2,13 @@
 //
 //  Title: Lab055
 //
-//  Subtitle:
+//  Subtitle: Using SF Symbols in Particle Emitters
 //
-//  Description:
+//  Description: We can create Texture Resources to be used in our Particle Emitters.
 //
-//  Type:
+//  Type: Volume
 //
-//  Created by Joseph Simpson on 5/30/25.
+//  Created by Joseph Simpson on 6/01/25.
 
 import SwiftUI
 import RealityKit
@@ -39,8 +39,6 @@ struct Lab055: View {
             particleSystem.mainEmitter.birthRate = 25
             particleSystem.mainEmitter.size = 0.1
 
-            
-
             // Add the component to the entity
             subject.components.set(particleSystem)
 
@@ -64,7 +62,7 @@ struct Lab055: View {
                                 selectedSymbol = symbol
                             }
                             .padding(6)
-                            .background( selectedSymbol == symbol ? .stepRed : Color.clear)
+                            .background( selectedSymbol == symbol ? .purple : Color.clear)
                             .clipShape(.circle)
                     }
                 }
