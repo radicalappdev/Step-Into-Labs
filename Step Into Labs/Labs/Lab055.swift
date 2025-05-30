@@ -83,7 +83,6 @@ struct Lab055: View {
         
         // Get the natural size of the symbol
         let symbolSize = symbolImage.size
-        print("symbol size \(symbolSize)")
         
         // Create a square texture
         let textureSize: CGFloat = 128
@@ -104,7 +103,6 @@ struct Lab055: View {
         let x = (textureSize - scaledSize.width) / 2
         let y = (textureSize - scaledSize.height) / 2
         let drawRect = CGRect(origin: CGPoint(x: x, y: y), size: scaledSize)
-        print("draw rect \(drawRect)")
 
         // Start the graphics context.
         UIGraphicsBeginImageContextWithOptions(imageSize, false, 0)
