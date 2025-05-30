@@ -15,6 +15,11 @@ import RealityKit
 import RealityKitContent
 
 struct Lab055: View {
+
+    @State private var selectedSymbol: String = "vision.pro.fill"
+
+    let symbols = ["vision.pro.fill", "macpro.gen3.fill",  "macbook.gen2", "iphone", "applewatch", "ipad"]
+
     var body: some View {
         RealityView { content in
 
@@ -30,7 +35,7 @@ struct Lab055: View {
             particleSystem.emitterShapeSize = [0.3, 0.3, 0.3]
 
             // Set the image to the result of generateTextureFromSystemName using a symbol name
-            particleSystem.mainEmitter.image = generateTextureFromSystemName("heart.fill")
+            particleSystem.mainEmitter.image = generateTextureFromSystemName(selectedSymbol)
             particleSystem.mainEmitter.birthRate = 25
             particleSystem.mainEmitter.size = 0.1
 
@@ -39,6 +44,26 @@ struct Lab055: View {
 
         } update: { content in
 
+            if let subject = content.entities.first?.findEntity(named: "Particles") {
+                if var particleSystem = subject.components[ParticleEmitterComponent.self] {
+                    particleSystem.mainEmitter.image = generateTextureFromSystemName(selectedSymbol)
+                    subject.components.set(particleSystem)
+                }
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .bottomOrnament, content: {
+                HStack {
+                    ForEach(symbols, id: \.self) { symbol in
+                        Image(systemName: symbol)
+                            .frame(width: 32, height: 32)
+                            .foregroundColor(selectedSymbol == symbol ? .blue : .white)
+                            .onTapGesture {
+                                selectedSymbol = symbol
+                            }
+                    }
+                }
+            })
         }
     }
 
