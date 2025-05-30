@@ -419,6 +419,13 @@ class ModelData {
              subtitle: "Oops all Hover Effects",
              description: "Just a bit of fun with hover effect namespaces.")
 
+        ,Lab(title: "Lab 055",
+             type: .VOLUME,
+             date: Date("5/30/2025"),
+             isFeatured: true,
+             subtitle: "Using SF Symbols in Particle Emitters",
+             description: "")
+
 
 
     ]
