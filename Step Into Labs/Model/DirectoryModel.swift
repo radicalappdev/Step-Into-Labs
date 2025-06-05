@@ -426,6 +426,27 @@ class ModelData {
              subtitle: "Using SF Symbols in Particle Emitters",
              description: "We can create Texture Resources to be used in our Particle Emitters.")
 
+        ,Lab(title: "Lab 056",
+             type: .VOLUME,
+             date: Date("6/03/2025"),
+             isFeatured: true,
+             subtitle: "Using Emoji in Particle Emitters",
+             description: "We can render emoji as Texture Resources to be used in our Particle Emitters.")
+
+        ,Lab(title: "Lab 057",
+             type: .VOLUME,
+             date: Date("6/04/2025"),
+             isFeatured: true,
+             subtitle: "Using Opacity Component with Particle Emitters",
+             description: "We can use Opacity Component on an entity with a Particle System to fade out all particles together.")
+
+        ,Lab(title: "Lab 058",
+             type: .VOLUME,
+             date: Date("6/05/2025"),
+             isFeatured: true,
+             subtitle: "Particles Emitting Particles",
+             description: "We can setup the main particle emitter to spawn sub-particles.")
+
 
 
     ]

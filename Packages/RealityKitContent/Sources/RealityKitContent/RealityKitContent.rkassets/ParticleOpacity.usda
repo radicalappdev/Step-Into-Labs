@@ -1,0 +1,78 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 2.0 (448.120.2)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    def Cube "Cube" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        reorder nameChildren = ["DefaultMaterial", "PS"]
+        rel material:binding = </Root/Cube/DefaultMaterial>
+        double size = 0.6
+        float3 xformOp:scale = (1, 0.1, 1)
+        float3 xformOp:translate = (0, -0.05, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            prepend token outputs:surface.connect = </Root/Cube/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def Xform "PS" (
+            active = true
+        )
+        {
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 10, 1)
+            float3 xformOp:translate = (0, 0.6316443, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def RealityKitComponent "VFXEmitter"
+            {
+                uniform token info:id = "RealityKit.VFXEmitter"
+
+                def RealityKitStruct "currentState"
+                {
+                    token emitterShape = "Plane"
+                    bool isEmitting = 1
+
+                    def RealityKitStruct "mainEmitter"
+                    {
+                        token blendMode = "Alpha"
+                        float4 endColorA = (0, 0.039524972, 0.39365923, 1)
+                        bool isLightingEnabled = 0
+                        float noiseStrength = 0
+                        float4 startColorA = (0.6710024, 0.00089546974, 0.16192299, 1)
+                        bool useEndColor = 1
+                        bool useEndColorRange = 0
+                        bool useStartColorRange = 0
+                        float3 vortexDirection = (0, 1, 0)
+                        float vortexStrength = 10
+                    }
+
+                    def RealityKitStruct "spawnedEmitter"
+                    {
+                    }
+                }
+            }
+        }
+    }
+}
+

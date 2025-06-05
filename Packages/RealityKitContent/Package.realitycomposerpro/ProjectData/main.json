@@ -39,6 +39,7 @@
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/LetMeTalkToWhales.usda" : "7FCCE3C2-26E6-4555-8625-122976883DA3",
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/MaterialSandbox.usda" : "031AB4B8-A98D-4B94-9361-640C4AAEFEC5",
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/NoFloor.usda" : "E370BFC6-7A53-4D4F-9BFA-7ACE9227C2CD",
+    "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/ParticleOpacity.usda" : "EA85B0E2-4138-42BA-BA0C-F68161C15F69",
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/PhysicsPlayground.usda" : "8088479F-CE0C-4853-808C-58DB5763AAFA",
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/PortalBall.usda" : "06C5FFFA-7340-4E0D-B614-25C231069B5F",
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/PortalDoorway.usda" : "89714D88-49CF-41B7-87AE-A1E97BD4B341",
@@ -61,5 +62,10 @@
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/VideoTest.usda" : "B7890F28-2D7B-4FE1-BD1F-DC717DA52CAF",
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/WorldTracking.usda" : "BC102122-6C6C-4068-8676-0C4A6C3DB800",
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/labs\/Untitled%20Scene.usda" : "D19CE1CC-1DEB-42EB-BE41-BD27D3C10D80"
+  },
+  "projectID" : 4685505066463330447,
+  "uuidToIntID" : {
+    "EA85B0E2-4138-42BA-BA0C-F68161C15F69" : -128178770540532007,
+    "EE4E9B65-08F0-49B1-A553-D543CC6E0965" : 2148006992111173440
   }
 }
