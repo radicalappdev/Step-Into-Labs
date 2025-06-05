@@ -39,13 +39,9 @@ struct Lab056: View {
             particleSystem.mainEmitter.birthRate = 25
             particleSystem.mainEmitter.size = 0.1
 
-            // Setting the color is a little annoying
             // Issues: I haven't found a way to specify no color for the particles.
             // The best option I found is to provide a white constant color. This will tint the emoji a bit.
-            let color = ParticleEmitterComponent.ParticleEmitter.Color(.white)
-            let singleColorValue = ParticleEmitterComponent.ParticleEmitter.ParticleColor.ColorValue.single(color)
-            let constantColor = ParticleEmitterComponent.ParticleEmitter.ParticleColor.constant(singleColorValue)
-            particleSystem.mainEmitter.color = constantColor
+            particleSystem.mainEmitter.color = .constant(.single(.white))
 
             // Add the component to the entity
             subject.components.set(particleSystem)

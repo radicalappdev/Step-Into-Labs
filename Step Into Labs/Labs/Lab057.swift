@@ -33,11 +33,7 @@ struct Lab057: View {
 
             particleSystem.mainEmitter.birthRate = 25
             particleSystem.mainEmitter.size = 0.1
-
-            let color = ParticleEmitterComponent.ParticleEmitter.Color(.stepRed)
-            let singleColorValue = ParticleEmitterComponent.ParticleEmitter.ParticleColor.ColorValue.single(color)
-            let constantColor = ParticleEmitterComponent.ParticleEmitter.ParticleColor.constant(singleColorValue)
-            particleSystem.mainEmitter.color = constantColor
+            particleSystem.mainEmitter.color = .constant(.single(.stepRed))
 
             subject.components.set(particleSystem)
 
