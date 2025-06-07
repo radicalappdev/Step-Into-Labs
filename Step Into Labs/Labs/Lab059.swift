@@ -2,11 +2,11 @@
 //
 //  Title: Lab059
 //
-//  Subtitle:
+//  Subtitle: Extruding a Mesh from a Shape
 //
-//  Description:
+//  Description: I was so excited to see this added at WWDC 2024. Too bad it took me a year to try it!
 //
-//  Type:
+//  Type: Volume
 //
 //  Created by Joseph Simpson on 6/7/25.
 
@@ -25,7 +25,9 @@ struct Lab059: View {
             guard let mesh = try? await MeshResource(extruding: simplePath(), extrusionOptions: options) else { return }
 
             // Set up an entity and add it to the scene.
-            let material = SimpleMaterial(color: .stepGreen, isMetallic: false)
+            var material = PhysicallyBasedMaterial()
+            material.baseColor = .init(tint: .stepGreen)
+
             let subject = ModelEntity(mesh: mesh, materials: [material])
             subject.name = "Subject"
             subject.orientation = .init(angle: .pi / 4, axis: [0, 1, 0])

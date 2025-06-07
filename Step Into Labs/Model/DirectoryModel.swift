@@ -452,7 +452,7 @@ class ModelData {
              date: Date("6/07/2025"),
              isFeatured: true,
              subtitle: "Extruding a Mesh from a Shape",
-             description: "")
+             description: "I was so excited to see this added at WWDC 2024. Too bad it took me a year to try it!")
 
 
 
