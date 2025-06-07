@@ -447,6 +447,13 @@ class ModelData {
              subtitle: "Particles Emitting Particles",
              description: "We can setup the main particle emitter to spawn sub-particles.")
 
+        ,Lab(title: "Lab 059",
+             type: .VOLUME,
+             date: Date("6/07/2025"),
+             isFeatured: true,
+             subtitle: "Extruding a Mesh from a Shape",
+             description: "")
+
 
 
     ]
