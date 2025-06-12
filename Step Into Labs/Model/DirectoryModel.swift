@@ -408,51 +408,65 @@ class ModelData {
         ,Lab(title: "Lab 053",
              type: .WINDOW,
              date: Date("5/22/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Using Attachments in Portals",
              description: "We can render SwiftUI views as attachments inside portals, but they are not interactive.")
 
         ,Lab(title: "Lab 054",
              type: .WINDOW_ALT,
              date: Date("5/29/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Oops all Hover Effects",
              description: "Just a bit of fun with hover effect namespaces.")
 
         ,Lab(title: "Lab 055",
              type: .VOLUME,
              date: Date("6/01/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Using SF Symbols in Particle Emitters",
              description: "We can create Texture Resources to be used in our Particle Emitters.")
 
         ,Lab(title: "Lab 056",
              type: .VOLUME,
              date: Date("6/03/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Using Emoji in Particle Emitters",
              description: "We can render emoji as Texture Resources to be used in our Particle Emitters.")
 
         ,Lab(title: "Lab 057",
              type: .VOLUME,
              date: Date("6/04/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Using Opacity Component with Particle Emitters",
              description: "We can use Opacity Component on an entity with a Particle System to fade out all particles together.")
 
         ,Lab(title: "Lab 058",
              type: .VOLUME,
              date: Date("6/05/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Particles Emitting Particles",
              description: "We can setup the main particle emitter to spawn sub-particles.")
 
         ,Lab(title: "Lab 059",
              type: .VOLUME,
              date: Date("6/07/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Extruding a Mesh from a Shape",
              description: "I was so excited to see this added at WWDC 2024. Too bad it took me a year to try it!")
+
+        ,Lab(title: "Lab 060",
+             type: .VOLUME,
+             date: Date("6/11/2025"),
+             isFeatured: true,
+             subtitle: "First look at Manipulation Component",
+             description: "A simple but powerful component to interact with entities in RealityKit.")
+
+        ,Lab(title: "Lab 061",
+             type: .VOLUME,
+             date: Date("6/12/2025"),
+             isFeatured: true,
+             subtitle: "First look at SwiftUI animations in RealityKit",
+             description: "")
 
 
 

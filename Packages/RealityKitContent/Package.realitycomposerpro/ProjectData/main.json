@@ -56,6 +56,7 @@
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/SpawnerLabResources.usda" : "BA6BE059-1C05-4085-9737-D5BB0902579F",
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/StackSkyBlocks.usda" : "E2C1523E-C5DA-4EAF-B131-6EAEC1E74847",
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/Stacks.usda" : "E5A9429C-2ED0-42F1-88DD-34DE71A5656B",
+    "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/SwiftUIAnimationLab.usda" : "16EF6DE0-4654-4C62-B685-024D241A80E4",
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/TeleportLabs.usda" : "00AC74E2-A464-4F74-A445-36CD76630287",
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/TeleportLaps.usda" : "6CF9F98D-FEB2-4CD2-A36D-E65ED723B51F",
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/TeleportPivot.usda" : "DED916C6-0CB0-4CBD-91F7-68ADC71C48D4",
@@ -65,6 +66,10 @@
   },
   "projectID" : 4685505066463330447,
   "uuidToIntID" : {
+    "16EF6DE0-4654-4C62-B685-024D241A80E4" : 6163654179434515856,
+    "98043A2D-E996-4BE7-8F15-47AAB1E1E57E" : 3831284581732163823,
+    "AFEEA4E5-CA98-4411-BA40-1EAA956BB9C0" : -9111057617197431254,
+    "E370BFC6-7A53-4D4F-9BFA-7ACE9227C2CD" : -7279067251994390257,
     "EA85B0E2-4138-42BA-BA0C-F68161C15F69" : -128178770540532007,
     "EE4E9B65-08F0-49B1-A553-D543CC6E0965" : 2148006992111173440
   }
