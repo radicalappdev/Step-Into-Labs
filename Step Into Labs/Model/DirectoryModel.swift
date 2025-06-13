@@ -466,7 +466,7 @@ class ModelData {
              date: Date("6/12/2025"),
              isFeatured: true,
              subtitle: "First look at SwiftUI animations in RealityKit",
-             description: "")
+             description: "Using the new content.animate method to apply a SwiftUI animation to a RealityKit entity.")
 
 
 

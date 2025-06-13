@@ -2,11 +2,11 @@
 //
 //  Title: Lab061
 //
-//  Subtitle:
+//  Subtitle: First look at SwiftUI animations in RealityKit
 //
-//  Description:
+//  Description: Using the new content.animate method to apply a SwiftUI animation to a RealityKit entity.
 //
-//  Type:
+//  Type: Volume
 //
 //  Created by Joseph Simpson on 6/12/25.
 
@@ -22,7 +22,7 @@ struct Lab061: View {
     // See "Better together: SwiftUI and RealityKit" WWDC 2025
     var animatedIsOffset: Binding<Bool> {
     $subjectToggle
-        .animation(.bouncy(extraBounce: 0.1))
+            .animation(.easeInOut(duration: 2))
     }
 
     var body: some View {
@@ -35,20 +35,12 @@ struct Lab061: View {
                 self.subject = subject
             }
 
-
         } update: { content in
 
+            // Using content.animate here, but there is also an Entity animate I need to check out
             content.animate {
-                // Example 1: change the scale
                 let scaler: Float = subjectToggle ? 2.0 : 1.0
                 subject.scale = .init(repeating: scaler)
-
-                // Example 2: change the color of the material
-                let color: Color = subjectToggle ? .stepRed : .stepGreen
-                if var material = subject.components[ModelComponent.self]?.materials.first as? PhysicallyBasedMaterial {
-                    material.baseColor.tint = UIColor(color)
-                    subject.components[ModelComponent.self]?.materials[0] = material
-                }
             }
 
         }
@@ -61,8 +53,6 @@ struct Lab061: View {
         }
     }
 }
-
-
 
 #Preview {
     Lab061()
