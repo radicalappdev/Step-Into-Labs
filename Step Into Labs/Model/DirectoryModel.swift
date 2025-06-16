@@ -468,6 +468,13 @@ class ModelData {
              subtitle: "First look at SwiftUI animations in RealityKit",
              description: "Using the new content.animate method to apply a SwiftUI animation to a RealityKit entity.")
 
+        ,Lab(title: "Lab 062",
+             type: .VOLUME,
+             date: Date("6/16/2025"),
+             isFeatured: true,
+             subtitle: "First look at Gesture Component",
+             description: "A component that allows us to create unique SwiftUI gestures for RealityKit entities.")
+
 
 
     ]
