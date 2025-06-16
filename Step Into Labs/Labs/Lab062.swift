@@ -48,6 +48,11 @@ struct Lab062: View {
     }
 }
 
-#Preview {
+
+
+
+
+
+#Preview("Volume", windowStyle: .volumetric) {
     Lab062()
 }
