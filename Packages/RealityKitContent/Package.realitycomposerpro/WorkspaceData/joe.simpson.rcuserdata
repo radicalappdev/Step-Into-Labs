@@ -1,10 +1,7 @@
 {
-  "advancedEditorSelectedIdentifier" : "ProjectBrowser",
+  "advancedEditorSelectedIdentifier" : "BehaviorsPluginID",
   "openSceneRelativePaths" : [
-    "NoFloor.usda",
-    "InputOddness.usda",
-    "DanceLights.usda",
-    "SwiftUIAnimationLab.usda"
+    "ObserveEntity.usda"
   ],
   "recentIdentifiers" : {
     "00AC74E2-A464-4F74-A445-36CD76630287" : [
@@ -56,6 +53,9 @@
 
     ],
     "6CF9F98D-FEB2-4CD2-A36D-E65ED723B51F" : [
+
+    ],
+    "6F07F0BB-6FDD-4EE0-A176-AA78BBBE18CE" : [
 
     ],
     "76613277-49F8-4842-91EC-5363D85CF245" : [
@@ -7379,5 +7379,5 @@
   "sceneViewportBackgroundColors" : {
 
   },
-  "selectedSceneRelativePath" : "SwiftUIAnimationLab.usda"
+  "selectedSceneRelativePath" : "ObserveEntity.usda"
 }

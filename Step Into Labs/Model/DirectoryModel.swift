@@ -475,6 +475,13 @@ class ModelData {
              subtitle: "First look at Gesture Component",
              description: "A component that allows us to create unique SwiftUI gestures for RealityKit entities.")
 
+        ,Lab(title: "Lab 063",
+             type: .VOLUME,
+             date: Date("6/17/2025"),
+             isFeatured: true,
+             subtitle: "First look at Entity Observation",
+             description: "")
+
 
 
     ]
