@@ -18,6 +18,8 @@ struct Lab063: View {
 
     @State private var subject = Entity()
 
+    @State private var subjectTransform: Transform = .init()
+
     var body: some View {
         RealityView { content in
 
@@ -33,8 +35,8 @@ struct Lab063: View {
 
 
         }
-        .onChange(of: subject.observable.position) {
-            print("New subject \(subject.observable.position)")
+        .onChange(of: subject.observable.transform) {
+            print("Subject Transform Changed \(subject.observable.transform)")
         }
         .ornament(attachmentAnchor: .scene(.back), ornament: {
             List {
@@ -74,7 +76,8 @@ fileprivate struct VectorDisplay: View {
                 .fontWeight(.bold)
             HStack {
                 ForEach(["X", "Y", "Z"], id: \.self) { axis in
-                    Text("\(axis): \(String(format: "%8.3f", axis == "X" ? vector.x : axis == "Y" ? vector.y : vector.z))")
+                    let value = axis == "X" ? vector.x : axis == "Y" ? vector.y : vector.z
+                    Text("\(axis): \(String(format: "%8.3f", value.isNaN ? 0 : value))")
                         .frame(width: 120, alignment: .leading)
                 }
             }
