@@ -2,11 +2,11 @@
 //
 //  Title: Lab063
 //
-//  Subtitle:
+//  Subtitle: First look at Entity Observation
 //
-//  Description:
+//  Description: SwiftUI can now observe changes directly from RealityKit entities.
 //
-//  Type:
+//  Type: Volume
 //
 //  Created by Joseph Simpson on 6/17/25.
 
@@ -16,9 +16,12 @@ import RealityKitContent
 
 struct Lab063: View {
 
-    @State private var subject = Entity()
+    @State private var subject: Entity?
 
     @State private var subjectTransform: Transform = .init()
+
+    @State var willBegin: EventSubscription?
+    @State var willEnd: EventSubscription?
 
     var body: some View {
         RealityView { content in
@@ -27,36 +30,56 @@ struct Lab063: View {
             content.add(scene)
             scene.position.y = -0.4
 
-            // Load the subject entity
+            // Load the subject entity and add the ManipulationComponent so we can interact with it
             guard let subject = scene.findEntity(named: "ToyRocket") else { return }
             subject.components.set(ManipulationComponent())
-            self.subject = subject
 
+            // We'll only observe the subject while the Manipulation is active
+            willBegin = content.subscribe(to: ManipulationEvents.WillBegin.self) { event in
+                withAnimation {
+                    self.subject = event.entity
 
+                }
+            }
+
+            willEnd = content.subscribe(to: ManipulationEvents.WillEnd.self) { event in
+                withAnimation {
+
+                    self.subject = nil
+                }
+            }
 
         }
-        .onChange(of: subject.observable.transform) {
-            print("Subject Transform Changed \(subject.observable.transform)")
+        .onChange(of: subject?.observable.transform) {
+            // Do something when the value changes
+            // Update related views
+            // Apply side effects (clamping or transforming values, etc)
+            print("Subject Transform Changed \(String(describing: subject?.observable.transform))")
         }
         .ornament(attachmentAnchor: .scene(.back), ornament: {
             List {
                 Section("Observed Entity Data", content: {
 
-                    VectorDisplay(title: "Position", vector: subject.observable.position)
+                    if let subject = self.subject {
+                        VectorDisplay(title: "Position", vector: subject.observable.position)
 
-                    VStack(alignment: .leading) {
-                        Text("Rotation \(subject.observable.orientation.angle)")
-                            .fontWeight(.bold)
-                        VectorDisplay(title: "", vector: subject.observable.orientation.axis)
+                        VStack(alignment: .leading) {
+                            Text("Rotation \(subject.observable.orientation.angle)")
+                                .fontWeight(.bold)
+                            VectorDisplay(title: "", vector: subject.observable.orientation.axis)
+                        }
+
+                        VectorDisplay(title: "Scale", vector: subject.observable.scale)
+
                     }
 
-                    VectorDisplay(title: "Scale", vector: subject.observable.scale)
                 })
             }
             .padding(.top, 12)
             .frame(width: 460, height: 500)
             .glassBackgroundEffect()
-
+            .offset(y: subject != nil ? 0: 500)
+            .opacity(subject != nil ? 1 : 0)
         })
     }
 }

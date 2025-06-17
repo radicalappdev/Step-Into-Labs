@@ -480,7 +480,7 @@ class ModelData {
              date: Date("6/17/2025"),
              isFeatured: true,
              subtitle: "First look at Entity Observation",
-             description: "")
+             description: "SwiftUI can now observe changes directly from RealityKit entities.")
 
 
 
