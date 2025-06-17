@@ -17,9 +17,7 @@ import RealityKitContent
 struct Lab063: View {
 
     @State private var subject: Entity?
-
     @State private var subjectTransform: Transform = .init()
-
     @State var willBegin: EventSubscription?
     @State var willEnd: EventSubscription?
 
@@ -38,13 +36,11 @@ struct Lab063: View {
             willBegin = content.subscribe(to: ManipulationEvents.WillBegin.self) { event in
                 withAnimation {
                     self.subject = event.entity
-
                 }
             }
 
             willEnd = content.subscribe(to: ManipulationEvents.WillEnd.self) { event in
                 withAnimation {
-
                     self.subject = nil
                 }
             }
@@ -70,9 +66,7 @@ struct Lab063: View {
                         }
 
                         VectorDisplay(title: "Scale", vector: subject.observable.scale)
-
                     }
-
                 })
             }
             .padding(.top, 12)
