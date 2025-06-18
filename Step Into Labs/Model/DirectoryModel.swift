@@ -482,6 +482,13 @@ class ModelData {
              subtitle: "First look at Entity Observation",
              description: "SwiftUI can now observe changes directly from RealityKit entities.")
 
+        ,Lab(title: "Lab 064",
+             type: .VOLUME,
+             date: Date("6/18/2025"),
+             isFeatured: true,
+             subtitle: "First look at Presentation Component",
+             description: "")
+
 
 
     ]
