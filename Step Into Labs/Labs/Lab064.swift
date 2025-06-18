@@ -2,11 +2,11 @@
 //
 //  Title: Lab064
 //
-//  Subtitle:
+//  Subtitle: First look at Presentation Component
 //
-//  Description:
+//  Description: We can show SwiftUI views as popovers relative to the transform of a RealityKit Entity.
 //
-//  Type:
+//  Type: Volume
 //
 //  Created by Joseph Simpson on 6/18/25.
 
@@ -59,7 +59,6 @@ struct Lab064: View {
 #Preview("Volume", windowStyle: .volumetric) {
     Lab064()
 }
-
 
 fileprivate struct RocketCard: View {
     var body: some View {
