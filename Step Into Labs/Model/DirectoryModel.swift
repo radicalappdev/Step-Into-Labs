@@ -487,7 +487,7 @@ class ModelData {
              date: Date("6/18/2025"),
              isFeatured: true,
              subtitle: "First look at Presentation Component",
-             description: "")
+             description: "We can show SwiftUI views as popovers relative to the transform of a RealityKit Entity.")
 
 
 

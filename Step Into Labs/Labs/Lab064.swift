@@ -22,41 +22,41 @@ struct Lab064: View {
     var body: some View {
         RealityView { content in
 
-            guard let scene = try? await Entity(named: "ObserveEntity", in: realityKitContentBundle) else { return }
+            guard let scene = try? await Entity(named: "PresentationComponentLab", in: realityKitContentBundle) else { return }
             content.add(scene)
             scene.position.y = -0.4
 
+            // The main entity we are looking at
             guard let subject = scene.findEntity(named: "ToyRocket") else { return }
-
             self.subject = subject
 
-            // Create a gesture
+            // A secondary entity that we can use as the transform point for the presented popover
+            guard let presentationPoint = scene.findEntity(named: "PresentationPoint") else { return }
+
+            // We'll use a TapGesture and the new GestureComponent to toggle the popover
             let tapGesture = TapGesture()
                 .onEnded({
-                    // Bonus: we'll use a SwiftUI animation to scale the entity
                     Entity.animate(.bouncy, body: {
                         showingPopover.toggle()
                     })
                 })
-
-            // Pass the gestutre to GestureComponent
             let gestureComponent = GestureComponent(tapGesture)
+            subject.components.set(gestureComponent)
 
+            // Create the presentation component using $showingPopover to toggle presentation
             let presentation = PresentationComponent(
                 isPresented: $showingPopover,
                 configuration: .popover(arrowEdge: .bottom),
                 content: RocketCard()
             )
-
-            subject.components.set(presentation)
-            subject.components.set(gestureComponent)
+            presentationPoint.components.set(presentation)
 
         }
 
     }
 }
 
-#Preview {
+#Preview("Volume", windowStyle: .volumetric) {
     Lab064()
 }
 
