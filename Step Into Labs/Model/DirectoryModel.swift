@@ -489,6 +489,13 @@ class ModelData {
              subtitle: "First look at Presentation Component",
              description: "We can show SwiftUI views as popovers relative to the transform of a RealityKit Entity.")
 
+        ,Lab(title: "Lab 065",
+             type: .WINDOW,
+             date: Date("6/19/2025"),
+             isFeatured: true,
+             subtitle: "First look at the Manipulable modifier",
+             description: "A SwiftUI modifier that works just like Manipulation Component from RealityKit.")
+
 
 
     ]
