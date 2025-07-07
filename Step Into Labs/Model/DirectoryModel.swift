@@ -500,7 +500,7 @@ class ModelData {
              type: .SPACE,
              date: Date("7/72025"),
              isFeatured: true,
-             subtitle: "First look at the Mesh Instances Component",
+             subtitle: "TBD",
              description: "")
 
 
