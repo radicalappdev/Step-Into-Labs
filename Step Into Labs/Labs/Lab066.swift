@@ -15,7 +15,7 @@ import RealityKit
 import RealityKitContent
 
 struct Lab066: View {
-    @State var instanceCount = 3
+    @State var instanceCount = 1
     @State var offset: Float = 0.05
 
     var body: some View {
@@ -25,39 +25,58 @@ struct Lab066: View {
             guard let scene = try? await Entity(named: "InstanceLab", in: realityKitContentBundle) else { return }
             content.add(scene)
 
-            // Load an entity
+            // Load an entity and set it up for input
             guard let subject = scene.findEntity(named: "Subject") else { return }
+            subject.components.set(InputTargetComponent())
+            subject.components.set(HoverEffectComponent())
+            subject.components
+                .set(CollisionComponent(shapes: [.generateBox(width: 0.1, height: 0.1, depth: 0.1)], isStatic: false))
 
-            // Create and set up the component
-            var meshInstancesComponent = MeshInstancesComponent()
-            do {
-                let instances = try LowLevelInstanceData(instanceCount: 20)
-                // The tricky part can be getting the correct part index
-                meshInstancesComponent[partIndex: 0] = .init(data: instances)
+            // When we tap on the subject, we'll create create new instances
+            let tapGesture = TapGesture()
+                .onEnded({ [weak subject] _ in
+                    guard let subject = subject else { return }
+                    instanceCount += 1
 
-                // Loop over each instance and update the transform
-                instances.withMutableTransforms { transforms in
-                    for i in 0..<instanceCount {
+                    // Create and set up the component
+                    var meshInstancesComponent = MeshInstancesComponent()
+                    do {
+                        let instances = try LowLevelInstanceData(instanceCount: instanceCount)
+                        // The tricky part can be getting the correct part index
+                        meshInstancesComponent[partIndex: 0] = .init(data: instances)
 
-                        // For this example, we'll only edit the position / translation. We can also edit the scale and rotation if needed.
-                        let offset: Float = 0.05 * Float(i)
-                        var transform = Transform()
+                        // Loop over each instance and update the transform
+                        instances.withMutableTransforms { transforms in
+                            for i in 0..<instanceCount {
 
-                        transform.translation = [offset, offset, offset]
-                        transforms[i] = transform.matrix
+                                // For this example, we'll only edit the position / translation. We can also edit the scale and rotation if needed.
+                                let offset: Float = 0.05 * Float(i)
+                                var transform = Transform()
 
+                                transform.translation = [offset, offset, offset]
+                                transforms[i] = transform.matrix
+
+                            }
+                        }
+
+                        subject.components.set(meshInstancesComponent)
+
+                    } catch {
+                        print("error creating instances = \(error)")
                     }
-                }
 
-                subject.components.set(meshInstancesComponent)
-            } catch {
-                print("error creating instances = \(error)")
-            }
-            content.add(subject)
-            subject.position = .init(x: 0, y: -0.4, z: 0)
+                })
+            
+            let gestureComponent = GestureComponent(tapGesture)
+            subject.components.set(gestureComponent)
 
+            subject.position = .init(x: 0, y: -0.3, z: 0)
 
-
+        }
+        .toolbar {
+            ToolbarItem(placement: .bottomOrnament, content: {
+                Text("Instances: \(instanceCount)")
+            })
         }
     }
 }
