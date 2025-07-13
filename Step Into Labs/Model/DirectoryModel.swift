@@ -496,11 +496,11 @@ class ModelData {
              subtitle: "First look at the Manipulable modifier",
              description: "A SwiftUI modifier that works just like Manipulation Component from RealityKit.")
 
-        ,Lab(title: "Lab 065",
-             type: .SPACE,
-             date: Date("7/72025"),
+        ,Lab(title: "Lab 066",
+             type: .VOLUME,
+             date: Date("7/13/2025"),
              isFeatured: true,
-             subtitle: "TBD",
+             subtitle: "First look at MeshInstancesComponent",
              description: "")
 
 
