@@ -500,7 +500,14 @@ class ModelData {
              type: .VOLUME,
              date: Date("7/13/2025"),
              isFeatured: true,
-             subtitle: "First look at MeshInstancesComponent",
+             subtitle: "First look at Mesh Instances Component",
+             description: "Useful for creating efficient copies of meshes in vast quantities.")
+
+        ,Lab(title: "Lab 067",
+             type: .VOLUME,
+             date: Date("7/14/2025"),
+             isFeatured: true,
+             subtitle: "TBD",
              description: "")
 
 

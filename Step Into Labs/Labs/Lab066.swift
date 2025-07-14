@@ -2,13 +2,13 @@
 //
 //  Title: Lab066
 //
-//  Subtitle:
+//  Subtitle: First look at Mesh Instances Component
 //
-//  Description:
+//  Description: Useful for creating efficient copies of meshes in vast quantities.
 //
-//  Type:
+//  Type: Volume
 //
-//  Created by Joseph Simpson on 7/7/25.
+//  Created by Joseph Simpson on 7/13/25.
 
 import SwiftUI
 import RealityKit
@@ -35,35 +35,9 @@ struct Lab066: View {
             // When we tap on the subject, we'll create create new instances
             let tapGesture = TapGesture()
                 .onEnded({ [weak subject] _ in
+
                     guard let subject = subject else { return }
-                    instanceCount += 1
-
-                    // Create and set up the component
-                    var meshInstancesComponent = MeshInstancesComponent()
-                    do {
-                        let instances = try LowLevelInstanceData(instanceCount: instanceCount)
-                        // The tricky part can be getting the correct part index
-                        meshInstancesComponent[partIndex: 0] = .init(data: instances)
-
-                        // Loop over each instance and update the transform
-                        instances.withMutableTransforms { transforms in
-                            for i in 0..<instanceCount {
-
-                                // For this example, we'll only edit the position / translation. We can also edit the scale and rotation if needed.
-                                let offset: Float = 0.05 * Float(i)
-                                var transform = Transform()
-
-                                transform.translation = [offset, offset, offset]
-                                transforms[i] = transform.matrix
-
-                            }
-                        }
-
-                        subject.components.set(meshInstancesComponent)
-
-                    } catch {
-                        print("error creating instances = \(error)")
-                    }
+                    createInstances(entity: subject)
 
                 })
             
@@ -79,8 +53,41 @@ struct Lab066: View {
             })
         }
     }
+
+    func createInstances(entity: Entity) {
+
+        instanceCount += 1 // Add another instance each time this is run
+
+        // Create and set up the component
+        var meshInstancesComponent = MeshInstancesComponent()
+        do {
+            let instances = try LowLevelInstanceData(instanceCount: instanceCount)
+            // The tricky part can be getting the correct part index
+            meshInstancesComponent[partIndex: 0] = .init(data: instances)
+
+            // Loop over each instance and update the transform
+            instances.withMutableTransforms { transforms in
+                for i in 0..<instanceCount {
+
+                    // For this example, we'll only edit the position / translation. We can also edit the scale and rotation if needed.
+                    let offset: Float = 0.05 * Float(i)
+                    var transform = Transform()
+
+                    transform.translation = [offset, offset, offset]
+                    transforms[i] = transform.matrix
+
+                }
+            }
+
+            entity.components.set(meshInstancesComponent)
+
+        } catch {
+            print("error creating instances = \(error)")
+        }
+    }
 }
 
 #Preview {
     Lab066()
 }
+

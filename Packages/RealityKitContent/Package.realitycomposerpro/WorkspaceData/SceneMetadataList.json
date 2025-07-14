@@ -1146,6 +1146,15 @@
       {
         "isExpanded" : true,
         "isLocked" : false
+      },
+      [
+        "88B7C491-C980-4DD9-A4AC-3E1BBAB00CAB",
+        "Root",
+        "Subject"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
       }
     ]
   },
