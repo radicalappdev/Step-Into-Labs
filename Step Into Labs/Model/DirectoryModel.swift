@@ -504,7 +504,7 @@ class ModelData {
              description: "Useful for creating efficient copies of meshes in vast quantities.")
 
         ,Lab(title: "Lab 067",
-             type: .VOLUME,
+             type: .WINDOW,
              date: Date("7/14/2025"),
              isFeatured: true,
              subtitle: "TBD",
