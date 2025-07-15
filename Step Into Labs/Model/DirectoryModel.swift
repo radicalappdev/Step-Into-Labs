@@ -507,8 +507,8 @@ class ModelData {
              type: .WINDOW,
              date: Date("7/14/2025"),
              isFeatured: true,
-             subtitle: "TBD",
-             description: "")
+             subtitle: "Exploring custom Layouts in SwiftUI",
+             description: "Taking a look at the RadialLayout example from Apple and mocking up a HoneycombLayout.")
 
 
 

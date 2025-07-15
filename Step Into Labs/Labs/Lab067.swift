@@ -2,11 +2,11 @@
 //
 //  Title: Lab067
 //
-//  Subtitle:
+//  Subtitle: Exploring custom Layouts in SwiftUI
 //
-//  Description:
+//  Description: Taking a look at the RadialLayout example from Apple and mocking up a HoneycombLayout.
 //
-//  Type:
+//  Type: Window
 //
 //  Created by Joseph Simpson on 7/14/25.
 
@@ -20,7 +20,7 @@ struct Lab067: View {
     @State var previousNodes: Int = 3
     @State var useHoneycomb: Bool = false
 
-    var emoji: [String] = ["💎", "🐸", "🤔", "🔥", "💻", "🐶", "🥸", "📱", "🎉", "🚀", "❤️", "🤓", "🧲", "💰", "🤩", "🍪", "🦉", "💡", "😎", "🌸"]
+    var emoji: [String] = ["🌸", "🐸", "❤️", "🔥", "💻", "🐶", "🥸", "📱", "🎉", "🚀", "🤔", "🤓", "🧲", "💰", "🤩", "🍪", "🦉", "💡", "😎"]
 
     var body: some View {
         VStack {
@@ -87,7 +87,7 @@ struct Lab067: View {
                         }, label: {
                             Image(systemName: "minus.circle.fill")
                         })
-                        .disabled(nodes <= 5)
+                        .disabled(nodes <= 3)
 
                         Text("\(nodes)")
                             .frame(width:60)
@@ -101,7 +101,7 @@ struct Lab067: View {
                         }, label: {
                             Image(systemName: "plus.circle.fill")
                         })
-                        .disabled(nodes >= 20)
+                        .disabled(nodes >= 19)
                     }
                 }
             })
@@ -115,6 +115,7 @@ struct Lab067: View {
 
 
 // Honeycomb grid layout that grows from the inside out
+// Cursor was very helpful for creating this layout. I gave it the RadialLayout as an example and described the structure I wanted. It took a few iterations, but the result is pretty neat.
 fileprivate struct HoneycombLayout: Layout, Animatable {
     var angleOffset: Angle = .zero
     
@@ -156,11 +157,17 @@ fileprivate struct HoneycombLayout: Layout, Animatable {
                     let endAngle = Double(i + 1) * .pi / 3 + angleOffset.radians
                     let radius = Double(ring) * hexSpacing
                     
-                    // Add intermediate positions
+                    // Add intermediate positions with adjusted radius for tighter honeycomb
                     for j in 1..<ring {
                         let angle = startAngle + (endAngle - startAngle) * Double(j) / Double(ring)
-                        let x = center.x + radius * cos(angle)
-                        let y = center.y + radius * sin(angle)
+                        
+                        // Adjust radius for items that should be closer to center
+                        // Items at the edges of each segment get pulled in slightly
+                        let radiusAdjustment = 0.15 // Pull items in by 15%
+                        let adjustedRadius = radius * (1.0 - radiusAdjustment)
+                        
+                        let x = center.x + adjustedRadius * cos(angle)
+                        let y = center.y + adjustedRadius * sin(angle)
                         positions.append(CGPoint(x: x, y: y))
                     }
                 }
