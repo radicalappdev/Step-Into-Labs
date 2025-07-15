@@ -23,7 +23,7 @@ struct Lab067: View {
 
     var body: some View {
         VStack {
-            RadialLayout {
+            HoneycombLayout {
                 ForEach(0..<nodes, id: \.self) { index in
                     ZStack {
                         Circle()
@@ -69,6 +69,73 @@ struct Lab067: View {
 
 #Preview {
     Lab067()
+}
+
+
+// Honeycomb grid layout that grows from the inside out
+fileprivate struct HoneycombLayout: Layout, Animatable {
+    var angleOffset: Angle = .zero
+    
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+        let updatedProposal = proposal.replacingUnspecifiedDimensions()
+        let minDim = min(updatedProposal.width, updatedProposal.height)
+        return CGSize(width: minDim, height: minDim)
+    }
+    
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+        guard !subviews.isEmpty else { return }
+        
+        let center = CGPoint(x: bounds.midX, y: bounds.midY)
+        let hexSize: CGFloat = 50
+        let hexSpacing: CGFloat = 5
+        
+        // Calculate how many rings we need based on subview count
+        let maxItemsInRing = { (ring: Int) -> Int in
+            if ring == 0 { return 1 }
+            return ring * 6
+        }
+        
+        var currentRing = 0
+        var itemsInCurrentRing = 0
+        var totalItemsPlaced = 0
+        
+        for (index, subview) in subviews.enumerated() {
+            // Determine which ring this item belongs to
+            while totalItemsPlaced + maxItemsInRing(currentRing) <= index {
+                totalItemsPlaced += maxItemsInRing(currentRing)
+                currentRing += 1
+                itemsInCurrentRing = 0
+            }
+            
+            let positionInRing = index - totalItemsPlaced
+            
+            var x: CGFloat, y: CGFloat
+            
+            if currentRing == 0 {
+                // Center hexagon
+                x = center.x
+                y = center.y
+            } else {
+                // Calculate position in the ring
+                let angle = (2 * .pi * CGFloat(positionInRing)) / CGFloat(maxItemsInRing(currentRing))
+                let radius = CGFloat(currentRing) * (hexSize + hexSpacing)
+                
+                x = center.x + radius * cos(angle + angleOffset.radians)
+                y = center.y + radius * sin(angle + angleOffset.radians)
+            }
+            
+            subview.place(
+                at: CGPoint(x: x, y: y),
+                anchor: .center,
+                proposal: .init(width: hexSize, height: hexSize)
+            )
+        }
+    }
+    
+    var animatableData: Angle.AnimatableData {
+        get { angleOffset.animatableData }
+        set { angleOffset.animatableData = newValue }
+    }
 }
 
 
