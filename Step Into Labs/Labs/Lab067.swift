@@ -16,51 +16,93 @@ import RealityKitContent
 
 struct Lab067: View {
 
-    @State var nodes: Int = 5
-    @State var previousNodes: Int = 5
+    @State var nodes: Int = 3
+    @State var previousNodes: Int = 3
+    @State var useHoneycomb: Bool = false
 
     var emoji: [String] = ["💎", "🐸", "🤔", "🔥", "💻", "🐶", "🥸", "📱", "🎉", "🚀", "❤️", "🤓", "🧲", "💰", "🤩", "🍪", "🦉", "💡", "😎", "🌸"]
 
     var body: some View {
         VStack {
-            HoneycombLayout {
-                ForEach(0..<nodes, id: \.self) { index in
-                    ZStack {
-                        Circle()
-                            .fill(.stepGreen)
-                            .frame(width: 60, height: 60)
-                        Text(emoji[index])
-                            .font(.system(size: 30))
+            if useHoneycomb {
+                HoneycombLayout {
+                    ForEach(0..<nodes, id: \.self) { index in
+                        ZStack {
+                            Circle()
+                                .fill(.stepGreen)
+                                .frame(width: 60, height: 60)
+                            Text(emoji[index])
+                                .font(.system(size: 30))
+                        }
+                    }
+                }
+            } else {
+                RadialLayout {
+                    ForEach(0..<nodes, id: \.self) { index in
+                        ZStack {
+                            Circle()
+                                .fill(.stepGreen)
+                                .frame(width: 60, height: 60)
+                            Text(emoji[index])
+                                .font(.system(size: 30))
+                        }
                     }
                 }
             }
         }
         .toolbar {
             ToolbarItem(placement: .bottomOrnament, content: {
-                HStack(spacing: 24) {
-                    Button(action: {
-                        withAnimation {
-                            previousNodes = nodes
-                            nodes -= 1
-                        }
-                    }, label: {
-                        Image(systemName: "minus.circle.fill")
-                    })
-                    .disabled(nodes <= 5)
+                VStack(spacing: 16) {
+                    // Layout toggle
+                    HStack(spacing: 16) {
+                        Button(action: {
+                            withAnimation {
+                                useHoneycomb = false
+                            }
+                        }, label: {
+                            Text("Radial")
+                                .padding()
+                                .foregroundColor(useHoneycomb ? .gray : .white)
+                        })
+                        
+                        Button(action: {
+                            withAnimation {
+                                useHoneycomb = true
+                            }
+                        }, label: {
+                            Text("Honeycomb")
+                                .padding()
+                                .foregroundColor(useHoneycomb ? .white : .gray)
 
-                    Text("\(nodes)")
-                        .frame(width:60)
-                        .contentTransition(.numericText(countsDown: nodes < previousNodes))
+                        })
+                    }
+                    
+                    // Node controls
+                    HStack(spacing: 24) {
+                        Button(action: {
+                            withAnimation {
+                                previousNodes = nodes
+                                nodes -= 1
+                            }
+                        }, label: {
+                            Image(systemName: "minus.circle.fill")
+                        })
+                        .disabled(nodes <= 5)
 
-                    Button(action: {
-                        withAnimation {
-                            previousNodes = nodes
-                            nodes += 1
-                        }
-                    }, label: {
-                        Image(systemName: "plus.circle.fill")
-                    })
-                    .disabled(nodes >= 20)
+                        Text("\(nodes)")
+                            .frame(width:60)
+                            .contentTransition(.numericText(countsDown: nodes < previousNodes))
+
+                        Button(action: {
+                            withAnimation {
+                                previousNodes = nodes
+                                nodes += 1
+                            }
+                        }, label: {
+                            Image(systemName: "plus.circle.fill")
+                        })
+                        .disabled(nodes >= 20)
+                    }
                 }
             })
         }
