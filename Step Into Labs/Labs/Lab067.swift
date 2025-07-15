@@ -90,7 +90,7 @@ fileprivate struct HoneycombLayout: Layout, Animatable {
         let hexRadius = hexSize / 2
         
         // Calculate hexagon spacing (distance between centers)
-        let hexSpacing = hexRadius * sqrt(3) + 5
+        let hexSpacing = hexRadius * sqrt(3) + 20
         
         // Generate hexagon positions in a spiral pattern
         var positions: [CGPoint] = []
