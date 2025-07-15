@@ -25,8 +25,13 @@ struct Lab067: View {
         VStack {
             RadialLayout {
                 ForEach(0..<nodes, id: \.self) { index in
-                    Text(emoji[index])
-                        .font(.system(size: 40))
+                    ZStack {
+                        Circle()
+                            .fill(.stepGreen)
+                            .frame(width: 60, height: 60)
+                        Text(emoji[index])
+                            .font(.system(size: 30))
+                    }
                 }
             }
         }
