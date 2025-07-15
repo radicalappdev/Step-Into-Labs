@@ -87,48 +87,55 @@ fileprivate struct HoneycombLayout: Layout, Animatable {
         
         let center = CGPoint(x: bounds.midX, y: bounds.midY)
         let hexSize: CGFloat = 50
-        let hexSpacing: CGFloat = 5
+        let hexRadius = hexSize / 2
         
-        // Calculate how many rings we need based on subview count
-        let maxItemsInRing = { (ring: Int) -> Int in
-            if ring == 0 { return 1 }
-            return ring * 6
+        // Calculate hexagon spacing (distance between centers)
+        let hexSpacing = hexRadius * sqrt(3) + 5
+        
+        // Generate hexagon positions in a spiral pattern
+        var positions: [CGPoint] = []
+        positions.append(center) // Center hexagon
+        
+        var ring = 1
+        while positions.count < subviews.count {
+            // For each ring, place hexagons at 60-degree intervals
+            for i in 0..<6 {
+                let angle = Double(i) * .pi / 3 + angleOffset.radians
+                let radius = Double(ring) * hexSpacing
+                let x = center.x + radius * cos(angle)
+                let y = center.y + radius * sin(angle)
+                positions.append(CGPoint(x: x, y: y))
+            }
+            
+            // Fill in the gaps between the corners for larger rings
+            if ring > 1 {
+                for i in 0..<6 {
+                    let startAngle = Double(i) * .pi / 3 + angleOffset.radians
+                    let endAngle = Double(i + 1) * .pi / 3 + angleOffset.radians
+                    let radius = Double(ring) * hexSpacing
+                    
+                    // Add intermediate positions
+                    for j in 1..<ring {
+                        let angle = startAngle + (endAngle - startAngle) * Double(j) / Double(ring)
+                        let x = center.x + radius * cos(angle)
+                        let y = center.y + radius * sin(angle)
+                        positions.append(CGPoint(x: x, y: y))
+                    }
+                }
+            }
+            
+            ring += 1
         }
         
-        var currentRing = 0
-        var itemsInCurrentRing = 0
-        var totalItemsPlaced = 0
-        
+        // Place subviews at calculated positions
         for (index, subview) in subviews.enumerated() {
-            // Determine which ring this item belongs to
-            while totalItemsPlaced + maxItemsInRing(currentRing) <= index {
-                totalItemsPlaced += maxItemsInRing(currentRing)
-                currentRing += 1
-                itemsInCurrentRing = 0
+            if index < positions.count {
+                subview.place(
+                    at: positions[index],
+                    anchor: .center,
+                    proposal: .init(width: hexSize, height: hexSize)
+                )
             }
-            
-            let positionInRing = index - totalItemsPlaced
-            
-            var x: CGFloat, y: CGFloat
-            
-            if currentRing == 0 {
-                // Center hexagon
-                x = center.x
-                y = center.y
-            } else {
-                // Calculate position in the ring
-                let angle = (2 * .pi * CGFloat(positionInRing)) / CGFloat(maxItemsInRing(currentRing))
-                let radius = CGFloat(currentRing) * (hexSize + hexSpacing)
-                
-                x = center.x + radius * cos(angle + angleOffset.radians)
-                y = center.y + radius * sin(angle + angleOffset.radians)
-            }
-            
-            subview.place(
-                at: CGPoint(x: x, y: y),
-                anchor: .center,
-                proposal: .init(width: hexSize, height: hexSize)
-            )
         }
     }
     
