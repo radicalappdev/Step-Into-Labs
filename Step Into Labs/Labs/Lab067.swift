@@ -17,13 +17,16 @@ import RealityKitContent
 struct Lab067: View {
 
     @State var nodes: Int = 5
+    @State var previousNodes: Int = 5
+
+    var emoji: [String] = ["💎", "🐸", "🤔", "🔥", "💻", "🐶", "🥸", "📱", "🎉", "🚀", "❤️", "🤓", "🧲", "💰", "🤩", "🍪", "🦉", "💡", "😎", "🌸"]
 
     var body: some View {
         VStack {
             RadialLayout {
                 ForEach(0..<nodes, id: \.self) { index in
-                    Circle()
-                        .fill(.stepGreen)
+                    Text(emoji[index])
+                        .font(.system(size: 40))
                 }
             }
         }
@@ -32,6 +35,7 @@ struct Lab067: View {
                 HStack(spacing: 24) {
                     Button(action: {
                         withAnimation {
+                            previousNodes = nodes
                             nodes -= 1
                         }
                     }, label: {
@@ -41,10 +45,11 @@ struct Lab067: View {
 
                     Text("\(nodes)")
                         .frame(width:60)
-                        .contentTransition(.numericText(countsDown: true))
+                        .contentTransition(.numericText(countsDown: nodes < previousNodes))
 
                     Button(action: {
                         withAnimation {
+                            previousNodes = nodes
                             nodes += 1
                         }
                     }, label: {
