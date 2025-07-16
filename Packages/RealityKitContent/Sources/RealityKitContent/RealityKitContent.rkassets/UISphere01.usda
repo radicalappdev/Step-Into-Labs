@@ -72,6 +72,7 @@ def Xform "Root"
     }
 
     def Sphere "Glass" (
+        active = false
         prepend apiSchemas = ["MaterialBindingAPI"]
     )
     {
