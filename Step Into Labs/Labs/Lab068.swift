@@ -28,16 +28,20 @@ struct Lab068: View {
                 HoneycombLayout {
                     ForEach(0..<nodes, id: \.self) { index in
                         ModelViewEmoji(name: "UISphere01", emoji: emoji[index], bundle: realityKitContentBundle)
+                            .rotation3DLayout(Rotation3D(angle: .degrees(-90), axis: .x))
                     }
                 }
             } else {
                 RadialLayout {
                     ForEach(0..<nodes, id: \.self) { index in
                         ModelViewEmoji(name: "UISphere01", emoji: emoji[index], bundle: realityKitContentBundle)
+                            .rotation3DLayout(Rotation3D(angle: .degrees(-90), axis: .x))
+                            .offset(z: 24 * CGFloat(index))
                     }
                 }
             }
         }
+        .rotation3DLayout(Rotation3D(angle: .degrees(90), axis: .x))
         .toolbar {
             ToolbarItem(placement: .bottomOrnament, content: {
                 VStack(spacing: 16) {

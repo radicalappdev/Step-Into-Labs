@@ -511,7 +511,7 @@ class ModelData {
              description: "Taking a look at the RadialLayout example from Apple and mocking up a HoneycombLayout.")
 
         ,Lab(title: "Lab 068",
-             type: .WINDOW,
+             type: .VOLUME,
              date: Date("7/16/2025"),
              isFeatured: true,
              subtitle: "Adding a new axis to a custom layout",
