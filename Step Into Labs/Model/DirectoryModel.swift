@@ -457,58 +457,65 @@ class ModelData {
         ,Lab(title: "Lab 060",
              type: .VOLUME,
              date: Date("6/11/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "First look at Manipulation Component",
              description: "A simple but powerful component to interact with entities in RealityKit.")
 
         ,Lab(title: "Lab 061",
              type: .VOLUME,
              date: Date("6/12/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "First look at SwiftUI animations in RealityKit",
              description: "Using the new content.animate method to apply a SwiftUI animation to a RealityKit entity.")
 
         ,Lab(title: "Lab 062",
              type: .VOLUME,
              date: Date("6/16/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "First look at Gesture Component",
              description: "A component that allows us to create unique SwiftUI gestures for RealityKit entities.")
 
         ,Lab(title: "Lab 063",
              type: .VOLUME,
              date: Date("6/17/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "First look at Entity Observation",
              description: "SwiftUI can now observe changes directly from RealityKit entities.")
 
         ,Lab(title: "Lab 064",
              type: .VOLUME,
              date: Date("6/18/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "First look at Presentation Component",
              description: "We can show SwiftUI views as popovers relative to the transform of a RealityKit Entity.")
 
         ,Lab(title: "Lab 065",
              type: .WINDOW,
              date: Date("6/19/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "First look at the Manipulable modifier",
              description: "A SwiftUI modifier that works just like Manipulation Component from RealityKit.")
 
         ,Lab(title: "Lab 066",
              type: .VOLUME,
              date: Date("7/13/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "First look at Mesh Instances Component",
              description: "Useful for creating efficient copies of meshes in vast quantities.")
 
         ,Lab(title: "Lab 067",
              type: .WINDOW,
-             date: Date("7/14/2025"),
+             date: Date("7/15/2025"),
              isFeatured: true,
              subtitle: "Exploring custom Layouts in SwiftUI",
              description: "Taking a look at the RadialLayout example from Apple and mocking up a HoneycombLayout.")
+
+        ,Lab(title: "Lab 068",
+             type: .WINDOW,
+             date: Date("7/16/2025"),
+             isFeatured: true,
+             subtitle: "Adding a new axis to a custom layout",
+             description: "")
 
 
 

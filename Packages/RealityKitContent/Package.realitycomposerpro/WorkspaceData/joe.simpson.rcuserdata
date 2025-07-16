@@ -2,7 +2,9 @@
   "advancedEditorSelectedIdentifier" : "ProjectBrowser",
   "openSceneRelativePaths" : [
     "BYOHZ.usda",
-    "InstanceLab.usda"
+    "InstanceLab.usda",
+    "UISphere01.usda",
+    "BuildingBlocks\/StepSphereGreen.usda"
   ],
   "recentIdentifiers" : {
     "00AC74E2-A464-4F74-A445-36CD76630287" : [
@@ -51,6 +53,9 @@
 
     ],
     "4E7393D3-3FFC-4BFB-8AC2-9243FE94CF44" : [
+
+    ],
+    "51846BC9-340D-4930-9987-C60C51E07011" : [
 
     ],
     "69135388-7782-493A-B7EE-3B9F9169A20D" : [
@@ -2751,6 +2756,30 @@
           0.62567973,
           1.7665575,
           2.1214585,
+          1
+        ]
+      }
+    ],
+    "51846BC9-340D-4930-9987-C60C51E07011" : [
+      {
+        "date" : 774369139.786064,
+        "title" : "Untitled",
+        "transform" : [
+          0.9868405,
+          -4.67832e-10,
+          -0.16169682,
+          0,
+          -0.07841394,
+          0.87454516,
+          -0.4785626,
+          0,
+          0.14141119,
+          0.48494425,
+          0.8630366,
+          0,
+          0.3657317,
+          1.2542113,
+          2.2320714,
           1
         ]
       }
@@ -7637,5 +7666,5 @@
   "sceneViewportBackgroundColors" : {
 
   },
-  "selectedSceneRelativePath" : "InstanceLab.usda"
+  "selectedSceneRelativePath" : "UISphere01.usda"
 }
