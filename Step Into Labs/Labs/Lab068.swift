@@ -2,11 +2,11 @@
 //
 //  Title: Lab068
 //
-//  Subtitle:
+//  Subtitle: Adding aa axis to custom layouts
 //
-//  Description:
+//  Description: Building on the custom layouts from Lab 067, we can add some 3D models and use SwiftUI modifiers to control rotation and position.
 //
-//  Type:
+//  Type: Volume
 //
 //  Created by Joseph Simpson on 7/16/25.
 
@@ -45,6 +45,7 @@ struct Lab068: View {
             }
         }
         .rotation3DLayout(Rotation3D(angle: .degrees(90), axis: .x))
+        .offset(y: 250)
 
         .toolbar {
             ToolbarItem(placement: .bottomOrnament, content: {
