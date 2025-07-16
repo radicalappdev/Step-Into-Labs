@@ -514,7 +514,7 @@ class ModelData {
              type: .VOLUME,
              date: Date("7/16/2025"),
              isFeatured: true,
-             subtitle: "Adding aa axis to custom layouts",
+             subtitle: "Adding an axis to custom layouts",
              description: "Building on the custom layouts from Lab 067, we can add some 3D models and use SwiftUI modifiers to control rotation and position.")
 
 

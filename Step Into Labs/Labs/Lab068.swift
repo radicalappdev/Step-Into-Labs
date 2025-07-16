@@ -2,7 +2,7 @@
 //
 //  Title: Lab068
 //
-//  Subtitle: Adding aa axis to custom layouts
+//  Subtitle: Adding an axis to custom layouts
 //
 //  Description: Building on the custom layouts from Lab 067, we can add some 3D models and use SwiftUI modifiers to control rotation and position.
 //
@@ -131,7 +131,7 @@ fileprivate struct ModelViewEmoji: View {
                             .font(.system(size: 30))
                     }
             } else if phase.error != nil {
-                Text("Could not load model \(name).")
+                Text(emoji) // just load the emoji without the model
             } else {
                 ProgressView()
             }
@@ -265,4 +265,5 @@ fileprivate struct RadialLayout: Layout, Animatable {
         set { angleOffset.animatableData = newValue }
     }
 }
+
 
