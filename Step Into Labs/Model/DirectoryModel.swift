@@ -524,6 +524,13 @@ class ModelData {
              subtitle: "More fun with RadialLayout",
              description: "Using rotation3DLayout, adjust angle, and animating some changes.")
 
+        ,Lab(title: "Lab 069",
+             type: .WINDOW,
+             date: Date("7/17/2025"),
+             isFeatured: true,
+             subtitle: "Step Into Vision 2025",
+             description: "")
+
 
 
     ]
