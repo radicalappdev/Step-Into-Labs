@@ -521,8 +521,8 @@ class ModelData {
              type: .VOLUME,
              date: Date("7/17/2025"),
              isFeatured: true,
-             subtitle: "TBD",
-             description: "")
+             subtitle: "More fun with RadialLayout",
+             description: "Using rotation3DLayout, adjust angle, and animating some changes.")
 
 
 

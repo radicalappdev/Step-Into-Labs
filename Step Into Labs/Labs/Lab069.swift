@@ -2,11 +2,11 @@
 //
 //  Title: Lab069
 //
-//  Subtitle:
+//  Subtitle: More fun with RadialLayout
 //
-//  Description:
+//  Description: Using rotation3DLayout, adjust angle, and animating some changes.
 //
-//  Type:
+//  Type: Volume
 //
 //  Created by Joseph Simpson on 7/17/25.
 
@@ -23,26 +23,22 @@ struct Lab069: View {
     @State private var isAnimatingRotation: Bool = false
     @State private var animationTimerRotation: Timer?
 
-    // Adjust the angle inside the layout
+    // Adjust the angle inside the layout. This will control which element is at the front of the circle.
     @State private var angleOffset: Angle = .zero
     @State private var isAnimatingAngle: Bool = false
     @State private var animationTimerAngle: Timer?
 
-    // Animate this between 0 and 30.0
+    // Adjust an offzet on the Z axis
     @State private var offsetZ: CGFloat = 0
     @State private var isAnimatingOffsetZ: Bool = false
     @State private var animationTimerOffsetZ: Timer?
     @State private var offsetZDirection: Bool = true // true = increasing, false = decreasing
 
-    // Animate this between 300 and max for the current view
+    // Adjust the bounds of the view
     @State private var bounds: CGFloat = 300
     @State private var isAnimatingBounds: Bool = false
     @State private var animationTimerBounds: Timer?
     @State private var boundsDirection: Bool = true // true = increasing, false = decreasing
-
-
-
-
 
     var emoji: [String] = ["🌸", "🐸", "❤️", "🔥", "💻", "🐶", "🥸", "📱", "🎉", "🚀", "🤔", "🤓", "🧲", "💰", "🤩", "🍪", "🦉", "💡", "😎"]
 
@@ -56,7 +52,6 @@ struct Lab069: View {
                     ModelViewEmoji(name: "UISphere01", emoji: emoji[index], bundle: realityKitContentBundle)
                         .rotation3DLayout(Rotation3D(angle: .degrees(360 - layoutRotation), axis: .x))
                         .offset(z: offsetZ * CGFloat(index))
-                        .debugBorder3D(showDebugLines ? .white : .clear)
                 }
             }
             .rotation3DLayout(Rotation3D(angle: .degrees(layoutRotation), axis: .x))
