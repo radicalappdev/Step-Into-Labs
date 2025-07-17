@@ -18,13 +18,22 @@ struct Lab069: View {
 
     @State private var showDebugLines = false
 
-    @State private var angleOffset: Angle = .zero
-    @State private var offsetZ: CGFloat = 0
-
+    // Control the total layout rotation
     @State private var layoutRotation: Double = 45
-    @State private var bounds: CGFloat = 300
     @State private var isAnimatingRotation: Bool = false
     @State private var animationTimerRotation: Timer?
+
+    // Adjust the angle inside the layout
+    @State private var angleOffset: Angle = .zero
+    @State private var isAnimatingAngle: Bool = false
+    @State private var animationTimerAngle: Timer?
+
+
+    @State private var offsetZ: CGFloat = 0
+    @State private var bounds: CGFloat = 300
+
+
+
 
 
     var emoji: [String] = ["🌸", "🐸", "❤️", "🔥", "💻", "🐶", "🥸", "📱", "🎉", "🚀", "🤔", "🤓", "🧲", "💰", "🤩", "🍪", "🦉", "💡", "😎"]
@@ -66,8 +75,28 @@ struct Lab069: View {
                         }
                     }
                 }, label: {
-                    Text(isAnimatingRotation ? "Stop Spin" : "Start Spin")
+                    Label("Rotate Layout", systemImage: isAnimatingRotation ? "stop" : "play")
                 })
+
+                Button(action: {
+                    if isAnimatingAngle {
+                        // Stop animation
+                        animationTimerAngle?.invalidate()
+                        animationTimerAngle = nil
+                        isAnimatingAngle = false
+                    } else {
+                        // Start animation
+                        isAnimatingAngle = true
+                        animationTimerAngle = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
+                            withAnimation(.linear(duration: 0.05)) {
+                                angleOffset += .degrees(2)
+                            }
+                        }
+                    }
+                }, label: {
+                    Label("Angle Change", systemImage: isAnimatingAngle ? "stop" : "play")
+                })
+
 
                 Button(action: {
                     showDebugLines.toggle()
