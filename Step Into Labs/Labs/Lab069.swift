@@ -16,15 +16,15 @@ import RealityKitContent
 
 struct Lab069: View {
 
-    @State var nodes: Int = 12
-    @State var previousNodes: Int = 3
-    @State var useHoneycomb: Bool = false
+    @State private var showDebugLines = false
 
     @State private var angleOffset: Angle = .zero
     @State private var offsetZ: CGFloat = 0
 
     @State private var layoutRotation: Double = 45
     @State private var bounds: CGFloat = 300
+    @State private var isAnimatingRotation: Bool = false
+    @State private var animationTimerRotation: Timer?
 
 
     var emoji: [String] = ["🌸", "🐸", "❤️", "🔥", "💻", "🐶", "🥸", "📱", "🎉", "🚀", "🤔", "🤓", "🧲", "💰", "🤩", "🍪", "🦉", "💡", "😎"]
@@ -35,39 +35,44 @@ struct Lab069: View {
 
             RadialLayout(angleOffset: angleOffset) {
 
-                ForEach(0..<nodes, id: \.self) { index in
+                ForEach(0..<11, id: \.self) { index in
                     ModelViewEmoji(name: "UISphere01", emoji: emoji[index], bundle: realityKitContentBundle)
                         .rotation3DLayout(Rotation3D(angle: .degrees(360 - layoutRotation), axis: .x))
                         .offset(z: offsetZ * CGFloat(index))
+                        .debugBorder3D(showDebugLines ? .white : .clear)
                 }
             }
             .rotation3DLayout(Rotation3D(angle: .degrees(layoutRotation), axis: .x))
             .frame(width: bounds, height: bounds)
+            .debugBorder3D(showDebugLines ? .white : .clear)
         }
         .ornament(attachmentAnchor: .scene(.trailing), ornament: {
 
             VStack(alignment: .center, spacing: 8) {
 
                 Button(action: {
-                    withAnimation {
-                        layoutRotation = 0
+                    if isAnimatingRotation {
+                        // Stop animation
+                        animationTimerRotation?.invalidate()
+                        animationTimerRotation = nil
+                        isAnimatingRotation = false
+                    } else {
+                        // Start animation
+                        isAnimatingRotation = true
+                        animationTimerRotation = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
+                            withAnimation(.linear(duration: 0.05)) {
+                                layoutRotation += 2
+                            }
+                        }
                     }
                 }, label: {
-                    Text("Rotate 0")
+                    Text(isAnimatingRotation ? "Stop Spin" : "Start Spin")
                 })
+
                 Button(action: {
-                    withAnimation {
-                        layoutRotation = 45
-                    }
+                    showDebugLines.toggle()
                 }, label: {
-                    Text("Rotate 45")
-                })
-                Button(action: {
-                    withAnimation {
-                        layoutRotation = 90
-                    }
-                }, label: {
-                    Text("Rotate 90")
+                    Text("Debug")
                 })
 
             }
@@ -76,40 +81,6 @@ struct Lab069: View {
             .glassBackgroundEffect()
 
         })
-
-
-        .toolbar {
-            ToolbarItem(placement: .bottomOrnament, content: {
-                // Node controls
-                HStack(spacing: 24) {
-                    Button(action: {
-                        withAnimation {
-                            previousNodes = nodes
-                            nodes -= 1
-                        }
-                    }, label: {
-                        Image(systemName: "minus.circle.fill")
-                    })
-                    .disabled(nodes <= 3)
-
-                    Text("\(nodes)")
-                        .frame(width:60)
-                        .contentTransition(.numericText(countsDown: nodes < previousNodes))
-
-                    Button(action: {
-                        withAnimation {
-                            previousNodes = nodes
-                            nodes += 1
-                        }
-                    }, label: {
-                        Image(systemName: "plus.circle.fill")
-                    })
-                    .disabled(nodes >= 19)
-
-                    }
-
-            })
-        }
 
     }
 }

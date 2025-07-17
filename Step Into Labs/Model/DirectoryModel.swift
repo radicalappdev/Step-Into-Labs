@@ -518,7 +518,7 @@ class ModelData {
              description: "Building on the custom layouts from Lab 067, we can add some 3D models and use SwiftUI modifiers to control rotation and position.")
 
         ,Lab(title: "Lab 069",
-             type: .WINDOW,
+             type: .VOLUME,
              date: Date("7/17/2025"),
              isFeatured: true,
              subtitle: "TBD",
