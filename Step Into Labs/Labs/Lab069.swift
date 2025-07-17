@@ -28,9 +28,17 @@ struct Lab069: View {
     @State private var isAnimatingAngle: Bool = false
     @State private var animationTimerAngle: Timer?
 
-
+    // Animate this between 0 and 30.0
     @State private var offsetZ: CGFloat = 0
+    @State private var isAnimatingOffsetZ: Bool = false
+    @State private var animationTimerOffsetZ: Timer?
+    @State private var offsetZDirection: Bool = true // true = increasing, false = decreasing
+
+    // Animate this between 300 and max for the current view
     @State private var bounds: CGFloat = 300
+    @State private var isAnimatingBounds: Bool = false
+    @State private var animationTimerBounds: Timer?
+    @State private var boundsDirection: Bool = true // true = increasing, false = decreasing
 
 
 
@@ -57,7 +65,7 @@ struct Lab069: View {
         }
         .ornament(attachmentAnchor: .scene(.trailing), ornament: {
 
-            VStack(alignment: .center, spacing: 8) {
+            VStack(alignment: .leading, spacing: 8) {
 
                 Button(action: {
                     if isAnimatingRotation {
@@ -97,6 +105,66 @@ struct Lab069: View {
                     Label("Angle Change", systemImage: isAnimatingAngle ? "stop" : "play")
                 })
 
+                Button(action: {
+                    if isAnimatingOffsetZ {
+                        // Stop animation
+                        animationTimerOffsetZ?.invalidate()
+                        animationTimerOffsetZ = nil
+                        isAnimatingOffsetZ = false
+                        withAnimation(.easeInOut(duration: 0.5)) {
+                            offsetZ = 0
+                        }
+                    } else {
+                        // Start animation
+                        isAnimatingOffsetZ = true
+                        animationTimerOffsetZ = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
+                            withAnimation(.linear(duration: 0.05)) {
+                                if offsetZDirection {
+                                    offsetZ += 0.5
+                                    if offsetZ >= 30.0 {
+                                        offsetZDirection = false
+                                    }
+                                } else {
+                                    offsetZ -= 0.5
+                                    if offsetZ <= 0 {
+                                        offsetZDirection = true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }, label: {
+                    Label("Z Offset", systemImage: isAnimatingOffsetZ ? "stop" : "play")
+                })
+
+                Button(action: {
+                    if isAnimatingBounds {
+                        // Stop animation
+                        animationTimerBounds?.invalidate()
+                        animationTimerBounds = nil
+                        isAnimatingBounds = false
+                    } else {
+                        // Start animation
+                        isAnimatingBounds = true
+                        animationTimerBounds = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
+                            withAnimation(.linear(duration: 0.05)) {
+                                if boundsDirection {
+                                    bounds += 5
+                                    if bounds >= 1000 {
+                                        boundsDirection = false
+                                    }
+                                } else {
+                                    bounds -= 5
+                                    if bounds <= 300 {
+                                        boundsDirection = true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }, label: {
+                    Label("Bounds", systemImage: isAnimatingBounds ? "stop" : "play")
+                })
 
                 Button(action: {
                     showDebugLines.toggle()
