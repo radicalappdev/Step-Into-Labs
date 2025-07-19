@@ -36,14 +36,14 @@ struct Lab070: View {
     var body: some View {
         VStackLayout().depthAlignment(.center) {
 
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 2), count: 20), spacing: 6) {
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 4), count: 20), spacing: 4) {
                 ForEach(1...365, id: \.self) { day in
                     Circle()
                         .fill(day <= dayOfYear ? .stepGreen : .stepBackgroundSecondary)
                         .hoverEffect()
-                        .padding()
+//                        .padding()
                         .help(getDateForDayOfYear(day))
-                        .frame(width: 60, height: 60)
+                        .frame(width: 30, height: 30)
                 }
             }
             .padding()
