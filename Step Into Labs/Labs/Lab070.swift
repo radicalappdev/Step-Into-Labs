@@ -112,7 +112,10 @@ fileprivate struct MonthView: View {
                 .font(.caption)
                 .fontWeight(.bold)
                 .frame(maxWidth: .infinity)
-
+                .padding(.vertical, 4)
+                .background(Color.blue.opacity(0.3))
+                .cornerRadius(4)
+            
             LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 1), count: 7), spacing: 1) {
                 ForEach(0..<getFirstDayOfWeek(month), id: \.self) { _ in
                     Rectangle()
@@ -123,20 +126,12 @@ fileprivate struct MonthView: View {
                 ForEach(getDaysInMonth(month), id: \.self) { day in
                     DayView(day: day, dayOfYear: getDayOfYear(month: month, day: day), currentDayOfYear: currentDayOfYear)
                 }
-                
-                // Add empty cells to ensure all months have exactly 6 rows (42 cells total)
-                ForEach(0..<(42 - getFirstDayOfWeek(month) - getDaysInMonth(month).count), id: \.self) { _ in
-                    Rectangle()
-                        .fill(Color.clear)
-                        .frame(height: 16)
-                }
             }
         }
+        .frame(height: 120) // Fixed height for all months
         .padding(6)
-        .background(.thickMaterial)
-        .cornerRadius(12)
-
-//        .background(Color.gray.opacity(0.1))
+        .background(Color.gray.opacity(0.1))
+        .cornerRadius(8)
     }
     
     func getMonthName(_ month: Int) -> String {
@@ -192,10 +187,13 @@ fileprivate struct DayView: View {
         Text("\(day)")
             .font(.caption2)
             .fontWeight(.medium)
-            .frame(width: 20, height: 20)
-            .foregroundStyle(dayOfYear <= currentDayOfYear ? .white : .black)
+            .frame(width: 16, height: 16)
             .background(dayOfYear <= currentDayOfYear ? .stepGreen : .stepBackgroundSecondary)
             .cornerRadius(2)
+            .overlay(
+                RoundedRectangle(cornerRadius: 2)
+                    .stroke(Color.gray.opacity(0.3), lineWidth: 0.5)
+            )
             .help(getDateForDayOfYear(dayOfYear))
     }
     
