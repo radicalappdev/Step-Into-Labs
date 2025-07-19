@@ -70,33 +70,13 @@ fileprivate struct YearCalendarView: View {
     let currentDayOfYear: Int
     
     var body: some View {
-        VStack(spacing: 8) {
-            // Row 1: Jan, Feb, Mar
-            HStack(alignment: .top, spacing: 8) {
-                MonthView(month: 1, currentDayOfYear: currentDayOfYear)
-                MonthView(month: 2, currentDayOfYear: currentDayOfYear)
-                MonthView(month: 3, currentDayOfYear: currentDayOfYear)
-            }
-            
-            // Row 2: Apr, May, Jun
-            HStack(alignment: .top, spacing: 8) {
-                MonthView(month: 4, currentDayOfYear: currentDayOfYear)
-                MonthView(month: 5, currentDayOfYear: currentDayOfYear)
-                MonthView(month: 6, currentDayOfYear: currentDayOfYear)
-            }
-            
-            // Row 3: Jul, Aug, Sep
-            HStack(alignment: .top, spacing: 8) {
-                MonthView(month: 7, currentDayOfYear: currentDayOfYear)
-                MonthView(month: 8, currentDayOfYear: currentDayOfYear)
-                MonthView(month: 9, currentDayOfYear: currentDayOfYear)
-            }
-            
-            // Row 4: Oct, Nov, Dec
-            HStack(alignment: .top, spacing: 8) {
-                MonthView(month: 10, currentDayOfYear: currentDayOfYear)
-                MonthView(month: 11, currentDayOfYear: currentDayOfYear)
-                MonthView(month: 12, currentDayOfYear: currentDayOfYear)
+        LazyVGrid(
+            columns: Array(repeating: GridItem(.flexible(), spacing: 8), count: 3),
+            alignment: .leading,
+            spacing: 8
+        ) {
+            ForEach(1...12, id: \.self) { month in
+                MonthView(month: month, currentDayOfYear: currentDayOfYear)
             }
         }
     }
@@ -128,7 +108,6 @@ fileprivate struct MonthView: View {
                 }
             }
         }
-        .frame(height: 120) // Fixed height for all months
         .padding(6)
         .background(Color.gray.opacity(0.1))
         .cornerRadius(8)
