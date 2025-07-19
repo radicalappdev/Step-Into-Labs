@@ -529,7 +529,7 @@ class ModelData {
              date: Date("7/17/2025"),
              isFeatured: true,
              subtitle: "Step Into Vision 2025",
-             description: "")
+             description: "Part of my goal to publish on Step Into Vision everyday in 2025.")
 
 
 

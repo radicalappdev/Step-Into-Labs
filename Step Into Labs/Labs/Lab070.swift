@@ -2,11 +2,11 @@
 //
 //  Title: Lab070
 //
-//  Subtitle:
+//  Subtitle: Step Into Vision 2025
 //
-//  Description:
+//  Description: Part of my goal to publish on Step Into Vision everyday in 2025.
 //
-//  Type:
+//  Type: Window
 //
 //  Created by Joseph Simpson on 7/17/25.
 
@@ -17,19 +17,15 @@ import RealityKitContent
 struct Lab070: View {
 
     @State var dayOfYear: Int = 0
-    
-    // Helper function to get date string for a given day of year
+
     func getDateForDayOfYear(_ day: Int) -> String {
         let calendar = Calendar.current
         let currentYear = calendar.component(.year, from: Date())
-        
-        // Create a date for the given day of year
         if let date = calendar.date(from: DateComponents(year: currentYear, day: day)) {
             let formatter = DateFormatter()
             formatter.dateFormat = "MMM dd yyyy"
             return "Day \(day): " + formatter.string(from: date)
         }
-        
         return "Day \(day)"
     }
 
@@ -41,7 +37,6 @@ struct Lab070: View {
                     Circle()
                         .fill(day <= dayOfYear ? .stepGreen : .stepBackgroundSecondary)
                         .hoverEffect()
-//                        .padding()
                         .help(getDateForDayOfYear(day))
                         .frame(width: 30, height: 30)
                 }
@@ -57,11 +52,10 @@ struct Lab070: View {
         .ornament(attachmentAnchor: .scene(.bottom), ornament: {
             VStack {
                 Text("Day of Year: \(dayOfYear)")
-                               // Percentage of year complete
                 Text("2025 is \(Int((Double(dayOfYear) / 365.0) * 100))% complete")
             }
-                    .padding()
-                    .glassBackgroundEffect()
+            .padding()
+            .glassBackgroundEffect()
         })
         .onAppear {
             let calendar = Calendar.current
