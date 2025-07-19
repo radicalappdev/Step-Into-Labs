@@ -35,18 +35,9 @@ struct Lab070: View {
 
     var body: some View {
         VStackLayout().depthAlignment(.center) {
+            YearCalendarView(currentDayOfYear: dayOfYear)
+                .padding()
 
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 2), count: 20), spacing: 6) {
-                ForEach(1...365, id: \.self) { day in
-                    Circle()
-                        .fill(day <= dayOfYear ? .stepGreen : .stepBackgroundSecondary)
-                        .hoverEffect()
-                        .padding()
-                        .help(getDateForDayOfYear(day))
-                        .frame(width: 60, height: 60)
-                }
-            }
-            .padding()
         }
         .ornament(attachmentAnchor: .scene(.topBack), ornament: {
             Text("Step Into Vision: 2025")
@@ -68,6 +59,133 @@ struct Lab070: View {
             let today = Date()
             dayOfYear = calendar.ordinality(of: .day, in: .year, for: today) ?? 0
         }
+    }
+}
+
+
+
+// MARK: - Calendar Views
+
+fileprivate struct YearCalendarView: View {
+    let currentDayOfYear: Int
+    
+    var body: some View {
+        LazyVGrid(
+            columns: Array(repeating: GridItem(.flexible(), spacing: 8), count: 3),
+            alignment: .leading,
+            spacing: 8
+        ) {
+            ForEach(1...12, id: \.self) { month in
+                MonthView(month: month, currentDayOfYear: currentDayOfYear)
+            }
+        }
+    }
+}
+
+fileprivate struct MonthView: View {
+    let month: Int
+    let currentDayOfYear: Int
+    
+    var body: some View {
+        VStack(spacing: 4) {
+            Text(getMonthName(month))
+                .font(.caption)
+                .fontWeight(.bold)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 4)
+                .background(Color.blue.opacity(0.3))
+                .cornerRadius(4)
+            
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 1), count: 7), spacing: 1) {
+                ForEach(0..<getFirstDayOfWeek(month), id: \.self) { _ in
+                    Rectangle()
+                        .fill(Color.clear)
+                        .frame(height: 16)
+                }
+                
+                ForEach(getDaysInMonth(month), id: \.self) { day in
+                    DayView(day: day, dayOfYear: getDayOfYear(month: month, day: day), currentDayOfYear: currentDayOfYear)
+                }
+            }
+        }
+        .padding(6)
+        .background(Color.gray.opacity(0.1))
+        .cornerRadius(8)
+    }
+    
+    func getMonthName(_ month: Int) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM"
+        let calendar = Calendar.current
+        let currentYear = calendar.component(.year, from: Date())
+        
+        if let date = calendar.date(from: DateComponents(year: currentYear, month: month, day: 1)) {
+            return formatter.string(from: date)
+        }
+        return "Month \(month)"
+    }
+    
+    func getDaysInMonth(_ month: Int) -> [Int] {
+        let calendar = Calendar.current
+        let currentYear = calendar.component(.year, from: Date())
+        
+        if let date = calendar.date(from: DateComponents(year: currentYear, month: month, day: 1)),
+           let range = calendar.range(of: .day, in: .month, for: date) {
+            return Array(range)
+        }
+        return []
+    }
+    
+    func getDayOfYear(month: Int, day: Int) -> Int {
+        let calendar = Calendar.current
+        let currentYear = calendar.component(.year, from: Date())
+        
+        if let date = calendar.date(from: DateComponents(year: currentYear, month: month, day: day)) {
+            return calendar.ordinality(of: .day, in: .year, for: date) ?? 0
+        }
+        return 0
+    }
+    
+    func getFirstDayOfWeek(_ month: Int) -> Int {
+        let calendar = Calendar.current
+        let currentYear = calendar.component(.year, from: Date())
+        
+        if let date = calendar.date(from: DateComponents(year: currentYear, month: month, day: 1)) {
+            return calendar.component(.weekday, from: date) - 1
+        }
+        return 0
+    }
+}
+
+fileprivate struct DayView: View {
+    let day: Int
+    let dayOfYear: Int
+    let currentDayOfYear: Int
+    
+    var body: some View {
+        Text("\(day)")
+            .font(.caption2)
+            .fontWeight(.medium)
+            .frame(width: 16, height: 16)
+            .background(dayOfYear <= currentDayOfYear ? .stepGreen : .stepBackgroundSecondary)
+            .cornerRadius(2)
+            .overlay(
+                RoundedRectangle(cornerRadius: 2)
+                    .stroke(Color.gray.opacity(0.3), lineWidth: 0.5)
+            )
+            .help(getDateForDayOfYear(dayOfYear))
+    }
+    
+    func getDateForDayOfYear(_ day: Int) -> String {
+        let calendar = Calendar.current
+        let currentYear = calendar.component(.year, from: Date())
+        
+        if let date = calendar.date(from: DateComponents(year: currentYear, day: day)) {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MMM dd yyyy"
+            return "Day \(day): " + formatter.string(from: date)
+        }
+        return "Day \(day)"
     }
 }
 
