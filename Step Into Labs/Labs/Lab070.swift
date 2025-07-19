@@ -26,8 +26,8 @@ struct Lab070: View {
         // Create a date for the given day of year
         if let date = calendar.date(from: DateComponents(year: currentYear, day: day)) {
             let formatter = DateFormatter()
-            formatter.dateFormat = "MMM d"
-            return formatter.string(from: date)
+            formatter.dateFormat = "MMM dd yyyy"
+            return "Day \(day): " + formatter.string(from: date)
         }
         
         return "Day \(day)"
@@ -40,13 +40,15 @@ struct Lab070: View {
                 ForEach(1...365, id: \.self) { day in
                     Circle()
                         .fill(day <= dayOfYear ? .stepGreen : .stepBackgroundSecondary)
-                        .frame(width: 24, height: 24)
+                        .hoverEffect()
+                        .padding()
                         .help(getDateForDayOfYear(day))
+                        .frame(width: 60, height: 60)
                 }
             }
             .padding()
         }
-        .ornament(attachmentAnchor: .scene(.top), ornament: {
+        .ornament(attachmentAnchor: .scene(.topBack), ornament: {
             Text("Step Into Vision: 2025")
                 .font(.largeTitle)
                 .padding()
@@ -62,7 +64,6 @@ struct Lab070: View {
                     .glassBackgroundEffect()
         })
         .onAppear {
-            // get day of year
             let calendar = Calendar.current
             let today = Date()
             dayOfYear = calendar.ordinality(of: .day, in: .year, for: today) ?? 0
