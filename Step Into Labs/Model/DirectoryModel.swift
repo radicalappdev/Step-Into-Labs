@@ -531,6 +531,13 @@ class ModelData {
              subtitle: "Step Into Vision 2025",
              description: "Part of my goal to publish on Step Into Vision everyday in 2025.")
 
+        ,Lab(title: "Lab 071",
+             type: .SPACE,
+             date: Date("7/20/2025"),
+             isFeatured: true,
+             subtitle: "Presentations in Immersive Spaces?",
+             description: "Can we use the new Presentation Component or SwiftUI Pickers in Immersive Spaces?")
+
 
 
     ]
