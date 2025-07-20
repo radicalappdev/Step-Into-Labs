@@ -20,7 +20,7 @@ struct Lab071: View {
     @State private var showingPopover: Bool = false
 
     var body: some View {
-        RealityView { content in
+        RealityView { content, attachments in
 
             guard let scene = try? await Entity(named: "PresentationComponentLab", in: realityKitContentBundle) else { return }
             content.add(scene)
@@ -53,13 +53,24 @@ struct Lab071: View {
             )
             presentationPoint.components.set(presentation)
 
-            // ❌ Demo 2: Adding an attachment entity. The SwiftUI view in the attachment uses picker controls, which rely on Presentations.
+            // ❌ Demo 2: Adding an attachment using the new ViewAttachmentComponent. The SwiftUI view in the attachment uses picker controls, which rely on Presentations.
             let attachmentEntity = Entity()
             let attachment = ViewAttachmentComponent(rootView: FormView())
             attachmentEntity.components.set(attachment)
             subject.addChild(attachmentEntity, preservingWorldTransform: false)
             attachmentEntity.setPosition([0, 0.25, 0], relativeTo: subject)
 
+            // 🤷🏻‍♂️ Demo 3: Adding an attachment from the RealityView. The SwiftUI view in the attachment uses picker controls, which rely on Presentations.
+            if let rootAttachment = attachments.entity(for: "RootAttachment") {
+                rootAttachment.position = [1, 1.5, -2]
+                content.add(rootAttachment)
+            }
+
+
+        } attachments: {
+            Attachment(id: "RootAttachment", {
+                FormView()
+            })
         }
 
     }
