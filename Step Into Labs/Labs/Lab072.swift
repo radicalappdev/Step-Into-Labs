@@ -27,11 +27,9 @@ struct Lab072: View {
                 ModelViewEmoji(name: "UISphere01", emoji: emoji[index], bundle: realityKitContentBundle)
                     .rotation3DLayout(Rotation3D(angle: .degrees(-45), axis: .x))
                     .debugBorder3D(showDebugLines ? .white : .clear)
-                    .manipulable()
-                    .hoverEffect()
+
             }
         }
-//        .frame(width: 600, height: 600)
         .rotation3DLayout(Rotation3D(angle: .degrees(45), axis: .x))
         .debugBorder3D(showDebugLines ? .white : .clear)
     }
@@ -44,24 +42,30 @@ fileprivate struct ModelViewEmoji: View {
     let bundle: Bundle
 
     var body: some View {
-        Model3D(named: name, bundle: bundle)
-        { phase in
-            if let model = phase.model {
-                model
-                    .resizable()
-                    .frame(width: 96, height: 96)
-                    .frame(depth: 96)
-                    .aspectRatio(contentMode: .fill)
-                    .spatialOverlay(alignment:  .center) {
-                        Text(emoji)
-                            .font(.system(size: 48))
-                    }
-            } else if phase.error != nil {
-                Text(emoji) // just load the emoji without the model
-            } else {
-                ProgressView()
+        SpatialContainer {
+
+            Model3D(named: name, bundle: bundle)
+            { phase in
+                if let model = phase.model {
+                    model
+                        .resizable()
+                        .frame(width: 96, height: 96)
+                        .frame(depth: 96)
+                        .scaledToFit3D()
+                        .spatialOverlay(alignment:  .center) {
+                            Text(emoji)
+                                .font(.system(size: 48))
+                        }
+                } else if phase.error != nil {
+                    Text(emoji) // just load the emoji without the model
+                } else {
+                    ProgressView()
+                }
             }
         }
+        .manipulable()
+        .hoverEffect()
+
     }
 }
 
