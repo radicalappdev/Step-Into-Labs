@@ -538,6 +538,14 @@ class ModelData {
              subtitle: "Presentations in Immersive Spaces?",
              description: "Can we use the new Presentation Component or SwiftUI Pickers in Immersive Spaces?")
 
+        ,Lab(title: "Lab 072",
+             type: .VOLUME,
+             date: Date("7/21/2025"),
+             isFeatured: true,
+             subtitle: "Switch from a Model3D to a RealityView",
+             description: "")
+
+
 
 
     ]
