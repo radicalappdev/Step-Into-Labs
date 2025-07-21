@@ -93,8 +93,6 @@ struct Lab072: View {
                     Label("Angle Change", systemImage: isAnimatingAngle ? "stop" : "play")
                 })
 
-            
-
                 Button(action: {
                     if isAnimatingBounds {
                         animationTimerBounds?.invalidate()
@@ -274,3 +272,5 @@ fileprivate struct HoneycombLayout: Layout, Animatable {
         set { angleOffset.animatableData = newValue }
     }
 }
+
+
