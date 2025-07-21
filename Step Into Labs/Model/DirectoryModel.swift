@@ -542,8 +542,8 @@ class ModelData {
              type: .VOLUME,
              date: Date("7/21/2025"),
              isFeatured: true,
-             subtitle: "Switch from a Model3D to a RealityView",
-             description: "")
+             subtitle: "More fun with HoneycombLayout",
+             description: "Using rotation3DLayout, adjust angle, and animating some changes.")
 
 
 

@@ -2,11 +2,11 @@
 //
 //  Title: Lab072
 //
-//  Subtitle:
+//  Subtitle: More fun with HoneycombLayout
 //
-//  Description:
+//  Description: Using rotation3DLayout, adjust angle, and animating some changes.
 //
-//  Type:
+//  Type: Volume
 //
 //  Created by Joseph Simpson on 7/21/25.
 
@@ -30,24 +30,21 @@ struct Lab072: View {
     @State private var animationTimerAngle: Timer?
 
     // Adjust the bounds of the view
-    @State private var bounds: CGFloat = 300
+    @State private var bounds: CGFloat = 500
     @State private var isAnimatingBounds: Bool = false
     @State private var animationTimerBounds: Timer?
     @State private var boundsDirection: Bool = true // true = increasing, false = decreasing
 
-    @State private var hexSize: Double = 124.0
-    @State private var isAnimatingHexSize: Bool = false
-    @State private var animationTimerHexSize: Timer?
-    @State private var hexSizeDirection: Bool = true // true = increasing, false = decreasing
-
     var emoji: [String] = ["🌸", "🐸", "❤️", "🔥", "💻", "🐶", "🥸", "📱", "🎉", "🚀", "🤔", "🤓", "🧲", "💰", "🤩", "🍪", "🦉", "💡", "😎"]
-    
+
+    let hexSize: CGFloat = 96
+
     var body: some View {
         HoneycombLayout(angleOffset: angleOffset, hexSize: hexSize) {
             ForEach(0..<nodes, id: \.self) { index in
                 ModelViewEmoji(
                     name: "UISphere01",
-                    hexSize: 96, emoji: emoji[index],
+                    hexSize: hexSize, emoji: emoji[index],
                     bundle: realityKitContentBundle
                 )
                     .rotation3DLayout(Rotation3D(angle: .degrees(360 - layoutRotation), axis: .x))
@@ -64,12 +61,10 @@ struct Lab072: View {
 
                 Button(action: {
                     if isAnimatingRotation {
-                        // Stop animation
                         animationTimerRotation?.invalidate()
                         animationTimerRotation = nil
                         isAnimatingRotation = false
                     } else {
-                        // Start animation
                         isAnimatingRotation = true
                         animationTimerRotation = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
                             withAnimation(.linear(duration: 0.05)) {
@@ -83,12 +78,10 @@ struct Lab072: View {
 
                 Button(action: {
                     if isAnimatingAngle {
-                        // Stop animation
                         animationTimerAngle?.invalidate()
                         animationTimerAngle = nil
                         isAnimatingAngle = false
                     } else {
-                        // Start animation
                         isAnimatingAngle = true
                         animationTimerAngle = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
                             withAnimation(.linear(duration: 0.05)) {
@@ -104,23 +97,21 @@ struct Lab072: View {
 
                 Button(action: {
                     if isAnimatingBounds {
-                        // Stop animation
                         animationTimerBounds?.invalidate()
                         animationTimerBounds = nil
                         isAnimatingBounds = false
                     } else {
-                        // Start animation
                         isAnimatingBounds = true
                         animationTimerBounds = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
                             withAnimation(.linear(duration: 0.05)) {
                                 if boundsDirection {
                                     bounds += 5
-                                    if bounds >= 1000 {
+                                    if bounds >= 1200 {
                                         boundsDirection = false
                                     }
                                 } else {
                                     bounds -= 5
-                                    if bounds <= 300 {
+                                    if bounds <= 500 {
                                         boundsDirection = true
                                     }
                                 }
@@ -131,34 +122,6 @@ struct Lab072: View {
                     Label("Bounds", systemImage: isAnimatingBounds ? "stop" : "play")
                 })
 
-                Button(action: {
-                    if isAnimatingHexSize {
-                        // Stop animation
-                        animationTimerHexSize?.invalidate()
-                        animationTimerHexSize = nil
-                        isAnimatingHexSize = false
-                    } else {
-                        // Start animation
-                        isAnimatingHexSize = true
-                        animationTimerHexSize = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
-                            withAnimation(.linear(duration: 0.05)) {
-                                if hexSizeDirection {
-                                    hexSize += 4
-                                    if hexSize >= 256 {
-                                        hexSizeDirection = false
-                                    }
-                                } else {
-                                    hexSize -= 4
-                                    if hexSize <= 72 {
-                                        hexSizeDirection = true
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }, label: {
-                    Label("Hex Size", systemImage: isAnimatingBounds ? "stop" : "play")
-                })
 
                 Button(action: {
                     showDebugLines.toggle()
@@ -178,12 +141,12 @@ struct Lab072: View {
 fileprivate struct ModelViewEmoji: View {
 
     @State var name: String = ""
-    var hexSize: CGFloat = 40.0
+    var hexSize: CGFloat = 60
     let emoji: String
     let bundle: Bundle
     
     var modelSize: CGFloat {
-        hexSize * 0.8
+        hexSize * 0.9
     }
     
     var textSize: CGFloat {
@@ -221,9 +184,17 @@ fileprivate struct ModelViewEmoji: View {
 // Honeycomb grid layout that grows from the inside out
 fileprivate struct HoneycombLayout: Layout, Animatable {
     var angleOffset: Angle = .zero
-    var hexSize: CGFloat = 50
+    var hexSize: CGFloat = 60
 
-
+    // Calculate the number of rings needed for a given number of items
+    private func calculateRings(for itemCount: Int) -> Int {
+        if itemCount <= 1 { return 1 }
+        if itemCount <= 7 { return 2 }
+        if itemCount <= 19 { return 3 }
+        if itemCount <= 37 { return 4 }
+        if itemCount <= 61 { return 5 }
+        return 6 // Default for larger counts
+    }
 
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
         let updatedProposal = proposal.replacingUnspecifiedDimensions()
@@ -235,10 +206,15 @@ fileprivate struct HoneycombLayout: Layout, Animatable {
         guard !subviews.isEmpty else { return }
 
         let center = CGPoint(x: bounds.midX, y: bounds.midY)
-        let hexRadius = hexSize / 2
-
-        // Calculate hexagon spacing (distance between centers)
-        let hexSpacing = hexRadius * sqrt(3) + 20
+        
+        // Calculate dynamic hex size based on available space and number of items
+        let minDimension = min(bounds.width, bounds.height)
+        let rings = calculateRings(for: subviews.count)
+        let availableRadius = minDimension / 2 - 20 // Leave 20pt padding
+        let dynamicHexSize = min(hexSize, availableRadius / CGFloat(rings))
+        
+        // Calculate hexagon spacing to fill the available space
+        let hexSpacing = availableRadius / CGFloat(rings)
 
         // Generate hexagon positions in a spiral pattern
         var positions: [CGPoint] = []
@@ -287,7 +263,7 @@ fileprivate struct HoneycombLayout: Layout, Animatable {
                 subview.place(
                     at: positions[index],
                     anchor: .center,
-                    proposal: .init(width: hexSize, height: hexSize)
+                    proposal: .init(width: dynamicHexSize, height: dynamicHexSize)
                 )
             }
         }
