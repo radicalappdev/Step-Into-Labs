@@ -47,11 +47,10 @@ struct Lab072: View {
             ForEach(0..<nodes, id: \.self) { index in
                 ModelViewEmoji(
                     name: "UISphere01",
-                    hexSize: hexSize, emoji: emoji[index],
+                    hexSize: 96, emoji: emoji[index],
                     bundle: realityKitContentBundle
                 )
                     .rotation3DLayout(Rotation3D(angle: .degrees(360 - layoutRotation), axis: .x))
-//                    .debugBorder3D(showDebugLines ? .white : .clear)
 
             }
         }
@@ -182,10 +181,14 @@ fileprivate struct ModelViewEmoji: View {
     var hexSize: CGFloat = 40.0
     let emoji: String
     let bundle: Bundle
-
-    // Add two computed props
-    // modelSize: 80% of frame
-    // textSize: 72% of frame
+    
+    var modelSize: CGFloat {
+        hexSize * 0.8
+    }
+    
+    var textSize: CGFloat {
+        hexSize * 0.5
+    }
 
     var body: some View {
         SpatialContainer {
@@ -195,12 +198,12 @@ fileprivate struct ModelViewEmoji: View {
                 if let model = phase.model {
                     model
                         .resizable()
-                        .frame(width: hexSize, height: hexSize)
-                        .frame(depth: hexSize)
+                        .frame(width: modelSize, height: modelSize)
+                        .frame(depth: modelSize)
                         .scaledToFit3D()
                         .spatialOverlay(alignment:  .center) {
                             Text(emoji)
-                                .font(.system(size: 48))
+                                .font(.system(size: textSize))
                         }
                 } else if phase.error != nil {
                     Text(emoji) // just load the emoji without the model
@@ -216,7 +219,6 @@ fileprivate struct ModelViewEmoji: View {
 }
 
 // Honeycomb grid layout that grows from the inside out
-
 fileprivate struct HoneycombLayout: Layout, Animatable {
     var angleOffset: Angle = .zero
     var hexSize: CGFloat = 50
