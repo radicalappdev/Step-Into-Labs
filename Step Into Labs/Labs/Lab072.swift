@@ -19,27 +19,173 @@ struct Lab072: View {
     @State var nodes: Int = 19
     @State private var showDebugLines = true
 
+    // Control the total layout rotation
+    @State private var layoutRotation: Double = 45
+    @State private var isAnimatingRotation: Bool = false
+    @State private var animationTimerRotation: Timer?
+
+    // Adjust the angle inside the layout. This will control which element is at the front of the circle.
+    @State private var angleOffset: Angle = .zero
+    @State private var isAnimatingAngle: Bool = false
+    @State private var animationTimerAngle: Timer?
+
+    // Adjust the bounds of the view
+    @State private var bounds: CGFloat = 300
+    @State private var isAnimatingBounds: Bool = false
+    @State private var animationTimerBounds: Timer?
+    @State private var boundsDirection: Bool = true // true = increasing, false = decreasing
+
+    @State private var hexSize: Double = 124.0
+    @State private var isAnimatingHexSize: Bool = false
+    @State private var animationTimerHexSize: Timer?
+    @State private var hexSizeDirection: Bool = true // true = increasing, false = decreasing
+
     var emoji: [String] = ["🌸", "🐸", "❤️", "🔥", "💻", "🐶", "🥸", "📱", "🎉", "🚀", "🤔", "🤓", "🧲", "💰", "🤩", "🍪", "🦉", "💡", "😎"]
     
     var body: some View {
-        HoneycombLayout {
+        HoneycombLayout(angleOffset: angleOffset, hexSize: hexSize) {
             ForEach(0..<nodes, id: \.self) { index in
-                ModelViewEmoji(name: "UISphere01", emoji: emoji[index], bundle: realityKitContentBundle)
-                    .rotation3DLayout(Rotation3D(angle: .degrees(-45), axis: .x))
-                    .debugBorder3D(showDebugLines ? .white : .clear)
+                ModelViewEmoji(
+                    name: "UISphere01",
+                    hexSize: hexSize, emoji: emoji[index],
+                    bundle: realityKitContentBundle
+                )
+                    .rotation3DLayout(Rotation3D(angle: .degrees(360 - layoutRotation), axis: .x))
+//                    .debugBorder3D(showDebugLines ? .white : .clear)
 
             }
         }
-        .rotation3DLayout(Rotation3D(angle: .degrees(45), axis: .x))
+        .rotation3DLayout(Rotation3D(angle: .degrees(layoutRotation), axis: .x))
+        .frame(width: bounds, height: bounds)
         .debugBorder3D(showDebugLines ? .white : .clear)
+
+        .ornament(attachmentAnchor: .scene(.trailing), ornament: {
+
+            VStack(alignment: .leading, spacing: 8) {
+
+                Button(action: {
+                    if isAnimatingRotation {
+                        // Stop animation
+                        animationTimerRotation?.invalidate()
+                        animationTimerRotation = nil
+                        isAnimatingRotation = false
+                    } else {
+                        // Start animation
+                        isAnimatingRotation = true
+                        animationTimerRotation = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
+                            withAnimation(.linear(duration: 0.05)) {
+                                layoutRotation += 2
+                            }
+                        }
+                    }
+                }, label: {
+                    Label("Rotate Layout", systemImage: isAnimatingRotation ? "stop" : "play")
+                })
+
+                Button(action: {
+                    if isAnimatingAngle {
+                        // Stop animation
+                        animationTimerAngle?.invalidate()
+                        animationTimerAngle = nil
+                        isAnimatingAngle = false
+                    } else {
+                        // Start animation
+                        isAnimatingAngle = true
+                        animationTimerAngle = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
+                            withAnimation(.linear(duration: 0.05)) {
+                                angleOffset += .degrees(2)
+                            }
+                        }
+                    }
+                }, label: {
+                    Label("Angle Change", systemImage: isAnimatingAngle ? "stop" : "play")
+                })
+
+            
+
+                Button(action: {
+                    if isAnimatingBounds {
+                        // Stop animation
+                        animationTimerBounds?.invalidate()
+                        animationTimerBounds = nil
+                        isAnimatingBounds = false
+                    } else {
+                        // Start animation
+                        isAnimatingBounds = true
+                        animationTimerBounds = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
+                            withAnimation(.linear(duration: 0.05)) {
+                                if boundsDirection {
+                                    bounds += 5
+                                    if bounds >= 1000 {
+                                        boundsDirection = false
+                                    }
+                                } else {
+                                    bounds -= 5
+                                    if bounds <= 300 {
+                                        boundsDirection = true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }, label: {
+                    Label("Bounds", systemImage: isAnimatingBounds ? "stop" : "play")
+                })
+
+                Button(action: {
+                    if isAnimatingHexSize {
+                        // Stop animation
+                        animationTimerHexSize?.invalidate()
+                        animationTimerHexSize = nil
+                        isAnimatingHexSize = false
+                    } else {
+                        // Start animation
+                        isAnimatingHexSize = true
+                        animationTimerHexSize = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
+                            withAnimation(.linear(duration: 0.05)) {
+                                if hexSizeDirection {
+                                    hexSize += 4
+                                    if hexSize >= 256 {
+                                        hexSizeDirection = false
+                                    }
+                                } else {
+                                    hexSize -= 4
+                                    if hexSize <= 72 {
+                                        hexSizeDirection = true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }, label: {
+                    Label("Hex Size", systemImage: isAnimatingBounds ? "stop" : "play")
+                })
+
+                Button(action: {
+                    showDebugLines.toggle()
+                }, label: {
+                    Text("Debug")
+                })
+
+            }
+            .padding()
+            .controlSize(.small)
+            .glassBackgroundEffect()
+
+        })
     }
 }
 
 fileprivate struct ModelViewEmoji: View {
 
     @State var name: String = ""
+    var hexSize: CGFloat = 40.0
     let emoji: String
     let bundle: Bundle
+
+    // Add two computed props
+    // modelSize: 80% of frame
+    // textSize: 72% of frame
 
     var body: some View {
         SpatialContainer {
@@ -49,8 +195,8 @@ fileprivate struct ModelViewEmoji: View {
                 if let model = phase.model {
                     model
                         .resizable()
-                        .frame(width: 96, height: 96)
-                        .frame(depth: 96)
+                        .frame(width: hexSize, height: hexSize)
+                        .frame(depth: hexSize)
                         .scaledToFit3D()
                         .spatialOverlay(alignment:  .center) {
                             Text(emoji)
@@ -70,9 +216,12 @@ fileprivate struct ModelViewEmoji: View {
 }
 
 // Honeycomb grid layout that grows from the inside out
-// Cursor was very helpful for creating this layout. I gave it the RadialLayout as an example and described the structure I wanted. It took a few iterations, but the result is pretty neat.
+
 fileprivate struct HoneycombLayout: Layout, Animatable {
     var angleOffset: Angle = .zero
+    var hexSize: CGFloat = 50
+
+
 
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
         let updatedProposal = proposal.replacingUnspecifiedDimensions()
@@ -84,7 +233,6 @@ fileprivate struct HoneycombLayout: Layout, Animatable {
         guard !subviews.isEmpty else { return }
 
         let center = CGPoint(x: bounds.midX, y: bounds.midY)
-        let hexSize: CGFloat = 124
         let hexRadius = hexSize / 2
 
         // Calculate hexagon spacing (distance between centers)
