@@ -1,5 +1,5 @@
 {
-  "advancedEditorSelectedIdentifier" : "ProjectBrowser",
+  "advancedEditorSelectedIdentifier" : "ShaderGraphEditorPluginID",
   "openSceneRelativePaths" : [
     "BYOHZ.usda",
     "InstanceLab.usda",
@@ -7666,5 +7666,5 @@
   "sceneViewportBackgroundColors" : {
 
   },
-  "selectedSceneRelativePath" : "UISphere01.usda"
+  "selectedSceneRelativePath" : "BYOHZ.usda"
 }
