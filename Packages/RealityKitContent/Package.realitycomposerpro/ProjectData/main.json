@@ -64,6 +64,7 @@
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/TeleportLabs.usda" : "00AC74E2-A464-4F74-A445-36CD76630287",
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/TeleportLaps.usda" : "6CF9F98D-FEB2-4CD2-A36D-E65ED723B51F",
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/TeleportPivot.usda" : "DED916C6-0CB0-4CBD-91F7-68ADC71C48D4",
+    "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/UIPanel01.usda" : "1D8A4016-C08F-4AEB-8C0B-FCB89AEB685F",
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/UISphere01.usda" : "51846BC9-340D-4930-9987-C60C51E07011",
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/VideoTest.usda" : "B7890F28-2D7B-4FE1-BD1F-DC717DA52CAF",
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/WorldTracking.usda" : "BC102122-6C6C-4068-8676-0C4A6C3DB800",
@@ -73,6 +74,7 @@
   "uuidToIntID" : {
     "1605787C-1F17-4706-A47E-4EE3FE226711" : 2388988900709263365,
     "16EF6DE0-4654-4C62-B685-024D241A80E4" : 6163654179434515856,
+    "1D8A4016-C08F-4AEB-8C0B-FCB89AEB685F" : -3357639774680757467,
     "36465E30-5BDC-4D2B-8442-4AB477D81AAC" : -8185673501247378815,
     "51846BC9-340D-4930-9987-C60C51E07011" : -3808376137528967896,
     "6F07F0BB-6FDD-4EE0-A176-AA78BBBE18CE" : 5681930775777813898,

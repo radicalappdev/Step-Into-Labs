@@ -546,7 +546,7 @@ class ModelData {
              description: "Using rotation3DLayout, adjust angle, and animating some changes.")
 
         ,Lab(title: "Lab 073",
-             type: .SPACE,
+             type: .WINDOW,
              date: Date("7/23/2025"),
              isFeatured: true,
              subtitle: "TBD",

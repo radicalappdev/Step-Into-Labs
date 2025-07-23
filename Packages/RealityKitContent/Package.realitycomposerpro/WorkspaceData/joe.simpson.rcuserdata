@@ -4,7 +4,8 @@
     "BYOHZ.usda",
     "InstanceLab.usda",
     "UISphere01.usda",
-    "BuildingBlocks\/StepSphereGreen.usda"
+    "BuildingBlocks\/StepSphereGreen.usda",
+    "UIPanel01.usda"
   ],
   "recentIdentifiers" : {
     "00AC74E2-A464-4F74-A445-36CD76630287" : [
@@ -32,6 +33,9 @@
 
     ],
     "16EF6DE0-4654-4C62-B685-024D241A80E4" : [
+
+    ],
+    "1D8A4016-C08F-4AEB-8C0B-FCB89AEB685F" : [
 
     ],
     "20745604-DECF-4F37-8881-1F01AE07047E" : [
@@ -1488,6 +1492,30 @@
           0,
           0.22839034,
           0.22839046,
+          1
+        ]
+      }
+    ],
+    "1D8A4016-C08F-4AEB-8C0B-FCB89AEB685F" : [
+      {
+        "date" : 774988285.51712,
+        "title" : "Untitled",
+        "transform" : [
+          0.9992928,
+          9.487755e-11,
+          -0.03760131,
+          0,
+          -0.014448703,
+          0.9232247,
+          -0.3839888,
+          0,
+          0.03471446,
+          0.38426062,
+          0.9225718,
+          0,
+          0.089782,
+          0.99381316,
+          2.3860474,
           1
         ]
       }
@@ -7666,5 +7694,5 @@
   "sceneViewportBackgroundColors" : {
 
   },
-  "selectedSceneRelativePath" : "BYOHZ.usda"
+  "selectedSceneRelativePath" : "UIPanel01.usda"
 }
