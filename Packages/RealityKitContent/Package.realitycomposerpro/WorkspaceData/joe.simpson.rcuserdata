@@ -4,7 +4,6 @@
     "BYOHZ.usda",
     "InstanceLab.usda",
     "UISphere01.usda",
-    "BuildingBlocks\/StepSphereGreen.usda",
     "UIPanel01.usda"
   ],
   "recentIdentifiers" : {
@@ -1497,6 +1496,28 @@
       }
     ],
     "1D8A4016-C08F-4AEB-8C0B-FCB89AEB685F" : [
+      {
+        "date" : 774988314.515124,
+        "title" : "Untitled",
+        "transform" : [
+          0.8580446,
+          1.4756814e-09,
+          0.5135752,
+          0,
+          0.16464046,
+          0.94722235,
+          -0.2750695,
+          0,
+          -0.48646992,
+          0.32057723,
+          0.81275904,
+          0,
+          -1.258157,
+          0.8291088,
+          2.1020389,
+          1
+        ]
+      },
       {
         "date" : 774988285.51712,
         "title" : "Untitled",

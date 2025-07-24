@@ -549,8 +549,8 @@ class ModelData {
              type: .WINDOW,
              date: Date("7/23/2025"),
              isFeatured: true,
-             subtitle: "TBD",
-             description: "")
+             subtitle: "Ornaments can have their own ornaments",
+             description: "I heard you like ornaments so I made you an ornament for your ornament.")
 
 
 
