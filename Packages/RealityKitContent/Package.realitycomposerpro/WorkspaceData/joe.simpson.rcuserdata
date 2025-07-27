@@ -1,5 +1,5 @@
 {
-  "advancedEditorSelectedIdentifier" : "ShaderGraphEditorPluginID",
+  "advancedEditorSelectedIdentifier" : "StatisticsPluginID",
   "openSceneRelativePaths" : [
     "BYOHZ.usda",
     "InstanceLab.usda",
@@ -7715,5 +7715,5 @@
   "sceneViewportBackgroundColors" : {
 
   },
-  "selectedSceneRelativePath" : "UIPanel01.usda"
+  "selectedSceneRelativePath" : "BYOHZ.usda"
 }
