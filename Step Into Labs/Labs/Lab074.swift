@@ -15,17 +15,49 @@ import RealityKit
 import RealityKitContent
 
 struct Lab074: View {
+    @State private var currentSecond: Int = 0
+    @State private var timer: Timer?
+    
     var body: some View {
         VStack {
-
-            RadialLayout(angleOffset: .degrees(0)) {
-                ForEach(0..<59, id: \.self) { index in
-                    Text("•")
+            Text("Current Second: \(currentSecond)")
+                .font(.title2)
+                .padding()
+            
+            RadialLayout(angleOffset: .degrees(180)) {
+                ForEach(0..<60, id: \.self) { index in
+                    Circle()
+                        .fill(index % 15 == 0 ? Color.blue : index % 5 == 0 ? Color.gray : Color.white)
+                        .scaleEffect(index == currentSecond ? 2.0 : 1.0)
+                        .animation(.easeInOut(duration: 0.5), value: currentSecond)
                         .id(index)
                 }
             }
             .padding(.vertical, 20)
         }
+        .onAppear {
+            startTimer()
+        }
+        .onDisappear {
+            stopTimer()
+        }
+    }
+    
+    private func startTimer() {
+        // Update to current second immediately
+        let calendar = Calendar.current
+        currentSecond = calendar.component(.second, from: Date())
+        
+        // Start timer that updates every second
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+            let calendar = Calendar.current
+            currentSecond = calendar.component(.second, from: Date())
+        }
+    }
+    
+    private func stopTimer() {
+        timer?.invalidate()
+        timer = nil
     }
 }
 
