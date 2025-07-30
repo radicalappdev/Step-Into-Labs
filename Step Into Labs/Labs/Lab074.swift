@@ -93,19 +93,38 @@ fileprivate struct ClockView: View {
     
     private func startTimer() {
         // Update to current time immediately
+        updateTime()
+        
+        // Calculate time until next second starts
+        scheduleNextUpdate()
+    }
+    
+    private func updateTime() {
         let calendar = Calendar.current
-        let now = Date()
+        let now = Date().addingTimeInterval(0.1) // Add small offset to get current time
         currentSecond = calendar.component(.second, from: now)
         currentHour = calendar.component(.hour, from: now) % 12
         currentMinute = calendar.component(.minute, from: now)
+    }
+    
+    private func scheduleNextUpdate() {
+        // Get the current second interval
+        let now = Date()
+        guard let currentSecondInterval = Calendar.current.dateInterval(of: .second, for: now) else { return }
         
-        // Start timer that updates every second
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+        // Calculate time until the start of the next second
+        let nextSecondStart = currentSecondInterval.end
+        let timeUntilNextSecond = nextSecondStart.timeIntervalSinceNow
+        
+        // Schedule update at the exact start of the next second
+        DispatchQueue.main.asyncAfter(deadline: .now() + timeUntilNextSecond) {
+            // Get time immediately when this fires
             let calendar = Calendar.current
-            let now = Date()
-            currentSecond = calendar.component(.second, from: now)
-            currentHour = calendar.component(.hour, from: now) % 12
-            currentMinute = calendar.component(.minute, from: now)
+            let currentTime = Date()
+            self.currentSecond = calendar.component(.second, from: currentTime)
+            self.currentHour = calendar.component(.hour, from: currentTime) % 12
+            self.currentMinute = calendar.component(.minute, from: currentTime)
+            self.scheduleNextUpdate() // Schedule the next update
         }
     }
     
