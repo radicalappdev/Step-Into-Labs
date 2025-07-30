@@ -15,19 +15,37 @@ import RealityKit
 import RealityKitContent
 
 struct Lab074: View {
+    var body: some View {
+        VStack {
+            ClockView()
+                .padding(.vertical, 20)
+        }
+    }
+}
+
+fileprivate struct ClockView: View {
     @State private var currentSecond: Int = 0
+    @State private var currentHour: Int = 0
     @State private var timer: Timer?
     
     var body: some View {
-        VStack {
-            Text("Current Second: \(currentSecond)")
-                .font(.title2)
-                .padding()
+        ZStack {
+            Circle()
+                .fill(.stepGreen)
+            RadialLayout(angleOffset: .degrees(180)) {
+                ForEach([12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], id: \.self) { hour in
+                    Text("\(hour)")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .foregroundColor(.black)
+                }
+            }
             
+            // Seconds layout (inner ring)
             RadialLayout(angleOffset: .degrees(180)) {
                 ForEach(0..<60, id: \.self) { index in
                     Circle()
-                        .fill(index % 15 == 0 ? .stepGreen : .white)
+                        .fill(.stepBackgroundSecondary)
                         .scaleEffect(index == currentSecond ? 2.0 : 1.0)
                         .opacity(index == currentSecond ? 1.0 : 0.25)
                         .offset(z: index == currentSecond ? 5 : 0)
@@ -36,7 +54,7 @@ struct Lab074: View {
                         .id(index)
                 }
             }
-            .padding(.vertical, 20)
+            .scaleEffect(0.7)
         }
         .onAppear {
             startTimer()
@@ -47,14 +65,18 @@ struct Lab074: View {
     }
     
     private func startTimer() {
-        // Update to current second immediately
+        // Update to current time immediately
         let calendar = Calendar.current
-        currentSecond = calendar.component(.second, from: Date())
+        let now = Date()
+        currentSecond = calendar.component(.second, from: now)
+        currentHour = calendar.component(.hour, from: now) % 12
         
         // Start timer that updates every second
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
             let calendar = Calendar.current
-            currentSecond = calendar.component(.second, from: Date())
+            let now = Date()
+            currentSecond = calendar.component(.second, from: now)
+            currentHour = calendar.component(.hour, from: now) % 12
         }
     }
     
