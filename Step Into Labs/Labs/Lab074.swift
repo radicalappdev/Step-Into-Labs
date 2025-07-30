@@ -2,11 +2,11 @@
 //
 //  Title: Lab074
 //
-//  Subtitle:
+//  Subtitle: Mocking up a clock using Radial Layout
 //
-//  Description:
+//  Description: Using SwiftUI views, modifiers, and a layout to create a simple clock.
 //
-//  Type:
+//  Type: Window
 //
 //  Created by Joseph Simpson on 7/30/25.
 

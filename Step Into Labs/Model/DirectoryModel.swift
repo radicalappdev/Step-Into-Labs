@@ -556,8 +556,8 @@ class ModelData {
              type: .WINDOW,
              date: Date("7/30/2025"),
              isFeatured: true,
-             subtitle: "Radical Clock",
-             description: "TBD")
+             subtitle: "Mocking up a clock using Radial Layout",
+             description: "Using SwiftUI views, modifiers, and a layout to create a simple clock.")
 
 
 
