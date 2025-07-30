@@ -18,7 +18,9 @@ struct Lab074: View {
     var body: some View {
         VStack {
             ClockView()
+                .offset(z: 10)
                 .padding(.vertical, 20)
+                .manipulable()
         }
     }
 }
@@ -26,6 +28,7 @@ struct Lab074: View {
 fileprivate struct ClockView: View {
     @State private var currentSecond: Int = 0
     @State private var currentHour: Int = 0
+    @State private var currentMinute: Int = 0
     @State private var timer: Timer?
     
     var body: some View {
@@ -37,11 +40,10 @@ fileprivate struct ClockView: View {
                     Text("\(hour)")
                         .font(.title2)
                         .fontWeight(.bold)
-                        .foregroundColor(.black)
+                        .foregroundColor(.stepBackgroundPrimary)
                 }
             }
-            
-            // Seconds layout (inner ring)
+
             RadialLayout(angleOffset: .degrees(180)) {
                 ForEach(0..<60, id: \.self) { index in
                     Circle()
@@ -54,7 +56,26 @@ fileprivate struct ClockView: View {
                         .id(index)
                 }
             }
-            .scaleEffect(0.7)
+            .scaleEffect(0.74)
+
+            ZStack {
+
+                Rectangle()
+                    .fill(.stepBackgroundSecondary)
+                    .frame(width: 6, height: 80)
+                    .offset(y: -40)
+                    .offset(z: 5)
+                    .rotationEffect(.degrees(Double(currentHour) * 30 + Double(currentMinute) * 0.5))
+                    .shadow(radius: 1, x: 0.0, y: 0.0)
+
+                Rectangle()
+                    .fill(.stepBackgroundSecondary)
+                    .frame(width: 4, height: 100)
+                    .offset(y: -40)
+                    .offset(z: 3)
+                    .rotationEffect(.degrees(Double(currentMinute) * 6))
+                    .shadow(radius: 1, x: 0.0, y: 0.0)
+            }
         }
         .onAppear {
             startTimer()
@@ -70,6 +91,7 @@ fileprivate struct ClockView: View {
         let now = Date()
         currentSecond = calendar.component(.second, from: now)
         currentHour = calendar.component(.hour, from: now) % 12
+        currentMinute = calendar.component(.minute, from: now)
         
         // Start timer that updates every second
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
@@ -77,6 +99,7 @@ fileprivate struct ClockView: View {
             let now = Date()
             currentSecond = calendar.component(.second, from: now)
             currentHour = calendar.component(.hour, from: now) % 12
+            currentMinute = calendar.component(.minute, from: now)
         }
     }
     
