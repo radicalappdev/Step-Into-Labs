@@ -27,8 +27,11 @@ struct Lab074: View {
             RadialLayout(angleOffset: .degrees(180)) {
                 ForEach(0..<60, id: \.self) { index in
                     Circle()
-                        .fill(index % 15 == 0 ? Color.blue : index % 5 == 0 ? Color.gray : Color.white)
+                        .fill(index % 15 == 0 ? .stepGreen : .white)
                         .scaleEffect(index == currentSecond ? 2.0 : 1.0)
+                        .opacity(index == currentSecond ? 1.0 : 0.25)
+                        .offset(z: index == currentSecond ? 5 : 0)
+                        .shadow(radius: index == currentSecond ? 5 : 0, x: 0.0, y: 0.0)
                         .animation(.easeInOut(duration: 0.5), value: currentSecond)
                         .id(index)
                 }
