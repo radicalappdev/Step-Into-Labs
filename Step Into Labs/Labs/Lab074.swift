@@ -32,50 +32,56 @@ fileprivate struct ClockView: View {
     @State private var timer: Timer?
     
     var body: some View {
-        ZStack {
-            Circle()
-                .fill(.stepGreen)
-            RadialLayout(angleOffset: .degrees(180)) {
-                ForEach([12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], id: \.self) { hour in
-                    Text("\(hour)")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .foregroundColor(.stepBackgroundPrimary)
-                }
-            }
-
-            RadialLayout(angleOffset: .degrees(180)) {
-                ForEach(0..<60, id: \.self) { index in
-                    Circle()
-                        .fill(.stepBackgroundSecondary)
-                        .scaleEffect(index == currentSecond ? 2.0 : 1.0)
-                        .opacity(index == currentSecond ? 1.0 : 0.25)
-                        .offset(z: index == currentSecond ? 5 : 0)
-                        .shadow(radius: index == currentSecond ? 5 : 0, x: 0.0, y: 0.0)
-                        .animation(.easeInOut(duration: 0.5), value: currentSecond)
-                        .id(index)
-                }
-            }
-            .scaleEffect(0.74)
-
+        GeometryReader { geometry in
             ZStack {
+                Circle()
+                    .fill(.stepGreen)
+                RadialLayout(angleOffset: .degrees(180)) {
+                    ForEach([12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], id: \.self) { hour in
+                        Text("\(hour)")
+                            .font(.system(size: 20, weight: .bold))
+                            .foregroundColor(.stepBackgroundPrimary)
+                            .scaleEffect(min(geometry.size.width, geometry.size.height) / 400)
+                    }
+                }
 
-                Rectangle()
-                    .fill(.stepBackgroundSecondary)
-                    .frame(width: 6, height: 80)
-                    .offset(y: -40)
-                    .offset(z: 5)
-                    .rotationEffect(.degrees(Double(currentHour) * 30 + Double(currentMinute) * 0.5))
-                    .shadow(radius: 1, x: 0.0, y: 0.0)
+                RadialLayout(angleOffset: .degrees(180)) {
+                    ForEach(0..<60, id: \.self) { index in
+                        Circle()
+                            .fill(.stepBackgroundSecondary)
+                            .scaleEffect(index == currentSecond ? 2.0 : 1.0)
+                            .opacity(index == currentSecond ? 1.0 : 0.25)
+                            .offset(z: index == currentSecond ? 5 : 0)
+                            .shadow(radius: index == currentSecond ? 5 : 0, x: 0.0, y: 0.0)
+                            .animation(.easeInOut(duration: 0.5), value: currentSecond)
+                            .id(index)
+                    }
+                }
+                .scaleEffect(0.74)
 
-                Rectangle()
-                    .fill(.stepBackgroundSecondary)
-                    .frame(width: 4, height: 100)
-                    .offset(y: -40)
-                    .offset(z: 3)
-                    .rotationEffect(.degrees(Double(currentMinute) * 6))
-                    .shadow(radius: 1, x: 0.0, y: 0.0)
+                ZStack {
+                    // Hour hand
+                    Rectangle()
+                        .fill(.stepBackgroundSecondary)
+                        .frame(width: 6, height: 80)
+                        .offset(y: -40)
+                        .offset(z: 5)
+                        .rotationEffect(.degrees(Double(currentHour) * 30 + Double(currentMinute) * 0.5))
+                        .shadow(radius: 1, x: 0.0, y: 0.0)
+                        .scaleEffect(min(geometry.size.width, geometry.size.height) / 400)
+
+                    // Minute hand
+                    Rectangle()
+                        .fill(.stepBackgroundSecondary)
+                        .frame(width: 4, height: 100)
+                        .offset(y: -40)
+                        .offset(z: 3)
+                        .rotationEffect(.degrees(Double(currentMinute) * 6))
+                        .shadow(radius: 1, x: 0.0, y: 0.0)
+                        .scaleEffect(min(geometry.size.width, geometry.size.height) / 400)
+                }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .onAppear {
             startTimer()
