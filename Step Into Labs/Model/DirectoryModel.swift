@@ -552,6 +552,12 @@ class ModelData {
              subtitle: "Ornaments can have their own ornaments",
              description: "I heard you like ornaments so I made you an ornament for your ornament.")
 
+        ,Lab(title: "Lab 074",
+             type: .WINDOW,
+             date: Date("7/30/2025"),
+             isFeatured: true,
+             subtitle: "Radical Clock",
+             description: "TBD")
 
 
 
