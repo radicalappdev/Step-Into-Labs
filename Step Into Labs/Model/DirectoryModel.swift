@@ -506,21 +506,21 @@ class ModelData {
         ,Lab(title: "Lab 067",
              type: .WINDOW,
              date: Date("7/15/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Exploring custom Layouts in SwiftUI",
              description: "Taking a look at the RadialLayout example from Apple and mocking up a HoneycombLayout.")
 
         ,Lab(title: "Lab 068",
              type: .VOLUME,
              date: Date("7/16/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Adding an axis to custom layouts",
              description: "Building on the custom layouts from Lab 067, we can add some 3D models and use SwiftUI modifiers to control rotation and position.")
 
         ,Lab(title: "Lab 069",
              type: .VOLUME,
              date: Date("7/17/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "More fun with RadialLayout",
              description: "Using rotation3DLayout, adjust angle, and animating some changes.")
 
@@ -534,21 +534,21 @@ class ModelData {
         ,Lab(title: "Lab 071",
              type: .SPACE,
              date: Date("7/20/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Presentations in Immersive Spaces?",
              description: "Can we use the new Presentation Component or SwiftUI Pickers in Immersive Spaces?")
 
         ,Lab(title: "Lab 072",
              type: .VOLUME,
              date: Date("7/21/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "More fun with HoneycombLayout",
              description: "Using rotation3DLayout, adjust angle, and animating some changes.")
 
         ,Lab(title: "Lab 073",
              type: .WINDOW,
              date: Date("7/23/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Ornaments can have their own ornaments",
              description: "I heard you like ornaments so I made you an ornament for your ornament.")
 
@@ -558,6 +558,13 @@ class ModelData {
              isFeatured: true,
              subtitle: "Mocking up a clock using Radial Layout",
              description: "Using SwiftUI views, modifiers, and a layout to create a simple clock.")
+
+        ,Lab(title: "Lab 075",
+             type: .WINDOW,
+             date: Date("8/02/2025"),
+             isFeatured: true,
+             subtitle: "Visualizing SwiftUI Frames",
+             description: "Using an incredibly useful view extension from WWDC 2025 to debug and visualize spatial layouts.")
 
 
 

@@ -245,7 +245,7 @@ struct ModelViewSimple: View {
             if let model = phase.model {
                 model
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
+                    .scaledToFit3D()
             } else if phase.error != nil {
                 Text("Could not load model \(name).")
             } else {
