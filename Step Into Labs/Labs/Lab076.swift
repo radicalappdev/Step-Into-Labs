@@ -36,86 +36,86 @@ struct Lab076: View {
         }
 
 
-        .toolbar {
-            ToolbarItem(placement: .bottomOrnament, content: {
-                VStack(spacing: 6) {
+        .ornament(attachmentAnchor: .scene(.trailing), contentAlignment: .leading, ornament: {
+            VStack(spacing: 6) {
 
-                    // Node controls
-                    HStack(spacing: 24) {
-                        Button(action: {
-                            withAnimation {
-                                previousNodes = nodes
-                                nodes -= 1
-                            }
-                        }, label: {
-                            Image(systemName: "minus.circle.fill")
-                        })
-                        .disabled(nodes <= 3)
+                // Node controls
+                HStack(spacing: 24) {
+                    Button(action: {
+                        withAnimation {
+                            previousNodes = nodes
+                            nodes -= 1
+                        }
+                    }, label: {
+                        Image(systemName: "minus.circle.fill")
+                    })
+                    .disabled(nodes <= 3)
 
-                        Text("\(nodes)")
-                            .frame(width:60)
-                            .contentTransition(.numericText(countsDown: nodes < previousNodes))
+                    Text("\(nodes)")
+                        .frame(width:80)
+                        .contentTransition(.numericText(countsDown: nodes < previousNodes))
 
-                        Button(action: {
-                            withAnimation {
-                                previousNodes = nodes
-                                nodes += 1
-                            }
-                        }, label: {
-                            Image(systemName: "plus.circle.fill")
-                        })
-                        .disabled(nodes >= 19)
-                    }
-                    
-                    // Arc controls
-                    HStack(spacing: 24) {
-                        
-                        Button(action: {
-                            withAnimation {
-                                arcDegrees = max(45, arcDegrees - 45)
-                            }
-                        }, label: {
-                            Image(systemName: "minus.circle.fill")
-                        })
-                        .disabled(arcDegrees <= 45)
-
-                        Text("Arc: \(Int(arcDegrees))°")
-                            .frame(width: 80)
-
-                        Button(action: {
-                            withAnimation {
-                                arcDegrees = min(360, arcDegrees + 45)
-                            }
-                        }, label: {
-                            Image(systemName: "plus.circle.fill")
-                        })
-                        .disabled(arcDegrees >= 360)
-                    }
-                    
-                    // Start angle controls
-                    HStack(spacing: 24) {
-                        Button(action: {
-                            withAnimation {
-                                startAngleDegrees -= 45
-                            }
-                        }, label: {
-                            Image(systemName: "minus.circle.fill")
-                        })
-
-                        Text("Start: \(Int(startAngleDegrees))°")
-                            .frame(width: 80)
-
-                        Button(action: {
-                            withAnimation {
-                                startAngleDegrees += 45
-                            }
-                        }, label: {
-                            Image(systemName: "plus.circle.fill")
-                        })
-                    }
+                    Button(action: {
+                        withAnimation {
+                            previousNodes = nodes
+                            nodes += 1
+                        }
+                    }, label: {
+                        Image(systemName: "plus.circle.fill")
+                    })
+                    .disabled(nodes >= 19)
                 }
-            })
-        }
+
+                // Arc controls
+                HStack(spacing: 24) {
+
+                    Button(action: {
+                        withAnimation {
+                            arcDegrees = max(45, arcDegrees - 45)
+                        }
+                    }, label: {
+                        Image(systemName: "minus.circle.fill")
+                    })
+                    .disabled(arcDegrees <= 45)
+
+                    Text("Arc: \(Int(arcDegrees))°")
+                        .frame(width: 80)
+
+                    Button(action: {
+                        withAnimation {
+                            arcDegrees = min(360, arcDegrees + 45)
+                        }
+                    }, label: {
+                        Image(systemName: "plus.circle.fill")
+                    })
+                    .disabled(arcDegrees >= 225)
+                }
+
+                // Start angle controls
+                HStack(spacing: 24) {
+                    Button(action: {
+                        withAnimation {
+                            startAngleDegrees -= 45
+                        }
+                    }, label: {
+                        Image(systemName: "minus.circle.fill")
+                    })
+
+                    Text("Start: \(Int(startAngleDegrees))°")
+                        .frame(width: 80)
+
+                    Button(action: {
+                        withAnimation {
+                            startAngleDegrees += 45
+                        }
+                    }, label: {
+                        Image(systemName: "plus.circle.fill")
+                    })
+                }
+            }
+            .padding()
+            .glassBackgroundEffect()
+        })
     }
 }
 
