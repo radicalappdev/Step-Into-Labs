@@ -19,7 +19,7 @@ struct Lab076: View {
     @State var nodes: Int = 12
     @State var previousNodes: Int = 3
     @State var arcDegrees: Double = 180
-    @State var startAngleDegrees: Double = -90
+    @State var startAngleDegrees: Double = -180
 
 
     var emoji: [String] = ["🌸", "🐸", "❤️", "🔥", "💻", "🐶", "🥸", "📱", "🎉", "🚀", "🤔", "🤓", "🧲", "💰", "🤩", "🍪", "🦉", "💡", "😎"]
@@ -39,7 +39,7 @@ struct Lab076: View {
 
         .toolbar {
             ToolbarItem(placement: .bottomOrnament, content: {
-                VStack(spacing: 16) {
+                VStack(spacing: 6) {
 
                     // Node controls
                     HStack(spacing: 24) {
@@ -70,8 +70,6 @@ struct Lab076: View {
                     
                     // Arc controls
                     HStack(spacing: 24) {
-                        Text("Arc: \(Int(arcDegrees))°")
-                            .frame(width: 80)
                         
                         Button(action: {
                             withAnimation {
@@ -81,7 +79,10 @@ struct Lab076: View {
                             Image(systemName: "minus.circle.fill")
                         })
                         .disabled(arcDegrees <= 45)
-                        
+
+                        Text("Arc: \(Int(arcDegrees))°")
+                            .frame(width: 80)
+
                         Button(action: {
                             withAnimation {
                                 arcDegrees = min(360, arcDegrees + 45)
@@ -94,9 +95,6 @@ struct Lab076: View {
                     
                     // Start angle controls
                     HStack(spacing: 24) {
-                        Text("Start: \(Int(startAngleDegrees))°")
-                            .frame(width: 80)
-                        
                         Button(action: {
                             withAnimation {
                                 startAngleDegrees -= 45
@@ -104,7 +102,10 @@ struct Lab076: View {
                         }, label: {
                             Image(systemName: "minus.circle.fill")
                         })
-                        
+
+                        Text("Start: \(Int(startAngleDegrees))°")
+                            .frame(width: 80)
+
                         Button(action: {
                             withAnimation {
                                 startAngleDegrees += 45
@@ -177,10 +178,19 @@ fileprivate struct ArcLayout: Layout, Animatable {
         
         // Convert degrees to radians and calculate angle increment for the arc
         let arcRadians = degrees * .pi / 180.0
-        let angleIncrement = arcRadians / CGFloat(max(1, subviews.count - 1))
         
-        // Start angle in radians (convert from Angle to Double)
-        let startRadians = startAngle.radians
+        // For a full circle (360°), use radial layout logic
+        // For partial arcs, span the specified degrees
+        let angleIncrement: CGFloat
+        let startRadians: CGFloat
+        
+        if degrees >= 359.9 { // Full circle - use original radial logic
+            angleIncrement = 2 * .pi / CGFloat(subviews.count)
+            startRadians = startAngle.radians
+        } else { // Partial arc - span the specified degrees
+            angleIncrement = arcRadians / CGFloat(max(1, subviews.count - 1))
+            startRadians = startAngle.radians
+        }
 
         for (index, subview) in subviews.enumerated() {
             // Calculate angle within the arc range
