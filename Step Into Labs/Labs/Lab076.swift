@@ -20,6 +20,19 @@ struct Lab076: View {
     @State var previousNodes: Int = 3
     @State var arcDegrees: Double = 180
     @State var angleOffsetDegrees: Double = 0
+    
+    // Computed property to automatically center the arc
+    private var autoCenteredAngleOffset: Double {
+        // For a 180° arc, we want it centered (bottom half of circle)
+        // This means rotating it so the arc spans from -90° to +90° (centered around 0°)
+        // Since our arc starts at -90° (top) and spans arcDegrees, we need to offset it
+        let targetCenterAngle = 0.0 // We want the arc centered around 0°
+        let currentStartAngle = -90.0 // Our arc starts at -90° (top)
+        let arcCenterAngle = currentStartAngle + (arcDegrees / 2) // Current center of the arc
+        let offsetNeeded = targetCenterAngle - arcCenterAngle
+        
+        return offsetNeeded
+    }
 
 
     var emoji: [String] = ["🌸", "🐸", "❤️", "🔥", "💻", "🐶", "🥸", "📱", "🎉", "🚀", "🤔", "🤓", "🧲", "💰", "🤩", "🍪", "🦉", "💡", "😎"]
@@ -27,7 +40,7 @@ struct Lab076: View {
     var body: some View {
 
         VStack {
-            ArcLayout(angleOffset: .degrees(angleOffsetDegrees), degrees: arcDegrees) {
+            ArcLayout(angleOffset: .degrees(autoCenteredAngleOffset + angleOffsetDegrees), degrees: arcDegrees) {
                 ForEach(0..<nodes, id: \.self) { index in
                     ModelViewEmoji(name: "UISphere01", emoji: emoji[index], bundle: realityKitContentBundle)
                 }
