@@ -30,12 +30,11 @@ struct Lab076: View {
             ArcLayout(degrees: arcDegrees, startAngle: .degrees(startAngleDegrees)) {
                 ForEach(0..<nodes, id: \.self) { index in
                     ModelViewEmoji(name: "UISphere01", emoji: emoji[index], bundle: realityKitContentBundle)
-//                        .rotation3DLayout(Rotation3D(angle: .degrees(-90), axis: .x))
                 }
             }
+            .debugBorder3D(.white)
         }
-//        .rotation3DLayout(Rotation3D(angle: .degrees(90), axis: .x))
-//        .offset(y: 250)
+
 
         .toolbar {
             ToolbarItem(placement: .bottomOrnament, content: {
@@ -134,10 +133,10 @@ fileprivate struct ModelViewEmoji: View {
                 model
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 60)
+                    .frame(width: 90)
                     .spatialOverlay(alignment:  .center) {
                         Text(emoji)
-                            .font(.system(size: 30))
+                            .font(.system(size: 42))
                     }
             } else if phase.error != nil {
                 Text(emoji) // just load the emoji without the model
