@@ -19,7 +19,7 @@ struct Lab076: View {
     @State var nodes: Int = 12
     @State var previousNodes: Int = 3
     @State var arcDegrees: Double = 180
-    @State var startAngleDegrees: Double = -180
+    @State var angleOffsetDegrees: Double = 0
 
 
     var emoji: [String] = ["🌸", "🐸", "❤️", "🔥", "💻", "🐶", "🥸", "📱", "🎉", "🚀", "🤔", "🤓", "🧲", "💰", "🤩", "🍪", "🦉", "💡", "😎"]
@@ -27,7 +27,7 @@ struct Lab076: View {
     var body: some View {
 
         VStack {
-            ArcLayout(degrees: arcDegrees, startAngle: .degrees(startAngleDegrees)) {
+            ArcLayout(angleOffset: .degrees(angleOffsetDegrees), degrees: arcDegrees) {
                 ForEach(0..<nodes, id: \.self) { index in
                     ModelViewEmoji(name: "UISphere01", emoji: emoji[index], bundle: realityKitContentBundle)
                 }
@@ -81,37 +81,37 @@ struct Lab076: View {
                     Text("Arc: \(Int(arcDegrees))°")
                         .frame(width: 80)
 
-                    Button(action: {
-                        withAnimation {
-                            arcDegrees = min(360, arcDegrees + 45)
-                        }
-                    }, label: {
-                        Image(systemName: "plus.circle.fill")
-                    })
-                    .disabled(arcDegrees >= 225)
-                }
-
-                // Start angle controls
-                HStack(spacing: 24) {
-                    Button(action: {
-                        withAnimation {
-                            startAngleDegrees -= 45
-                        }
-                    }, label: {
-                        Image(systemName: "minus.circle.fill")
-                    })
-
-                    Text("Start: \(Int(startAngleDegrees))°")
-                        .frame(width: 80)
-
-                    Button(action: {
-                        withAnimation {
-                            startAngleDegrees += 45
-                        }
-                    }, label: {
-                        Image(systemName: "plus.circle.fill")
-                    })
-                }
+                                         Button(action: {
+                         withAnimation {
+                             arcDegrees = min(360, arcDegrees + 45)
+                         }
+                     }, label: {
+                         Image(systemName: "plus.circle.fill")
+                     })
+                     .disabled(arcDegrees >= 225)
+                 }
+                 
+                 // Angle offset controls
+                 HStack(spacing: 24) {
+                     Button(action: {
+                         withAnimation {
+                             angleOffsetDegrees -= 45
+                         }
+                     }, label: {
+                         Image(systemName: "minus.circle.fill")
+                     })
+                     
+                     Text("Offset: \(Int(angleOffsetDegrees))°")
+                         .frame(width: 80)
+                     
+                     Button(action: {
+                         withAnimation {
+                             angleOffsetDegrees += 45
+                         }
+                     }, label: {
+                         Image(systemName: "plus.circle.fill")
+                     })
+                 }
             }
             .padding()
             .glassBackgroundEffect()
@@ -152,7 +152,6 @@ fileprivate struct ModelViewEmoji: View {
 fileprivate struct ArcLayout: Layout, Animatable {
     var angleOffset: Angle = .zero
     var degrees: Double = 180 // Default to 180 degrees (half circle)
-    var startAngle: Angle = .degrees(-90) // Start from top (-90 degrees)
 
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
         let updatedProposal = proposal.replacingUnspecifiedDimensions()
@@ -185,10 +184,10 @@ fileprivate struct ArcLayout: Layout, Animatable {
         
         if degrees >= 359.9 { // Full circle - use original radial logic
             angleIncrement = 2 * .pi / CGFloat(subviews.count)
-            startRadians = startAngle.radians
+            startRadians = -.pi / 2 // Start from top (-90 degrees)
         } else { // Partial arc - span the specified degrees
             angleIncrement = arcRadians / CGFloat(max(1, subviews.count - 1))
-            startRadians = startAngle.radians
+            startRadians = -.pi / 2 // Start from top (-90 degrees)
         }
 
         for (index, subview) in subviews.enumerated() {
