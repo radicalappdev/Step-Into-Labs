@@ -18,6 +18,8 @@ struct Lab076: View {
 
     @State var nodes: Int = 12
     @State var previousNodes: Int = 3
+    @State var arcDegrees: Double = 180
+    @State var startAngleDegrees: Double = -90
 
 
     var emoji: [String] = ["🌸", "🐸", "❤️", "🔥", "💻", "🐶", "🥸", "📱", "🎉", "🚀", "🤔", "🤓", "🧲", "💰", "🤩", "🍪", "🦉", "💡", "😎"]
@@ -25,7 +27,7 @@ struct Lab076: View {
     var body: some View {
 
         VStack {
-            ArcLayout {
+            ArcLayout(degrees: arcDegrees, startAngle: .degrees(startAngleDegrees)) {
                 ForEach(0..<nodes, id: \.self) { index in
                     ModelViewEmoji(name: "UISphere01", emoji: emoji[index], bundle: realityKitContentBundle)
 //                        .rotation3DLayout(Rotation3D(angle: .degrees(-90), axis: .x))
@@ -65,6 +67,52 @@ struct Lab076: View {
                         })
                         .disabled(nodes >= 19)
                     }
+                    
+                    // Arc controls
+                    HStack(spacing: 24) {
+                        Text("Arc: \(Int(arcDegrees))°")
+                            .frame(width: 80)
+                        
+                        Button(action: {
+                            withAnimation {
+                                arcDegrees = max(45, arcDegrees - 45)
+                            }
+                        }, label: {
+                            Image(systemName: "minus.circle.fill")
+                        })
+                        .disabled(arcDegrees <= 45)
+                        
+                        Button(action: {
+                            withAnimation {
+                                arcDegrees = min(360, arcDegrees + 45)
+                            }
+                        }, label: {
+                            Image(systemName: "plus.circle.fill")
+                        })
+                        .disabled(arcDegrees >= 360)
+                    }
+                    
+                    // Start angle controls
+                    HStack(spacing: 24) {
+                        Text("Start: \(Int(startAngleDegrees))°")
+                            .frame(width: 80)
+                        
+                        Button(action: {
+                            withAnimation {
+                                startAngleDegrees -= 45
+                            }
+                        }, label: {
+                            Image(systemName: "minus.circle.fill")
+                        })
+                        
+                        Button(action: {
+                            withAnimation {
+                                startAngleDegrees += 45
+                            }
+                        }, label: {
+                            Image(systemName: "plus.circle.fill")
+                        })
+                    }
                 }
             })
         }
@@ -103,6 +151,8 @@ fileprivate struct ModelViewEmoji: View {
 // For information on custom layouts, watch https://developer.apple.com/videos/play/wwdc2022/10056.
 fileprivate struct ArcLayout: Layout, Animatable {
     var angleOffset: Angle = .zero
+    var degrees: Double = 180 // Default to 180 degrees (half circle)
+    var startAngle: Angle = .degrees(-90) // Start from top (-90 degrees)
 
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
         let updatedProposal = proposal.replacingUnspecifiedDimensions()
@@ -118,16 +168,23 @@ fileprivate struct ArcLayout: Layout, Animatable {
                 proposal: proposal)
             return
         }
+        
         let minDimension = min(bounds.width, bounds.height)
         let subViewDim = minDimension / CGFloat((subviews.count / 2) + 1)
         let radius = min(bounds.width, bounds.height) / 2
         let placementRadius = radius - (subViewDim / 2)
         let center = CGPoint(x: bounds.midX, y: bounds.midY)
-        let angleIncrement = 2 * .pi / CGFloat(subviews.count)
-        let centerOffset = Double.pi / 2 // Centers the view.
+        
+        // Convert degrees to radians and calculate angle increment for the arc
+        let arcRadians = degrees * .pi / 180.0
+        let angleIncrement = arcRadians / CGFloat(max(1, subviews.count - 1))
+        
+        // Start angle in radians (convert from Angle to Double)
+        let startRadians = startAngle.radians
 
         for (index, subview) in subviews.enumerated() {
-            let angle = angleIncrement * CGFloat(index) + angleOffset.radians + centerOffset
+            // Calculate angle within the arc range
+            let angle = startRadians + (angleIncrement * CGFloat(index)) + angleOffset.radians
 
             let xPosition = center.x + (placementRadius * cos(angle))
             let yPosition = center.y + (placementRadius * sin(angle))
