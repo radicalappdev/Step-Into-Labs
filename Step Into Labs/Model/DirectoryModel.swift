@@ -566,6 +566,13 @@ class ModelData {
              subtitle: "Visualizing SwiftUI Frames",
              description: "Using an incredibly useful view extension from WWDC 2025 to debug and visualize spatial layouts.")
 
+        ,Lab(title: "Lab 076",
+             type: .VOLUME,
+             date: Date("8/11/2025"),
+             isFeatured: true,
+             subtitle: "Custom Layout: Arc",
+             description: "")
+
 
 
     ]
