@@ -20,34 +20,20 @@ struct Lab076: View {
     @State var previousNodes: Int = 3
     @State var arcDegrees: Double = 180
     @State var angleOffsetDegrees: Double = 0
-    
-    // Computed property to automatically center the arc
-    private var autoCenteredAngleOffset: Double {
-        // For a 180° arc, we want it centered (bottom half of circle)
-        // This means rotating it so the arc spans from -90° to +90° (centered around 0°)
-        // Since our arc starts at -90° (top) and spans arcDegrees, we need to offset it
-        let targetCenterAngle = 0.0 // We want the arc centered around 0°
-        let currentStartAngle = -90.0 // Our arc starts at -90° (top)
-        let arcCenterAngle = currentStartAngle + (arcDegrees / 2) // Current center of the arc
-        let offsetNeeded = targetCenterAngle - arcCenterAngle
-        
-        return offsetNeeded
-    }
-
+    @State var shouldAutoCenter = true
 
     var emoji: [String] = ["🌸", "🐸", "❤️", "🔥", "💻", "🐶", "🥸", "📱", "🎉", "🚀", "🤔", "🤓", "🧲", "💰", "🤩", "🍪", "🦉", "💡", "😎"]
 
     var body: some View {
 
         VStack {
-            ArcLayout(angleOffset: .degrees(autoCenteredAngleOffset + angleOffsetDegrees), degrees: arcDegrees) {
+            ArcLayout(angleOffset: .degrees(angleOffsetDegrees), degrees: arcDegrees, shouldAutoCenter: shouldAutoCenter) {
                 ForEach(0..<nodes, id: \.self) { index in
                     ModelViewEmoji(name: "UISphere01", emoji: emoji[index], bundle: realityKitContentBundle)
                 }
             }
             .debugBorder3D(.white)
         }
-
 
         .ornament(attachmentAnchor: .scene(.trailing), contentAlignment: .leading, ornament: {
             VStack(spacing: 6) {
@@ -125,6 +111,14 @@ struct Lab076: View {
                          Image(systemName: "plus.circle.fill")
                      })
                  }
+
+                Button(action: {
+                    withAnimation {
+                        shouldAutoCenter.toggle()
+                    }
+                }, label: {
+                    Label("Auto-center", systemImage: shouldAutoCenter ? "circle.circle.fill" : "circle")
+                })
             }
             .padding()
             .glassBackgroundEffect()
@@ -160,16 +154,29 @@ fileprivate struct ModelViewEmoji: View {
     }
 }
 
-// Taken from Canyon Crosser from WWDC 2025
-// For information on custom layouts, watch https://developer.apple.com/videos/play/wwdc2022/10056.
+// Adapted from the RadialLayout that Apple included in from Canyon Crosser from WWDC 2025
 fileprivate struct ArcLayout: Layout, Animatable {
     var angleOffset: Angle = .zero
     var degrees: Double = 180 // Default to 180 degrees (half circle)
+    var shouldAutoCenter: Bool = false // Whether to automatically center the arc
 
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
         let updatedProposal = proposal.replacingUnspecifiedDimensions()
         let minDim = min(updatedProposal.width, updatedProposal.height)
         return CGSize(width: minDim, height: minDim)
+    }
+    
+    // Computed property to calculate auto-centering offset
+    private var autoCenterOffset: Angle {
+        guard shouldAutoCenter else { return .zero }
+        
+        // For auto-centering, we want the arc centered around 0° (horizontal center)
+        let targetCenterAngle = 0.0
+        let currentStartAngle = -90.0 // Our arc starts at -90° (top)
+        let arcCenterAngle = currentStartAngle + (degrees / 2) // Current center of the arc
+        let offsetNeeded = targetCenterAngle - arcCenterAngle
+        
+        return .degrees(offsetNeeded)
     }
 
     func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
@@ -205,7 +212,7 @@ fileprivate struct ArcLayout: Layout, Animatable {
 
         for (index, subview) in subviews.enumerated() {
             // Calculate angle within the arc range
-            let angle = startRadians + (angleIncrement * CGFloat(index)) + angleOffset.radians
+            let angle = startRadians + (angleIncrement * CGFloat(index)) + angleOffset.radians + autoCenterOffset.radians
 
             let xPosition = center.x + (placementRadius * cos(angle))
             let yPosition = center.y + (placementRadius * sin(angle))
