@@ -17,13 +17,12 @@ import RealityKitContent
 struct Lab036: View {
     var body: some View {
         RealityView { content in
-
-            if let scene = try? await Entity(named: "Glasses", in: realityKitContentBundle) {
-                content.add(scene)
-            }
+            // This loads a pair of classes that uses Occlusion Material on the lenses
+            guard let scene = try? await Entity(named: "Glasses", in: realityKitContentBundle) else { return }
+            content.add(scene)
+            guard let entity = scene.findEntity(named: "Offset") else { return }
+            entity.components.set(ManipulationComponent())
         }
-        .modifier(DragGestureImproved())
-        .modifier(ScaleAndRotateGesture())
     }
 }
 

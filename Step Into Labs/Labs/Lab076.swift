@@ -2,11 +2,11 @@
 //
 //  Title: Lab076
 //
-//  Subtitle:
+//  Subtitle: ArcLayout
 //
-//  Description:
+//  Description: Adapting the RadialLayout from Apple into an ArcLayout.
 //
-//  Type:
+//  Type: Volume
 //
 //  Created by Joseph Simpson on 8/11/25.
 

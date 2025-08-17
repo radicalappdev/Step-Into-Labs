@@ -570,8 +570,15 @@ class ModelData {
              type: .VOLUME,
              date: Date("8/11/2025"),
              isFeatured: true,
-             subtitle: "Custom Layout: Arc",
-             description: "")
+             subtitle: "Custom Layout: ArcLayout",
+             description: "Adapting the RadialLayout from Apple into an ArcLayout.")
+
+        ,Lab(title: "Lab 077",
+             type: .VOLUME,
+             date: Date("8/17/2025"),
+             isFeatured: true,
+             subtitle: "Ornaments in Presentations?",
+             description: "We *can* add ornaments to popovers shown by PresentationComponent, but I'm not sure if we *should*.")
 
 
 
