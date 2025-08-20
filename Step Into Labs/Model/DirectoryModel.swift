@@ -580,6 +580,14 @@ class ModelData {
              subtitle: "Ornaments in Presentations?",
              description: "We *can* add ornaments to popovers shown by PresentationComponent, but I'm not sure if we *should*.")
 
+        ,Lab(title: "Lab 078",
+             type: .VOLUME,
+             date: Date("8/20/2025"),
+             isFeatured: true,
+             subtitle: "Glass Effect Box",
+             description: "")
+
+
 
 
     ]
