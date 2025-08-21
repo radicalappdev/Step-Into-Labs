@@ -16,7 +16,7 @@ import RealityKitContent
 
 struct Lab078: View {
 
-    @State var panes: Edge3D.Set = [.all]
+    @State var panes: Edge3D.Set = [.horizontal]
 //    @State var panes: Edge3D.Set = [.back, .leading, .trailing, .bottom, .top]
 
     var body: some View {
@@ -31,29 +31,38 @@ struct Lab078: View {
 
 extension View {
     func glassBackgroundBox(padding: CGFloat = 0, _ directions: Edge3D.Set) -> some View {
+
+        let topDisplayMode: GlassBackgroundDisplayMode = directions.contains(.top) || directions.contains(.all) || directions.contains(.vertical) ? .always : .never
+        let bottomDisplayMode: GlassBackgroundDisplayMode = directions.contains(.bottom) || directions.contains(.all) || directions.contains(.vertical) ? .always : .never
+        let leadingDisplayMode: GlassBackgroundDisplayMode = directions.contains(.leading) || directions.contains(.all) || directions.contains(.horizontal) ? .always : .never
+        let trailingDisplayMode: GlassBackgroundDisplayMode = directions.contains(.trailing) || directions.contains(.all) || directions.contains(.horizontal) ? .always : .never
+        let frontDisplayMode: GlassBackgroundDisplayMode = directions.contains(.front) || directions.contains(.all) || directions.contains(.depth) ? .always : .never
+        let backDisplayMode: GlassBackgroundDisplayMode = directions.contains(.back) || directions.contains(.all) || directions.contains(.depth) ? .always : .never
+
+        return
         spatialOverlay {
             ZStack {
                 // Back
                 Color.clear
-                    .glassBackgroundEffect()
+                    .glassBackgroundEffect(displayMode: backDisplayMode)
                     .padding(padding)
 
 
                 // Create the sides just the like back and front, but rotate them on y
                 ZStack {
                     Color.clear
-                        .glassBackgroundEffect()
+                        .glassBackgroundEffect(displayMode: leadingDisplayMode)
                         .padding(padding)
                     Spacer()
                     Color.clear
-                        .glassBackgroundEffect()
+                        .glassBackgroundEffect(displayMode: trailingDisplayMode)
                         .padding(padding)
                 }
                 .rotation3DLayout(.degrees(90), axis: .y)
 
                 // Front
                 Color.clear
-                    .glassBackgroundEffect(displayMode: directions.contains(.front) ? .always : .never)
+                    .glassBackgroundEffect(displayMode: frontDisplayMode)
                     .padding(padding)
             }
 
@@ -64,11 +73,11 @@ extension View {
         .spatialOverlay {
             ZStack {
                 Color.clear
-                    .glassBackgroundEffect()
+                    .glassBackgroundEffect(displayMode: topDisplayMode)
                     .padding(padding)
                 Spacer()
                 Color.clear
-                    .glassBackgroundEffect(displayMode: directions.contains(.top) ? .always : .never)
+                    .glassBackgroundEffect(displayMode: bottomDisplayMode)
                     .padding(padding)
             }
             .rotation3DLayout(.degrees(90), axis: .x)
