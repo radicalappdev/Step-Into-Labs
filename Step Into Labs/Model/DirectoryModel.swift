@@ -584,7 +584,7 @@ class ModelData {
              type: .VOLUME,
              date: Date("8/21/2025"),
              isFeatured: true,
-             subtitle: "Building an glass material box",
+             subtitle: "Building a glass material box",
              description: "Using spatialOverlay wrap any SwiftUI view in glass material panes.")
 
 

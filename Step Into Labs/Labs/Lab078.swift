@@ -2,7 +2,7 @@
 //
 //  Title: Lab078
 //
-//  Subtitle: Building an glass material box
+//  Subtitle: Building a glass material box
 //
 //  Description: Using spatialOverlay wrap any SwiftUI view in glass material panes.
 //
@@ -179,7 +179,7 @@ struct Lab078: View {
     }
 }
 
-extension View {
+fileprivate extension View {
     func glassBackgroundBox(padding: CGFloat = 0, _ directions: Edge3D.Set) -> some View {
 
         // compute the display mode based on the edge set
@@ -238,3 +238,9 @@ extension View {
 #Preview {
     Lab078()
 }
+
+
+
+
+
+
