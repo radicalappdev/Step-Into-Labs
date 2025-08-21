@@ -18,9 +18,9 @@ struct Lab078: View {
     var body: some View {
         VStack {
             ModelViewSimple(name: "ToyRocket", bundle: realityKitContentBundle)
-                .frame(width: 300, height: 300)
-                .frame(depth: 300)
-                .glassBackgroundBox(padding: 0)
+                .frame(width: 500, height: 500)
+                .frame(depth: 500)
+                .glassBackgroundBox(padding: 24)
         }
     }
 }
@@ -36,27 +36,15 @@ extension View {
 
                 // Create the sides just the like back and front, but rotate them on y
                 ZStack {
-                    Color.blue
+                    Color.clear
                         .glassBackgroundEffect()
                         .padding(padding)
                     Spacer()
-                    Color.blue
+                    Color.clear
                         .glassBackgroundEffect()
                         .padding(padding)
                 }
                 .rotation3DLayout(.degrees(90), axis: .y)
-
-                // Create the top and bottom just the like back and front, but rotate them on x
-                ZStack {
-                    Color.red
-                        .glassBackgroundEffect()
-                        .padding(padding)
-                    Spacer()
-                    Color.red
-                        .glassBackgroundEffect()
-                        .padding(padding)
-                }
-                .rotation3DLayout(.degrees(90), axis: .x)
 
                 // Front
                 Color.clear
@@ -66,6 +54,19 @@ extension View {
 
 
 
+        }
+        // Create the top and bottom with another overlay and rotate the panes on the X axis
+        .spatialOverlay {
+            ZStack {
+                Color.clear
+                    .glassBackgroundEffect()
+                    .padding(padding)
+                Spacer()
+                Color.clear
+                    .glassBackgroundEffect()
+                    .padding(padding)
+            }
+            .rotation3DLayout(.degrees(90), axis: .x)
         }
     }
 }
