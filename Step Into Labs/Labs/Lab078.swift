@@ -17,16 +17,28 @@ import RealityKitContent
 struct Lab078: View {
 
     @State var panes: Edge3D.Set = [.all]
+    @State var padding: CGFloat = 24
 
     var body: some View {
         VStack {
             ModelViewSimple(name: "ToyRocket", bundle: realityKitContentBundle)
                 .frame(width: 500, height: 500)
                 .frame(depth: 500)
-                .glassBackgroundBox(padding: 24, panes)
+                .glassBackgroundBox(padding: padding, panes)
         }
         .ornament(attachmentAnchor: .scene(.trailing), contentAlignment: .leading, ornament: {
             VStack(spacing: 6) {
+
+                Slider(value: $padding,
+                       in: 0...96,
+                       step: 1,
+                       minimumValueLabel: Text("0"),
+                       maximumValueLabel: Text("96"),
+                       label: {
+                    Text("Padding")
+                })
+                .frame(width: 200)
+
                 HStack {
 
 
@@ -173,6 +185,7 @@ struct Lab078: View {
 extension View {
     func glassBackgroundBox(padding: CGFloat = 0, _ directions: Edge3D.Set) -> some View {
 
+        // compute the display mode based on the edge set
         let topDisplayMode: GlassBackgroundDisplayMode = directions.contains(.top) || directions.contains(.all) || directions.contains(.vertical) ? .always : .never
         let bottomDisplayMode: GlassBackgroundDisplayMode = directions.contains(.bottom) || directions.contains(.all) || directions.contains(.vertical) ? .always : .never
         let leadingDisplayMode: GlassBackgroundDisplayMode = directions.contains(.leading) || directions.contains(.all) || directions.contains(.horizontal) ? .always : .never
