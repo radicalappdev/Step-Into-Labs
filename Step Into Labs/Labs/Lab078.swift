@@ -36,33 +36,36 @@ extension View {
 
                 // Create the sides just the like back and front, but rotate them on y
                 ZStack {
-                    Color.clear
+                    Color.blue
                         .glassBackgroundEffect()
                         .padding(padding)
                     Spacer()
-                    Color.clear
+                    Color.blue
                         .glassBackgroundEffect()
                         .padding(padding)
                 }
                 .rotation3DLayout(.degrees(90), axis: .y)
 
                 // Create the top and bottom just the like back and front, but rotate them on x
-//                ZStack {
-//                    Color.clear
-//                        .glassBackgroundEffect()
-//                        .padding(padding)
-//                    Spacer()
-//                    Color.clear
-//                        .glassBackgroundEffect()
-//                        .padding(padding)
-//                }
-//                .rotation3DLayout(.degrees(90), axis: .x)
+                ZStack {
+                    Color.red
+                        .glassBackgroundEffect()
+                        .padding(padding)
+                    Spacer()
+                    Color.red
+                        .glassBackgroundEffect()
+                        .padding(padding)
+                }
+                .rotation3DLayout(.degrees(90), axis: .x)
 
                 // Front
                 Color.clear
                     .glassBackgroundEffect()
                     .padding(padding)
             }
+
+
+
         }
     }
 }
