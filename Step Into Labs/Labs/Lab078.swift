@@ -2,13 +2,13 @@
 //
 //  Title: Lab078
 //
-//  Subtitle:
+//  Subtitle: Building an glass material box
 //
-//  Description:
+//  Description: Using spatialOverlay wrap any SwiftUI view in glass material panes.
 //
-//  Type:
+//  Type: Volume
 //
-//  Created by Joseph Simpson on 8/20/25.
+//  Created by Joseph Simpson on 8/21/25.
 
 import SwiftUI
 import RealityKit

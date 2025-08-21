@@ -582,10 +582,10 @@ class ModelData {
 
         ,Lab(title: "Lab 078",
              type: .VOLUME,
-             date: Date("8/20/2025"),
+             date: Date("8/21/2025"),
              isFeatured: true,
-             subtitle: "Glass Effect Box",
-             description: "")
+             subtitle: "Building an glass material box",
+             description: "Using spatialOverlay wrap any SwiftUI view in glass material panes.")
 
 
 
