@@ -25,6 +25,100 @@ struct Lab078: View {
                 .frame(depth: 500)
                 .glassBackgroundBox(padding: 24, panes)
         }
+        .ornament(attachmentAnchor: .scene(.trailing), contentAlignment: .leading, ornament: {
+            VStack(spacing: 6) {
+                HStack {
+                    Button("Top") {
+                        if panes.contains(.top) {
+                            panes.remove(.top)
+                        } else {
+                            panes.insert(.top)
+                        }
+                    }
+
+                    Button("Bottom") {
+                        if panes.contains(.bottom) {
+                            panes.remove(.bottom)
+                        } else {
+                            panes.insert(.bottom)
+                        }
+                    }
+                }
+
+                HStack {
+                    Button("Leading") {
+                        if panes.contains(.leading) {
+                            panes.remove(.leading)
+                        } else {
+                            panes.insert(.leading)
+                        }
+                    }
+
+                    Button("Trailing") {
+                        if panes.contains(.trailing) {
+                            panes.remove(.trailing)
+                        } else {
+                            panes.insert(.trailing)
+                        }
+                    }
+                }
+
+                HStack {
+
+                    Button("Front") {
+                        if panes.contains(.front) {
+                            panes.remove(.front)
+                        } else {
+                            panes.insert(.front)
+                        }
+                    }
+
+                    Button("Back") {
+                        if panes.contains(.back) {
+                            panes.remove(.back)
+                        } else {
+                            panes.insert(.back)
+                        }
+                    }
+                }
+                
+                Divider()
+
+                // Set-based toggles
+                Button("Horizontal") {
+                    if panes.contains(.horizontal) {
+                        panes.remove(.horizontal)
+                    } else {
+                        panes.insert(.horizontal)
+                    }
+                }
+                
+                Button("Vertical") {
+                    if panes.contains(.vertical) {
+                        panes.remove(.vertical)
+                    } else {
+                        panes.insert(.vertical)
+                    }
+                }
+                
+                Button("Depth") {
+                    if panes.contains(.depth) {
+                        panes.remove(.depth)
+                    } else {
+                        panes.insert(.depth)
+                    }
+                }
+                
+                Divider()
+                
+                // All toggle
+                Button("All") {
+                    panes = [.all]
+                }
+            }
+            .padding()
+            .glassBackgroundEffect()
+        })
     }
 }
 
