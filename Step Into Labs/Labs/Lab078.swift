@@ -41,7 +41,6 @@ struct Lab078: View {
 
                 HStack {
 
-
                     Button(action: {
                         if panes.contains(.vertical) {
                             panes.remove(.vertical)
@@ -66,7 +65,6 @@ struct Lab078: View {
                             .frame(width: 80)
                     })
 
-
                     Button(action: {
                         if panes.contains(.bottom) {
                             panes.remove(.bottom)
@@ -78,7 +76,6 @@ struct Lab078: View {
                         Text("Bottom")
                             .frame(width: 80)
                     })
-
 
                 }
 
