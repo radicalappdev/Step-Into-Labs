@@ -15,24 +15,29 @@ import RealityKit
 import RealityKitContent
 
 struct Lab078: View {
+
+    @State var panes: Edge3D.Set = [.all]
+//    @State var panes: Edge3D.Set = [.back, .leading, .trailing, .bottom, .top]
+
     var body: some View {
         VStack {
             ModelViewSimple(name: "ToyRocket", bundle: realityKitContentBundle)
                 .frame(width: 500, height: 500)
                 .frame(depth: 500)
-                .glassBackgroundBox(padding: 24)
+                .glassBackgroundBox(padding: 24, panes)
         }
     }
 }
 
 extension View {
-    func glassBackgroundBox(padding: CGFloat = 0) -> some View {
+    func glassBackgroundBox(padding: CGFloat = 0, _ directions: Edge3D.Set) -> some View {
         spatialOverlay {
             ZStack {
                 // Back
                 Color.clear
                     .glassBackgroundEffect()
                     .padding(padding)
+
 
                 // Create the sides just the like back and front, but rotate them on y
                 ZStack {
@@ -48,7 +53,7 @@ extension View {
 
                 // Front
                 Color.clear
-                    .glassBackgroundEffect()
+                    .glassBackgroundEffect(displayMode: directions.contains(.front) ? .always : .never)
                     .padding(padding)
             }
 
@@ -63,7 +68,7 @@ extension View {
                     .padding(padding)
                 Spacer()
                 Color.clear
-                    .glassBackgroundEffect()
+                    .glassBackgroundEffect(displayMode: directions.contains(.top) ? .always : .never)
                     .padding(padding)
             }
             .rotation3DLayout(.degrees(90), axis: .x)
