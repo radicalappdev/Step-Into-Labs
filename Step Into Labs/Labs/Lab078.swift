@@ -16,8 +16,7 @@ import RealityKitContent
 
 struct Lab078: View {
 
-    @State var panes: Edge3D.Set = [.horizontal]
-//    @State var panes: Edge3D.Set = [.back, .leading, .trailing, .bottom, .top]
+    @State var panes: Edge3D.Set = [.all]
 
     var body: some View {
         VStack {
@@ -39,8 +38,7 @@ extension View {
         let frontDisplayMode: GlassBackgroundDisplayMode = directions.contains(.front) || directions.contains(.all) || directions.contains(.depth) ? .always : .never
         let backDisplayMode: GlassBackgroundDisplayMode = directions.contains(.back) || directions.contains(.all) || directions.contains(.depth) ? .always : .never
 
-        return
-        spatialOverlay {
+        return spatialOverlay {
             ZStack {
                 // Back
                 Color.clear
