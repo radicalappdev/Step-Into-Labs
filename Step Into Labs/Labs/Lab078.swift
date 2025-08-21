@@ -28,94 +28,142 @@ struct Lab078: View {
         .ornament(attachmentAnchor: .scene(.trailing), contentAlignment: .leading, ornament: {
             VStack(spacing: 6) {
                 HStack {
-                    Button("Top") {
+
+
+                    Button(action: {
+                        if panes.contains(.vertical) {
+                            panes.remove(.vertical)
+                        } else {
+                            panes.insert(.vertical)
+                        }
+
+                    }, label: {
+                        Text("Vertical")
+                            .frame(width: 80)
+                    })
+
+                    Button(action: {
                         if panes.contains(.top) {
                             panes.remove(.top)
                         } else {
                             panes.insert(.top)
                         }
-                    }
 
-                    Button("Bottom") {
+                    }, label: {
+                        Text("Top")
+                            .frame(width: 80)
+                    })
+
+
+                    Button(action: {
                         if panes.contains(.bottom) {
                             panes.remove(.bottom)
                         } else {
                             panes.insert(.bottom)
                         }
-                    }
+
+                    }, label: {
+                        Text("Bottom")
+                            .frame(width: 80)
+                    })
+
+
                 }
 
                 HStack {
-                    Button("Leading") {
+
+                    Button(action: {
+                        if panes.contains(.horizontal) {
+                            panes.remove(.horizontal)
+                        } else {
+                            panes.insert(.horizontal)
+                        }
+
+                    }, label: {
+                        Text("Horizontal")
+                            .frame(width: 80)
+                    })
+
+                    Button(action: {
                         if panes.contains(.leading) {
                             panes.remove(.leading)
                         } else {
                             panes.insert(.leading)
                         }
-                    }
 
-                    Button("Trailing") {
+                    }, label: {
+                        Text("Leading")
+                            .frame(width: 80)
+                    })
+
+                    Button(action: {
                         if panes.contains(.trailing) {
                             panes.remove(.trailing)
                         } else {
                             panes.insert(.trailing)
                         }
-                    }
+
+                    }, label: {
+                        Text("Trailing")
+                            .frame(width: 80)
+                    })
                 }
 
                 HStack {
 
-                    Button("Front") {
+                    Button(action: {
+                        if panes.contains(.depth) {
+                            panes.remove(.depth)
+                        } else {
+                            panes.insert(.depth)
+                        }
+
+                    }, label: {
+                        Text("Depth")
+                            .frame(width: 80)
+                    })
+
+                    Button(action: {
                         if panes.contains(.front) {
                             panes.remove(.front)
                         } else {
                             panes.insert(.front)
                         }
-                    }
 
-                    Button("Back") {
+                    }, label: {
+                        Text("Front")
+                            .frame(width: 80)
+                    })
+
+                    Button(action: {
                         if panes.contains(.back) {
                             panes.remove(.back)
                         } else {
                             panes.insert(.back)
                         }
-                    }
-                }
-                
-                Divider()
 
-                // Set-based toggles
-                Button("Horizontal") {
-                    if panes.contains(.horizontal) {
-                        panes.remove(.horizontal)
+                    }, label: {
+                        Text("Back")
+                            .frame(width: 80)
+                    })
+
+                }
+
+                Button(action: {
+                    if panes.contains(.all) {
+                        panes.remove(.all)
                     } else {
-                        panes.insert(.horizontal)
+                        panes.insert(.all)
                     }
-                }
-                
-                Button("Vertical") {
-                    if panes.contains(.vertical) {
-                        panes.remove(.vertical)
-                    } else {
-                        panes.insert(.vertical)
-                    }
-                }
-                
-                Button("Depth") {
-                    if panes.contains(.depth) {
-                        panes.remove(.depth)
-                    } else {
-                        panes.insert(.depth)
-                    }
-                }
-                
-                Divider()
-                
-                // All toggle
-                Button("All") {
-                    panes = [.all]
-                }
+
+                }, label: {
+                    Text("All")
+                        .frame(width: 80)
+                })
+
+
             }
+            .controlSize(.small)
             .padding()
             .glassBackgroundEffect()
         })
@@ -165,11 +213,11 @@ extension View {
         .spatialOverlay {
             ZStack {
                 Color.clear
-                    .glassBackgroundEffect(displayMode: topDisplayMode)
+                    .glassBackgroundEffect(displayMode: bottomDisplayMode)
                     .padding(padding)
                 Spacer()
                 Color.clear
-                    .glassBackgroundEffect(displayMode: bottomDisplayMode)
+                    .glassBackgroundEffect(displayMode: topDisplayMode)
                     .padding(padding)
             }
             .rotation3DLayout(.degrees(90), axis: .x)
