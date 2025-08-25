@@ -14,170 +14,170 @@ import SwiftUI
 import RealityKit
 import RealityKitContent
 
-struct Lab078: View {
+    struct Lab078: View {
 
-    @State var panes: Edge3D.Set = [.all]
-    @State var padding: CGFloat = 24
+        @State var panes: Edge3D.Set = [.all]
+        @State var padding: CGFloat = 24
 
-    var body: some View {
-        VStack {
-            ModelViewSimple(name: "ToyRocket", bundle: realityKitContentBundle)
-                .frame(width: 500, height: 500)
-                .frame(depth: 500)
-                .glassBackgroundBox(padding: padding, panes)
-        }
-        .ornament(attachmentAnchor: .scene(.trailing), contentAlignment: .leading, ornament: {
-            VStack(spacing: 6) {
+        var body: some View {
+            VStack {
+                ModelViewSimple(name: "ToyRocket", bundle: realityKitContentBundle)
+                    .frame(width: 500, height: 500)
+                    .frame(depth: 500)
+                    .glassBackgroundBox(padding: padding, panes)
+            }
+            .ornament(attachmentAnchor: .scene(.trailing), contentAlignment: .leading, ornament: {
+                VStack(spacing: 6) {
 
-                Slider(value: $padding,
-                       in: 0...96,
-                       step: 1,
-                       minimumValueLabel: Text("0"),
-                       maximumValueLabel: Text("96"),
-                       label: {
-                    Text("Padding")
-                })
-                .frame(width: 200)
-
-                HStack {
-
-                    Button(action: {
-                        if panes.contains(.vertical) {
-                            panes.remove(.vertical)
-                        } else {
-                            panes.insert(.vertical)
-                        }
-
-                    }, label: {
-                        Text("Vertical")
-                            .frame(width: 80)
+                    Slider(value: $padding,
+                           in: 0...96,
+                           step: 1,
+                           minimumValueLabel: Text("0"),
+                           maximumValueLabel: Text("96"),
+                           label: {
+                        Text("Padding")
                     })
+                    .frame(width: 200)
 
-                    Button(action: {
-                        if panes.contains(.top) {
-                            panes.remove(.top)
-                        } else {
-                            panes.insert(.top)
-                        }
+                    HStack {
 
-                    }, label: {
-                        Text("Top")
-                            .frame(width: 80)
-                    })
+                        Button(action: {
+                            if panes.contains(.vertical) {
+                                panes.remove(.vertical)
+                            } else {
+                                panes.insert(.vertical)
+                            }
 
-                    Button(action: {
-                        if panes.contains(.bottom) {
-                            panes.remove(.bottom)
-                        } else {
-                            panes.insert(.bottom)
-                        }
+                        }, label: {
+                            Text("Vertical")
+                                .frame(width: 80)
+                        })
 
-                    }, label: {
-                        Text("Bottom")
-                            .frame(width: 80)
-                    })
+                        Button(action: {
+                            if panes.contains(.top) {
+                                panes.remove(.top)
+                            } else {
+                                panes.insert(.top)
+                            }
 
-                }
+                        }, label: {
+                            Text("Top")
+                                .frame(width: 80)
+                        })
 
-                HStack {
+                        Button(action: {
+                            if panes.contains(.bottom) {
+                                panes.remove(.bottom)
+                            } else {
+                                panes.insert(.bottom)
+                            }
 
-                    Button(action: {
-                        if panes.contains(.horizontal) {
-                            panes.remove(.horizontal)
-                        } else {
-                            panes.insert(.horizontal)
-                        }
+                        }, label: {
+                            Text("Bottom")
+                                .frame(width: 80)
+                        })
 
-                    }, label: {
-                        Text("Horizontal")
-                            .frame(width: 80)
-                    })
-
-                    Button(action: {
-                        if panes.contains(.leading) {
-                            panes.remove(.leading)
-                        } else {
-                            panes.insert(.leading)
-                        }
-
-                    }, label: {
-                        Text("Leading")
-                            .frame(width: 80)
-                    })
-
-                    Button(action: {
-                        if panes.contains(.trailing) {
-                            panes.remove(.trailing)
-                        } else {
-                            panes.insert(.trailing)
-                        }
-
-                    }, label: {
-                        Text("Trailing")
-                            .frame(width: 80)
-                    })
-                }
-
-                HStack {
-
-                    Button(action: {
-                        if panes.contains(.depth) {
-                            panes.remove(.depth)
-                        } else {
-                            panes.insert(.depth)
-                        }
-
-                    }, label: {
-                        Text("Depth")
-                            .frame(width: 80)
-                    })
-
-                    Button(action: {
-                        if panes.contains(.front) {
-                            panes.remove(.front)
-                        } else {
-                            panes.insert(.front)
-                        }
-
-                    }, label: {
-                        Text("Front")
-                            .frame(width: 80)
-                    })
-
-                    Button(action: {
-                        if panes.contains(.back) {
-                            panes.remove(.back)
-                        } else {
-                            panes.insert(.back)
-                        }
-
-                    }, label: {
-                        Text("Back")
-                            .frame(width: 80)
-                    })
-
-                }
-
-                Button(action: {
-                    if panes.contains(.all) {
-                        panes.remove(.all)
-                    } else {
-                        panes.insert(.all)
                     }
 
-                }, label: {
-                    Text("All")
-                        .frame(width: 80)
-                })
+                    HStack {
+
+                        Button(action: {
+                            if panes.contains(.horizontal) {
+                                panes.remove(.horizontal)
+                            } else {
+                                panes.insert(.horizontal)
+                            }
+
+                        }, label: {
+                            Text("Horizontal")
+                                .frame(width: 80)
+                        })
+
+                        Button(action: {
+                            if panes.contains(.leading) {
+                                panes.remove(.leading)
+                            } else {
+                                panes.insert(.leading)
+                            }
+
+                        }, label: {
+                            Text("Leading")
+                                .frame(width: 80)
+                        })
+
+                        Button(action: {
+                            if panes.contains(.trailing) {
+                                panes.remove(.trailing)
+                            } else {
+                                panes.insert(.trailing)
+                            }
+
+                        }, label: {
+                            Text("Trailing")
+                                .frame(width: 80)
+                        })
+                    }
+
+                    HStack {
+
+                        Button(action: {
+                            if panes.contains(.depth) {
+                                panes.remove(.depth)
+                            } else {
+                                panes.insert(.depth)
+                            }
+
+                        }, label: {
+                            Text("Depth")
+                                .frame(width: 80)
+                        })
+
+                        Button(action: {
+                            if panes.contains(.front) {
+                                panes.remove(.front)
+                            } else {
+                                panes.insert(.front)
+                            }
+
+                        }, label: {
+                            Text("Front")
+                                .frame(width: 80)
+                        })
+
+                        Button(action: {
+                            if panes.contains(.back) {
+                                panes.remove(.back)
+                            } else {
+                                panes.insert(.back)
+                            }
+
+                        }, label: {
+                            Text("Back")
+                                .frame(width: 80)
+                        })
+
+                    }
+
+                    Button(action: {
+                        if panes.contains(.all) {
+                            panes.remove(.all)
+                        } else {
+                            panes.insert(.all)
+                        }
+
+                    }, label: {
+                        Text("All")
+                            .frame(width: 80)
+                    })
 
 
-            }
-            .controlSize(.small)
-            .padding()
-            .glassBackgroundEffect()
-        })
+                }
+                .controlSize(.small)
+                .padding()
+                .glassBackgroundEffect()
+            })
+        }
     }
-}
 
 fileprivate extension View {
     func glassBackgroundBox(padding: CGFloat = 0, _ directions: Edge3D.Set) -> some View {

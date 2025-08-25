@@ -587,6 +587,13 @@ class ModelData {
              subtitle: "Building a glass material box",
              description: "Using spatialOverlay wrap any SwiftUI view in glass material panes.")
 
+        ,Lab(title: "Lab 079",
+             type: .VOLUME,
+             date: Date("8/25/2025"),
+             isFeatured: true,
+             subtitle: "TBD",
+             description: "")
+
 
 
 
