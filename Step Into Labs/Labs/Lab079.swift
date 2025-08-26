@@ -2,11 +2,11 @@
 //
 //  Title: Lab079
 //
-//  Subtitle:
+//  Subtitle: Using Physics with Manipulation Component
 //
-//  Description:
+//  Description: This labs explores how the new Manipulation Component works with physics bodies.
 //
-//  Type:
+//  Type: Volume
 //
 //  Created by Joseph Simpson on 8/25/25.
 
@@ -25,24 +25,19 @@ struct Lab079: View {
             scene.position.y = -0.4
 
             if let subject1 = scene.findEntity(named: "Subject_1") {
-                // Using the ManipulationComponent defaults
                 let mc = ManipulationComponent()
                 subject1.components.set(mc)
             }
 
             if let subject2 = scene.findEntity(named: "Subject_2") {
-                // Using the ManipulationComponent defaults
                 let mc = ManipulationComponent()
                 subject2.components.set(mc)
             }
 
             if let subject3 = scene.findEntity(named: "Subject_3") {
-                // Using the ManipulationComponent defaults
                 let mc = ManipulationComponent()
                 subject3.components.set(mc)
             }
-
-
 
         }
     }

@@ -123,6 +123,24 @@ def Xform "Root"
         {
             uniform token info:id = "RealityKit.InputTarget"
         }
+
+        def RealityKitComponent "RigidBody"
+        {
+            bool gravityEnabled = 0
+            uniform token info:id = "RealityKit.RigidBody"
+            token motionType = "Static"
+
+            def RealityKitStruct "massFrame"
+            {
+                def RealityKitStruct "m_pose"
+                {
+                }
+            }
+
+            def RealityKitStruct "material"
+            {
+            }
+        }
     }
 
     def Cube "Subject_2" (
@@ -181,6 +199,7 @@ def Xform "Root"
 
         def RealityKitComponent "RigidBody"
         {
+            bool gravityEnabled = 0
             uniform token info:id = "RealityKit.RigidBody"
 
             def RealityKitStruct "massFrame"
@@ -252,6 +271,7 @@ def Xform "Root"
 
         def RealityKitComponent "RigidBody"
         {
+            bool gravityEnabled = 0
             uniform token info:id = "RealityKit.RigidBody"
             token motionType = "Kinematic"
 

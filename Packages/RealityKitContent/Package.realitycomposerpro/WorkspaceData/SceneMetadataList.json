@@ -1441,33 +1441,6 @@
       {
         "isExpanded" : true,
         "isLocked" : false
-      },
-      [
-        "92C2D816-BBAF-4395-8EC5-B77DD3495EE7",
-        "Root",
-        "Subject_3"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "92C2D816-BBAF-4395-8EC5-B77DD3495EE7",
-        "Root",
-        "Subject_2"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "92C2D816-BBAF-4395-8EC5-B77DD3495EE7",
-        "Root",
-        "Subject_1"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
       }
     ]
   },

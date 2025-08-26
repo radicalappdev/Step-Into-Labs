@@ -589,10 +589,10 @@ class ModelData {
 
         ,Lab(title: "Lab 079",
              type: .VOLUME,
-             date: Date("8/25/2025"),
+             date: Date("8/26/2025"),
              isFeatured: true,
-             subtitle: "TBD",
-             description: "")
+             subtitle: "Using Physics with Manipulation Component",
+             description: "This labs explores how the new Manipulation Component works with physics bodies.")
 
 
 
