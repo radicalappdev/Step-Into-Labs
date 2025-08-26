@@ -5,7 +5,9 @@
     "InstanceLab.usda",
     "UISphere01.usda",
     "UIPanel01.usda",
-    "Glasses.usda"
+    "Glasses.usda",
+    "GestureLabs.usda",
+    "ManipulatePhysics.usda"
   ],
   "recentIdentifiers" : {
     "00AC74E2-A464-4F74-A445-36CD76630287" : [
@@ -93,6 +95,9 @@
 
     ],
     "90C235E0-C99C-42E7-9D0D-5E131743A0A7" : [
+
+    ],
+    "92C2D816-BBAF-4395-8EC5-B77DD3495EE7" : [
 
     ],
     "98043A2D-E996-4BE7-8F15-47AAB1E1E57E" : [
@@ -4462,6 +4467,30 @@
         ]
       }
     ],
+    "92C2D816-BBAF-4395-8EC5-B77DD3495EE7" : [
+      {
+        "date" : 777900707.77385,
+        "title" : "Untitled",
+        "transform" : [
+          0.9947944,
+          1.1879582e-09,
+          -0.101902805,
+          0,
+          -0.046446003,
+          0.8900888,
+          -0.4534146,
+          0,
+          0.09070254,
+          0.4557872,
+          0.8854553,
+          0,
+          0.2283817,
+          1.1883795,
+          2.229505,
+          1
+        ]
+      }
+    ],
     "98043A2D-E996-4BE7-8F15-47AAB1E1E57E" : [
       {
         "date" : 759507368.632263,
@@ -7716,5 +7745,5 @@
   "sceneViewportBackgroundColors" : {
 
   },
-  "selectedSceneRelativePath" : "Glasses.usda"
+  "selectedSceneRelativePath" : "ManipulatePhysics.usda"
 }
