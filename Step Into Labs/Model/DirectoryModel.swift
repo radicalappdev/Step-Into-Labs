@@ -598,7 +598,7 @@ class ModelData {
              type: .VOLUME,
              date: Date("8/30/2025"),
              isFeatured: true,
-             subtitle: "Adjusting component values based on Volume Size",
+             subtitle: "",
              description: "")
 
 
