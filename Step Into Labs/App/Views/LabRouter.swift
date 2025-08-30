@@ -92,6 +92,7 @@ struct LabRouter: View {
         case "Lab 077": Lab077()
         case "Lab 078": Lab078()
         case "Lab 079": Lab079()
+        case "Lab 080": Lab080()
 
 
 

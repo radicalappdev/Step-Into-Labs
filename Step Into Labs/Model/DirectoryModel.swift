@@ -594,6 +594,13 @@ class ModelData {
              subtitle: "Using Physics with Manipulation Component",
              description: "This labs explores how the new Manipulation Component works with physics bodies.")
 
+        ,Lab(title: "Lab 080",
+             type: .VOLUME,
+             date: Date("8/30/2025"),
+             isFeatured: true,
+             subtitle: "Adjusting component values based on Volume Size",
+             description: "")
+
 
 
 
