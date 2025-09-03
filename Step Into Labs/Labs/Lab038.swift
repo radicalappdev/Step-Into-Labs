@@ -32,7 +32,8 @@ struct Lab038: View {
 
             guard let portalSphereScene = try? await Entity(named: "PortalBall", in: realityKitContentBundle) else { return }
             rootEntity.addChild(portalSphereScene)
-            portalSphereScene.position.y = -0.28
+
+            portalSphereScene.scale = .init(repeating: 2.0)
 
             // 3. An entity that will render the portal
             if let portalSphere = portalSphereScene.findEntity(named: "PortalSphere") {
@@ -51,12 +52,13 @@ struct Lab038: View {
             }
 
             // 4. We'll load some content to add to the portalContentRoot
-            guard let scene = try? await Entity(named: "TeleportLabs", in: realityKitContentBundle) else { return }
+            guard let scene = try? await Entity(named: "Stacks", in: realityKitContentBundle) else { return }
 
             portalContentRoot.addChild(scene)
             scene.position.y = -1.4
 
         }
+        .realityViewLayoutBehavior(.centered)
         .gesture(longPressGesture)
     }
 

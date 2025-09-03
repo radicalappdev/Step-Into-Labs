@@ -68,9 +68,9 @@ def Xform "Root"
                     colorSpace = "srgb_texture"
                 )
                 float inputs:ior = 1.5
-                float inputs:metallic = 0.6
+                float inputs:metallic = 0.8
                 float inputs:opacity = 1
-                float inputs:roughness = 0.1
+                float inputs:roughness = 0.05
                 token outputs:surface
             }
         }
@@ -238,12 +238,12 @@ def Xform "Root"
     {
         reorder nameChildren = ["MaplePlywood", "DefaultMaterial"]
         uniform token axis = "Y"
-        double height = 0.1
+        double height = 0.04
         rel material:binding = </Root/Stand/MaplePlywood> (
             bindMaterialAs = "weakerThanDescendants"
         )
-        double radius = 0.2
-        float3 xformOp:translate = (0, -0.14494732, 0)
+        double radius = 0.16
+        float3 xformOp:translate = (0, -0.13862255, 0)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         def "MaplePlywood" (
@@ -254,6 +254,7 @@ def Xform "Root"
             color3f inputs:Basecolor_Tint = (0.57874745, 0.32151988, 0) (
                 colorSpace = "srgb_texture"
             )
+            float2 inputs:UV_Scale = (1, 0.1)
         }
     }
 }
