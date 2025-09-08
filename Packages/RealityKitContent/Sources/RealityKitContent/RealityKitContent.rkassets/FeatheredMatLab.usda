@@ -1,0 +1,950 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 2.0 (494)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    reorder nameChildren = ["Feathered", "FadeEdge", "FadeEdge_WithColor_Edge", "FadeEdge_WithColour_Full", "Sphere_0", "Sphere_1", "Sphere_2"]
+    def Sphere "Sphere_0" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </Root/FadeEdge> (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        double radius = 0.1
+        float3 xformOp:translate = (-0.25, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def Material "Feathered"
+    {
+        color3f inputs:BaseColor = (0, 0, 0) (
+            customData = {
+                dictionary realitykit = {
+                    float2 positionInSubgraph = (470.49075, 314.7228)
+                    int stackingOrderInSubgraph = 618
+                }
+            }
+        )
+        float inputs:Falloff = 0.4 (
+            customData = {
+                dictionary realitykit = {
+                    float2 positionInSubgraph = (251.81888, 310.00015)
+                    int stackingOrderInSubgraph = 618
+                }
+            }
+        )
+        token outputs:mtlx:surface.connect = </Root/Feathered/PreviewSurface.outputs:out>
+        token outputs:realitykit:vertex
+        token outputs:surface.connect = </Root/Feathered/DefaultSurfaceShader.outputs:surface>
+        float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (1306.9961, 214.13281)
+        int ui:nodegraph:realitykit:subgraphOutputs:stackingOrder = 105
+
+        def Shader "DefaultSurfaceShader" (
+            active = false
+        )
+        {
+            uniform token info:id = "UsdPreviewSurface"
+            color3f inputs:diffuseColor = (0.003921569, 0.38039216, 0.41960785) (
+                colorSpace = "srgb_texture"
+            )
+            float inputs:roughness = 0.75
+            token outputs:surface
+        }
+
+        def Shader "OcclusionSurface"
+        {
+            uniform token info:id = "ND_realitykit_occlusion_surfaceshader"
+            token outputs:out
+            float2 ui:nodegraph:node:pos = (964.58594, 421.59766)
+            int ui:nodegraph:node:stackingOrder = 160
+        }
+
+        def Shader "ShadowReceivingOcclusionSurface"
+        {
+            uniform token info:id = "ND_realitykit_shadowreceiver_surfaceshader"
+            float2 ui:nodegraph:node:pos = (1180.5444, 367.49228)
+            int ui:nodegraph:node:stackingOrder = 344
+        }
+
+        def Shader "Clamp"
+        {
+            uniform token info:id = "ND_clamp_float"
+            float inputs:high
+            float inputs:in.connect = </Root/Feathered/DotProduct.outputs:out>
+            float inputs:low
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (428.0806, 88.15248)
+            int ui:nodegraph:node:stackingOrder = 618
+        }
+
+        def Shader "DotProduct"
+        {
+            uniform token info:id = "ND_dotproduct_vector3"
+            float3 inputs:in1.connect = </Root/Feathered/ViewDirection.outputs:out>
+            float3 inputs:in2.connect = </Root/Feathered/Normal.outputs:out>
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (232.3306, 88.15248)
+            int ui:nodegraph:node:stackingOrder = 618
+        }
+
+        def Shader "ViewDirection"
+        {
+            uniform token info:id = "ND_realitykit_viewdirection_vector3"
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (-17.66941, 194.15248)
+            int ui:nodegraph:node:stackingOrder = 618
+        }
+
+        def Shader "Normal"
+        {
+            uniform token info:id = "ND_normal_vector3"
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (107.75, 71)
+            int ui:nodegraph:node:stackingOrder = 618
+        }
+
+        def Shader "Divide"
+        {
+            uniform token info:id = "ND_divide_float"
+            float inputs:in1.connect = </Root/Feathered/Clamp.outputs:out>
+            float inputs:in2 = 0.5
+            float inputs:in2.connect = </Root/Feathered.inputs:Falloff>
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (609.08057, 167.40248)
+            int ui:nodegraph:node:stackingOrder = 618
+            string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["inputs:in2"]
+        }
+
+        def Shader "PreviewSurface"
+        {
+            uniform token info:id = "ND_UsdPreviewSurface_surfaceshader"
+            color3f inputs:diffuseColor = (0.003921569, 0.38039216, 0.41960785) (
+                colorSpace = "srgb_texture"
+            )
+            color3f inputs:diffuseColor.connect = </Root/Feathered.inputs:BaseColor>
+            float inputs:metallic
+            float3 inputs:normal
+            float inputs:opacity.connect = </Root/Feathered/Divide.outputs:out>
+            float inputs:roughness
+            token outputs:out
+            float2 ui:nodegraph:node:pos = (833.9048, 122.51576)
+            int ui:nodegraph:node:stackingOrder = 618
+            string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["inputs:diffuseColor"]
+        }
+
+        def Scope "Group" (
+            kind = "group"
+        )
+        {
+            string ui:group:annotation = "Feathering Opacity"
+            string ui:group:annotationDescription = ""
+            string[] ui:group:members = ["p:Clamp", "p:DotProduct", "i:inputs:BaseColor", "p:Divide", "i:inputs:Falloff", "p:ViewDirection", "p:PreviewSurface"]
+        }
+    }
+
+    def Material "FadeEdge"
+    {
+        float inputs:Falloff = 0.8 (
+            customData = {
+                dictionary realitykit = {
+                    float2 positionInSubgraph = (-461.98056, 48.4375)
+                    int stackingOrderInSubgraph = 758
+                }
+            }
+        )
+        token outputs:mtlx:surface.connect = </Root/FadeEdge/PreviewSurface.outputs:out>
+        token outputs:realitykit:vertex
+        float2 ui:nodegraph:node:pos = (20, 20)
+        int ui:nodegraph:node:stackingOrder = 1
+        float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (582.91254, 101.71302)
+        int ui:nodegraph:realitykit:subgraphOutputs:stackingOrder = 201
+
+        def Shader "PreviewSurface"
+        {
+            uniform token info:id = "ND_UsdPreviewSurface_surfaceshader"
+            color3f inputs:diffuseColor.connect = None
+            float inputs:metallic
+            float3 inputs:normal
+            float inputs:opacity.connect = </Root/FadeEdge/Clamp_1.outputs:out>
+            float inputs:roughness = 0.5
+            token outputs:out
+            float2 ui:nodegraph:node:pos = (341.1625, 101.71302)
+            int ui:nodegraph:node:stackingOrder = 715
+        }
+
+        def Shader "ViewDirection"
+        {
+            uniform token info:id = "ND_realitykit_viewdirection_vector3"
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (-983.0467, 81.06342)
+            int ui:nodegraph:node:stackingOrder = 844
+        }
+
+        def Shader "Normal"
+        {
+            uniform token info:id = "ND_normal_vector3"
+            string inputs:space = "world"
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (-946.8084, 169.31734)
+            int ui:nodegraph:node:stackingOrder = 844
+        }
+
+        def Shader "DotProduct"
+        {
+            uniform token info:id = "ND_dotproduct_vector3"
+            float3 inputs:in1.connect = </Root/FadeEdge/ViewDirection.outputs:out>
+            float3 inputs:in2.connect = </Root/FadeEdge/Normal.outputs:out>
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-752.035, 136.07515)
+            int ui:nodegraph:node:stackingOrder = 844
+        }
+
+        def Shader "Clamp"
+        {
+            uniform token info:id = "ND_clamp_float"
+            float inputs:high
+            float inputs:in.connect = </Root/FadeEdge/DotProduct.outputs:out>
+            float inputs:low
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-571.2889, 223.21187)
+            int ui:nodegraph:node:stackingOrder = 844
+        }
+
+        def Shader "Oneminus"
+        {
+            uniform token info:id = "ND_realitykit_oneminus_float"
+            float inputs:in.connect = </Root/FadeEdge/Clamp.outputs:out>
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-437.7342, 208.81734)
+            int ui:nodegraph:node:stackingOrder = 844
+        }
+
+        def Shader "Oneminus_1"
+        {
+            uniform token info:id = "ND_realitykit_oneminus_float"
+            float inputs:in.connect = </Root/FadeEdge/Power.outputs:out>
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-157.5352, 62.397358)
+            int ui:nodegraph:node:stackingOrder = 762
+        }
+
+        def Shader "Power"
+        {
+            uniform token info:id = "ND_power_float"
+            float inputs:in1.connect = </Root/FadeEdge/Oneminus.outputs:out>
+            float inputs:in2.connect = </Root/FadeEdge.inputs:Falloff>
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-292.96494, 50.785156)
+            int ui:nodegraph:node:stackingOrder = 758
+        }
+
+        def Shader "Remap"
+        {
+            uniform token info:id = "ND_remap_float"
+            float inputs:in.connect = </Root/FadeEdge/Oneminus_1.outputs:out>
+            float inputs:inhigh = 0.3
+            float inputs:inlow
+            float inputs:outhigh
+            float inputs:outlow
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-31.289165, 126.23828)
+            int ui:nodegraph:node:stackingOrder = 758
+        }
+
+        def Shader "Clamp_1"
+        {
+            uniform token info:id = "ND_clamp_float"
+            float inputs:high
+            float inputs:in.connect = </Root/FadeEdge/Remap.outputs:out>
+            float inputs:low
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (130.31764, 133.93823)
+            int ui:nodegraph:node:stackingOrder = 760
+        }
+    }
+
+    def Material "FadeEdge_WithColor_Edge"
+    {
+        float inputs:Falloff = 0.8 (
+            customData = {
+                dictionary realitykit = {
+                    float2 positionInSubgraph = (-580.1044, 59.665756)
+                    int stackingOrderInSubgraph = 889
+                }
+            }
+        )
+        float inputs:Speed = 0.5 (
+            colorSpace = ""
+            customData = {
+                dictionary realitykit = {
+                    float2 positionInSubgraph = (-1188.0156, -259.4294)
+                    int stackingOrderInSubgraph = 1112
+                }
+            }
+        )
+        float inputs:Strength = 10 (
+            colorSpace = ""
+            customData = {
+                dictionary realitykit = {
+                    float2 positionInSubgraph = (-990.71295, -555.6288)
+                    int stackingOrderInSubgraph = 1118
+                }
+            }
+        )
+        token outputs:mtlx:surface.connect = </Root/FadeEdge_WithColor_Edge/PreviewSurface.outputs:out>
+        token outputs:realitykit:vertex
+        float2 ui:nodegraph:node:pos = (-370.4413, -128.5522)
+        int ui:nodegraph:node:stackingOrder = 2
+        float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (903.75146, 100.532364)
+        int ui:nodegraph:realitykit:subgraphOutputs:stackingOrder = 1184
+
+        def Shader "PreviewSurface"
+        {
+            uniform token info:id = "ND_UsdPreviewSurface_surfaceshader"
+            color3f inputs:diffuseColor.connect = </Root/FadeEdge_WithColor_Edge/Mix_1.outputs:out>
+            float inputs:metallic
+            float3 inputs:normal
+            float inputs:opacity.connect = </Root/FadeEdge_WithColor_Edge/Clamp_1.outputs:out>
+            float inputs:roughness = 0.5
+            token outputs:out
+            float2 ui:nodegraph:node:pos = (662.0014, 100.532364)
+            int ui:nodegraph:node:stackingOrder = 1184
+        }
+
+        def Shader "ViewDirection"
+        {
+            uniform token info:id = "ND_realitykit_viewdirection_vector3"
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (-1141.683, 102.67694)
+            int ui:nodegraph:node:stackingOrder = 945
+        }
+
+        def Shader "Normal"
+        {
+            uniform token info:id = "ND_normal_vector3"
+            string inputs:space = "world"
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (-1044.4167, 188.97618)
+            int ui:nodegraph:node:stackingOrder = 945
+        }
+
+        def Shader "DotProduct"
+        {
+            uniform token info:id = "ND_dotproduct_vector3"
+            float3 inputs:in1.connect = </Root/FadeEdge_WithColor_Edge/ViewDirection.outputs:out>
+            float3 inputs:in2.connect = </Root/FadeEdge_WithColor_Edge/Normal.outputs:out>
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-849.6433, 155.734)
+            int ui:nodegraph:node:stackingOrder = 945
+        }
+
+        def Shader "Clamp"
+        {
+            uniform token info:id = "ND_clamp_float"
+            float inputs:high
+            float inputs:in.connect = </Root/FadeEdge_WithColor_Edge/DotProduct.outputs:out>
+            float inputs:low
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-668.8972, 242.87071)
+            int ui:nodegraph:node:stackingOrder = 945
+        }
+
+        def Shader "Oneminus"
+        {
+            uniform token info:id = "ND_realitykit_oneminus_float"
+            float inputs:in.connect = </Root/FadeEdge_WithColor_Edge/Clamp.outputs:out>
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-535.3425, 228.47618)
+            int ui:nodegraph:node:stackingOrder = 945
+        }
+
+        def Shader "Oneminus_1"
+        {
+            uniform token info:id = "ND_realitykit_oneminus_float"
+            float inputs:in.connect = </Root/FadeEdge_WithColor_Edge/Power.outputs:out>
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-282.20206, 65.887794)
+            int ui:nodegraph:node:stackingOrder = 897
+        }
+
+        def Shader "Power"
+        {
+            uniform token info:id = "ND_power_float"
+            float inputs:in1.connect = </Root/FadeEdge_WithColor_Edge/Oneminus.outputs:out>
+            float inputs:in2.connect = </Root/FadeEdge_WithColor_Edge.inputs:Falloff>
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-411.08878, 62.013412)
+            int ui:nodegraph:node:stackingOrder = 889
+        }
+
+        def Shader "Remap"
+        {
+            uniform token info:id = "ND_remap_float"
+            float inputs:in.connect = </Root/FadeEdge_WithColor_Edge/Oneminus_1.outputs:out>
+            float inputs:inhigh = 0.3
+            float inputs:inlow
+            float inputs:outhigh
+            float inputs:outlow
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-149.413, 137.46654)
+            int ui:nodegraph:node:stackingOrder = 889
+        }
+
+        def Shader "ConstantColor3"
+        {
+            uniform token info:id = "ND_constant_color3"
+            color3f inputs:value = (0.90588236, 0.37254903, 0.6392157) (
+                colorSpace = "srgb_texture"
+            )
+            color3f outputs:out
+            float2 ui:nodegraph:node:pos = (-345.2686, -154.73013)
+            int ui:nodegraph:node:stackingOrder = 1184
+        }
+
+        def Shader "ConstantColor3_1"
+        {
+            uniform token info:id = "ND_constant_color3"
+            color3f inputs:value = (1, 0.8509804, 0.2627451) (
+                colorSpace = "srgb_texture"
+            )
+            color3f outputs:out
+            float2 ui:nodegraph:node:pos = (-344.69333, -84.77714)
+            int ui:nodegraph:node:stackingOrder = 1184
+        }
+
+        def Shader "ConstantColor3_2"
+        {
+            uniform token info:id = "ND_constant_color3"
+            color3f inputs:value = (0.61053896, 0.61053896, 0.61053896) (
+                colorSpace = "srgb_displayp3"
+            )
+            color3f outputs:out
+            float2 ui:nodegraph:node:pos = (145.91736, -461.19373)
+            int ui:nodegraph:node:stackingOrder = 1195
+        }
+
+        def Shader "Clamp_1"
+        {
+            uniform token info:id = "ND_clamp_float"
+            float inputs:high
+            float inputs:in.connect = </Root/FadeEdge_WithColor_Edge/Remap.outputs:out>
+            float inputs:low
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (57.59958, 112.411255)
+            int ui:nodegraph:node:stackingOrder = 892
+        }
+
+        def Shader "Multiply_2"
+        {
+            uniform token info:id = "ND_multiply_float"
+            float inputs:in1.connect = </Root/FadeEdge_WithColor_Edge/Time.outputs:out>
+            float inputs:in2.connect = </Root/FadeEdge_WithColor_Edge.inputs:Speed>
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-934.19946, -348.34164)
+            int ui:nodegraph:node:stackingOrder = 1112
+        }
+
+        def Shader "Add_1"
+        {
+            uniform token info:id = "ND_add_vector2FA"
+            float2 inputs:in1.connect = </Root/FadeEdge_WithColor_Edge/Combine2.outputs:out>
+            float inputs:in2.connect = </Root/FadeEdge_WithColor_Edge/Multiply_2.outputs:out>
+            float2 outputs:out
+            float2 ui:nodegraph:node:pos = (-814.7615, -370.95688)
+            int ui:nodegraph:node:stackingOrder = 1112
+        }
+
+        def Shader "Time"
+        {
+            uniform token info:id = "ND_time_float"
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-1116.46, -382.67038)
+            int ui:nodegraph:node:stackingOrder = 1112
+        }
+
+        def Shader "Add_2"
+        {
+            uniform token info:id = "ND_add_vector2"
+            float2 inputs:in1.connect = </Root/FadeEdge_WithColor_Edge/Add_1.outputs:out>
+            float2 inputs:in2.connect = None
+            float2 outputs:out
+            float2 ui:nodegraph:node:pos = (-704.9209, -365.12155)
+            int ui:nodegraph:node:stackingOrder = 1112
+        }
+
+        def Shader "Noise2D"
+        {
+            uniform token info:id = "ND_noise2d_vector3"
+            float3 inputs:amplitude = (2, 2, 2)
+            float3 inputs:amplitude.connect = </Root/FadeEdge_WithColor_Edge/Combine3.outputs:out>
+            float inputs:pivot.connect = None
+            float2 inputs:texcoord.connect = </Root/FadeEdge_WithColor_Edge/Add_2.outputs:out>
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (-505.343, -477.59787)
+            int ui:nodegraph:node:stackingOrder = 1115
+            string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["outputs:out"]
+        }
+
+        def Shader "Combine3"
+        {
+            uniform token info:id = "ND_combine3_vector3"
+            float inputs:in1.connect = </Root/FadeEdge_WithColor_Edge.inputs:Strength>
+            float inputs:in2.connect = </Root/FadeEdge_WithColor_Edge.inputs:Strength>
+            float inputs:in3.connect = </Root/FadeEdge_WithColor_Edge.inputs:Strength>
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (-782.74976, -556.70154)
+            int ui:nodegraph:node:stackingOrder = 1112
+        }
+
+        def Shader "Mix"
+        {
+            uniform token info:id = "ND_mix_color3"
+            color3f inputs:bg.connect = </Root/FadeEdge_WithColor_Edge/ConstantColor3_1.outputs:out>
+            color3f inputs:fg.connect = </Root/FadeEdge_WithColor_Edge/ConstantColor3.outputs:out>
+            float inputs:mix.connect = </Root/FadeEdge_WithColor_Edge/Separate3.outputs:outy>
+            color3f outputs:out
+            float2 ui:nodegraph:node:pos = (-79.4361, -110.66264)
+            int ui:nodegraph:node:stackingOrder = 1184
+        }
+
+        def Shader "Separate3"
+        {
+            uniform token info:id = "ND_separate3_vector3"
+            float3 inputs:in.connect = </Root/FadeEdge_WithColor_Edge/Noise2D.outputs:out>
+            float outputs:outx
+            float outputs:outy
+            float outputs:outz
+            float2 ui:nodegraph:node:pos = (-286.50433, -307.43405)
+            int ui:nodegraph:node:stackingOrder = 697
+        }
+
+        def Shader "Mix_1"
+        {
+            uniform token info:id = "ND_mix_color3"
+            color3f inputs:bg.connect = </Root/FadeEdge_WithColor_Edge/Mix_2.outputs:out>
+            color3f inputs:fg.connect = </Root/FadeEdge_WithColor_Edge/ConstantColor3_2.outputs:out>
+            float inputs:mix.connect = </Root/FadeEdge_WithColor_Edge/Clamp_1.outputs:out>
+            color3f outputs:out
+            float2 ui:nodegraph:node:pos = (394.58975, -50.557205)
+            int ui:nodegraph:node:stackingOrder = 1193
+        }
+
+        def Shader "Combine2"
+        {
+            uniform token info:id = "ND_combine2_vector2"
+            float inputs:in1.connect = None
+            float inputs:in2.connect = </Root/FadeEdge_WithColor_Edge/DotProduct_1.outputs:out>
+            float2 outputs:out
+            float2 ui:nodegraph:node:pos = (-1129.043, -479.0829)
+            int ui:nodegraph:node:stackingOrder = 1112
+        }
+
+        def Shader "DotProduct_1"
+        {
+            uniform token info:id = "ND_dotproduct_vector3"
+            float3 inputs:in1.connect = </Root/FadeEdge_WithColor_Edge/Normal_2.outputs:out>
+            float3 inputs:in2.connect = </Root/FadeEdge_WithColor_Edge/ConstantFloat3.outputs:out>
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-1375.4385, -437.25055)
+            int ui:nodegraph:node:stackingOrder = 1112
+        }
+
+        def Shader "Normal_2"
+        {
+            uniform token info:id = "ND_normal_vector3"
+            string inputs:space = "object"
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (-1564.8984, -495.2142)
+            int ui:nodegraph:node:stackingOrder = 1112
+        }
+
+        def Shader "ConstantFloat3"
+        {
+            uniform token info:id = "ND_constant_vector3"
+            float3 inputs:value = (0, -1, 0)
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (-1571.3538, -393.27612)
+            int ui:nodegraph:node:stackingOrder = 1112
+        }
+
+        def Shader "Clamp_2"
+        {
+            uniform token info:id = "ND_clamp_float"
+            float inputs:high
+            float inputs:in.connect = </Root/FadeEdge_WithColor_Edge/DotProduct_1.outputs:out>
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-1193.6709, -134.38036)
+            int ui:nodegraph:node:stackingOrder = 1122
+        }
+
+        def Shader "Mix_2"
+        {
+            uniform token info:id = "ND_mix_color3"
+            color3f inputs:bg.connect = </Root/FadeEdge_WithColor_Edge/ConstantColor3_2.outputs:out>
+            color3f inputs:fg.connect = </Root/FadeEdge_WithColor_Edge/Mix.outputs:out>
+            float inputs:mix.connect = </Root/FadeEdge_WithColor_Edge/Multiply.outputs:out>
+            color3f outputs:out
+            float2 ui:nodegraph:node:pos = (161.16046, -46.70787)
+            int ui:nodegraph:node:stackingOrder = 1187
+        }
+
+        def Shader "Multiply"
+        {
+            uniform token info:id = "ND_multiply_float"
+            float inputs:in1.connect = </Root/FadeEdge_WithColor_Edge/Clamp_2.outputs:out>
+            float inputs:in2 = 2
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-854.6725, -7.603118)
+            int ui:nodegraph:node:stackingOrder = 1124
+        }
+    }
+
+    def Material "FadeEdge_WithColour_Full"
+    {
+        float inputs:Falloff = 0.8 (
+            customData = {
+                dictionary realitykit = {
+                    float2 positionInSubgraph = (-598.4375, 68.59797)
+                    int stackingOrderInSubgraph = 1271
+                }
+            }
+        )
+        float inputs:Speed = 0.5 (
+            colorSpace = ""
+            customData = {
+                dictionary realitykit = {
+                    float2 positionInSubgraph = (-1070.3132, -292.46906)
+                    int stackingOrderInSubgraph = 1069
+                }
+            }
+        )
+        float inputs:Strength = 1 (
+            colorSpace = ""
+            customData = {
+                dictionary realitykit = {
+                    float2 positionInSubgraph = (-977.5811, -558.985)
+                    int stackingOrderInSubgraph = 1069
+                }
+            }
+        )
+        token outputs:mtlx:surface.connect = </Root/FadeEdge_WithColour_Full/PreviewSurface.outputs:out>
+        token outputs:realitykit:vertex
+        float2 ui:nodegraph:node:pos = (-373.9523, -20.99091)
+        int ui:nodegraph:node:stackingOrder = 2
+        float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (582.91254, 101.71302)
+        int ui:nodegraph:realitykit:subgraphOutputs:stackingOrder = 201
+
+        def Shader "PreviewSurface"
+        {
+            uniform token info:id = "ND_UsdPreviewSurface_surfaceshader"
+            color3f inputs:diffuseColor.connect = </Root/FadeEdge_WithColour_Full/Mix_2.outputs:out>
+            float inputs:metallic
+            float3 inputs:normal
+            float inputs:opacity.connect = </Root/FadeEdge_WithColour_Full/Clamp_1.outputs:out>
+            float inputs:roughness = 0.5
+            token outputs:out
+            float2 ui:nodegraph:node:pos = (341.1625, 101.71302)
+            int ui:nodegraph:node:stackingOrder = 842
+        }
+
+        def Shader "ViewDirection"
+        {
+            uniform token info:id = "ND_realitykit_viewdirection_vector3"
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (-1126.669, 52.87625)
+            int ui:nodegraph:node:stackingOrder = 1269
+        }
+
+        def Shader "Normal"
+        {
+            uniform token info:id = "ND_normal_vector3"
+            string inputs:space = "world"
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (-1090.4307, 141.13016)
+            int ui:nodegraph:node:stackingOrder = 1269
+        }
+
+        def Shader "DotProduct"
+        {
+            uniform token info:id = "ND_dotproduct_vector3"
+            float3 inputs:in1.connect = </Root/FadeEdge_WithColour_Full/ViewDirection.outputs:out>
+            float3 inputs:in2.connect = </Root/FadeEdge_WithColour_Full/Normal.outputs:out>
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-895.6572, 107.88797)
+            int ui:nodegraph:node:stackingOrder = 1269
+        }
+
+        def Shader "Clamp"
+        {
+            uniform token info:id = "ND_clamp_float"
+            float inputs:high
+            float inputs:in.connect = </Root/FadeEdge_WithColour_Full/DotProduct.outputs:out>
+            float inputs:low
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-714.91113, 195.02469)
+            int ui:nodegraph:node:stackingOrder = 1269
+        }
+
+        def Shader "Oneminus"
+        {
+            uniform token info:id = "ND_realitykit_oneminus_float"
+            float inputs:in.connect = </Root/FadeEdge_WithColour_Full/Clamp.outputs:out>
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-581.35645, 180.63016)
+            int ui:nodegraph:node:stackingOrder = 1269
+        }
+
+        def Shader "Oneminus_1"
+        {
+            uniform token info:id = "ND_realitykit_oneminus_float"
+            float inputs:in.connect = </Root/FadeEdge_WithColour_Full/Power.outputs:out>
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-293.72275, 134.30414)
+            int ui:nodegraph:node:stackingOrder = 1130
+        }
+
+        def Shader "Power"
+        {
+            uniform token info:id = "ND_power_float"
+            float inputs:in1.connect = </Root/FadeEdge_WithColour_Full/Oneminus.outputs:out>
+            float inputs:in2.connect = </Root/FadeEdge_WithColour_Full.inputs:Falloff>
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-422.60947, 89.81586)
+            int ui:nodegraph:node:stackingOrder = 910
+        }
+
+        def Shader "Remap"
+        {
+            uniform token info:id = "ND_remap_float"
+            float inputs:in.connect = </Root/FadeEdge_WithColour_Full/Oneminus_1.outputs:out>
+            float inputs:inhigh = 0.3
+            float inputs:inlow
+            float inputs:outhigh
+            float inputs:outlow
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-160.9337, 165.26898)
+            int ui:nodegraph:node:stackingOrder = 910
+        }
+
+        def Shader "ConstantColor3"
+        {
+            uniform token info:id = "ND_constant_color3"
+            color3f inputs:value = (0.90588236, 0.37254903, 0.6392157) (
+                colorSpace = "srgb_texture"
+            )
+            color3f outputs:out
+            float2 ui:nodegraph:node:pos = (-361.5919, -193.35399)
+            int ui:nodegraph:node:stackingOrder = 997
+        }
+
+        def Shader "ConstantColor3_1"
+        {
+            uniform token info:id = "ND_constant_color3"
+            color3f inputs:value = (1, 0.8509804, 0.2627451) (
+                colorSpace = "srgb_texture"
+            )
+            color3f outputs:out
+            float2 ui:nodegraph:node:pos = (-361.01663, -123.400986)
+            int ui:nodegraph:node:stackingOrder = 997
+        }
+
+        def Shader "ConstantColor3_2"
+        {
+            uniform token info:id = "ND_constant_color3"
+            color3f inputs:value = (0.61053896, 0.61053896, 0.61053896) (
+                colorSpace = "srgb_displayp3"
+            )
+            color3f outputs:out
+            float2 ui:nodegraph:node:pos = (-143.78285, 4.5047474)
+            int ui:nodegraph:node:stackingOrder = 953
+        }
+
+        def Shader "Clamp_1"
+        {
+            uniform token info:id = "ND_clamp_float"
+            float inputs:high
+            float inputs:in.connect = </Root/FadeEdge_WithColour_Full/Remap.outputs:out>
+            float inputs:low
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (13.348086, 160.95984)
+            int ui:nodegraph:node:stackingOrder = 912
+        }
+
+        def Shader "Multiply_2"
+        {
+            uniform token info:id = "ND_multiply_float"
+            float inputs:in1.connect = </Root/FadeEdge_WithColour_Full/Time.outputs:out>
+            float inputs:in2.connect = </Root/FadeEdge_WithColour_Full.inputs:Speed>
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-886.3236, -337.70187)
+            int ui:nodegraph:node:stackingOrder = 1069
+        }
+
+        def Shader "Add_1"
+        {
+            uniform token info:id = "ND_add_vector2FA"
+            float2 inputs:in1.connect = </Root/FadeEdge_WithColour_Full/Combine2.outputs:out>
+            float inputs:in2.connect = </Root/FadeEdge_WithColour_Full/Multiply_2.outputs:out>
+            float2 outputs:out
+            float2 ui:nodegraph:node:pos = (-766.8856, -360.3171)
+            int ui:nodegraph:node:stackingOrder = 1069
+        }
+
+        def Shader "Time"
+        {
+            uniform token info:id = "ND_time_float"
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-1068.5841, -372.0306)
+            int ui:nodegraph:node:stackingOrder = 1069
+        }
+
+        def Shader "Noise2D"
+        {
+            uniform token info:id = "ND_noise2d_vector3"
+            float3 inputs:amplitude = (2, 2, 2)
+            float3 inputs:amplitude.connect = </Root/FadeEdge_WithColour_Full/Combine3.outputs:out>
+            float inputs:pivot.connect = None
+            float2 inputs:texcoord.connect = </Root/FadeEdge_WithColour_Full/Add_1.outputs:out>
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (-494.51785, -486.43137)
+            int ui:nodegraph:node:stackingOrder = 1069
+            string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["outputs:out"]
+        }
+
+        def Shader "Combine3"
+        {
+            uniform token info:id = "ND_combine3_vector3"
+            float inputs:in1.connect = </Root/FadeEdge_WithColour_Full.inputs:Strength>
+            float inputs:in2.connect = </Root/FadeEdge_WithColour_Full.inputs:Strength>
+            float inputs:in3.connect = </Root/FadeEdge_WithColour_Full.inputs:Strength>
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (-734.8739, -546.06177)
+            int ui:nodegraph:node:stackingOrder = 1069
+        }
+
+        def Shader "Mix"
+        {
+            uniform token info:id = "ND_mix_color3"
+            color3f inputs:bg.connect = </Root/FadeEdge_WithColour_Full/ConstantColor3_1.outputs:out>
+            color3f inputs:fg.connect = </Root/FadeEdge_WithColour_Full/ConstantColor3.outputs:out>
+            float inputs:mix.connect = </Root/FadeEdge_WithColour_Full/Separate3.outputs:outy>
+            color3f outputs:out
+            float2 ui:nodegraph:node:pos = (-98.30117, -161.0403)
+            int ui:nodegraph:node:stackingOrder = 950
+        }
+
+        def Shader "Separate3"
+        {
+            uniform token info:id = "ND_separate3_vector3"
+            float3 inputs:in.connect = </Root/FadeEdge_WithColour_Full/Noise2D.outputs:out>
+            float outputs:outx
+            float outputs:outy
+            float outputs:outz
+            float2 ui:nodegraph:node:pos = (-286.50433, -307.43405)
+            int ui:nodegraph:node:stackingOrder = 697
+        }
+
+        def Shader "Combine2"
+        {
+            uniform token info:id = "ND_combine2_vector2"
+            float inputs:in1.connect = </Root/FadeEdge_WithColour_Full/DotProduct_1.outputs:out>
+            float inputs:in2.connect = None
+            float2 outputs:out
+            float2 ui:nodegraph:node:pos = (-1081.1671, -468.4431)
+            int ui:nodegraph:node:stackingOrder = 1069
+        }
+
+        def Shader "DotProduct_1"
+        {
+            uniform token info:id = "ND_dotproduct_vector3"
+            float3 inputs:in1.connect = </Root/FadeEdge_WithColour_Full/Normal_2.outputs:out>
+            float3 inputs:in2.connect = </Root/FadeEdge_WithColour_Full/ConstantFloat3.outputs:out>
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-1327.5626, -426.61078)
+            int ui:nodegraph:node:stackingOrder = 1069
+        }
+
+        def Shader "Normal_2"
+        {
+            uniform token info:id = "ND_normal_vector3"
+            string inputs:space = "object"
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (-1517.0226, -484.57443)
+            int ui:nodegraph:node:stackingOrder = 1069
+        }
+
+        def Shader "ConstantFloat3"
+        {
+            uniform token info:id = "ND_constant_vector3"
+            float3 inputs:value = (0, -1, 0)
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (-1523.4779, -382.63635)
+            int ui:nodegraph:node:stackingOrder = 1069
+        }
+
+        def Shader "Clamp_2"
+        {
+            uniform token info:id = "ND_clamp_float"
+            float inputs:high
+            float inputs:in.connect = </Root/FadeEdge_WithColour_Full/DotProduct_1.outputs:out>
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-1153.2505, -120.06007)
+            int ui:nodegraph:node:stackingOrder = 1069
+        }
+
+        def Shader "Mix_2"
+        {
+            uniform token info:id = "ND_mix_color3"
+            color3f inputs:bg.connect = </Root/FadeEdge_WithColour_Full/ConstantColor3_2.outputs:out>
+            color3f inputs:fg.connect = </Root/FadeEdge_WithColour_Full/Mix.outputs:out>
+            float inputs:mix.connect = </Root/FadeEdge_WithColour_Full/Clamp_2.outputs:out>
+            color3f outputs:out
+            float2 ui:nodegraph:node:pos = (125.217155, -116.63072)
+            int ui:nodegraph:node:stackingOrder = 950
+        }
+    }
+
+    def Sphere "Sphere_1" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </Root/FadeEdge_WithColor_Edge> (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        double radius = 0.1
+        float2 ui:nodegraph:node:pos = (692.8126, 185.99022)
+        int ui:nodegraph:node:stackingOrder = 1
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def Sphere "Sphere_2" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </Root/FadeEdge_WithColour_Full> (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        double radius = 0.1
+        float2 ui:nodegraph:node:pos = (712.8126, 205.99022)
+        int ui:nodegraph:node:stackingOrder = 2
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0.25, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+}
+

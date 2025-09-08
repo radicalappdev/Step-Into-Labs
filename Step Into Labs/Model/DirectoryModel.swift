@@ -596,9 +596,9 @@ class ModelData {
 
         ,Lab(title: "Lab 080",
              type: .VOLUME,
-             date: Date("8/30/2025"),
+             date: Date("9/08/2025"),
              isFeatured: true,
-             subtitle: "",
+             subtitle: "Shake to enlarge",
              description: "")
 
 
