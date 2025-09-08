@@ -595,10 +595,10 @@ class ModelData {
              description: "This labs explores how the new Manipulation Component works with physics bodies.")
 
         ,Lab(title: "Lab 080",
-             type: .VOLUME,
+             type: .WINDOW,
              date: Date("9/08/2025"),
              isFeatured: true,
-             subtitle: "Shake to enlarge",
+             subtitle: "First Look at Unified coordinate conversion",
              description: "")
 
 
