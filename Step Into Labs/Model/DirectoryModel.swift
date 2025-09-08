@@ -598,8 +598,8 @@ class ModelData {
              type: .WINDOW,
              date: Date("9/08/2025"),
              isFeatured: true,
-             subtitle: "First Look at Unified coordinate conversion",
-             description: "")
+             subtitle: "First Look at Unified Coordinate Conversion",
+             description: "visionOS 26 brings a new unified coordinate system that we can use in SwiftUI and RealityKit.")
 
 
 

@@ -2,11 +2,11 @@
 //
 //  Title: Lab080
 //
-//  Subtitle:
+//  Subtitle: First Look at Unified Coordinate Conversion
 //
-//  Description:
+//  Description: visionOS 26 brings a new unified coordinate system that we can use in SwiftUI and RealityKit.
 //
-//  Type:
+//  Type: Window
 //
 //  Created by Joseph Simpson on 8/30/25.
 
@@ -36,10 +36,8 @@ struct Lab080: View {
                 .font(.title)
                 .padding(24)
 
-
             }
-            .onGeometryChange3D(for: Point3D.self) { proxy in
-                try! proxy
+            .onGeometryChange3D(for: Point3D.self) { proxy in try! proxy
                     .coordinateSpace3D()
                     .convert(value: Point3D.zero, to: .worldReference)
             } action: { old, new in
@@ -47,10 +45,8 @@ struct Lab080: View {
                 posY = Float(new.y)
                 posZ = Float(new.z)
             }
-
         }
     }
-
 }
 
 #Preview {
