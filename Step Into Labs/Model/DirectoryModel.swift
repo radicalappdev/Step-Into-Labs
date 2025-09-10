@@ -601,6 +601,13 @@ class ModelData {
              subtitle: "First Look at Unified Coordinate Conversion",
              description: "visionOS 26 brings a new unified coordinate system that we can use in SwiftUI and RealityKit.")
 
+        ,Lab(title: "Lab 081",
+             type: .VOLUME,
+             date: Date("9/10/2025"),
+             isFeatured: true,
+             subtitle: "Exploring Feathered Materials",
+             description: "")
+
 
 
 

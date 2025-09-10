@@ -10,7 +10,7 @@
 
 def Xform "Root"
 {
-    reorder nameChildren = ["Feathered", "FadeEdge", "FadeEdge_WithColor_Edge", "FadeEdge_WithColour_Full", "Sphere_0", "Sphere_1", "Sphere_2"]
+    reorder nameChildren = ["Feathered", "FadeEdge", "FadeEdge_WithColor_Edge", "FadeEdge_WithColour_Full", "Sphere_0", "Sphere_1", "Sphere_2", "Cube_0", "Cube_1", "Cube_2", "ToyRocket_0"]
     def Sphere "Sphere_0" (
         active = true
         prepend apiSchemas = ["MaterialBindingAPI"]
@@ -153,7 +153,16 @@ def Xform "Root"
 
     def Material "FadeEdge"
     {
-        float inputs:Falloff = 0.8 (
+        color3f inputs:Base_Color = (0.83137256, 0.73333335, 0.73333335) (
+            colorSpace = "srgb_displayp3"
+            customData = {
+                dictionary realitykit = {
+                    float2 positionInSubgraph = (96.48191, -100.81078)
+                    int stackingOrderInSubgraph = 846
+                }
+            }
+        )
+        float inputs:Falloff = 0.5 (
             customData = {
                 dictionary realitykit = {
                     float2 positionInSubgraph = (-461.98056, 48.4375)
@@ -171,7 +180,7 @@ def Xform "Root"
         def Shader "PreviewSurface"
         {
             uniform token info:id = "ND_UsdPreviewSurface_surfaceshader"
-            color3f inputs:diffuseColor.connect = None
+            color3f inputs:diffuseColor.connect = </Root/FadeEdge.inputs:Base_Color>
             float inputs:metallic
             float3 inputs:normal
             float inputs:opacity.connect = </Root/FadeEdge/Clamp_1.outputs:out>
@@ -274,11 +283,38 @@ def Xform "Root"
 
     def Material "FadeEdge_WithColor_Edge"
     {
-        float inputs:Falloff = 0.8 (
+        color3f inputs:Base_Color = (0.83137256, 0.73333335, 0.73333335) (
+            colorSpace = "srgb_displayp3"
+            customData = {
+                dictionary realitykit = {
+                    float2 positionInSubgraph = (145.91736, -461.19373)
+                    int stackingOrderInSubgraph = 1194
+                }
+            }
+        )
+        float inputs:Falloff = 0.5 (
             customData = {
                 dictionary realitykit = {
                     float2 positionInSubgraph = (-580.1044, 59.665756)
                     int stackingOrderInSubgraph = 889
+                }
+            }
+        )
+        color3f inputs:Highlight_1 = (0.90588236, 0.37254903, 0.6392157) (
+            colorSpace = "srgb_texture"
+            customData = {
+                dictionary realitykit = {
+                    float2 positionInSubgraph = (-345.2686, -154.73013)
+                    int stackingOrderInSubgraph = 1195
+                }
+            }
+        )
+        color3f inputs:Highlight_2 = (1, 0.8509804, 0.2627451) (
+            colorSpace = "srgb_texture"
+            customData = {
+                dictionary realitykit = {
+                    float2 positionInSubgraph = (-344.69333, -84.77714)
+                    int stackingOrderInSubgraph = 1194
                 }
             }
         )
@@ -399,39 +435,6 @@ def Xform "Root"
             int ui:nodegraph:node:stackingOrder = 889
         }
 
-        def Shader "ConstantColor3"
-        {
-            uniform token info:id = "ND_constant_color3"
-            color3f inputs:value = (0.90588236, 0.37254903, 0.6392157) (
-                colorSpace = "srgb_texture"
-            )
-            color3f outputs:out
-            float2 ui:nodegraph:node:pos = (-345.2686, -154.73013)
-            int ui:nodegraph:node:stackingOrder = 1184
-        }
-
-        def Shader "ConstantColor3_1"
-        {
-            uniform token info:id = "ND_constant_color3"
-            color3f inputs:value = (1, 0.8509804, 0.2627451) (
-                colorSpace = "srgb_texture"
-            )
-            color3f outputs:out
-            float2 ui:nodegraph:node:pos = (-344.69333, -84.77714)
-            int ui:nodegraph:node:stackingOrder = 1184
-        }
-
-        def Shader "ConstantColor3_2"
-        {
-            uniform token info:id = "ND_constant_color3"
-            color3f inputs:value = (0.61053896, 0.61053896, 0.61053896) (
-                colorSpace = "srgb_displayp3"
-            )
-            color3f outputs:out
-            float2 ui:nodegraph:node:pos = (145.91736, -461.19373)
-            int ui:nodegraph:node:stackingOrder = 1195
-        }
-
         def Shader "Clamp_1"
         {
             uniform token info:id = "ND_clamp_float"
@@ -508,8 +511,8 @@ def Xform "Root"
         def Shader "Mix"
         {
             uniform token info:id = "ND_mix_color3"
-            color3f inputs:bg.connect = </Root/FadeEdge_WithColor_Edge/ConstantColor3_1.outputs:out>
-            color3f inputs:fg.connect = </Root/FadeEdge_WithColor_Edge/ConstantColor3.outputs:out>
+            color3f inputs:bg.connect = </Root/FadeEdge_WithColor_Edge.inputs:Highlight_2>
+            color3f inputs:fg.connect = </Root/FadeEdge_WithColor_Edge.inputs:Highlight_1>
             float inputs:mix.connect = </Root/FadeEdge_WithColor_Edge/Separate3.outputs:outy>
             color3f outputs:out
             float2 ui:nodegraph:node:pos = (-79.4361, -110.66264)
@@ -531,7 +534,7 @@ def Xform "Root"
         {
             uniform token info:id = "ND_mix_color3"
             color3f inputs:bg.connect = </Root/FadeEdge_WithColor_Edge/Mix_2.outputs:out>
-            color3f inputs:fg.connect = </Root/FadeEdge_WithColor_Edge/ConstantColor3_2.outputs:out>
+            color3f inputs:fg.connect = </Root/FadeEdge_WithColor_Edge.inputs:Base_Color>
             float inputs:mix.connect = </Root/FadeEdge_WithColor_Edge/Clamp_1.outputs:out>
             color3f outputs:out
             float2 ui:nodegraph:node:pos = (394.58975, -50.557205)
@@ -589,7 +592,7 @@ def Xform "Root"
         def Shader "Mix_2"
         {
             uniform token info:id = "ND_mix_color3"
-            color3f inputs:bg.connect = </Root/FadeEdge_WithColor_Edge/ConstantColor3_2.outputs:out>
+            color3f inputs:bg.connect = </Root/FadeEdge_WithColor_Edge.inputs:Base_Color>
             color3f inputs:fg.connect = </Root/FadeEdge_WithColor_Edge/Mix.outputs:out>
             float inputs:mix.connect = </Root/FadeEdge_WithColor_Edge/Multiply.outputs:out>
             color3f outputs:out
@@ -610,11 +613,38 @@ def Xform "Root"
 
     def Material "FadeEdge_WithColour_Full"
     {
-        float inputs:Falloff = 0.8 (
+        color3f inputs:Base_Color = (0.83137256, 0.73333335, 0.73333335) (
+            colorSpace = "srgb_displayp3"
+            customData = {
+                dictionary realitykit = {
+                    float2 positionInSubgraph = (-59.386047, -455.37192)
+                    int stackingOrderInSubgraph = 1276
+                }
+            }
+        )
+        float inputs:Falloff = 0.5 (
             customData = {
                 dictionary realitykit = {
                     float2 positionInSubgraph = (-598.4375, 68.59797)
                     int stackingOrderInSubgraph = 1271
+                }
+            }
+        )
+        color3f inputs:Highlight_1 = (0.47450978, 0.086274505, 0.1764706) (
+            colorSpace = "srgb_displayp3"
+            customData = {
+                dictionary realitykit = {
+                    float2 positionInSubgraph = (-361.5919, -193.35399)
+                    int stackingOrderInSubgraph = 1277
+                }
+            }
+        )
+        color3f inputs:Highlight_2 = (0.003921569, 0.38039216, 0.41960785) (
+            colorSpace = "srgb_texture"
+            customData = {
+                dictionary realitykit = {
+                    float2 positionInSubgraph = (-361.01663, -123.400986)
+                    int stackingOrderInSubgraph = 1277
                 }
             }
         )
@@ -646,7 +676,7 @@ def Xform "Root"
         def Shader "PreviewSurface"
         {
             uniform token info:id = "ND_UsdPreviewSurface_surfaceshader"
-            color3f inputs:diffuseColor.connect = </Root/FadeEdge_WithColour_Full/Mix_2.outputs:out>
+            color3f inputs:diffuseColor.connect = </Root/FadeEdge_WithColour_Full/Mix_1.outputs:out>
             float inputs:metallic
             float3 inputs:normal
             float inputs:opacity.connect = </Root/FadeEdge_WithColour_Full/Clamp_1.outputs:out>
@@ -735,39 +765,6 @@ def Xform "Root"
             int ui:nodegraph:node:stackingOrder = 910
         }
 
-        def Shader "ConstantColor3"
-        {
-            uniform token info:id = "ND_constant_color3"
-            color3f inputs:value = (0.90588236, 0.37254903, 0.6392157) (
-                colorSpace = "srgb_texture"
-            )
-            color3f outputs:out
-            float2 ui:nodegraph:node:pos = (-361.5919, -193.35399)
-            int ui:nodegraph:node:stackingOrder = 997
-        }
-
-        def Shader "ConstantColor3_1"
-        {
-            uniform token info:id = "ND_constant_color3"
-            color3f inputs:value = (1, 0.8509804, 0.2627451) (
-                colorSpace = "srgb_texture"
-            )
-            color3f outputs:out
-            float2 ui:nodegraph:node:pos = (-361.01663, -123.400986)
-            int ui:nodegraph:node:stackingOrder = 997
-        }
-
-        def Shader "ConstantColor3_2"
-        {
-            uniform token info:id = "ND_constant_color3"
-            color3f inputs:value = (0.61053896, 0.61053896, 0.61053896) (
-                colorSpace = "srgb_displayp3"
-            )
-            color3f outputs:out
-            float2 ui:nodegraph:node:pos = (-143.78285, 4.5047474)
-            int ui:nodegraph:node:stackingOrder = 953
-        }
-
         def Shader "Clamp_1"
         {
             uniform token info:id = "ND_clamp_float"
@@ -834,8 +831,8 @@ def Xform "Root"
         def Shader "Mix"
         {
             uniform token info:id = "ND_mix_color3"
-            color3f inputs:bg.connect = </Root/FadeEdge_WithColour_Full/ConstantColor3_1.outputs:out>
-            color3f inputs:fg.connect = </Root/FadeEdge_WithColour_Full/ConstantColor3.outputs:out>
+            color3f inputs:bg.connect = </Root/FadeEdge_WithColour_Full.inputs:Highlight_2>
+            color3f inputs:fg.connect = </Root/FadeEdge_WithColour_Full.inputs:Highlight_1>
             float inputs:mix.connect = </Root/FadeEdge_WithColour_Full/Separate3.outputs:outy>
             color3f outputs:out
             float2 ui:nodegraph:node:pos = (-98.30117, -161.0403)
@@ -904,12 +901,23 @@ def Xform "Root"
         def Shader "Mix_2"
         {
             uniform token info:id = "ND_mix_color3"
-            color3f inputs:bg.connect = </Root/FadeEdge_WithColour_Full/ConstantColor3_2.outputs:out>
+            color3f inputs:bg.connect = </Root/FadeEdge_WithColour_Full.inputs:Base_Color>
             color3f inputs:fg.connect = </Root/FadeEdge_WithColour_Full/Mix.outputs:out>
             float inputs:mix.connect = </Root/FadeEdge_WithColour_Full/Clamp_2.outputs:out>
             color3f outputs:out
             float2 ui:nodegraph:node:pos = (125.217155, -116.63072)
             int ui:nodegraph:node:stackingOrder = 950
+        }
+
+        def Shader "Mix_1"
+        {
+            uniform token info:id = "ND_mix_color3"
+            color3f inputs:bg.connect = </Root/FadeEdge_WithColour_Full/Mix_2.outputs:out>
+            color3f inputs:fg.connect = </Root/FadeEdge_WithColour_Full.inputs:Base_Color>
+            float inputs:mix
+            color3f outputs:out
+            float2 ui:nodegraph:node:pos = (312.60547, -232.94531)
+            int ui:nodegraph:node:stackingOrder = 1276
         }
     }
 
@@ -945,6 +953,164 @@ def Xform "Root"
         float3 xformOp:scale = (1, 1, 1)
         float3 xformOp:translate = (0.25, 0, 0)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def Cube "Cube_0" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (0, 0.78539807, 0)
+        }
+    )
+    {
+        rel material:binding = </Root/FadeEdge> (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        double size = 0.15
+        quatf xformOp:orient = (0.92387956, 0, 0.38268337, 0)
+        float3 xformOp:translate = (-0.25, 0.3, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def Cube "Cube_1" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (0, 0.78539807, 0)
+        }
+    )
+    {
+        rel material:binding = </Root/FadeEdge_WithColor_Edge> (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        double size = 0.15
+        float2 ui:nodegraph:node:pos = (20, 20)
+        int ui:nodegraph:node:stackingOrder = 1
+        quatf xformOp:orient = (0.92387956, 0, 0.38268334, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 0.3, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def Cube "Cube_2" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (0, 0.78539807, 0)
+        }
+    )
+    {
+        rel material:binding = </Root/FadeEdge_WithColour_Full> (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        double size = 0.15
+        float2 ui:nodegraph:node:pos = (40, 40)
+        int ui:nodegraph:node:stackingOrder = 2
+        quatf xformOp:orient = (0.92387956, 0, 0.38268334, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0.25, 0.3, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "ToyRocket_0" (
+        active = true
+        references = @ToyRocket.usdz@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (-0.25, 0.5, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "geom"
+        {
+            over "realistic"
+            {
+                over "geo"
+                {
+                    over "lod0"
+                    {
+                        over "toy_rocket_realistic_lod0" (
+                            prepend apiSchemas = ["MaterialBindingAPI"]
+                        )
+                        {
+                            rel material:binding = </Root/FadeEdge> (
+                                bindMaterialAs = "weakerThanDescendants"
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    def "ToyRocket_1" (
+        active = true
+        references = @ToyRocket.usdz@
+    )
+    {
+        float2 ui:nodegraph:node:pos = (-94.30011, -202.661)
+        int ui:nodegraph:node:stackingOrder = 1
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (-0.25, 0.5, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "geom"
+        {
+            over "realistic"
+            {
+                over "geo"
+                {
+                    over "lod0"
+                    {
+                        over "toy_rocket_realistic_lod0" (
+                            prepend apiSchemas = ["MaterialBindingAPI"]
+                        )
+                        {
+                            rel material:binding = </Root/FadeEdge_WithColor_Edge> (
+                                bindMaterialAs = "weakerThanDescendants"
+                            )
+                            float3 xformOp:translate = (0.25, 0, 0)
+                            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    def "ToyRocket_2" (
+        active = true
+        references = @ToyRocket.usdz@
+    )
+    {
+        float2 ui:nodegraph:node:pos = (-74.30011, -182.661)
+        int ui:nodegraph:node:stackingOrder = 2
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (-0.25, 0.5, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "geom"
+        {
+            over "realistic"
+            {
+                over "geo"
+                {
+                    over "lod0"
+                    {
+                        over "toy_rocket_realistic_lod0" (
+                            prepend apiSchemas = ["MaterialBindingAPI"]
+                        )
+                        {
+                            rel material:binding = </Root/FadeEdge_WithColour_Full> (
+                                bindMaterialAs = "weakerThanDescendants"
+                            )
+                            float3 xformOp:translate = (0.5, 0, 0)
+                            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
