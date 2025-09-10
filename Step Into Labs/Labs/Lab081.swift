@@ -21,6 +21,18 @@ struct Lab081: View {
             guard let scene = try? await Entity(named: "FeatheredMatLab", in: realityKitContentBundle) else { return }
             content.add(scene)
 
+            // Add ManipulationComponent to every entity that already has an InputTargetComponent (added in RCP)
+            var stack: [Entity] = Array(content.entities)
+            await MainActor.run {
+                while let entity = stack.popLast() {
+                    if entity.components.has(InputTargetComponent.self) &&
+                        !entity.components.has(ManipulationComponent.self) {
+                        entity.components.set(ManipulationComponent())
+                    }
+                    stack.append(contentsOf: entity.children)
+                }
+            }
+
         }
         .realityViewLayoutBehavior(.centered)
     }

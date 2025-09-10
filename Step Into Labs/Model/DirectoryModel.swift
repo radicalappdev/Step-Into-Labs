@@ -606,7 +606,7 @@ class ModelData {
              date: Date("9/10/2025"),
              isFeatured: true,
              subtitle: "Exploring Feathered Materials",
-             description: "")
+             description: "Adding soft, gradual transition at the edges of 3D objects.")
 
 
 
