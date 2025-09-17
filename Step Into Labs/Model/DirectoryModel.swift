@@ -555,28 +555,28 @@ class ModelData {
         ,Lab(title: "Lab 074",
              type: .WINDOW,
              date: Date("7/30/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Mocking up a clock using Radial Layout",
              description: "Using SwiftUI views, modifiers, and a layout to create a simple clock.")
 
         ,Lab(title: "Lab 075",
              type: .WINDOW,
              date: Date("8/02/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Visualizing SwiftUI Frames",
              description: "Using an incredibly useful view extension from WWDC 2025 to debug and visualize spatial layouts.")
 
         ,Lab(title: "Lab 076",
              type: .VOLUME,
              date: Date("8/11/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Custom Layout: ArcLayout",
              description: "Adapting the RadialLayout from Apple into an ArcLayout.")
 
         ,Lab(title: "Lab 077",
              type: .VOLUME,
              date: Date("8/17/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Ornaments in Presentations?",
              description: "We *can* add ornaments to popovers shown by PresentationComponent, but I'm not sure if we *should*.")
 
@@ -590,7 +590,7 @@ class ModelData {
         ,Lab(title: "Lab 079",
              type: .VOLUME,
              date: Date("8/26/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Using Physics with Manipulation Component",
              description: "This labs explores how the new Manipulation Component works with physics bodies.")
 
@@ -609,11 +609,11 @@ class ModelData {
              description: "Adding soft, gradual transition at the edges of 3D objects.")
 
         ,Lab(title: "Lab 082",
-             type: .VOLUME,
+             type: .WINDOW_ALT,
              date: Date("9/16/2025"),
              isFeatured: true,
-             subtitle: "Using implicit display mode with glassBackgroundEffect",
-             description: "When using implicit display mode on entities that have been offset on the z-axis..")
+             subtitle: "Using implicit glassBackgroundEffect with depth",
+             description: "We can use implicit display mode to show glass on views that have a Z offset.")
 
 
 
