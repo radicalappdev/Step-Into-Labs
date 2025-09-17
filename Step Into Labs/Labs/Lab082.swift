@@ -15,19 +15,22 @@ import RealityKit
 import RealityKitContent
 
 struct Lab082: View {
+
     @State private var showBackground = true
-    @State private var isClicked = false
+    @State private var showDepth = false
+
     var body: some View {
         VStack(alignment: .center) {
             Spacer()
             HStack {
                 CardView(imageName: "applewatch.watchface", title: "Apple Watch", caption: "Series 11")
-                    .offset(z: isClicked ? 40 : 0)
+                    .offset(z: showDepth ? 40 : 0)
 
-                CardView(imageName: "iphone.gen3", title: "iPhone", caption: "Pro 17, Silver")                    .offset(z: isClicked ? 120 : 0)
+                CardView(imageName: "iphone.gen3", title: "iPhone", caption: "Pro 17, Silver")
+                    .offset(z: showDepth ? 120 : 0)
 
                 CardView(imageName: "airpods.pro", title: "AirPods Pro", caption: "3rd Generation")
-                    .offset(z: isClicked ? 80 : 0)
+                    .offset(z: showDepth ? 80 : 0)
             }
             Spacer()
         }
@@ -40,14 +43,14 @@ struct Lab082: View {
                     Text("Background")
                 }
                 .toggleStyle(.button)
-                Toggle(isOn: $isClicked.animation()) {
+                Toggle(isOn: $showDepth.animation()) {
                     Text("Depth")
                 }
                 .toggleStyle(.button)
             }
             .controlSize(.small)
             .padding(4)
-            .glassBackgroundEffect(displayMode: .implicit)
+            .glassBackgroundEffect()
         })
     }
 }
@@ -70,11 +73,13 @@ fileprivate struct CardView : View {
         }
         .padding(12)
         .frame(width: 180, height: 120,)
+
+
+        // Each card uses implicit display mode
         .glassBackgroundEffect(displayMode: .implicit)
 
+
     }
-
-
 }
 
 
