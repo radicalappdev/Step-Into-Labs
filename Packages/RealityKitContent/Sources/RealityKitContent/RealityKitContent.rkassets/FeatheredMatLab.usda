@@ -180,16 +180,16 @@ def Xform "Root"
             colorSpace = "srgb_displayp3"
             customData = {
                 dictionary realitykit = {
-                    float2 positionInSubgraph = (96.48191, -100.81078)
-                    int stackingOrderInSubgraph = 846
+                    float2 positionInSubgraph = (143.24652, -106.793274)
+                    int stackingOrderInSubgraph = 847
                 }
             }
         )
         float inputs:Falloff = 0.5 (
             customData = {
                 dictionary realitykit = {
-                    float2 positionInSubgraph = (-461.98056, 48.4375)
-                    int stackingOrderInSubgraph = 758
+                    float2 positionInSubgraph = (-502.63522, -16.915842)
+                    int stackingOrderInSubgraph = 1290
                 }
             }
         )
@@ -210,15 +210,15 @@ def Xform "Root"
             float inputs:roughness = 0.5
             token outputs:out
             float2 ui:nodegraph:node:pos = (341.1625, 101.71302)
-            int ui:nodegraph:node:stackingOrder = 715
+            int ui:nodegraph:node:stackingOrder = 1171
         }
 
         def Shader "ViewDirection"
         {
             uniform token info:id = "ND_realitykit_viewdirection_vector3"
             float3 outputs:out
-            float2 ui:nodegraph:node:pos = (-983.0467, 81.06342)
-            int ui:nodegraph:node:stackingOrder = 844
+            float2 ui:nodegraph:node:pos = (-1021.89703, 16.088469)
+            int ui:nodegraph:node:stackingOrder = 1035
         }
 
         def Shader "Normal"
@@ -227,7 +227,7 @@ def Xform "Root"
             string inputs:space = "world"
             float3 outputs:out
             float2 ui:nodegraph:node:pos = (-946.8084, 169.31734)
-            int ui:nodegraph:node:stackingOrder = 844
+            int ui:nodegraph:node:stackingOrder = 1288
         }
 
         def Shader "DotProduct"
@@ -237,7 +237,7 @@ def Xform "Root"
             float3 inputs:in2.connect = </Root/FadeEdge/Normal.outputs:out>
             float outputs:out
             float2 ui:nodegraph:node:pos = (-752.035, 136.07515)
-            int ui:nodegraph:node:stackingOrder = 844
+            int ui:nodegraph:node:stackingOrder = 1288
         }
 
         def Shader "Clamp"
@@ -248,7 +248,7 @@ def Xform "Root"
             float inputs:low
             float outputs:out
             float2 ui:nodegraph:node:pos = (-571.2889, 223.21187)
-            int ui:nodegraph:node:stackingOrder = 844
+            int ui:nodegraph:node:stackingOrder = 1288
         }
 
         def Shader "Oneminus"
@@ -257,7 +257,7 @@ def Xform "Root"
             float inputs:in.connect = </Root/FadeEdge/Clamp.outputs:out>
             float outputs:out
             float2 ui:nodegraph:node:pos = (-437.7342, 208.81734)
-            int ui:nodegraph:node:stackingOrder = 844
+            int ui:nodegraph:node:stackingOrder = 1288
         }
 
         def Shader "Oneminus_1"
@@ -265,8 +265,8 @@ def Xform "Root"
             uniform token info:id = "ND_realitykit_oneminus_float"
             float inputs:in.connect = </Root/FadeEdge/Power.outputs:out>
             float outputs:out
-            float2 ui:nodegraph:node:pos = (-157.5352, 62.397358)
-            int ui:nodegraph:node:stackingOrder = 762
+            float2 ui:nodegraph:node:pos = (-165.2503, 73.03201)
+            int ui:nodegraph:node:stackingOrder = 1292
         }
 
         def Shader "Power"
@@ -276,7 +276,7 @@ def Xform "Root"
             float inputs:in2.connect = </Root/FadeEdge.inputs:Falloff>
             float outputs:out
             float2 ui:nodegraph:node:pos = (-292.96494, 50.785156)
-            int ui:nodegraph:node:stackingOrder = 758
+            int ui:nodegraph:node:stackingOrder = 1169
         }
 
         def Shader "Remap"
@@ -289,7 +289,7 @@ def Xform "Root"
             float inputs:outlow
             float outputs:out
             float2 ui:nodegraph:node:pos = (-31.289165, 126.23828)
-            int ui:nodegraph:node:stackingOrder = 758
+            int ui:nodegraph:node:stackingOrder = 1169
         }
 
         def Shader "Clamp_1"
@@ -300,7 +300,7 @@ def Xform "Root"
             float inputs:low
             float outputs:out
             float2 ui:nodegraph:node:pos = (130.31764, 133.93823)
-            int ui:nodegraph:node:stackingOrder = 760
+            int ui:nodegraph:node:stackingOrder = 1169
         }
     }
 

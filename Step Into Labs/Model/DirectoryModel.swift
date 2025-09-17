@@ -608,6 +608,13 @@ class ModelData {
              subtitle: "Exploring Feathered Materials",
              description: "Adding soft, gradual transition at the edges of 3D objects.")
 
+        ,Lab(title: "Lab 082",
+             type: .VOLUME,
+             date: Date("9/16/2025"),
+             isFeatured: true,
+             subtitle: "Using implicit display mode with glassBackgroundEffect",
+             description: "When using implicit display mode on entities that have been offset on the z-axis..")
+
 
 
 
