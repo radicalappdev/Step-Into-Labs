@@ -619,8 +619,8 @@ class ModelData {
              type: .WINDOW_ALT,
              date: Date("9/18/2025"),
              isFeatured: true,
-             subtitle: "Animated feathered glass titles",
-             description: "")
+             subtitle: "Feathered glass title card",
+             description: "A mock up of a title card for the Shared Visions Project.")
 
 
 
