@@ -610,10 +610,17 @@ class ModelData {
 
         ,Lab(title: "Lab 082",
              type: .WINDOW_ALT,
-             date: Date("9/16/2025"),
+             date: Date("9/17/2025"),
              isFeatured: true,
              subtitle: "Using implicit glassBackgroundEffect with depth",
              description: "We can use implicit display mode to show glass on views that have a Z offset.")
+
+        ,Lab(title: "Lab 083",
+             type: .WINDOW_ALT,
+             date: Date("9/18/2025"),
+             isFeatured: true,
+             subtitle: "Animated feathered glass titles",
+             description: "")
 
 
 
