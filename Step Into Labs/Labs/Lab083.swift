@@ -18,17 +18,29 @@ struct Lab083: View {
     @State private var progress: CGFloat = 0.0
 
     var body: some View {
-        ZStack {
-            Text("Feathered Glass Background Effect")
+        VStack(spacing: 18) {
+
+            Text("Shared Visions")
                 .font(.extraLargeTitle)
+                .shadow(radius: 12)
+
+            Text("Stories from the Apple Vision Pro community.")
+                .shadow(radius: 12)
+
+            Button(action: {}, label: {
+                Label("Explore", systemImage: "heart.fill")
+            })
+            .shadow(radius: 12)
         }
+        .padding(18)
         .glassBackgroundEffect(
             .feathered(
                 padding: 36,
-                softEdgeRadius: 3 + (9 * progress) // min 3, animates up to 12
+                softEdgeRadius: 4 + (6 * progress)
             ),
             displayMode: .always
         )
+
 
         .onAppear {
             withAnimation(.easeInOut(duration: 4.0).repeatForever()) {
