@@ -622,6 +622,13 @@ class ModelData {
              subtitle: "Feathered glass title card",
              description: "A mock up of a title card for the Shared Visions Project.")
 
+        ,Lab(title: "Lab 084",
+             type: .VOLUME,
+             date: Date("9/20/2025"),
+             isFeatured: true,
+             subtitle: "Background Glass as Material",
+             description: "Using the BlurredBackground Shader Graph Node.")
+
 
 
 

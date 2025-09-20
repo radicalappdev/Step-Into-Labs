@@ -1,0 +1,299 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 2.0 (494.8.1)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    def Cube "BlurredBackgroundCube" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        reorder nameChildren = ["BlurredBackgroundMat", "InputTarget", "Collider", "BlurredBackgroundColorMat"]
+        rel material:binding = </Root/BlurredBackgroundCube/BlurredBackgroundMat>
+        double size = 0.2
+        float3 xformOp:translate = (0, -0.1, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "BlurredBackgroundMat"
+        {
+            token outputs:mtlx:surface.connect = </Root/BlurredBackgroundCube/BlurredBackgroundMat/PreviewSurface.outputs:out>
+            token outputs:realitykit:vertex
+            token outputs:surface.connect = </Root/BlurredBackgroundCube/BlurredBackgroundMat/DefaultSurfaceShader.outputs:surface>
+            float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (599.75, 154.5)
+            int ui:nodegraph:realitykit:subgraphOutputs:stackingOrder = 3
+
+            def Shader "DefaultSurfaceShader" (
+                active = false
+            )
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+
+            def Shader "PreviewSurface"
+            {
+                uniform token info:id = "ND_UsdPreviewSurface_surfaceshader"
+                float inputs:clearcoat
+                float inputs:clearcoatRoughness
+                color3f inputs:diffuseColor.connect = </Root/BlurredBackgroundCube/BlurredBackgroundMat/BlurredBackground.outputs:out>
+                color3f inputs:emissiveColor.connect = None
+                float inputs:ior
+                float inputs:metallic
+                float3 inputs:normal
+                float inputs:occlusion
+                float inputs:opacity = 1
+                float inputs:opacityThreshold
+                float inputs:roughness
+                token outputs:out
+                float2 ui:nodegraph:node:pos = (358, 154.5)
+                int ui:nodegraph:node:stackingOrder = 43
+                string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["Advanced", "inputs:diffuseColor"]
+            }
+
+            def Shader "BlurredBackground"
+            {
+                uniform token info:id = "ND_realitykit_background_blur_color3"
+                color3f outputs:out
+                float2 ui:nodegraph:node:pos = (-143.58203, 143.23438)
+                int ui:nodegraph:node:stackingOrder = 51
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.2, 0.2, 0.2)
+                token shapeType = "Box"
+
+                def RealityKitStruct "pose"
+                {
+                }
+            }
+        }
+
+        def Material "BlurredBackgroundColorMat"
+        {
+            color3f inputs:Base_Color = (0.5686275, 0.3254902, 0.57254905) (
+                colorSpace = "srgb_displayp3"
+                customData = {
+                    dictionary realitykit = {
+                        float2 positionInSubgraph = (-146.51172, 11.425781)
+                        int stackingOrderInSubgraph = 52
+                    }
+                }
+            )
+            token outputs:mtlx:surface.connect = </Root/BlurredBackgroundCube/BlurredBackgroundColorMat/PreviewSurface.outputs:out>
+            token outputs:realitykit:vertex
+            token outputs:surface.connect = None
+            float2 ui:nodegraph:node:pos = (230, 165)
+            int ui:nodegraph:node:stackingOrder = 1
+            float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (599.75, 154.5)
+            int ui:nodegraph:realitykit:subgraphOutputs:stackingOrder = 3
+
+            def Shader "DefaultSurfaceShader" (
+                active = false
+            )
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+
+            def Shader "PreviewSurface"
+            {
+                uniform token info:id = "ND_UsdPreviewSurface_surfaceshader"
+                float inputs:clearcoat
+                float inputs:clearcoatRoughness
+                color3f inputs:diffuseColor.connect = </Root/BlurredBackgroundCube/BlurredBackgroundColorMat/Mix.outputs:out>
+                color3f inputs:emissiveColor.connect = None
+                float inputs:ior
+                float inputs:metallic
+                float3 inputs:normal
+                float inputs:occlusion
+                float inputs:opacity = 1
+                float inputs:opacityThreshold
+                float inputs:roughness
+                token outputs:out
+                float2 ui:nodegraph:node:pos = (358, 154.5)
+                int ui:nodegraph:node:stackingOrder = 43
+                string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["Advanced", "inputs:diffuseColor"]
+            }
+
+            def Shader "BlurredBackground"
+            {
+                uniform token info:id = "ND_realitykit_background_blur_color3"
+                color3f outputs:out
+                float2 ui:nodegraph:node:pos = (-143.58203, 143.23438)
+                int ui:nodegraph:node:stackingOrder = 51
+            }
+
+            def Shader "Mix"
+            {
+                uniform token info:id = "ND_mix_color3"
+                color3f inputs:bg.connect = </Root/BlurredBackgroundCube/BlurredBackgroundColorMat/BlurredBackground.outputs:out>
+                color3f inputs:fg.connect = </Root/BlurredBackgroundCube/BlurredBackgroundColorMat.inputs:Base_Color>
+                float inputs:mix = 0.5
+                color3f outputs:out
+                float2 ui:nodegraph:node:pos = (114.828125, 102.79297)
+                int ui:nodegraph:node:stackingOrder = 31
+            }
+        }
+    }
+
+    def Capsule "Capsule" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        uniform token axis = "Y"
+        double height = 0.2
+        rel material:binding = </Root/BlurredBackgroundCube/BlurredBackgroundMat> (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        double radius = 0.1
+        float3 xformOp:translate = (0.3, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.2, 0.4, 0.20000002)
+                float height = 0.4
+                float radius = 0.10000001
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                    float3 position = (0, 0, -3.7252903e-9)
+                }
+            }
+        }
+    }
+
+    def Sphere "Sphere" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </Root/BlurredBackgroundCube/BlurredBackgroundMat> (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        double radius = 0.1
+        float3 xformOp:translate = (-0.3, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.2, 0.2, 0.2)
+                float radius = 0.1
+                token shapeType = "Sphere"
+
+                def RealityKitStruct "pose"
+                {
+                }
+            }
+        }
+    }
+
+    def "ToyRocket" (
+        active = true
+        references = @ToyRocket.usdz@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (-0.002460301, -0.096649386, -0.19905235)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "geom"
+        {
+            over "realistic"
+            {
+                over "geo"
+                {
+                    over "lod0"
+                    {
+                        over "toy_rocket_realistic_lod0" (
+                            prepend apiSchemas = ["MaterialBindingAPI"]
+                        )
+                        {
+                            rel material:binding = </Root/BlurredBackgroundCube/BlurredBackgroundMat> (
+                                bindMaterialAs = "weakerThanDescendants"
+                            )
+                            float3 xformOp:translate = (0.002460301, 0.19664939, 0.19905235)
+                            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+                        }
+                    }
+                }
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.14075813, 0.23484677, 0.14075813)
+                token shapeType = "Box"
+
+                def RealityKitStruct "pose"
+                {
+                    float3 position = (0.0024602897, 0.32063976, 0.19905235)
+                }
+            }
+        }
+    }
+}
+
