@@ -629,6 +629,13 @@ class ModelData {
              subtitle: "Background Glass as Material",
              description: "Using the BlurredBackground Shader Graph Node.")
 
+        ,Lab(title: "Lab 085",
+             type: .SPACE,
+             date: Date("9/22/2025"),
+             isFeatured: true,
+             subtitle: "Background Glass Material Showcase",
+             description: "Using the BlurredBackground material to build a showcase object.")
+
 
 
 

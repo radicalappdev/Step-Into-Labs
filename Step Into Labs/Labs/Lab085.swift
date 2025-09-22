@@ -1,24 +1,24 @@
 //  Step Into Vision - Labs
 //
-//  Title: Lab084
+//  Title: Lab085
 //
-//  Subtitle: Background Glass as Material
+//  Subtitle: Background Glass Material Showcase
 //
-//  Description: Using the BlurredBackground Shader Graph Node.
+//  Description: Using the BlurredBackground material to build a showcase object.
 //
-//  Type: Volume
+//  Type: Space
 //
-//  Created by Joseph Simpson on 9/20/25.
+//  Created by Joseph Simpson on 9/22/25.
 
 import SwiftUI
 import RealityKit
 import RealityKitContent
 
-struct Lab084: View {
+struct Lab085: View {
     var body: some View {
         RealityView { content in
 
-            guard let scene = try? await Entity(named: "BackgroundGlass", in: realityKitContentBundle) else { return }
+            guard let scene = try? await Entity(named: "BackgroundGlassShowcase", in: realityKitContentBundle) else { return }
             content.add(scene)
 
             // Add ManipulationComponent to every entity that already has an InputTargetComponent (added in RCP)
@@ -32,10 +32,11 @@ struct Lab084: View {
                     stack.append(contentsOf: entity.children)
                 }
             }
+
         }
     }
 }
 
 #Preview {
-    Lab084()
+    Lab085()
 }
