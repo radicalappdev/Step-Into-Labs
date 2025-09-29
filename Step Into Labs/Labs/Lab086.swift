@@ -27,7 +27,14 @@ struct Lab086: View {
 
             // Import the scene from RCP and capture the capsules
             guard let scene = try? await Entity(named: "CatchingGame", in: realityKitContentBundle) else { return }
+
+            // Reducing gravity
+            var ps = PhysicsSimulationComponent()
+            ps.gravity = [0, -5, 0]
+            scene.components.set(ps)
             content.add(scene)
+
+
             guard let floor = scene.findEntity(named: "FloorBounds") else { return }
             guard let capsuleGroup = scene.findEntity(named: "Capsules") else { return }
             let mc = ManipulationComponent()
@@ -39,7 +46,7 @@ struct Lab086: View {
             // Set up the menu
             let gameMenuAttachment = ViewAttachmentComponent(rootView: GameMenu().environment(gameModel))
             menu.components.set(gameMenuAttachment)
-            menu.position = .init(x: 0, y: 1.5, z: -1)
+            menu.position = .init(x: 0, y: 1.2, z: -1)
             scene.addChild(menu)
 
             // Set up events
@@ -47,6 +54,7 @@ struct Lab086: View {
             // We'll use this event to determine success
             self.willBegin = content.subscribe(to: ManipulationEvents.WillBegin.self) { event in
                 gameModel.addScore()
+                gameModel.caughtCapsules.append(event.entity)
                 print("Success!")
             }
 
@@ -54,6 +62,9 @@ struct Lab086: View {
             self.collisionBegan = content
                 .subscribe(to: CollisionEvents.Began.self, on: floor)  { collisionEvent in
                     if(gameModel.lastCollision == collisionEvent.entityB.name) {
+                        return
+                    }
+                    if(gameModel.caughtCapsules.contains(where: { $0.name == collisionEvent.entityB.name })) {
                         return
                     }
                     print("\(collisionEvent.entityB.name) reached the ground!")
@@ -81,6 +92,7 @@ fileprivate class GameModel {
 
     var capsules: [Entity] = []
     var activeCapsules: [Entity] = []
+    var caughtCapsules: [Entity] = []
     var gameState: GameState = .setup
     var menu = Entity()
     var score = 0
@@ -103,7 +115,7 @@ fileprivate class GameModel {
             capsule.components.set(mc)
             capsule.components[PhysicsBodyComponent.self]?.isAffectedByGravity = false
             capsule.components.set(PhysicsMotionComponent())
-            capsule.position.y = 1.5
+            capsule.position.y = 2
             capsule.components.remove(OpacityComponent.self)
         }
     }

@@ -11,6 +11,9 @@
 def Xform "Root"
 {
     reorder nameChildren = ["MaplePlywood", "Capsules", "FloorBounds"]
+    float3 xformOp:translate = (0, 0, -0.25)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
     def Cylinder "FloorBounds" (
         prepend apiSchemas = ["MaterialBindingAPI"]
     )
@@ -113,7 +116,7 @@ def Xform "Root"
             double radius = 0.06
             quatf xformOp:orient = (1, 0, 0, 0)
             float3 xformOp:scale = (1, 1, 1)
-            float3 xformOp:translate = (-1.5, 1.5, 0)
+            float3 xformOp:translate = (-1.5, 2, 0)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
             def RealityKitComponent "Collider"
@@ -186,7 +189,7 @@ def Xform "Root"
             int ui:nodegraph:node:stackingOrder = 1
             quatf xformOp:orient = (1, 0, 0, 0)
             float3 xformOp:scale = (1, 1, 1)
-            float3 xformOp:translate = (-1.25, 1.5, -0.74)
+            float3 xformOp:translate = (-1.25, 2, -0.74)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
             def RealityKitComponent "Collider"
@@ -259,7 +262,7 @@ def Xform "Root"
             int ui:nodegraph:node:stackingOrder = 2
             quatf xformOp:orient = (1, 0, 0, 0)
             float3 xformOp:scale = (1, 1, 1)
-            float3 xformOp:translate = (-0.75, 1.5, -1.25)
+            float3 xformOp:translate = (-0.75, 2, -1.25)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
             def RealityKitComponent "Collider"
@@ -332,7 +335,7 @@ def Xform "Root"
             int ui:nodegraph:node:stackingOrder = 3
             quatf xformOp:orient = (1, 0, 0, 0)
             float3 xformOp:scale = (1, 1, 1)
-            float3 xformOp:translate = (0, 1.5, -1.5)
+            float3 xformOp:translate = (0, 2, -1.5)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
             def RealityKitComponent "Collider"
@@ -405,7 +408,7 @@ def Xform "Root"
             int ui:nodegraph:node:stackingOrder = 3
             quatf xformOp:orient = (1, 0, 0, 0)
             float3 xformOp:scale = (1, 1, 1)
-            float3 xformOp:translate = (0.75, 1.5, -1.25)
+            float3 xformOp:translate = (0.75, 2, -1.25)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
             def RealityKitComponent "Collider"
@@ -478,7 +481,7 @@ def Xform "Root"
             int ui:nodegraph:node:stackingOrder = 2
             quatf xformOp:orient = (1, 0, 0, 0)
             float3 xformOp:scale = (1, 1, 1)
-            float3 xformOp:translate = (1.25, 1.5, -0.74)
+            float3 xformOp:translate = (1.25, 2, -0.74)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
             def RealityKitComponent "Collider"
@@ -551,7 +554,7 @@ def Xform "Root"
             int ui:nodegraph:node:stackingOrder = 1
             quatf xformOp:orient = (1, 0, 0, 0)
             float3 xformOp:scale = (1, 1, 1)
-            float3 xformOp:translate = (1.5, 1.5, 0)
+            float3 xformOp:translate = (1.5, 2, 0)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
             def RealityKitComponent "Collider"
