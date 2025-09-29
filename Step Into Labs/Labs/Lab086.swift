@@ -60,6 +60,7 @@ struct Lab086: View {
                     collisionEvent.entityB.components.remove(ManipulationComponent.self)
                     gameModel.scheduleCapsuleActivation()
                     gameModel.lastCollision = collisionEvent.entityB.name
+                    collisionEvent.entityB.components.set(OpacityComponent(opacity: 0.25))
                 }
 
         }
@@ -103,6 +104,7 @@ fileprivate class GameModel {
             capsule.components[PhysicsBodyComponent.self]?.isAffectedByGravity = false
             capsule.components.set(PhysicsMotionComponent())
             capsule.position.y = 1.5
+            capsule.components.remove(OpacityComponent.self)
         }
     }
 
