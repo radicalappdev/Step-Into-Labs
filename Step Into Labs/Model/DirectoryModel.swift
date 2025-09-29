@@ -636,6 +636,13 @@ class ModelData {
              subtitle: "Background Glass Material Showcase",
              description: "Using the BlurredBackground material to build a showcase object.")
 
+        ,Lab(title: "Lab 086",
+             type: .SPACE,
+             date: Date("9/29/2025"),
+             isFeatured: true,
+             subtitle: "Catch the Tubes",
+             description: "A mini-game with Manipulation Component")
+
 
 
 
