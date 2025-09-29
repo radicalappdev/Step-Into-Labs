@@ -19,16 +19,21 @@ struct Lab086: View {
     @State private var gameModel = GameModel()
     @State private var menu = Entity()
 
+    @State private var willBegin: EventSubscription?
+    @State private var collisionBegan: EventSubscription?
+
     var body: some View {
         RealityView { content in
 
             // Import the scene from RCP and capture the capsules
             guard let scene = try? await Entity(named: "CatchingGame", in: realityKitContentBundle) else { return }
             content.add(scene)
-
+            guard let floor = scene.findEntity(named: "FloorBounds") else { return }
             guard let capsuleGroup = scene.findEntity(named: "Capsules") else { return }
+            let mc = ManipulationComponent()
             for capsule in capsuleGroup.children {
                 gameModel.capsules.append(capsule)
+                capsule.components.set(mc)
             }
 
             // Set up the menu
@@ -36,6 +41,21 @@ struct Lab086: View {
             menu.components.set(gameMenuAttachment)
             menu.position = .init(x: 0, y: 1.5, z: -1)
             scene.addChild(menu)
+
+            // Set up events
+
+            // We'll use this event to determine success
+            self.willBegin = content.subscribe(to: ManipulationEvents.WillBegin.self) { event in
+                gameModel.addScore()
+                print("Success!")
+            }
+
+
+            collisionBegan = content
+                .subscribe(to: CollisionEvents.Began.self, on: floor)  { collisionEvent in
+                    print("Collision Subject Example \(collisionEvent.entityA.name) and \(collisionEvent.entityB.name)")
+
+                }
 
         }
     }
@@ -57,7 +77,24 @@ fileprivate class GameModel {
     var activeCapsules: [Entity] = []
     var gameState: GameState = .setup
     var menu = Entity()
+    var score = 0
     private var capsuleTimer: Task<Void, Never>?
+
+    func startGame() {
+        score = 1
+        gameState = .active
+        activeCapsules.append(contentsOf: capsules)
+        scheduleCapsuleActivation()
+    }
+
+    func resetGame() {
+        gameState = .setup
+        activeCapsules.removeAll()
+    }
+
+    func addScore() {
+        score += 1
+    }
 
     func activateCapsule() {
         // Pick a random element from the capsules array and print the name
@@ -68,6 +105,7 @@ fileprivate class GameModel {
         if let index = activeCapsules.firstIndex(of: capsule) {
             activeCapsules.remove(at: index)
         }
+        capsule.components[PhysicsBodyComponent.self]?.isAffectedByGravity = true
 
         if activeCapsules.isEmpty { gameState = .over }
     }
@@ -82,17 +120,6 @@ fileprivate class GameModel {
                 self.activateCapsule()
             }
         }
-    }
-
-    func startGame() {
-        gameState = .active
-        activeCapsules.append(contentsOf: capsules)
-        scheduleCapsuleActivation()
-    }
-
-    func resetGame() {
-        gameState = .setup
-        activeCapsules.removeAll()
     }
 
     func scheduleCapsuleDrop(after seconds: Double, action: @escaping @MainActor () -> Void) {
