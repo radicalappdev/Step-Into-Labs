@@ -50,11 +50,16 @@ struct Lab086: View {
                 print("Success!")
             }
 
-
-            collisionBegan = content
+            // We'll use this event to determine failure. Anything that touches the ground is taken out of play
+            self.collisionBegan = content
                 .subscribe(to: CollisionEvents.Began.self, on: floor)  { collisionEvent in
-                    print("Collision Subject Example \(collisionEvent.entityA.name) and \(collisionEvent.entityB.name)")
-
+                    if(gameModel.lastCollision == collisionEvent.entityB.name) {
+                        return
+                    }
+                    print("\(collisionEvent.entityB.name) reached the ground!")
+                    collisionEvent.entityB.components.remove(ManipulationComponent.self)
+                    gameModel.scheduleCapsuleActivation()
+                    gameModel.lastCollision = collisionEvent.entityB.name
                 }
 
         }
@@ -78,6 +83,7 @@ fileprivate class GameModel {
     var gameState: GameState = .setup
     var menu = Entity()
     var score = 0
+    var lastCollision: String?
     private var capsuleTimer: Task<Void, Never>?
 
     func startGame() {
@@ -98,7 +104,7 @@ fileprivate class GameModel {
 
     func activateCapsule() {
         // Pick a random element from the capsules array and print the name
-
+        guard !activeCapsules.isEmpty else { gameState = .over; return }
         let capsule = activeCapsules.randomElement()!
         print("Activating capsule: \(capsule.name)")
         // Remove the capsule from the array
