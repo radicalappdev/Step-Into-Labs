@@ -583,7 +583,7 @@ class ModelData {
         ,Lab(title: "Lab 078",
              type: .VOLUME,
              date: Date("8/21/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Building a glass material box",
              description: "Using spatialOverlay wrap any SwiftUI view in glass material panes.")
 
@@ -597,21 +597,21 @@ class ModelData {
         ,Lab(title: "Lab 080",
              type: .WINDOW,
              date: Date("9/08/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "First Look at Unified Coordinate Conversion",
              description: "visionOS 26 brings a new unified coordinate system that we can use in SwiftUI and RealityKit.")
 
         ,Lab(title: "Lab 081",
              type: .VOLUME,
              date: Date("9/10/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Exploring Feathered Materials",
              description: "Adding soft, gradual transition at the edges of 3D objects.")
 
         ,Lab(title: "Lab 082",
              type: .WINDOW_ALT,
              date: Date("9/17/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Using implicit glassBackgroundEffect with depth",
              description: "We can use implicit display mode to show glass on views that have a Z offset.")
 
@@ -625,14 +625,14 @@ class ModelData {
         ,Lab(title: "Lab 084",
              type: .VOLUME,
              date: Date("9/20/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Background Glass as Material",
              description: "Using the BlurredBackground Shader Graph Node.")
 
         ,Lab(title: "Lab 085",
              type: .SPACE,
              date: Date("9/22/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Background Glass Material Showcase",
              description: "Using the BlurredBackground material to build a showcase object.")
 

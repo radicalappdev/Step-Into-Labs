@@ -6,7 +6,7 @@
     "isGridVisible" : true
   },
   "unitDefaults" : {
-    "kg" : "g",
+    "kg" : "lb",
     "kg⋅m²" : "kg⋅m²",
     "m" : "m",
     "m\/s" : "m\/s",
