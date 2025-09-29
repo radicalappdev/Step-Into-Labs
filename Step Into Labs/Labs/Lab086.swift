@@ -17,10 +17,7 @@ import RealityKitContent
 struct Lab086: View {
 
     @State private var gameModel = GameModel()
-
-
-
-    @State var menu = Entity()
+    @State private var menu = Entity()
 
     var body: some View {
         RealityView { content in
