@@ -96,6 +96,14 @@ fileprivate class GameModel {
     func resetGame() {
         gameState = .setup
         activeCapsules.removeAll()
+
+        let mc = ManipulationComponent()
+        for capsule in capsules {
+            capsule.components.set(mc)
+            capsule.components[PhysicsBodyComponent.self]?.isAffectedByGravity = false
+            capsule.components.set(PhysicsMotionComponent())
+            capsule.position.y = 1.5
+        }
     }
 
     func addScore() {
