@@ -640,8 +640,8 @@ class ModelData {
              type: .SPACE,
              date: Date("9/29/2025"),
              isFeatured: true,
-             subtitle: "Catch the Tubes",
-             description: "A mini-game with Manipulation Component")
+             subtitle: "Capsule Catch",
+             description: "A mini-game drop and catch game.")
 
 
 

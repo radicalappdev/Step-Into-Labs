@@ -2,11 +2,11 @@
 //
 //  Title: Lab086
 //
-//  Subtitle:
+//  Subtitle: Capsule Catch
 //
-//  Description:
+//  Description: A mini-game drop and catch game.
 //
-//  Type:
+//  Type: Space
 //
 //  Created by Joseph Simpson on 9/29/25.
 
@@ -28,12 +28,11 @@ struct Lab086: View {
             // Import the scene from RCP and capture the capsules
             guard let scene = try? await Entity(named: "CatchingGame", in: realityKitContentBundle) else { return }
 
-            // Reducing gravity
+            // Reducing gravity just a bit
             var ps = PhysicsSimulationComponent()
-            ps.gravity = [0, -5, 0]
+            ps.gravity = [0, -9.81 * 0.8, 0]
             scene.components.set(ps)
             content.add(scene)
-
 
             guard let floor = scene.findEntity(named: "FloorBounds") else { return }
             guard let capsuleGroup = scene.findEntity(named: "Capsules") else { return }
@@ -49,11 +48,12 @@ struct Lab086: View {
             menu.position = .init(x: 0, y: 1.2, z: -1)
             scene.addChild(menu)
 
-            // Set up events
-
             // We'll use this event to determine success
             self.willBegin = content.subscribe(to: ManipulationEvents.WillBegin.self) { event in
                 if(gameModel.lastInteraction == event.entity.name) {
+                    return
+                }
+                if(gameModel.caughtCapsules.contains(where: { $0.name == event.entity.name })) {
                     return
                 }
                 gameModel.addScore()
@@ -72,17 +72,14 @@ struct Lab086: View {
                     if(gameModel.caughtCapsules.contains(where: { $0.name == collisionEvent.entityB.name })) {
                         return
                     }
-                    print("\(collisionEvent.entityB.name) reached the ground!")
+                    print("\(collisionEvent.entityB.name) reached the ground without a score!")
                     collisionEvent.entityB.components.remove(ManipulationComponent.self)
                     gameModel.scheduleCapsuleActivation()
                     gameModel.lastInteraction = collisionEvent.entityB.name
                     collisionEvent.entityB.components.set(OpacityComponent(opacity: 0.1))
                 }
-
         }
     }
-
-
 }
 
 @MainActor
@@ -115,6 +112,7 @@ fileprivate class GameModel {
         gameState = .setup
         activeCapsules.removeAll()
 
+        // Reset each capsule to their default state
         let mc = ManipulationComponent()
         for capsule in capsules {
             capsule.components.set(mc)
@@ -134,13 +132,14 @@ fileprivate class GameModel {
         // Pick a random element from the capsules array and print the name
         guard !activeCapsules.isEmpty else { gameState = .over; return }
         let capsule = activeCapsules.randomElement()!
-        print("Activating capsule: \(capsule.name)")
+
         // Remove the capsule from the array
         if let index = activeCapsules.firstIndex(of: capsule) {
             activeCapsules.remove(at: index)
         }
 
         Task {
+            // TODO: consider playing a spatial sound effect to draw attention
             let action = EmphasizeAction(motionType: .pulse,
                                          style: .basic,
                                                   isAdditive: false)
@@ -152,8 +151,6 @@ fileprivate class GameModel {
             try? await Task.sleep(nanoseconds: 250_000_000)
             capsule.components[PhysicsBodyComponent.self]?.isAffectedByGravity = true
         }
-
-
         if activeCapsules.isEmpty { gameState = .over }
     }
 
@@ -211,7 +208,6 @@ fileprivate struct GameMenu: View {
                 }
             case .over:
                 VStack {
-                    // TODO: add results here
                     Text("Game Over!")
                         .font(.caption)
                     Text("Score: \(gameModel.score) out of 7")
@@ -223,14 +219,10 @@ fileprivate struct GameMenu: View {
                     })
                 }
             }
-
-
         }
         .padding()
         .frame(width: 400, height: 300)
         .glassBackgroundEffect()
         .opacity(gameModel.gameState == .active ? 0.0 : 1.0)
-
-
     }
 }

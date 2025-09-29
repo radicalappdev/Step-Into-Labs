@@ -10,7 +10,7 @@
 
 def Xform "Root"
 {
-    reorder nameChildren = ["MaplePlywood", "Capsules", "FloorBounds"]
+    reorder nameChildren = ["CapsuleMaterial", "Capsules", "FloorBounds"]
     float3 xformOp:translate = (0, 0, -0.25)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
@@ -75,7 +75,7 @@ def Xform "Root"
         }
     }
 
-    def "MaplePlywood" (
+    def "CapsuleMaterial" (
         active = true
         references = @Materials/MaplePlywood.usdz@
     )
@@ -89,7 +89,7 @@ def Xform "Root"
         {
             float inputs:clearcoat
             float inputs:clearcoatRoughness
-            color3f inputs:emissiveColor.connect = </Root/MaplePlywood.inputs:Basecolor_Tint>
+            color3f inputs:emissiveColor.connect = </Root/CapsuleMaterial.inputs:Basecolor_Tint>
             float inputs:ior
             float inputs:occlusion
             float inputs:opacityThreshold
@@ -110,7 +110,7 @@ def Xform "Root"
             reorder nameChildren = ["Collider", "InputTarget", "RigidBody", "MaplePlywood"]
             uniform token axis = "Y"
             double height = 0.2
-            rel material:binding = </Root/MaplePlywood> (
+            rel material:binding = </Root/CapsuleMaterial> (
                 bindMaterialAs = "weakerThanDescendants"
             )
             double radius = 0.06
@@ -181,7 +181,7 @@ def Xform "Root"
             reorder nameChildren = ["Collider", "InputTarget", "RigidBody", "MaplePlywood"]
             uniform token axis = "Y"
             double height = 0.2
-            rel material:binding = </Root/MaplePlywood> (
+            rel material:binding = </Root/CapsuleMaterial> (
                 bindMaterialAs = "weakerThanDescendants"
             )
             double radius = 0.06
@@ -254,7 +254,7 @@ def Xform "Root"
             reorder nameChildren = ["Collider", "InputTarget", "RigidBody", "MaplePlywood"]
             uniform token axis = "Y"
             double height = 0.2
-            rel material:binding = </Root/MaplePlywood> (
+            rel material:binding = </Root/CapsuleMaterial> (
                 bindMaterialAs = "weakerThanDescendants"
             )
             double radius = 0.06
@@ -327,7 +327,7 @@ def Xform "Root"
             reorder nameChildren = ["Collider", "InputTarget", "RigidBody", "MaplePlywood"]
             uniform token axis = "Y"
             double height = 0.2
-            rel material:binding = </Root/MaplePlywood> (
+            rel material:binding = </Root/CapsuleMaterial> (
                 bindMaterialAs = "weakerThanDescendants"
             )
             double radius = 0.06
@@ -400,7 +400,7 @@ def Xform "Root"
             reorder nameChildren = ["Collider", "InputTarget", "RigidBody", "MaplePlywood"]
             uniform token axis = "Y"
             double height = 0.2
-            rel material:binding = </Root/MaplePlywood> (
+            rel material:binding = </Root/CapsuleMaterial> (
                 bindMaterialAs = "weakerThanDescendants"
             )
             double radius = 0.06
@@ -473,7 +473,7 @@ def Xform "Root"
             reorder nameChildren = ["Collider", "InputTarget", "RigidBody", "MaplePlywood"]
             uniform token axis = "Y"
             double height = 0.2
-            rel material:binding = </Root/MaplePlywood> (
+            rel material:binding = </Root/CapsuleMaterial> (
                 bindMaterialAs = "weakerThanDescendants"
             )
             double radius = 0.06
@@ -546,7 +546,7 @@ def Xform "Root"
             reorder nameChildren = ["Collider", "InputTarget", "RigidBody", "MaplePlywood"]
             uniform token axis = "Y"
             double height = 0.2
-            rel material:binding = </Root/MaplePlywood> (
+            rel material:binding = </Root/CapsuleMaterial> (
                 bindMaterialAs = "weakerThanDescendants"
             )
             double radius = 0.06
