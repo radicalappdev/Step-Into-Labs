@@ -10,7 +10,7 @@
 
 def Xform "Root"
 {
-    reorder nameChildren = ["MaplePlywood", "Capsules", "FloorBounds", "DropCapsule"]
+    reorder nameChildren = ["MaplePlywood", "Capsules", "FloorBounds"]
     float3 xformOp:translate = (0, 0, -0.25)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
@@ -75,83 +75,540 @@ def Xform "Root"
         }
     }
 
+    def "MaplePlywood" (
+        active = true
+        references = @Materials/MaplePlywood.usdz@
+    )
+    {
+        color3f inputs:Basecolor_Tint = (0.7686275, 0.16470589, 0.4352941) (
+            colorSpace = "srgb_displayp3"
+        )
+        float2 inputs:UV_Scale = (1, 2)
+
+        over "PreviewSurface"
+        {
+            float inputs:clearcoat
+            float inputs:clearcoatRoughness
+            color3f inputs:emissiveColor.connect = </Root/MaplePlywood.inputs:Basecolor_Tint>
+            float inputs:ior
+            float inputs:occlusion
+            float inputs:opacityThreshold
+            int ui:nodegraph:node:stackingOrder = 2329
+            string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["Advanced"]
+        }
+    }
+
     def Xform "Capsules" (
         active = true
     )
     {
-        def "GrabCapsule_1" (
+        def Capsule "GrabCapsule_1" (
             active = true
-            references = @GrabCapsule.usda@
+            prepend apiSchemas = ["MaterialBindingAPI"]
         )
         {
+            reorder nameChildren = ["Collider", "InputTarget", "RigidBody", "MaplePlywood"]
+            uniform token axis = "Y"
+            double height = 0.2
+            rel material:binding = </Root/MaplePlywood> (
+                bindMaterialAs = "weakerThanDescendants"
+            )
+            double radius = 0.06
+            quatf xformOp:orient = (1, 0, 0, 0)
             float3 xformOp:scale = (1, 1, 1)
-            float3 xformOp:translate = (-1, 2, 0.049999997)
+            float3 xformOp:translate = (-1.5, 2, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def RealityKitComponent "Collider"
+            {
+                uint group = 1
+                uniform token info:id = "RealityKit.Collider"
+                uint mask = 4294967295
+                token type = "Default"
+
+                def RealityKitStruct "Shape"
+                {
+                    float3 extent = (0.12, 0.32, 0.120000005)
+                    float height = 0.32
+                    float radius = 0.060000002
+                    token shapeType = "Capsule"
+
+                    def RealityKitStruct "pose"
+                    {
+                        float3 position = (0, 0, -3.7252903e-9)
+                    }
+                }
+            }
+
+            def RealityKitComponent "InputTarget"
+            {
+                uniform token info:id = "RealityKit.InputTarget"
+            }
+
+            def RealityKitComponent "RigidBody"
+            {
+                bool gravityEnabled = 0
+                uniform token info:id = "RealityKit.RigidBody"
+
+                def RealityKitStruct "massFrame"
+                {
+                    float m_mass = 1.360776
+
+                    def RealityKitStruct "m_pose"
+                    {
+                    }
+                }
+
+                def RealityKitStruct "material"
+                {
+                    double restitution = 0.25
+                }
+            }
+
+            def RealityKitComponent "MotionState"
+            {
+                uniform token info:id = "RealityKit.MotionState"
+                float3 m_userSetAngularVelocity = (0.001, 0, 0)
+                uint m_userSetAngularVelocityVersion = 1
+            }
         }
 
-        def "GrabCapsule_2" (
+        def Capsule "GrabCapsule_2" (
             active = true
-            references = @GrabCapsule.usda@
+            prepend apiSchemas = ["MaterialBindingAPI"]
         )
         {
-            float2 ui:nodegraph:node:pos = (459.0403, 391.26724)
+            reorder nameChildren = ["Collider", "InputTarget", "RigidBody", "MaplePlywood"]
+            uniform token axis = "Y"
+            double height = 0.2
+            rel material:binding = </Root/MaplePlywood> (
+                bindMaterialAs = "weakerThanDescendants"
+            )
+            double radius = 0.06
+            float2 ui:nodegraph:node:pos = (32.36331, 471.47977)
             int ui:nodegraph:node:stackingOrder = 1
+            quatf xformOp:orient = (1, 0, 0, 0)
             float3 xformOp:scale = (1, 1, 1)
-            float3 xformOp:translate = (-0.75, 2, -0.25)
+            float3 xformOp:translate = (-1.25, 2, -0.74)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def RealityKitComponent "Collider"
+            {
+                uint group = 1
+                uniform token info:id = "RealityKit.Collider"
+                uint mask = 4294967295
+                token type = "Default"
+
+                def RealityKitStruct "Shape"
+                {
+                    float3 extent = (0.12, 0.32, 0.120000005)
+                    float height = 0.32
+                    float radius = 0.060000002
+                    token shapeType = "Capsule"
+
+                    def RealityKitStruct "pose"
+                    {
+                        float3 position = (0, 0, -3.7252903e-9)
+                    }
+                }
+            }
+
+            def RealityKitComponent "InputTarget"
+            {
+                uniform token info:id = "RealityKit.InputTarget"
+            }
+
+            def RealityKitComponent "RigidBody"
+            {
+                bool gravityEnabled = 0
+                uniform token info:id = "RealityKit.RigidBody"
+
+                def RealityKitStruct "massFrame"
+                {
+                    float m_mass = 1.360776
+
+                    def RealityKitStruct "m_pose"
+                    {
+                    }
+                }
+
+                def RealityKitStruct "material"
+                {
+                    double restitution = 0.25
+                }
+            }
+
+            def RealityKitComponent "MotionState"
+            {
+                uniform token info:id = "RealityKit.MotionState"
+                float3 m_userSetAngularVelocity = (0.001, 0, 0)
+                uint m_userSetAngularVelocityVersion = 1
+            }
         }
 
-        def "GrabCapsule_3" (
+        def Capsule "GrabCapsule_3" (
             active = true
-            references = @GrabCapsule.usda@
+            prepend apiSchemas = ["MaterialBindingAPI"]
         )
         {
-            float2 ui:nodegraph:node:pos = (479.0403, 411.26724)
+            reorder nameChildren = ["Collider", "InputTarget", "RigidBody", "MaplePlywood"]
+            uniform token axis = "Y"
+            double height = 0.2
+            rel material:binding = </Root/MaplePlywood> (
+                bindMaterialAs = "weakerThanDescendants"
+            )
+            double radius = 0.06
+            float2 ui:nodegraph:node:pos = (52.36331, 491.47977)
             int ui:nodegraph:node:stackingOrder = 2
+            quatf xformOp:orient = (1, 0, 0, 0)
             float3 xformOp:scale = (1, 1, 1)
-            float3 xformOp:translate = (-0.45, 2, -0.5)
+            float3 xformOp:translate = (-0.75, 2, -1.25)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def RealityKitComponent "Collider"
+            {
+                uint group = 1
+                uniform token info:id = "RealityKit.Collider"
+                uint mask = 4294967295
+                token type = "Default"
+
+                def RealityKitStruct "Shape"
+                {
+                    float3 extent = (0.12, 0.32, 0.120000005)
+                    float height = 0.32
+                    float radius = 0.060000002
+                    token shapeType = "Capsule"
+
+                    def RealityKitStruct "pose"
+                    {
+                        float3 position = (0, 0, -3.7252903e-9)
+                    }
+                }
+            }
+
+            def RealityKitComponent "InputTarget"
+            {
+                uniform token info:id = "RealityKit.InputTarget"
+            }
+
+            def RealityKitComponent "RigidBody"
+            {
+                bool gravityEnabled = 0
+                uniform token info:id = "RealityKit.RigidBody"
+
+                def RealityKitStruct "massFrame"
+                {
+                    float m_mass = 1.360776
+
+                    def RealityKitStruct "m_pose"
+                    {
+                    }
+                }
+
+                def RealityKitStruct "material"
+                {
+                    double restitution = 0.25
+                }
+            }
+
+            def RealityKitComponent "MotionState"
+            {
+                uniform token info:id = "RealityKit.MotionState"
+                float3 m_userSetAngularVelocity = (0.001, 0, 0)
+                uint m_userSetAngularVelocityVersion = 1
+            }
         }
 
-        def "GrabCapsule_4" (
+        def Capsule "GrabCapsule_4" (
             active = true
-            references = @GrabCapsule.usda@
+            prepend apiSchemas = ["MaterialBindingAPI"]
         )
         {
-            float2 ui:nodegraph:node:pos = (499.0403, 431.26724)
+            reorder nameChildren = ["Collider", "InputTarget", "RigidBody", "MaplePlywood"]
+            uniform token axis = "Y"
+            double height = 0.2
+            rel material:binding = </Root/MaplePlywood> (
+                bindMaterialAs = "weakerThanDescendants"
+            )
+            double radius = 0.06
+            float2 ui:nodegraph:node:pos = (72.36331, 511.47977)
             int ui:nodegraph:node:stackingOrder = 3
+            quatf xformOp:orient = (1, 0, 0, 0)
             float3 xformOp:scale = (1, 1, 1)
-            float3 xformOp:translate = (0, 2, -0.65)
+            float3 xformOp:translate = (0, 2, -1.5)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def RealityKitComponent "Collider"
+            {
+                uint group = 1
+                uniform token info:id = "RealityKit.Collider"
+                uint mask = 4294967295
+                token type = "Default"
+
+                def RealityKitStruct "Shape"
+                {
+                    float3 extent = (0.12, 0.32, 0.120000005)
+                    float height = 0.32
+                    float radius = 0.060000002
+                    token shapeType = "Capsule"
+
+                    def RealityKitStruct "pose"
+                    {
+                        float3 position = (0, 0, -3.7252903e-9)
+                    }
+                }
+            }
+
+            def RealityKitComponent "InputTarget"
+            {
+                uniform token info:id = "RealityKit.InputTarget"
+            }
+
+            def RealityKitComponent "RigidBody"
+            {
+                bool gravityEnabled = 0
+                uniform token info:id = "RealityKit.RigidBody"
+
+                def RealityKitStruct "massFrame"
+                {
+                    float m_mass = 1.360776
+
+                    def RealityKitStruct "m_pose"
+                    {
+                    }
+                }
+
+                def RealityKitStruct "material"
+                {
+                    double restitution = 0.25
+                }
+            }
+
+            def RealityKitComponent "MotionState"
+            {
+                uniform token info:id = "RealityKit.MotionState"
+                float3 m_userSetAngularVelocity = (0.001, 0, 0)
+                uint m_userSetAngularVelocityVersion = 1
+            }
         }
 
-        def "GrabCapsule_5" (
+        def Capsule "GrabCapsule_5" (
             active = true
-            references = @GrabCapsule.usda@
+            prepend apiSchemas = ["MaterialBindingAPI"]
         )
         {
-            float2 ui:nodegraph:node:pos = (459.0403, 391.26724)
+            reorder nameChildren = ["Collider", "InputTarget", "RigidBody", "MaplePlywood"]
+            uniform token axis = "Y"
+            double height = 0.2
+            rel material:binding = </Root/MaplePlywood> (
+                bindMaterialAs = "weakerThanDescendants"
+            )
+            double radius = 0.06
+            float2 ui:nodegraph:node:pos = (72.36331, 511.47977)
+            int ui:nodegraph:node:stackingOrder = 3
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:translate = (0.75, 2, -1.25)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def RealityKitComponent "Collider"
+            {
+                uint group = 1
+                uniform token info:id = "RealityKit.Collider"
+                uint mask = 4294967295
+                token type = "Default"
+
+                def RealityKitStruct "Shape"
+                {
+                    float3 extent = (0.12, 0.32, 0.120000005)
+                    float height = 0.32
+                    float radius = 0.060000002
+                    token shapeType = "Capsule"
+
+                    def RealityKitStruct "pose"
+                    {
+                        float3 position = (0, 0, -3.7252903e-9)
+                    }
+                }
+            }
+
+            def RealityKitComponent "InputTarget"
+            {
+                uniform token info:id = "RealityKit.InputTarget"
+            }
+
+            def RealityKitComponent "RigidBody"
+            {
+                bool gravityEnabled = 0
+                uniform token info:id = "RealityKit.RigidBody"
+
+                def RealityKitStruct "massFrame"
+                {
+                    float m_mass = 1.360776
+
+                    def RealityKitStruct "m_pose"
+                    {
+                    }
+                }
+
+                def RealityKitStruct "material"
+                {
+                    double restitution = 0.25
+                }
+            }
+
+            def RealityKitComponent "MotionState"
+            {
+                uniform token info:id = "RealityKit.MotionState"
+                float3 m_userSetAngularVelocity = (0.001, 0, 0)
+                uint m_userSetAngularVelocityVersion = 1
+            }
+        }
+
+        def Capsule "GrabCapsule_6" (
+            active = true
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            reorder nameChildren = ["Collider", "InputTarget", "RigidBody", "MaplePlywood"]
+            uniform token axis = "Y"
+            double height = 0.2
+            rel material:binding = </Root/MaplePlywood> (
+                bindMaterialAs = "weakerThanDescendants"
+            )
+            double radius = 0.06
+            float2 ui:nodegraph:node:pos = (52.36331, 491.47977)
+            int ui:nodegraph:node:stackingOrder = 2
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:translate = (1.25, 2, -0.74)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def RealityKitComponent "Collider"
+            {
+                uint group = 1
+                uniform token info:id = "RealityKit.Collider"
+                uint mask = 4294967295
+                token type = "Default"
+
+                def RealityKitStruct "Shape"
+                {
+                    float3 extent = (0.12, 0.32, 0.120000005)
+                    float height = 0.32
+                    float radius = 0.060000002
+                    token shapeType = "Capsule"
+
+                    def RealityKitStruct "pose"
+                    {
+                        float3 position = (0, 0, -3.7252903e-9)
+                    }
+                }
+            }
+
+            def RealityKitComponent "InputTarget"
+            {
+                uniform token info:id = "RealityKit.InputTarget"
+            }
+
+            def RealityKitComponent "RigidBody"
+            {
+                bool gravityEnabled = 0
+                uniform token info:id = "RealityKit.RigidBody"
+
+                def RealityKitStruct "massFrame"
+                {
+                    float m_mass = 1.360776
+
+                    def RealityKitStruct "m_pose"
+                    {
+                    }
+                }
+
+                def RealityKitStruct "material"
+                {
+                    double restitution = 0.25
+                }
+            }
+
+            def RealityKitComponent "MotionState"
+            {
+                uniform token info:id = "RealityKit.MotionState"
+                float3 m_userSetAngularVelocity = (0.001, 0, 0)
+                uint m_userSetAngularVelocityVersion = 1
+            }
+        }
+
+        def Capsule "GrabCapsule_7" (
+            active = true
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            reorder nameChildren = ["Collider", "InputTarget", "RigidBody", "MaplePlywood"]
+            uniform token axis = "Y"
+            double height = 0.2
+            rel material:binding = </Root/MaplePlywood> (
+                bindMaterialAs = "weakerThanDescendants"
+            )
+            double radius = 0.06
+            float2 ui:nodegraph:node:pos = (32.36331, 471.47977)
             int ui:nodegraph:node:stackingOrder = 1
+            quatf xformOp:orient = (1, 0, 0, 0)
             float3 xformOp:scale = (1, 1, 1)
-            float3 xformOp:translate = (1, 2, 0.049999997)
-        }
+            float3 xformOp:translate = (1.5, 2, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
-        def "GrabCapsule_6" (
-            active = true
-            references = @GrabCapsule.usda@
-        )
-        {
-            float2 ui:nodegraph:node:pos = (479.0403, 411.26724)
-            int ui:nodegraph:node:stackingOrder = 2
-            float3 xformOp:scale = (1, 1, 1)
-            float3 xformOp:translate = (0.75, 2, -0.25)
-        }
+            def RealityKitComponent "Collider"
+            {
+                uint group = 1
+                uniform token info:id = "RealityKit.Collider"
+                uint mask = 4294967295
+                token type = "Default"
 
-        def "GrabCapsule_7" (
-            active = true
-            references = @GrabCapsule.usda@
-        )
-        {
-            float2 ui:nodegraph:node:pos = (499.0403, 431.26724)
-            int ui:nodegraph:node:stackingOrder = 3
-            float3 xformOp:scale = (1, 1, 1)
-            float3 xformOp:translate = (0.45, 2, -0.5)
+                def RealityKitStruct "Shape"
+                {
+                    float3 extent = (0.12, 0.32, 0.120000005)
+                    float height = 0.32
+                    float radius = 0.060000002
+                    token shapeType = "Capsule"
+
+                    def RealityKitStruct "pose"
+                    {
+                        float3 position = (0, 0, -3.7252903e-9)
+                    }
+                }
+            }
+
+            def RealityKitComponent "InputTarget"
+            {
+                uniform token info:id = "RealityKit.InputTarget"
+            }
+
+            def RealityKitComponent "RigidBody"
+            {
+                bool gravityEnabled = 0
+                uniform token info:id = "RealityKit.RigidBody"
+
+                def RealityKitStruct "massFrame"
+                {
+                    float m_mass = 1.360776
+
+                    def RealityKitStruct "m_pose"
+                    {
+                    }
+                }
+
+                def RealityKitStruct "material"
+                {
+                    double restitution = 0.25
+                }
+            }
+
+            def RealityKitComponent "MotionState"
+            {
+                uniform token info:id = "RealityKit.MotionState"
+                float3 m_userSetAngularVelocity = (0.001, 0, 0)
+                uint m_userSetAngularVelocityVersion = 1
+            }
         }
     }
 
@@ -172,49 +629,6 @@ def Xform "Root"
 
             def RealityKitStruct "Shadow"
             {
-            }
-        }
-    }
-
-    def RealityKitAudioFile "switch1_mp3"
-    {
-        uniform asset file = @Sounds/switch1.mp3@
-        uniform bool shouldLoop = 0
-    }
-
-    def RealityKitTimeline "DropCapsule"
-    {
-        reorder nameChildren = ["Track", "Track2"]
-        def RealityKitTrack "Track"
-        {
-            def RealityKitAction "Play_Audio"
-            {
-                string actionKind = "audio"
-                string audioResourceName = "switch1_mp3"
-                bool controlPlayback = 1
-                double duration = 0.3146875
-                uniform token info:id = "E3B481F9-6FA3-4F80-910F-E09C776F83A7"
-                double startTime = 0
-                rel target = </Root/Capsules/GrabCapsule_1/GrabCapsule_1>
-
-                def RealityKitStruct "handoffType"
-                {
-                }
-            }
-        }
-
-        def RealityKitTrack "Track2"
-        {
-            def RealityKitAction "Emphasize"
-            {
-                string actionKind = "emphasize"
-                int blendLayer = 300
-                double duration = 0.25
-                uniform token info:id = "2338D428-2773-4856-B385-01CF72736D1C"
-                token motionType = "flip"
-                double startTime = 0
-                token style = "basic"
-                rel target = </Root/Capsules/GrabCapsule_1/GrabCapsule_1>
             }
         }
     }

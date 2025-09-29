@@ -300,47 +300,6 @@
       }
     ]
   },
-  "1E6EC47B-9CFD-4103-A87D-4541117F9317" : {
-    "objectMetadataList" : [
-      [
-        "1E6EC47B-9CFD-4103-A87D-4541117F9317",
-        "Root",
-        "DropCapsule",
-        "Track2"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "1E6EC47B-9CFD-4103-A87D-4541117F9317",
-        "Root"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "1E6EC47B-9CFD-4103-A87D-4541117F9317",
-        "Root",
-        "DropCapsule"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "1E6EC47B-9CFD-4103-A87D-4541117F9317",
-        "Root",
-        "DropCapsule",
-        "Track"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      }
-    ]
-  },
   "1ED5D871-E0A7-4327-99A4-DF46F7E2ECB0" : {
     "objectMetadataList" : [
       [
@@ -2072,44 +2031,6 @@
       [
         "BF95496B-A69B-4059-9505-1D10997B194E",
         "Root",
-        "Timeline",
-        "Track"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "BF95496B-A69B-4059-9505-1D10997B194E",
-        "Root",
-        "DropCapsule",
-        "Track2"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "BF95496B-A69B-4059-9505-1D10997B194E",
-        "Root"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "BF95496B-A69B-4059-9505-1D10997B194E",
-        "Root",
-        "DropCapsule",
-        "Track"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "BF95496B-A69B-4059-9505-1D10997B194E",
-        "Root",
         "Capsules"
       ],
       {
@@ -2128,7 +2049,15 @@
       [
         "BF95496B-A69B-4059-9505-1D10997B194E",
         "Root",
-        "DropCapsule"
+        "MaplePlywood"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "BF95496B-A69B-4059-9505-1D10997B194E",
+        "Root"
       ],
       {
         "isExpanded" : true,
