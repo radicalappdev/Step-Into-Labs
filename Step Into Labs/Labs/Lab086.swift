@@ -57,26 +57,50 @@ fileprivate class GameModel {
     var activeCapsules: [Entity] = []
     var gameState: GameState = .setup
     var menu = Entity()
+    private var capsuleTimer: Task<Void, Never>?
 
     func activateCapsule() {
         // Pick a random element from the capsules array and print the name
-        guard !activeCapsules.isEmpty else { gameState = .over; return }
+
         let capsule = activeCapsules.randomElement()!
         print("Activating capsule: \(capsule.name)")
         // Remove the capsule from the array
         if let index = activeCapsules.firstIndex(of: capsule) {
             activeCapsules.remove(at: index)
         }
+
+        if activeCapsules.isEmpty { gameState = .over }
+    }
+
+    func scheduleCapsuleActivation() {
+        capsuleTimer?.cancel()
+        guard !activeCapsules.isEmpty else { gameState = .over; return }
+        capsuleTimer = Task {
+            let delay = Double.random(in: 3...6)
+            try? await Task.sleep(for: .seconds(delay))
+            await MainActor.run {
+                self.activateCapsule()
+            }
+        }
     }
 
     func startGame() {
         gameState = .active
         activeCapsules.append(contentsOf: capsules)
+        scheduleCapsuleActivation()
     }
 
     func resetGame() {
         gameState = .setup
         activeCapsules.removeAll()
+    }
+
+    func scheduleCapsuleDrop(after seconds: Double, action: @escaping @MainActor () -> Void) {
+        capsuleTimer?.cancel()
+        capsuleTimer = Task {
+            try? await Task.sleep(for: .seconds(seconds))
+            action()
+        }
     }
 }
 
@@ -89,7 +113,7 @@ fileprivate struct GameMenu: View {
                 .font(.largeTitle)
 
             switch gameModel.gameState {
-                case .setup:
+            case .setup:
                 VStack {
                     Text("Use you fingers to pinch and grab as many capsules as you can!")
                         .font(.caption)
@@ -106,7 +130,7 @@ fileprivate struct GameMenu: View {
                         .font(.caption)
                         .multilineTextAlignment(.center)
                     Button(action: {
-                        gameModel.activateCapsule()
+                        gameModel.scheduleCapsuleActivation()
                     }, label: {
                         Text("Drop Test")
                     })
