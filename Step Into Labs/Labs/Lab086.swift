@@ -53,15 +53,20 @@ struct Lab086: View {
 
             // We'll use this event to determine success
             self.willBegin = content.subscribe(to: ManipulationEvents.WillBegin.self) { event in
+                if(gameModel.lastInteraction == event.entity.name) {
+                    return
+                }
                 gameModel.addScore()
                 gameModel.caughtCapsules.append(event.entity)
+                gameModel.scheduleCapsuleActivation()
+                gameModel.lastInteraction = event.entity.name
                 print("Success!")
             }
 
             // We'll use this event to determine failure. Anything that touches the ground is taken out of play
             self.collisionBegan = content
                 .subscribe(to: CollisionEvents.Began.self, on: floor)  { collisionEvent in
-                    if(gameModel.lastCollision == collisionEvent.entityB.name) {
+                    if(gameModel.lastInteraction == collisionEvent.entityB.name) {
                         return
                     }
                     if(gameModel.caughtCapsules.contains(where: { $0.name == collisionEvent.entityB.name })) {
@@ -70,8 +75,8 @@ struct Lab086: View {
                     print("\(collisionEvent.entityB.name) reached the ground!")
                     collisionEvent.entityB.components.remove(ManipulationComponent.self)
                     gameModel.scheduleCapsuleActivation()
-                    gameModel.lastCollision = collisionEvent.entityB.name
-                    collisionEvent.entityB.components.set(OpacityComponent(opacity: 0.25))
+                    gameModel.lastInteraction = collisionEvent.entityB.name
+                    collisionEvent.entityB.components.set(OpacityComponent(opacity: 0.1))
                 }
 
         }
@@ -96,7 +101,7 @@ fileprivate class GameModel {
     var gameState: GameState = .setup
     var menu = Entity()
     var score = 0
-    var lastCollision: String?
+    var lastInteraction: String?
     private var capsuleTimer: Task<Void, Never>?
 
     func startGame() {
@@ -115,6 +120,7 @@ fileprivate class GameModel {
             capsule.components.set(mc)
             capsule.components[PhysicsBodyComponent.self]?.isAffectedByGravity = false
             capsule.components.set(PhysicsMotionComponent())
+            capsule.transform.rotation = .init()
             capsule.position.y = 2
             capsule.components.remove(OpacityComponent.self)
         }
@@ -133,7 +139,20 @@ fileprivate class GameModel {
         if let index = activeCapsules.firstIndex(of: capsule) {
             activeCapsules.remove(at: index)
         }
-        capsule.components[PhysicsBodyComponent.self]?.isAffectedByGravity = true
+
+        Task {
+            let action = EmphasizeAction(motionType: .pulse,
+                                         style: .basic,
+                                                  isAdditive: false)
+            let animation = try AnimationResource.makeActionAnimation(for: action,
+                                                                      duration: 0.25,
+                                                                      bindTarget: .transform)
+            capsule.playAnimation(animation)
+            // todo: wait for 0.25
+            try? await Task.sleep(nanoseconds: 250_000_000)
+            capsule.components[PhysicsBodyComponent.self]?.isAffectedByGravity = true
+        }
+
 
         if activeCapsules.isEmpty { gameState = .over }
     }
@@ -195,7 +214,7 @@ fileprivate struct GameMenu: View {
                     // TODO: add results here
                     Text("Game Over!")
                         .font(.caption)
-                    Text("Score: TBD")
+                    Text("Score: \(gameModel.score) out of 7")
                         .font(.caption)
                     Button(action: {
                         gameModel.resetGame()
@@ -210,6 +229,7 @@ fileprivate struct GameMenu: View {
         .padding()
         .frame(width: 400, height: 300)
         .glassBackgroundEffect()
+        .opacity(gameModel.gameState == .active ? 0.0 : 1.0)
 
 
     }
