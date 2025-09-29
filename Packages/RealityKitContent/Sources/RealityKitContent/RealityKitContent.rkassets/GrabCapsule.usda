@@ -1,0 +1,179 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 2.0 (494.8.1)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    quatf xformOp:orient = (1, 0, 0, 0)
+    float3 xformOp:scale = (1, 1, 1)
+    float3 xformOp:translate = (0, 0, 0)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+    def Capsule "GrabCapsule_1" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        reorder nameChildren = ["Collider", "InputTarget", "RigidBody", "MaplePlywood"]
+        uniform token axis = "Y"
+        double height = 0.2
+        rel material:binding = </Root/MaplePlywood> (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        double radius = 0.06
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.12, 0.32, 0.120000005)
+                float height = 0.32
+                float radius = 0.060000002
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                    float3 position = (0, 0, -3.7252903e-9)
+                }
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "RigidBody"
+        {
+            bool gravityEnabled = 0
+            uniform token info:id = "RealityKit.RigidBody"
+
+            def RealityKitStruct "massFrame"
+            {
+                float m_mass = 1.360776
+
+                def RealityKitStruct "m_pose"
+                {
+                }
+            }
+
+            def RealityKitStruct "material"
+            {
+                double restitution = 0.25
+            }
+        }
+
+        def RealityKitComponent "MotionState"
+        {
+            uniform token info:id = "RealityKit.MotionState"
+            float3 m_userSetAngularVelocity = (0.001, 0, 0)
+            uint m_userSetAngularVelocityVersion = 1
+        }
+
+        def RealityKitComponent "SpatialAudio"
+        {
+            uniform token info:id = "RealityKit.SpatialAudio"
+        }
+
+        def RealityKitComponent "AudioLibrary"
+        {
+            uniform token info:id = "RealityKit.AudioLibrary"
+
+            def RealityKitDict "resources"
+            {
+                string[] keys = ["switch1_mp3"]
+                rel values = </Root/switch1_mp3>
+            }
+        }
+    }
+
+    def "MaplePlywood" (
+        active = true
+        references = @Materials/MaplePlywood.usdz@
+    )
+    {
+        color3f inputs:Basecolor_Tint = (0.7686275, 0.16470589, 0.4352941) (
+            colorSpace = "srgb_displayp3"
+        )
+        float2 inputs:UV_Scale = (1, 2)
+        token outputs:mtlx:surface.connect = </Root/MaplePlywood/PreviewSurface.outputs:out>
+        float2 ui:nodegraph:node:pos = (20, 20)
+        int ui:nodegraph:node:stackingOrder = 1
+
+        over "PreviewSurface"
+        {
+            float inputs:clearcoat
+            float inputs:clearcoatRoughness
+            color3f inputs:emissiveColor.connect = </Root/MaplePlywood.inputs:Basecolor_Tint>
+            float inputs:ior
+            float inputs:occlusion
+            float inputs:opacityThreshold
+            int ui:nodegraph:node:stackingOrder = 2329
+            string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["Advanced"]
+        }
+    }
+
+    def RealityKitAudioFile "switch1_mp3"
+    {
+        uniform asset file = @Sounds/switch1.mp3@
+        uniform bool shouldLoop = 0
+        float2 ui:nodegraph:node:pos = (32.36331, 471.47977)
+        int ui:nodegraph:node:stackingOrder = 1
+    }
+
+    def RealityKitTimeline "DropCapsule"
+    {
+        reorder nameChildren = ["Track", "Track2"]
+        float2 ui:nodegraph:node:pos = (32.36331, 471.47977)
+        int ui:nodegraph:node:stackingOrder = 1
+
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Play_Audio"
+            {
+                string actionKind = "audio"
+                string audioResourceName = "switch1_mp3"
+                bool controlPlayback = 1
+                double duration = 0.3146875
+                uniform token info:id = "E3B481F9-6FA3-4F80-910F-E09C776F83A7"
+                double startTime = 0
+                rel target = </Root/GrabCapsule_1>
+
+                def RealityKitStruct "handoffType"
+                {
+                }
+            }
+        }
+
+        def RealityKitTrack "Track2"
+        {
+            def RealityKitAction "Emphasize"
+            {
+                string actionKind = "emphasize"
+                int blendLayer = 300
+                double duration = 0.25
+                uniform token info:id = "2338D428-2773-4856-B385-01CF72736D1C"
+                token motionType = "flip"
+                double startTime = 0
+                token style = "basic"
+                rel target = </Root/GrabCapsule_1>
+            }
+        }
+    }
+}
+
