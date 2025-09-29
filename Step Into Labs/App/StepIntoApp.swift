@@ -74,6 +74,7 @@ struct StepIntoApp: App {
         // 3. Space:  Use this immersive scene to open a lab in a full space
         ImmersiveSpace(id: "RouterSpace", for: String.self, content: { $route in
             LabRouter(route: $route)
+                .environment(appModel)
         })
         .immersiveEnvironmentBehavior(.coexist)
 

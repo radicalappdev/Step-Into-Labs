@@ -11,5 +11,4 @@ import SwiftUI
 @MainActor
 @Observable
 class AppModel {
-
 }

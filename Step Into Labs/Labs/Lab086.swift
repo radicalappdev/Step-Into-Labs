@@ -16,6 +16,7 @@ import RealityKitContent
 
 struct Lab086: View {
 
+
     @State var capsules: [Entity] = []
     @State var gameActive: Bool = false
     @State var menu = Entity()
@@ -23,6 +24,7 @@ struct Lab086: View {
     var body: some View {
         RealityView { content in
 
+            // Import the scene from RCP and capture the capsules
             guard let scene = try? await Entity(named: "CatchingGame", in: realityKitContentBundle) else { return }
             content.add(scene)
 
@@ -31,11 +33,10 @@ struct Lab086: View {
                 capsules.append(capsule)
             }
 
-
             // Set up the menu
             let gameMenuAttachment = ViewAttachmentComponent(rootView: GameMenu(gameActive: $gameActive))
             menu.components.set(gameMenuAttachment)
-            menu.position = .init(x: 0, y: 1.2, z: -1)
+            menu.position = .init(x: 0, y: 1.5, z: -1)
             scene.addChild(menu)
 
 
@@ -61,13 +62,7 @@ fileprivate struct GameMenu: View {
             })
         }
         .frame(width: 400, height: 300)
-        .glassBackgroundEffect(
-            .feathered(
-                padding: 24,
-                softEdgeRadius: 4
-            ),
-            displayMode: .always
-        )
+        .glassBackgroundEffect()
 
 
     }
