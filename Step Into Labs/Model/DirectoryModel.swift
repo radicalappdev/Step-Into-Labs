@@ -643,7 +643,12 @@ class ModelData {
              subtitle: "Capsule Catch",
              description: "A mini-game drop and catch game.")
 
-
+        ,Lab(title: "Lab 087",
+             type: .SPACE,
+             date: Date("10/01/2025"),
+             isFeatured: true,
+             subtitle: "Immersive ArcLayout",
+             description: "")
 
 
     ]
