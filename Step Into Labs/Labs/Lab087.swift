@@ -16,7 +16,7 @@ import RealityKitContent
 
 struct Lab087: View {
 
-    @State var nodes: Int = 9
+    @State var nodes: Int = 7
     @State var previousNodes: Int = 3
     @State var arcDegrees: Double = 150
     @State var angleOffsetDegrees: Double = -90
@@ -32,18 +32,50 @@ struct Lab087: View {
                         .frame(width: 400, height: 800)
                         .glassBackgroundEffect()
                         .rotation3DLayout(Rotation3D(angle: .degrees(360 - 90), axis: .x))
+                        .rotation3DLayout(Rotation3D(angle: .degrees(inwardZRotation(for: index, total: nodes)), axis: .z))
                 }
             }
             .debugBorder3D(.white)
-            .frame(width: 4800, height: 3600)
+            .frame(width: 4800, height: 4800)
             .frame(depth: 2400, alignment: .front)
             .rotation3DLayout(Rotation3D(angle: .degrees(90), axis: .x))
             .offset(y: -1200)
             .offset(z: -2400)
 
-            //            .transform3DEffect(AffineTransform3D(translation: Vector3D(x: 0, y: -2400, z: -2400)))
         }
 
+    }
+
+    // MARK: - Orientation helpers
+    private func inwardZRotation(for index: Int, total: Int) -> Double {
+        // Compute the placement angle used by ArcLayout for this index
+        let angleDeg = arcPlacementAngleDegrees(for: index, total: total)
+        // Rotate the card so its “top” points toward the circle center
+        return angleDeg + 90.0
+    }
+
+    private func arcPlacementAngleDegrees(for index: Int, total: Int) -> Double {
+        // Match ArcLayout’s math
+        let arc = arcDegrees
+        let startDeg = -90.0 // start from top
+        let isFull = arc >= 359.9
+        let incrementDeg: Double = {
+            if isFull {
+                return 360.0 / Double(max(1, total))
+            } else {
+                return arc / Double(max(1, total - 1))
+            }
+        }()
+
+        // Auto-center offset (same as ArcLayout.autoCenterOffset)
+        let offsetNeeded: Double = {
+            guard shouldAutoCenter else { return 0 }
+            let targetCenter = 0.0
+            let arcCenter = startDeg + (arc / 2.0)
+            return targetCenter - arcCenter
+        }()
+
+        return startDeg + (incrementDeg * Double(index)) + angleOffsetDegrees + offsetNeeded
     }
 }
 
