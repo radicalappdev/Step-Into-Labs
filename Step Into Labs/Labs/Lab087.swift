@@ -25,7 +25,7 @@ struct Lab087: View {
     var body: some View {
 
         VStack {
-            ArcLayout(angleOffset: .degrees(angleOffsetDegrees), degrees: arcDegrees, shouldAutoCenter: shouldAutoCenter) {
+            ArcLayout(angleOffset: .degrees(angleOffsetDegrees), degrees: arcDegrees, shouldAutoCenter: shouldAutoCenter, fitArcBoundingBox: true) {
                 ForEach(0..<nodes, id: \.self) { index in
                     Rectangle()
                         .foregroundColor(.clear)
@@ -38,10 +38,10 @@ struct Lab087: View {
             .frame(width: 4800, height: 3600)
             .frame(depth: 2400, alignment: .front)
             .rotation3DLayout(Rotation3D(angle: .degrees(90), axis: .x))
-            .offset(z: -1200)
             .offset(y: -1200)
+            .offset(z: -2400)
 
-//            .transform3DEffect(AffineTransform3D(translation: Vector3D(x: 0, y: -2400, z: -2400)))
+            //            .transform3DEffect(AffineTransform3D(translation: Vector3D(x: 0, y: -2400, z: -2400)))
         }
 
     }
@@ -56,10 +56,27 @@ fileprivate struct ArcLayout: Layout, Animatable {
     var angleOffset: Angle = .zero
     var degrees: Double = 180 // Default to 180 degrees (half circle)
     var shouldAutoCenter: Bool = false // Whether to automatically center the arc
+    var fitArcBoundingBox: Bool = true // If true, the layout reports/uses only the arc's bounding box instead of a full circle
 
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
         let updatedProposal = proposal.replacingUnspecifiedDimensions()
         let minDim = min(updatedProposal.width, updatedProposal.height)
+
+        // If requested, size to the arc's bounding box rather than a full circle
+        if fitArcBoundingBox {
+            // For semicircles or smaller, height is approximately half the diameter
+            if degrees <= 180 {
+                return CGSize(width: minDim, height: minDim / 2)
+            } else {
+                // For larger arcs (180..360), linearly blend height from 0.5× to 1.0× of the diameter
+                // so 180° -> 0.5×, 360° -> 1.0×.
+                let t = min(max((degrees - 180.0) / 180.0, 0.0), 1.0)
+                let height = minDim * (0.5 + 0.5 * t)
+                return CGSize(width: minDim, height: height)
+            }
+        }
+
+        // Default: full circle footprint
         return CGSize(width: minDim, height: minDim)
     }
 
@@ -89,7 +106,20 @@ fileprivate struct ArcLayout: Layout, Animatable {
         let subViewDim = minDimension / CGFloat((subviews.count / 2) + 1)
         let radius = min(bounds.width, bounds.height) / 2
         let placementRadius = radius - (subViewDim / 2)
-        let center = CGPoint(x: bounds.midX, y: bounds.midY)
+        let center: CGPoint
+        if fitArcBoundingBox {
+            if degrees <= 180 {
+                // Place the circle's center on the bottom edge so a ≤180° arc occupies only the top half
+                center = CGPoint(x: bounds.midX, y: bounds.maxY)
+            } else {
+                // Blend the center between bottom (for 180°) and middle (for 360°)
+                let t = min(max((degrees - 180.0) / 180.0, 0.0), 1.0)
+                let blendedY = bounds.maxY - (bounds.height * 0.5 * t)
+                center = CGPoint(x: bounds.midX, y: blendedY)
+            }
+        } else {
+            center = CGPoint(x: bounds.midX, y: bounds.midY)
+        }
 
         // Convert degrees to radians and calculate angle increment for the arc
         let arcRadians = degrees * .pi / 180.0
