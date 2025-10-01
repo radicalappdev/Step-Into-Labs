@@ -18,8 +18,8 @@ struct Lab087: View {
 
     @State var nodes: Int = 9
     @State var previousNodes: Int = 3
-    @State var arcDegrees: Double = 180
-    @State var angleOffsetDegrees: Double = 0
+    @State var arcDegrees: Double = 150
+    @State var angleOffsetDegrees: Double = -90
     @State var shouldAutoCenter = true
 
     var body: some View {
@@ -31,8 +31,12 @@ struct Lab087: View {
                         .foregroundColor(.clear)
                         .frame(width: 400, height: 800)
                         .glassBackgroundEffect()
+                        .rotation3DLayout(Rotation3D(angle: .degrees(360 - 90), axis: .x))
                 }
             }
+            .frame(width: 4800, height: 3600)
+            .rotation3DLayout(Rotation3D(angle: .degrees(90), axis: .x))
+            .transform3DEffect(AffineTransform3D(translation: Vector3D(x: 0, y: -2400, z: -2400)))
             .debugBorder3D(.white)
         }
 
