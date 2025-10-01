@@ -34,10 +34,14 @@ struct Lab087: View {
                         .rotation3DLayout(Rotation3D(angle: .degrees(360 - 90), axis: .x))
                 }
             }
-            .frame(width: 4800, height: 3600)
-            .rotation3DLayout(Rotation3D(angle: .degrees(90), axis: .x))
-            .transform3DEffect(AffineTransform3D(translation: Vector3D(x: 0, y: -2400, z: -2400)))
             .debugBorder3D(.white)
+            .frame(width: 4800, height: 3600)
+            .frame(depth: 2400, alignment: .front)
+            .rotation3DLayout(Rotation3D(angle: .degrees(90), axis: .x))
+            .offset(z: -1200)
+            .offset(y: -1200)
+
+//            .transform3DEffect(AffineTransform3D(translation: Vector3D(x: 0, y: -2400, z: -2400)))
         }
 
     }
