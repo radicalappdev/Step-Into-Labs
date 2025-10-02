@@ -1,0 +1,62 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 2.0 (494.8.1)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    reorder nameChildren = ["BlueBirds", "Base", "MaplePlywood", "RedBirds"]
+    def Xform "BlueBirds"
+    {
+        float3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "VFXEmitter"
+        {
+            token info:id = "RealityKit.VFXEmitter"
+
+            def RealityKitStruct "currentState"
+            {
+                token birthLocation = "Volume"
+                int64 burstCount = 5
+                token emitterShape = "Box"
+                bool isLocal = 1
+                float particleSpeed = 0.01
+                float3 shapeSize = (0.5, 0.5, 0.5)
+
+                def RealityKitStruct "mainEmitter"
+                {
+                    float3 acceleration = (0.1, 0.03, 0)
+                    float birthRate = 3
+                    int64 columnCount = 3
+                    float4 endColorA = (0.0013006331, 0.032195132, 1, 1)
+                    bool isAnimated = 1
+                    float noiseAnimationSpeed = 0.01
+                    float noiseStrength = 0.01
+                    token opacityOverLife = "Constant"
+                    asset particleImage = @Textures/birdblue.png@
+                    double particleLifeSpan = 10
+                    float particleSize = 0.1
+                    float radialGravityStrength = 0.001
+                    int64 rowCount = 3
+                    float4 startColorA = (0.9999908, 1, 1, 1)
+                    bool useEndColor = 0
+                    bool useEndColorRange = 0
+                    bool useStartColorRange = 0
+                    float3 vortexDirection = (0, 0.5, 0.01)
+                    float vortexStrength = 0.01
+                }
+
+                def RealityKitStruct "spawnedEmitter"
+                {
+                }
+            }
+        }
+    }
+}
+

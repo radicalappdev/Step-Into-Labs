@@ -650,6 +650,13 @@ class ModelData {
              subtitle: "Immersive ArcLayout",
              description: "")
 
+        ,Lab(title: "Lab 088",
+             type: .VOLUME,
+             date: Date("10/02/2025"),
+             isFeatured: true,
+             subtitle: "Animated Particles",
+             description: "We can provide an image that contains a grid of sub-images, and use it to generate animated effects.")
+
 
     ]
 
