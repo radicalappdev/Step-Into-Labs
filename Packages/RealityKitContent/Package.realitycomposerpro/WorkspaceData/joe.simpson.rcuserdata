@@ -1,7 +1,8 @@
 {
-  "advancedEditorSelectedIdentifier" : "ProjectBrowser",
+  "advancedEditorSelectedIdentifier" : "ShaderGraphEditorPluginID",
   "openSceneRelativePaths" : [
-    "AnimatedBirdParticle.usda"
+    "MaterialLoadingLab.usda",
+    "BuildingBlocks\/StepSphereRed.usda"
   ],
   "recentIdentifiers" : {
     "00AC74E2-A464-4F74-A445-36CD76630287" : [
@@ -62,6 +63,9 @@
 
     ],
     "51846BC9-340D-4930-9987-C60C51E07011" : [
+
+    ],
+    "5C5D09F4-0306-407B-AE4B-439B6AD7AFF5" : [
 
     ],
     "69135388-7782-493A-B7EE-3B9F9169A20D" : [
@@ -9204,5 +9208,5 @@
   "sceneViewportBackgroundColors" : {
 
   },
-  "selectedSceneRelativePath" : "AnimatedBirdParticle.usda"
+  "selectedSceneRelativePath" : "MaterialLoadingLab.usda"
 }

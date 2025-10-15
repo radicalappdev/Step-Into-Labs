@@ -1,0 +1,79 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 2.0 (494.8.1)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    reorder nameChildren = ["GlossyRed", "Subject"]
+    def Sphere "Subject" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        reorder nameChildren = ["GlossyRed", "DefaultMaterial"]
+        rel material:binding = </Root/Subject/DefaultMaterial>
+        double radius = 0.3
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:mtlx:surface
+            token outputs:realitykit:vertex
+            token outputs:surface.connect = </Root/Subject/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.003921569, 0.38039216, 0.41960785) (
+                    colorSpace = "srgb_texture"
+                )
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def Material "GlossyRed"
+        {
+            token outputs:mtlx:surface.connect = </Root/Subject/GlossyRed/PreviewSurface.outputs:out>
+            token outputs:realitykit:vertex
+            token outputs:surface.connect = </Root/Subject/GlossyRed/DefaultSurfaceShader.outputs:surface>
+            float2 ui:nodegraph:node:pos = (32.36331, 471.47977)
+            int ui:nodegraph:node:stackingOrder = 1
+            float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (0, 110.5)
+
+            def Shader "DefaultSurfaceShader" (
+                active = false
+            )
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                float inputs:clearcoat = 1
+                color3f inputs:diffuseColor = (0.41960785, 0.003921569, 0.17254902) (
+                    colorSpace = "srgb_texture"
+                )
+                float inputs:metallic = 0.1
+                float inputs:opacity = 0.8
+                float inputs:roughness = 0.15
+                token outputs:surface
+            }
+
+            def Shader "PreviewSurface"
+            {
+                uniform token info:id = "ND_UsdPreviewSurface_surfaceshader"
+                float inputs:clearcoat = 0.1
+                color3f inputs:diffuseColor = (0.47450978, 0.086274505, 0.1764706) (
+                    colorSpace = "srgb_displayp3"
+                )
+                float inputs:metallic = 1
+                token outputs:out
+                float2 ui:nodegraph:node:pos = (-255, 105)
+                int ui:nodegraph:node:stackingOrder = 2
+            }
+        }
+    }
+}
+

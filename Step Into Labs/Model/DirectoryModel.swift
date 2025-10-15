@@ -657,6 +657,13 @@ class ModelData {
              subtitle: "Animated Particles",
              description: "We can provide an image that contains a grid of sub-images, and use it to generate animated effects.")
 
+        ,Lab(title: "Lab 089",
+             type: .VOLUME,
+             date: Date("10/15/2025"),
+             isFeatured: true,
+             subtitle: "Loading Materials",
+             description: "Exploring a few ways to load materials from Reality Composer Pro.")
+
 
     ]
 
