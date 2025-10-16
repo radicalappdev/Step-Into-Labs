@@ -42,6 +42,7 @@ def Xform "Root"
         references = @ToyRocket.usdz@
     )
     {
+        reorder nameChildren = ["geom", "Collider", "InputTarget", "Present"]
         float2 ui:nodegraph:node:pos = (20, 20)
         int ui:nodegraph:node:stackingOrder = 1
         float3 xformOp:scale = (1, 1, 1)
@@ -169,6 +170,16 @@ def Xform "Root"
                     }
                 }
             }
+        }
+
+        def Xform "Present" (
+            active = true
+        )
+        {
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:translate = (0, 0.2590357, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
         }
     }
 }

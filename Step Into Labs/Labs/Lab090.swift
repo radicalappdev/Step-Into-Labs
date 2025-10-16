@@ -2,11 +2,11 @@
 //
 //  Title: Lab090
 //
-//  Subtitle:
+//  Subtitle: Manipulation & Tap Workaround
 //
-//  Description:
+//  Description: We can't use Gestures and Mnipulation at the same time, but we can use this workaround.
 //
-//  Type:
+//  Type: Volume
 //
 //  Created by Joseph Simpson on 10/16/25.
 
@@ -16,8 +16,13 @@ import RealityKitContent
 
 struct Lab090: View {
 
+    @State private var showingPopover: Bool = false
     @State private var manipulationStart: SIMD3<Float> = .zero
     @State private var manipulationMaxDistanceSquared: Float = .zero
+
+    @State private var willBegin: EventSubscription?
+    @State private var didUpdateTransform: EventSubscription?
+    @State private var willEnd: EventSubscription?
 
     var body: some View {
         RealityView { content in
@@ -26,16 +31,32 @@ struct Lab090: View {
             scene.position.y = -0.4
             content.add(scene)
 
+
             guard let subject = scene.findEntity(named: "ToyRocket") else { return }
+
+            if let present = subject.findEntity(named: "Present") {
+                // Add a popover
+                let presentation = PresentationComponent(
+                    isPresented: $showingPopover,
+                    configuration: .popover(arrowEdge: .bottom),
+                    content: RocketCard()
+                )
+                present.components.set(presentation)
+            }
+
+
+            // Set up Manipulation. The entity already has collision and input components
             let mc = ManipulationComponent()
             subject.components.set(mc)
 
-            _ = content.subscribe(to: ManipulationEvents.WillBegin.self) { event in
+            // Capture the entity starting position
+            willBegin = content.subscribe(to: ManipulationEvents.WillBegin.self) { event in
                 manipulationStart = event.entity.position
                 manipulationMaxDistanceSquared = .zero
             }
 
-            _ = content.subscribe(to: ManipulationEvents.DidUpdateTransform.self) { event in
+            // Write the distance between this update and the start position
+            didUpdateTransform = content.subscribe(to: ManipulationEvents.DidUpdateTransform.self) { event in
                 let distanceSquared = simd_distance_squared(manipulationStart, event.entity.position)
                 if manipulationMaxDistanceSquared < distanceSquared {
                     manipulationMaxDistanceSquared = distanceSquared
@@ -43,9 +64,11 @@ struct Lab090: View {
 
             }
 
-            _ = content.subscribe(to: ManipulationEvents.WillEnd.self)  { event in
+            // Check to see if the distance falls below a threshold
+            willEnd = content.subscribe(to: ManipulationEvents.WillEnd.self)  { event in
                 if(manipulationMaxDistanceSquared < 0.01 * 0.01) {
                     print("tapped registered")
+                    showingPopover.toggle()
                 } else {
                     print("manipulation registered")
                 }
@@ -53,9 +76,29 @@ struct Lab090: View {
             }
 
         }
+        .onDisappear() {
+            willBegin?.cancel()
+            didUpdateTransform?.cancel()
+            willEnd?.cancel()
+        }
     }
 }
 
 #Preview {
     Lab090()
+}
+
+fileprivate struct RocketCard: View {
+    var body: some View {
+        VStack(spacing: 24) {
+            Text("Rocket")
+                .font(.largeTitle)
+
+            Text("🚀🚀🚀🚀🚀")
+                .font(.largeTitle)
+        }
+        .foregroundStyle(.black)
+        .textCase(.uppercase)
+        .padding()
+    }
 }

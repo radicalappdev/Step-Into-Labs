@@ -1,8 +1,9 @@
 {
-  "advancedEditorSelectedIdentifier" : "ShaderGraphEditorPluginID",
+  "advancedEditorSelectedIdentifier" : "ProjectBrowser",
   "openSceneRelativePaths" : [
     "MaterialLoadingLab.usda",
-    "BuildingBlocks\/StepSphereRed.usda"
+    "BuildingBlocks\/StepSphereRed.usda",
+    "ObserveEntity.usda"
   ],
   "recentIdentifiers" : {
     "00AC74E2-A464-4F74-A445-36CD76630287" : [
@@ -3744,6 +3745,74 @@
           0.020354725,
           4.4892335,
           2.804664,
+          1
+        ]
+      }
+    ],
+    "6F07F0BB-6FDD-4EE0-A176-AA78BBBE18CE" : [
+      {
+        "date" : 782308489.830306,
+        "title" : "Untitled",
+        "transform" : [
+          0.9999912,
+          3.2494057e-10,
+          0.004179011,
+          0,
+          0.0007182488,
+          0.9851196,
+          -0.171869,
+          0,
+          -0.0041168258,
+          0.17187057,
+          0.9851109,
+          0,
+          -0.00337233,
+          0.14078875,
+          0.8069613,
+          1
+        ]
+      },
+      {
+        "date" : 782308487.302805,
+        "title" : "Untitled",
+        "transform" : [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0.7071069,
+          -0.7071067,
+          0,
+          0,
+          0.7071067,
+          0.7071069,
+          0,
+          0,
+          0.5792317,
+          0.57923234,
+          1
+        ]
+      },
+      {
+        "date" : 782308482.959249,
+        "title" : "Untitled",
+        "transform" : [
+          1,
+          0,
+          -0,
+          0,
+          -0,
+          0.7071069,
+          -0.7071067,
+          0,
+          0,
+          0.7071067,
+          0.7071069,
+          0,
+          0,
+          0.111097455,
+          0.111097574,
           1
         ]
       }
@@ -9208,5 +9277,5 @@
   "sceneViewportBackgroundColors" : {
 
   },
-  "selectedSceneRelativePath" : "MaterialLoadingLab.usda"
+  "selectedSceneRelativePath" : "ObserveEntity.usda"
 }
