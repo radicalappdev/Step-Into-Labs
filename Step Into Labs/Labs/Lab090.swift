@@ -4,7 +4,7 @@
 //
 //  Subtitle: Manipulation & Tap Workaround
 //
-//  Description: We can't use Gestures and Mnipulation at the same time, but we can use this workaround.
+//  Description: We can't use Gestures and Manipulation at the same time, but we can use this workaround.
 //
 //  Type: Volume
 //
@@ -61,18 +61,17 @@ struct Lab090: View {
                 if manipulationMaxDistanceSquared < distanceSquared {
                     manipulationMaxDistanceSquared = distanceSquared
                 }
-
             }
 
             // Check to see if the distance falls below a threshold
             willEnd = content.subscribe(to: ManipulationEvents.WillEnd.self)  { event in
+                // 0.01 * 0.01 = 0.0001 m² → about 1 cm of movement squared; treats near-zero motion as a tap
                 if(manipulationMaxDistanceSquared < 0.01 * 0.01) {
                     print("tapped registered")
                     showingPopover.toggle()
                 } else {
                     print("manipulation registered")
                 }
-
             }
 
         }
@@ -102,3 +101,4 @@ fileprivate struct RocketCard: View {
         .padding()
     }
 }
+

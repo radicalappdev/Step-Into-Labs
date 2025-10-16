@@ -669,7 +669,7 @@ class ModelData {
              date: Date("10/16/2025"),
              isFeatured: true,
              subtitle: "Manipulation & Tap Workaround",
-             description: "We can't use Gestures and Mnipulation at the same time, but we can use this workaround.")
+             description: "We can't use Gestures and Manipulation at the same time, but we can use this workaround.")
 
 
     ]
