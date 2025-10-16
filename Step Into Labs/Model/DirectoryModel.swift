@@ -664,6 +664,13 @@ class ModelData {
              subtitle: "Loading Materials",
              description: "Exploring a few ways to load materials from Reality Composer Pro.")
 
+        ,Lab(title: "Lab 090",
+             type: .VOLUME,
+             date: Date("10/16/2025"),
+             isFeatured: true,
+             subtitle: "Manipulation & Tap Workaround",
+             description: "We can't use Gestures and Mnipulation at the same time, but we can use this workaround.")
+
 
     ]
 
