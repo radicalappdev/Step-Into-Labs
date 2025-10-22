@@ -671,6 +671,13 @@ class ModelData {
              subtitle: "Manipulation & Tap Workaround",
              description: "We can't use Gestures and Manipulation at the same time, but we can use this workaround.")
 
+        ,Lab(title: "Lab 091",
+             type: .SPACE,
+             date: Date("10/22/2025"),
+             isFeatured: true,
+             subtitle: "Light the Beacon",
+             description: "Just a bit of fun while I wait for my Apple Vision Pro M5 to arrive.")
+
 
     ]
 
