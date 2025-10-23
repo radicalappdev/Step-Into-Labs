@@ -678,6 +678,13 @@ class ModelData {
              subtitle: "Light the Beacon",
              description: "Just a bit of fun while I wait for my Apple Vision Pro M5 to arrive.")
 
+        ,Lab(title: "Lab 092",
+             type: .VOLUME,
+             date: Date("10/23/2025"),
+             isFeatured: true,
+             subtitle: "Manipulation from Input Target",
+             description: "")
+
 
     ]
 
