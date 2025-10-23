@@ -2,11 +2,11 @@
 //
 //  Title: Lab092
 //
-//  Subtitle:
+//  Subtitle: Manipulation from Input Target
 //
-//  Description:
+//  Description: Adding a helper function to quickly assign manipulation components to any entity with an input target component.
 //
-//  Type:
+//  Type: Volume
 //
 //  Created by Joseph Simpson on 10/23/25.
 
@@ -21,29 +21,12 @@ struct Lab092: View {
             scene.position.y = -0.4
             content.add(scene)
 
-            // Add ManipulationComponent to every entity that already has an InputTargetComponent (added in RCP)
-
-            var stack: [Entity] = Array(content.entities)
-
-            await MainActor.run {
-
-                while let entity = stack.popLast() {
-                    if entity.components.has(InputTargetComponent.self) &&
-                        !entity.components.has(ManipulationComponent.self) {
-                        entity.components.set(ManipulationComponent())
-                    }
-                    stack.append(contentsOf: entity.children)
-                }
-
-            }
+            // The entities in this scene alread have Input Target Components that were added in Reality Composer Pro
+            await content.addManipulationToInputTargets()
         }
     }
-
-    
 }
 
 #Preview {
     Lab092()
 }
-
-

@@ -683,7 +683,7 @@ class ModelData {
              date: Date("10/23/2025"),
              isFeatured: true,
              subtitle: "Manipulation from Input Target",
-             description: "")
+             description: "Adding a helper function to quickly assign manipulation components to any entity with an input target component.")
 
 
     ]
