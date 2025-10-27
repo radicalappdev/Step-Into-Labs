@@ -639,7 +639,7 @@ class ModelData {
         ,Lab(title: "Lab 086",
              type: .SPACE,
              date: Date("9/29/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Capsule Catch",
              description: "A mini-game drop and catch game.")
 
@@ -653,28 +653,28 @@ class ModelData {
         ,Lab(title: "Lab 088",
              type: .VOLUME,
              date: Date("10/02/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Animated Particles",
              description: "We can provide an image that contains a grid of sub-images, and use it to generate animated effects.")
 
         ,Lab(title: "Lab 089",
              type: .VOLUME,
              date: Date("10/15/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Loading Materials",
              description: "Exploring a few ways to load materials from Reality Composer Pro.")
 
         ,Lab(title: "Lab 090",
              type: .VOLUME,
              date: Date("10/16/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Manipulation & Tap Workaround",
              description: "We can't use Gestures and Manipulation at the same time, but we can use this workaround.")
 
         ,Lab(title: "Lab 091",
              type: .SPACE,
              date: Date("10/22/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Light the Beacon",
              description: "Just a bit of fun while I wait for my Apple Vision Pro M5 to arrive.")
 
@@ -684,6 +684,13 @@ class ModelData {
              isFeatured: true,
              subtitle: "Manipulation from Input Target",
              description: "Adding a helper function to quickly assign manipulation components to any entity with an input target component.")
+
+        ,Lab(title: "Lab 093",
+             type: .WINDOW,
+             date: Date("10/27/2025"),
+             isFeatured: true,
+             subtitle: "Manipulation and Gestures fail with Portal Content",
+             description: "When working with Entities inside a portal, Manipulation and Gestures do not work.")
 
 
     ]
