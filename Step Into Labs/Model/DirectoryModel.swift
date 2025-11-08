@@ -692,6 +692,16 @@ class ModelData {
              subtitle: "Manipulation and Gestures fail with Portal Content",
              description: "When working with Entities inside a portal, Manipulation and Gestures do not work.")
 
+        ,Lab(title: "Lab 094",
+             type: .VOLUME,
+             date: Date("11/08/2025"),
+             isFeatured: true,
+             subtitle: "Visualize a Pivot Point",
+             description: """
+A guest lab from [Michael Temper](https://bsky.app/profile/michaeltemper.bsky.social)
+Using a Draw Component and System to visualize the position of a given entity's pivot point in space.
+""")
+
 
     ]
 
