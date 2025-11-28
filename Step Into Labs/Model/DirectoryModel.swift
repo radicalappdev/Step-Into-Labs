@@ -702,6 +702,26 @@ A guest lab from [Michael Temper](https://bsky.app/profile/michaeltemper.bsky.so
 Using a Draw Component and System to visualize the position of a given entity's pivot point in space.
 """)
 
+        ,Lab(title: "Lab 095",
+             type: .VOLUME,
+             date: Date("11/22/2025"),
+             isFeatured: true,
+             subtitle: "World, Local & Object Space",
+             description: """
+A guest lab from [Michael Temper](https://bsky.app/profile/michaeltemper.bsky.social)
+Shows the movement in World, Local and Object Space
+""")
+
+        ,Lab(title: "Lab 096",
+             type: .VOLUME,
+             date: Date("11/29/2025"),
+             isFeatured: true,
+             subtitle: "Vector Example",
+             description: """
+A guest lab from [Michael Temper](https://bsky.app/profile/michaeltemper.bsky.social)
+Shows the vector of an object
+""")
+
 
     ]
 

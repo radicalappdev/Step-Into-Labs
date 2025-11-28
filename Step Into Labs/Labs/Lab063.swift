@@ -83,21 +83,21 @@ struct Lab063: View {
 }
 
 
-fileprivate struct VectorDisplay: View {
-    let title: String
-    let vector: SIMD3<Float>
-
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text(title)
-                .fontWeight(.bold)
-            HStack {
-                ForEach(["X", "Y", "Z"], id: \.self) { axis in
-                    let value = axis == "X" ? vector.x : axis == "Y" ? vector.y : vector.z
-                    Text("\(axis): \(String(format: "%8.3f", value.isNaN ? 0 : value))")
-                        .frame(width: 120, alignment: .leading)
-                }
-            }
-        }
-    }
-}
+//fileprivate struct VectorDisplay: View {
+//    let title: String
+//    let vector: SIMD3<Float>
+//
+//    var body: some View {
+//        VStack(alignment: .leading) {
+//            Text(title)
+//                .fontWeight(.bold)
+//            HStack {
+//                ForEach(["X", "Y", "Z"], id: \.self) { axis in
+//                    let value = axis == "X" ? vector.x : axis == "Y" ? vector.y : vector.z
+//                    Text("\(axis): \(String(format: "%8.3f", value.isNaN ? 0 : value))")
+//                        .frame(width: 120, alignment: .leading)
+//                }
+//            }
+//        }
+//    }
+//}

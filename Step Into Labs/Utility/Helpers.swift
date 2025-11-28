@@ -273,3 +273,28 @@ extension RealityViewContent {
         }
     }
 }
+
+// Added to support Lab 095
+struct VectorDisplay: View {
+    let title: String
+    let vector: SIMD3<Float>
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text(title)
+                .fontWeight(.bold)
+
+            HStack {
+                ForEach(["X", "Y", "Z"], id: \.self) { axis in
+                    let value = axis == "X" ? vector.x : axis == "Y" ? vector.y : vector.z
+                    HStack {
+                        Text("\(axis):")
+                            .fontWeight(.bold)
+                        Text(String(format: "%2.3f", value.isNaN ? 0 : value))
+                    }
+                    .frame(width: 150, alignment: .leading)
+                }
+            }
+        }
+    }
+}
