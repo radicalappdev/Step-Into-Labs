@@ -8,7 +8,7 @@
 //
 //  Type: Volume
 //
-//  Created by Joseph Simpson on 11/28/25.
+//  Michael Temper: https://bsky.app/profile/michaeltemper.bsky.social
 
 import SwiftUI
 import RealityKit

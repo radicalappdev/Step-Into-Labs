@@ -527,7 +527,7 @@ class ModelData {
         ,Lab(title: "Lab 070",
              type: .WINDOW,
              date: Date("7/17/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Step Into Vision 2025",
              description: "Part of my goal to publish on Step Into Vision everyday in 2025.")
 
@@ -681,14 +681,14 @@ class ModelData {
         ,Lab(title: "Lab 092",
              type: .VOLUME,
              date: Date("10/23/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Manipulation from Input Target",
              description: "Adding a helper function to quickly assign manipulation components to any entity with an input target component.")
 
         ,Lab(title: "Lab 093",
              type: .WINDOW,
              date: Date("10/27/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Manipulation and Gestures fail with Portal Content",
              description: "When working with Entities inside a portal, Manipulation and Gestures do not work.")
 
@@ -720,6 +720,16 @@ Shows the movement in World, Local and Object Space
              description: """
 A guest lab from [Michael Temper](https://bsky.app/profile/michaeltemper.bsky.social)
 Shows the vector of an object
+""")
+
+        ,Lab(title: "Lab 097",
+             type: .VOLUME,
+             date: Date("12/06/2025"),
+             isFeatured: true,
+             subtitle: "Vector Addition",
+             description: """
+A guest lab from [Michael Temper](https://bsky.app/profile/michaeltemper.bsky.social)
+Visualizes the addition of two vectors.
 """)
 
 
