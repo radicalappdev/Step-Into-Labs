@@ -732,6 +732,16 @@ A guest lab from [Michael Temper](https://bsky.app/profile/michaeltemper.bsky.so
 Visualizes the addition of two vectors.
 """)
 
+        ,Lab(title: "Lab 098",
+             type: .VOLUME,
+             date: Date("12/13/2025"),
+             isFeatured: true,
+             subtitle: "Vector Subtraction",
+             description: """
+A guest lab from [Michael Temper](https://bsky.app/profile/michaeltemper.bsky.social)
+Visualizes the subtraction of two vectors
+""")
+
 
     ]
 
