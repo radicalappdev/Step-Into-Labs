@@ -751,7 +751,7 @@ Visualizes the subtraction of two vectors
              date: Date("12/18/2025"),
              isFeatured: true,
              subtitle: "Exploring Extrusion Methods",
-             description: "")
+             description: "We can use linear, tracePositions, and traceTransforms to extrude meshes.")
 
 
     ]

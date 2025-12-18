@@ -2,13 +2,13 @@
 //
 //  Title: Lab101
 //
-//  Subtitle:
+//  Subtitle: Exploring Extrusion Methods
 //
-//  Description:
+//  Description: We can use linear, tracePositions, and traceTransforms to extrude meshes.
 //
-//  Type:
+//  Type: Volume
 //
-//  Featured:
+//  Featured: true
 //
 //  Created by Joseph Simpson on 12/18/25.
 
@@ -37,7 +37,10 @@ struct Lab101: View {
             content.add(entity)
 
             // Initial build.
-            await apply(example: example, to: entity)
+            let built = await buildSubject(example: example)
+            if let model = built.model {
+                entity.model = model
+            }
             appliedExample = example
             spinSubject(entity: entity)
         }
@@ -46,7 +49,10 @@ struct Lab101: View {
             guard appliedExample != newValue else { return }
 
             Task { @MainActor in
-                await apply(example: newValue, to: subject)
+                let built = await buildSubject(example: newValue)
+                if let model = built.model {
+                    subject.model = model
+                }
                 appliedExample = newValue
             }
         }
@@ -64,7 +70,7 @@ struct Lab101: View {
     }
 
     @MainActor
-    private func apply(example: ExtrusionExample, to entity: ModelEntity) async {
+    private func buildSubject(example: ExtrusionExample) async -> ModelEntity {
         // Materials
         let mat1 = SimpleMaterial(color: .stepGreen, roughness: 0.2, isMetallic: false)
         let mat2 = SimpleMaterial(color: .stepRed, roughness: 0.2, isMetallic: false)
@@ -89,14 +95,13 @@ struct Lab101: View {
         }
 
         extrusionOptions.chamferRadius = 0.01
-        extrusionOptions.boundaryResolution = .uniformSegmentsPerSpan(segmentCount: 64)
         extrusionOptions.materialAssignment = .init(front: 0, back: 1, extrusion: 2, frontChamfer: 3, backChamfer: 3)
 
         // Generate mesh
         let mesh = try! await MeshResource(extruding: simplePath(), extrusionOptions: extrusionOptions)
 
-        // Update the entity in-place (no swapping/removing required)
-        entity.model = ModelComponent(mesh: mesh, materials: [mat1, mat2, mat3, mat4])
+        // Build and return a new entity
+        return ModelEntity(mesh: mesh, materials: [mat1, mat2, mat3, mat4])
     }
 
     func arcTracePositions(
@@ -111,7 +116,7 @@ struct Lab101: View {
         let endX: Float = 0.25
 
         return (0..<n).map { i in
-            let t = Float(i) / Float(n - 1)              // 0 → 1
+            let t = Float(i) / Float(n - 1) // 0 → 1
             let x = simd_mix(startX, endX, t)
 
             // Smooth arc using sine (peaks at center)
@@ -200,3 +205,5 @@ struct Lab101: View {
 #Preview {
     Lab101()
 }
+
+
