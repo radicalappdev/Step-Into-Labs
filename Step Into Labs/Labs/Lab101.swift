@@ -21,7 +21,7 @@ struct Lab101: View {
         RealityView { content in
 
             let subject = await makeExtrudedEntity(title: "Subject", path: simplePath())
-//            spinSubject(entity: subject)
+            spinSubject(entity: subject)
             content.add(subject)
 
         }
@@ -38,17 +38,78 @@ struct Lab101: View {
 
         // Set up our extrusion options. Here we'll set a depth and chamfer. We can also assign material indexes to each face.
         var extrusionOptions = MeshResource.ShapeExtrusionOptions()
-        extrusionOptions.extrusionMethod = .linear(depth: 0.05) // in meters
+        //        extrusionOptions.extrusionMethod = .linear(depth: 0.05) // in meters
+                extrusionOptions.extrusionMethod = .tracePositions(
+                    arcTracePositions(count: 12)
+                )
+
+//        extrusionOptions.extrusionMethod = .traceTransforms(
+//            arcTraceMatrices(count: 24, startScale: .one, endScale: [2, 2, 2])
+//        )
+
         extrusionOptions.chamferRadius = 0.01
+        extrusionOptions.boundaryResolution = .uniformSegmentsPerSpan(segmentCount: 64)
         extrusionOptions.materialAssignment = .init(front: 0, back: 1, extrusion: 2, frontChamfer: 3, backChamfer: 3)
 
         // Create a Mesh Resource using the provided path and the extrusion options
         let mesh = try! await MeshResource(extruding: path, extrusionOptions: extrusionOptions)
 
-
         // Create an entity with the Mesh Resource and an array of materials
         return ModelEntity(mesh: mesh, materials: [mat1, mat2, mat3, mat4])
 
+    }
+
+    func arcTracePositions(
+        count n: Int,
+        radius: Float = 0.35,
+        height: Float = 0.05,
+        z: Float = 0
+    ) -> [SIMD3<Float>] {
+        guard n >= 2 else { return [] }
+
+        let startX: Float = -0.25
+        let endX: Float = 0.25
+
+        return (0..<n).map { i in
+            let t = Float(i) / Float(n - 1)              // 0 → 1
+            let x = simd_mix(startX, endX, t)
+
+            // Smooth arc using sine (peaks at center)
+            let y = sin(t * .pi) * height
+
+            return SIMD3<Float>(x, y, z)
+        }
+    }
+
+    func arcTraceMatrices(
+        count n: Int,
+        height: Float = 0.05,
+        x: Float = 0,
+        startZ: Float = -0.25,
+        endZ: Float = 0.25,
+        startScale: SIMD3<Float> = .one,
+        endScale: SIMD3<Float> = SIMD3<Float>(repeating: 1.12)
+    ) -> [simd_float4x4] {
+        guard n >= 2 else { return [] }
+
+        return (0..<n).map { i in
+            let t = Float(i) / Float(n - 1) // 0 → 1
+            let z = simd_mix(startZ, endZ, t)
+
+            // Smooth arc using sine (peaks at center)
+            let y = sin(t * .pi) * height
+
+            let translation = SIMD3<Float>(x, y, z)
+            let scale = simd_mix(startScale, endScale, SIMD3<Float>(repeating: t))
+
+            let transform = Transform(
+                scale: scale,
+                rotation: simd_quatf(angle: 0, axis: SIMD3<Float>(0, 1, 0)),
+                translation: translation
+            )
+
+            return transform.matrix
+        }
     }
 
     // Just a helper function to create a Path
@@ -89,8 +150,8 @@ struct Lab101: View {
                                     isAdditive: false)
             let animation = try AnimationResource.makeActionAnimation(for: action,
                                                                       duration: 3,
-                                                                      bindTarget: .transform
-                                                                      ,repeatMode: .autoReverse)
+                                                                      bindTarget: .transform,
+                                                                      repeatMode: .autoReverse)
             entity.playAnimation(animation)
         }
     }
