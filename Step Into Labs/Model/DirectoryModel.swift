@@ -743,6 +743,17 @@ Visualizes the subtraction of two vectors
 """)
 
 
+
+
+
+        ,Lab(title: "Lab 101",
+             type: .VOLUME,
+             date: Date("12/18/2025"),
+             isFeatured: true,
+             subtitle: "Exploring Extrusion Methods",
+             description: "")
+
+
     ]
 
 }

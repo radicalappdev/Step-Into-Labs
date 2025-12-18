@@ -112,6 +112,9 @@ struct LabRouter: View {
         case "Lab 097": Lab097()
         case "Lab 098": Lab098()
 
+
+        case "Lab 101": Lab101()
+
         case .none, .some:
 
             VStack {
