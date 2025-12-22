@@ -773,7 +773,7 @@ Shows the effect of a trigger
              type: .VOLUME,
              date: Date("12/22/2025"),
              isFeatured: true,
-             subtitle: "Extruding SF Symbols",
+             subtitle: "",
              description: "")
 
 
