@@ -742,9 +742,25 @@ A guest lab from [Michael Temper](https://bsky.app/profile/michaeltemper.bsky.so
 Visualizes the subtraction of two vectors
 """)
 
+        ,Lab(title: "Lab 099",
+             type: .VOLUME,
+             date: Date("12/20/2025"),
+             isFeatured: true,
+             subtitle: "Direction",
+             description: """
+A guest lab from [Michael Temper](https://bsky.app/profile/michaeltemper.bsky.social)
+Shows the direction of an object
+""")
 
-
-
+        ,Lab(title: "Lab 100",
+             type: .VOLUME,
+             date: Date("12/27/2025"),
+             isFeatured: true,
+             subtitle: "Trigger",
+             description: """
+A guest lab from [Michael Temper](https://bsky.app/profile/michaeltemper.bsky.social)
+Shows the effect of a trigger
+""")
 
         ,Lab(title: "Lab 101",
              type: .VOLUME,
@@ -752,6 +768,13 @@ Visualizes the subtraction of two vectors
              isFeatured: true,
              subtitle: "Exploring Extrusion Methods",
              description: "We can use linear, tracePositions, and traceTransforms to extrude meshes.")
+
+        ,Lab(title: "Lab 102",
+             type: .VOLUME,
+             date: Date("12/22/2025"),
+             isFeatured: true,
+             subtitle: "Extruding SF Symbols",
+             description: "")
 
 
     ]

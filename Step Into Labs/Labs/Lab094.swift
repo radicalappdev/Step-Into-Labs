@@ -8,7 +8,9 @@
 //
 //  Type: Volume
 //
-//  Michael Temper: https://bsky.app/profile/michaeltemper.bsky.social
+//  Created by Michael Temper on 11/08/25.
+//
+//  Follow: https://bsky.app/profile/michaeltemper.bsky.social
 
 import SwiftUI
 import RealityKit

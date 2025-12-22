@@ -8,7 +8,9 @@
 //
 //  Type: Volume
 //
-//  Created by Tempuno e.U. on 20.10.25.
+//  Created by Michael Temper on 12/13/25.
+//
+//  Follow: https://bsky.app/profile/michaeltemper.bsky.social
 
 import RealityKit
 import RealityKitContent
