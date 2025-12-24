@@ -647,8 +647,8 @@ class ModelData {
              type: .SPACE,
              date: Date("10/01/2025"),
              isFeatured: true,
-             subtitle: "Immersive ArcLayout",
-             description: "")
+             subtitle: "Standing inside a Spatial Layout",
+             description: "Documenting a workaround for using SwiftUI Spatial Layouts in Immersive Spaces.")
 
         ,Lab(title: "Lab 088",
              type: .VOLUME,
