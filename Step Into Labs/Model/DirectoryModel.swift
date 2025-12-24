@@ -338,7 +338,7 @@ class ModelData {
         ,Lab(title: "Lab 043",
              type: .SPACE,
              date: Date("3/false/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Visualize the Entity Spawner",
              description: "Using Components and Systems to create an entity spawner system.")
 
@@ -618,7 +618,7 @@ class ModelData {
         ,Lab(title: "Lab 083",
              type: .WINDOW_ALT,
              date: Date("9/18/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Feathered glass title card",
              description: "A mock up of a title card for the Shared Visions Project.")
 
