@@ -9,6 +9,8 @@
 //  https://www.hackingwithswift.com/quick-start/swiftui/how-to-create-3d-effects-like-cover-flow-using-scrollview-and-geometryreader
 //  Type:
 //
+//  Featured: true
+//
 //  Created by Joseph Simpson on 10/6/24.
 
 import SwiftUI

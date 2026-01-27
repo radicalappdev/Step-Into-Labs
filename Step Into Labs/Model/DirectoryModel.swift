@@ -646,7 +646,7 @@ class ModelData {
         ,Lab(title: "Lab 087",
              type: .SPACE,
              date: Date("10/01/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Standing inside a Spatial Layout",
              description: "Documenting a workaround for using SwiftUI Spatial Layouts in Immersive Spaces.")
 
@@ -770,8 +770,8 @@ Shows the effect of a trigger
              description: "We can use linear, tracePositions, and traceTransforms to extrude meshes.")
 
         ,Lab(title: "Lab 102",
-             type: .VOLUME,
-             date: Date("12/22/2025"),
+             type: .WINDOW,
+             date: Date("1/28/2026"),
              isFeatured: true,
              subtitle: "",
              description: "")
