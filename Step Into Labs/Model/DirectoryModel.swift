@@ -688,14 +688,14 @@ class ModelData {
         ,Lab(title: "Lab 093",
              type: .WINDOW,
              date: Date("10/27/2025"),
-             isFeatured: false,
+             isFeatured: true,
              subtitle: "Manipulation and Gestures fail with Portal Content",
              description: "When working with Entities inside a portal, Manipulation and Gestures do not work.")
 
         ,Lab(title: "Lab 094",
              type: .VOLUME,
              date: Date("11/08/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Visualize a Pivot Point",
              description: """
 A guest lab from [Michael Temper](https://bsky.app/profile/michaeltemper.bsky.social)
@@ -705,7 +705,7 @@ Using a Draw Component and System to visualize the position of a given entity's 
         ,Lab(title: "Lab 095",
              type: .VOLUME,
              date: Date("11/22/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "World, Local & Object Space",
              description: """
 A guest lab from [Michael Temper](https://bsky.app/profile/michaeltemper.bsky.social)
@@ -715,7 +715,7 @@ Shows the movement in World, Local and Object Space
         ,Lab(title: "Lab 096",
              type: .VOLUME,
              date: Date("11/29/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Vector Example",
              description: """
 A guest lab from [Michael Temper](https://bsky.app/profile/michaeltemper.bsky.social)
@@ -725,7 +725,7 @@ Shows the vector of an object
         ,Lab(title: "Lab 097",
              type: .VOLUME,
              date: Date("12/06/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Vector Addition",
              description: """
 A guest lab from [Michael Temper](https://bsky.app/profile/michaeltemper.bsky.social)
@@ -735,7 +735,7 @@ Visualizes the addition of two vectors.
         ,Lab(title: "Lab 098",
              type: .VOLUME,
              date: Date("12/13/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Vector Subtraction",
              description: """
 A guest lab from [Michael Temper](https://bsky.app/profile/michaeltemper.bsky.social)
@@ -745,7 +745,7 @@ Visualizes the subtraction of two vectors
         ,Lab(title: "Lab 099",
              type: .VOLUME,
              date: Date("12/20/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Direction",
              description: """
 A guest lab from [Michael Temper](https://bsky.app/profile/michaeltemper.bsky.social)
@@ -755,7 +755,7 @@ Shows the direction of an object
         ,Lab(title: "Lab 100",
              type: .VOLUME,
              date: Date("12/27/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Trigger",
              description: """
 A guest lab from [Michael Temper](https://bsky.app/profile/michaeltemper.bsky.social)
@@ -765,16 +765,16 @@ Shows the effect of a trigger
         ,Lab(title: "Lab 101",
              type: .VOLUME,
              date: Date("12/18/2025"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Exploring Extrusion Methods",
              description: "We can use linear, tracePositions, and traceTransforms to extrude meshes.")
 
         ,Lab(title: "Lab 102",
-             type: .WINDOW,
+             type: .SPACE,
              date: Date("1/28/2026"),
              isFeatured: true,
-             subtitle: "",
-             description: "")
+             subtitle: "Input works with Portals in Immersive Spaces",
+             description: "where input was not working when using portals in a window. The same lab input does work when using a portal in an immersive space.")
 
 
     ]

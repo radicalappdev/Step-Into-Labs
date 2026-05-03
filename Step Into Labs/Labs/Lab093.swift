@@ -18,7 +18,7 @@ struct Lab093: View {
 
     @State var rootEntity = Entity()
     @State var portalEntity = ModelEntity(
-        mesh: .generatePlane(width: 1.0, height: 1.0),
+        mesh: .generatePlane(width: 1.0, height: 1.0, cornerRadius: 0.03),
         materials: [PortalMaterial()]
     )
 
@@ -43,18 +43,6 @@ struct Lab093: View {
                     subject.components.set(ManipulationComponent())
                 }
 
-                // Add a simple Tap Gesture to the Red Sphere
-                if let subjectB = scene.findEntity(named: "StepSphereRed") {
-                    let tap = TapGesture().onEnded({ [weak subjectB] _ in
-                        print("tapped entity")
-                        if let subjectB = subjectB {
-                            let scaler: Float = subjectB.scale.x + 0.1
-                            subjectB.scale = .init(repeating: scaler)
-                        }
-                    })
-                    let gesture = GestureComponent(tap)
-                    subjectB.components.set(gesture)
-                }
 
             } update: { content in
                 // Resize the portal plane with the window
