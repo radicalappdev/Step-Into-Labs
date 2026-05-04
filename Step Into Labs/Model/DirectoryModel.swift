@@ -771,10 +771,17 @@ Shows the effect of a trigger
 
         ,Lab(title: "Lab 102",
              type: .SPACE,
-             date: Date("1/28/2026"),
+             date: Date("5/03/2026"),
              isFeatured: true,
              subtitle: "Input works with Portals in Immersive Spaces",
-             description: "where input was not working when using portals in a window. The same lab input does work when using a portal in an immersive space.")
+             description: "A follow up to lab 093, where input was not working when using portals in a window. Input does work when using the same portal scene in an immersive space.")
+
+        ,Lab(title: "Lab 103",
+             type: .SPACE,
+             date: Date("5/04/2026"),
+             isFeatured: true,
+             subtitle: "Camera Test",
+             description: "")
 
 
     ]

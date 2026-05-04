@@ -1,5 +1,6 @@
 {
   "pathsToIds" : {
+    "\/RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/CameraLab.usda" : "E76279B8-F948-4991-BA9B-A7873C09FC33",
     "\/RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/GridMaterial.usda" : "CB766F92-EE55-4A63-9401-E7B8C009764D",
     "\/RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/Immersive.usda" : "65F6F990-A780-4474-B78B-572E0E4E273D",
     "\/RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/Scene.usda" : "0A9B4653-B11E-4D6A-850E-C6FCB621626C",
@@ -114,6 +115,7 @@
     "E36691CB-520A-4193-B5FF-FF6846F6BFEA" : -4766335805032723554,
     "E370BFC6-7A53-4D4F-9BFA-7ACE9227C2CD" : -7279067251994390257,
     "E5A9429C-2ED0-42F1-88DD-34DE71A5656B" : 7418011899154033303,
+    "E76279B8-F948-4991-BA9B-A7873C09FC33" : -4504496153979125109,
     "EA85B0E2-4138-42BA-BA0C-F68161C15F69" : -128178770540532007,
     "EE4E9B65-08F0-49B1-A553-D543CC6E0965" : 2148006992111173440
   }
