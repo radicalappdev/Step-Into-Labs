@@ -783,6 +783,13 @@ Shows the effect of a trigger
              subtitle: "Camera Test",
              description: "")
 
+        ,Lab(title: "Lab 104",
+             type: .SPACE,
+             date: Date("5/05/2026"),
+             isFeatured: true,
+             subtitle: "Portal Glass",
+             description: "")
+
 
     ]
 
