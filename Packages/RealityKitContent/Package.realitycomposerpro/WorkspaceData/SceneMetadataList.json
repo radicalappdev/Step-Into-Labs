@@ -491,6 +491,25 @@
     "objectMetadataList" : [
       [
         "223104BD-3857-4439-92AD-A1EA0F35F2B9",
+        "Root",
+        "MagnifyingGlass",
+        "geom"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "223104BD-3857-4439-92AD-A1EA0F35F2B9",
+        "Root",
+        "Overlay"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "223104BD-3857-4439-92AD-A1EA0F35F2B9",
         "Root"
       ],
       {
@@ -500,16 +519,9 @@
       [
         "223104BD-3857-4439-92AD-A1EA0F35F2B9",
         "Root",
-        "Lens"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "223104BD-3857-4439-92AD-A1EA0F35F2B9",
-        "Root",
-        "MagnifyingGlass"
+        "MagnifyingGlass",
+        "geom",
+        "realistic"
       ],
       {
         "isExpanded" : true,

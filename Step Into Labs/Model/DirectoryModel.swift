@@ -787,8 +787,8 @@ Shows the effect of a trigger
              type: .SPACE,
              date: Date("5/05/2026"),
              isFeatured: true,
-             subtitle: "Portal Glass",
-             description: "")
+             subtitle: "Portal Orb",
+             description: "Setting up a lab to play with some ideas for using RealityKit Portals.")
 
 
     ]
