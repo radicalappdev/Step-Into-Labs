@@ -790,6 +790,13 @@ Shows the effect of a trigger
              subtitle: "Portal Orb",
              description: "Setting up a lab to play with some ideas for using RealityKit Portals.")
 
+        ,Lab(title: "Lab 105",
+             type: .SPACE,
+             date: Date("5/05/2026"),
+             isFeatured: true,
+             subtitle: "Vapor",
+             description: "I'm using this lab to build a basic scene that will be used for some other ideas later.")
+
 
     ]
 
