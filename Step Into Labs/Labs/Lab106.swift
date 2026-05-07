@@ -2,15 +2,19 @@
 //
 //  Title: Lab106
 //
-//  Subtitle:
+//  Subtitle: Mist
 //
-//  Description:
+//  Description: I'm using this lab to build a basic scene that will be used for some other ideas later.
 //
-//  Type:
+//  Type: Space
 //
-//  Featured:
+//  Featured: true
 //
 //  Created by Joseph Simpson on 5/7/26.
+//  boat_ornament by The Base Mesh [CC0]
+//  sundial by The Base Mesh [CC0]
+//  crt_monitor by The Base Mesh [CC0]
+//  retro_computer by The Base Mesh [CC0]
 
 import SwiftUI
 import RealityKit

@@ -2013,44 +2013,6 @@
       [
         "9140C295-E5E5-4019-B36D-F655A20D7191",
         "Root",
-        "sundial"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "9140C295-E5E5-4019-B36D-F655A20D7191",
-        "Root",
-        "crt_monitor_blender_edit"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "9140C295-E5E5-4019-B36D-F655A20D7191",
-        "Root",
-        "crt_monitor_blender_edit",
-        "_materials"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "9140C295-E5E5-4019-B36D-F655A20D7191",
-        "Root",
-        "sundial",
-        "Geom"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "9140C295-E5E5-4019-B36D-F655A20D7191",
-        "Root",
         "crt_monitor_screen"
       ],
       {
