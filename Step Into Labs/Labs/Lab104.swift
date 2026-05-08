@@ -33,7 +33,8 @@ struct Lab104: View {
 
             guard let portalGlass = try? await Entity(named: "PortalGlass", in: realityKitContentBundle) else { return }
             portalGlass.components.set(ManipulationComponent())
-            portalGlass.position = [-0.7, 1.4, -1.5]
+            portalGlass.position = [-0.25, 1.4, -1.5]
+            portalGlass.scale = .init(repeating: 2.5)
             rootEntity.addChild(portalGlass)
 
             // 3. We need something to render the portal on

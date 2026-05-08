@@ -179,9 +179,11 @@ def Xform "Root"
         def RealityKitComponent "DirectionalLight"
         {
             token info:id = "RealityKit.DirectionalLight"
+            float intensity = 2145.708
 
             def RealityKitStruct "Shadow"
             {
+                bool isEnabled = 0
             }
         }
     }
@@ -384,6 +386,18 @@ def Xform "Root"
                 token outputs:mtlx:surface
                 token outputs:realitykit:vertex
             }
+
+            over "Material_103"
+            {
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+            }
+
+            over "Material_101"
+            {
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+            }
         }
 
         over "Mesh_003" (
@@ -422,6 +436,21 @@ def Xform "Root"
             {
             }
         }
+
+        over "Light"
+        {
+            over "Light" (
+                active = false
+            )
+            {
+            }
+        }
+
+        over "Camera" (
+            active = false
+        )
+        {
+        }
     }
 
     def "retro_computer" (
@@ -445,79 +474,26 @@ def Xform "Root"
                     color3f inputs:diffuseColor = (0.999996, 1, 1) (
                         colorSpace = "srgb_texture"
                     )
+                    color3f inputs:emissiveColor = (0.6642242, 0.66424006, 0.66423154) (
+                        colorSpace = "srgb_texture"
+                    )
                 }
             }
         }
     }
 
     def "crt_monitor_screen" (
-        prepend apiSchemas = ["MaterialBindingAPI"]
+        active = true
         customData = {
-            float3 rotationEulerHint = (-1.5707963, 0, 0)
+            float3 rotationEulerHint = (-1.5707959, 0, 0)
         }
         prepend references = @crt_monitor_screen.usdc@
     )
     {
-        quatf xformOp:orient = (0.70710677, -0.7071067, 0, 0)
-        float3 xformOp:scale = (0.59999996, 0.59999996, 0.59999996)
-        float3 xformOp:translate = (0, -0.1, 0)
+        quatf xformOp:orient = (0.7071069, -0.7071066, 0, 0)
+        float3 xformOp:scale = (0.6, 0.6, 0.6)
+        float3 xformOp:translate = (0, 0, 0)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-
-        over "Mesh_002"
-        {
-            over "Mesh_002" (
-                prepend apiSchemas = ["MaterialBindingAPI"]
-            )
-            {
-                rel material:binding = </Root/crt_monitor_screen/_materials/Material_104> (
-                    bindMaterialAs = "weakerThanDescendants"
-                )
-            }
-        }
-
-        over "_materials"
-        {
-            over "Material_104"
-            {
-                token outputs:mtlx:surface
-                token outputs:realitykit:vertex
-            }
-        }
-
-        over "env_light" (
-            active = false
-        )
-        {
-        }
-    }
-
-    def Cube "Screen" (
-        active = false
-        prepend apiSchemas = ["MaterialBindingAPI"]
-    )
-    {
-        rel material:binding = </Root/Screen/DefaultMaterial>
-        double size = 1
-        float3 xformOp:scale = (4.7, 4, 0.01)
-        float3 xformOp:translate = (0.09641516, 5.1359487, -5.9179296)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-
-        def Material "DefaultMaterial"
-        {
-            token outputs:mtlx:surface
-            token outputs:realitykit:vertex
-            token outputs:surface.connect = </Root/Screen/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
-
-            def Shader "DefaultSurfaceShader"
-            {
-                uniform token info:id = "UsdPreviewSurface"
-                color3f inputs:diffuseColor = (0, 0, 0) (
-                    colorSpace = "srgb_texture"
-                )
-                float inputs:roughness = 0.75
-                token outputs:surface
-            }
-        }
     }
 }
 

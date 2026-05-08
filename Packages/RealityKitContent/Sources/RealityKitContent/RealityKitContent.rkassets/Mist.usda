@@ -416,49 +416,6 @@ def Xform "Root"
         }
     }
 
-    def "crt_monitor_screen" (
-        prepend apiSchemas = ["MaterialBindingAPI"]
-        customData = {
-            float3 rotationEulerHint = (-1.5707963, 0, 0)
-        }
-        prepend references = @crt_monitor_screen.usdc@
-    )
-    {
-        float2 ui:nodegraph:node:pos = (644.5645, 240.78127)
-        int ui:nodegraph:node:stackingOrder = 1
-        quatf xformOp:orient = (0.70710677, -0.7071067, 0, 0)
-        float3 xformOp:scale = (0.59999996, 0.59999996, 0.59999996)
-        float3 xformOp:translate = (0, -0.1, 0)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-
-        over "Mesh_002"
-        {
-            over "Mesh_002" (
-                prepend apiSchemas = ["MaterialBindingAPI"]
-            )
-            {
-                rel material:binding = </Root/crt_monitor_screen/_materials/Material_104> (
-                    bindMaterialAs = "weakerThanDescendants"
-                )
-            }
-        }
-
-        over "_materials"
-        {
-            over "Material_104"
-            {
-                token outputs:mtlx:surface
-                token outputs:realitykit:vertex
-            }
-        }
-
-        over "env_light" (
-            active = false
-        )
-        {
-        }
-    }
-
     def "retro_computer" (
         active = true
         references = @retro_computer.usdz@
@@ -518,6 +475,22 @@ def Xform "Root"
                 }
             }
         }
+    }
+
+    def "crt_monitor_screen" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707959, 0, 0)
+        }
+        prepend references = @crt_monitor_screen.usdc@
+    )
+    {
+        float2 ui:nodegraph:node:pos = (20, 20)
+        int ui:nodegraph:node:stackingOrder = 1
+        quatf xformOp:orient = (0.7071069, -0.7071066, 0, 0)
+        float3 xformOp:scale = (0.6, 0.6, 0.6)
+        float3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 }
 

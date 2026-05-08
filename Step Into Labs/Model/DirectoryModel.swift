@@ -784,7 +784,7 @@ Shows the effect of a trigger
              description: "")
 
         ,Lab(title: "Lab 104",
-             type: .SPACE,
+             type: .SPACE_FULL,
              date: Date("5/05/2026"),
              isFeatured: true,
              subtitle: "Portal Orb",

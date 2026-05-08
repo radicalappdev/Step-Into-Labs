@@ -27,6 +27,35 @@ struct Lab105: View {
             guard let rootEntity = try? await Entity(named: "Vapor", in: realityKitContentBundle) else { return }
             content.add(rootEntity)
 
+            // 2. The root for the content that will appear *inside* the portal
+            // We need a WorldComponent here
+            let portalContentRoot = Entity()
+            portalContentRoot.components.set(WorldComponent())
+            rootEntity.addChild(portalContentRoot)
+
+            // 3. We need something to render the portal on
+            if let screenSurface = rootEntity.findEntity(named: "ScreenSurface") {
+                var portalMaterial = PortalMaterial()
+                portalMaterial.faceCulling = .none
+
+                if var modelComponent = screenSurface.components[ModelComponent.self] {
+                    modelComponent.materials = modelComponent.materials.map { _ in portalMaterial }
+                    screenSurface.components.set(modelComponent)
+                    screenSurface.components.set(PortalComponent(
+                        target: portalContentRoot,
+                        clippingMode: .plane(.negativeY),
+                        crossingMode: .disabled
+                    ))
+                }
+            }
+
+            // 4. We'll load some content to add to the portalContentRoot
+            guard let scene = try? await Entity(named: "Mist", in: realityKitContentBundle) else { return }
+            scene.scale = .init(repeating: 0.5)
+            scene.position = [0, 4, -9]
+            scene.orientation = simd_quatf(angle: -6, axis: [1, 0, 0])
+            portalContentRoot.addChild(scene)
+
         }
     }
 }
