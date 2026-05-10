@@ -10,30 +10,17 @@
 
 def Xform "Root"
 {
-    reorder nameChildren = ["CheckerMat01", "Ground", "SkyDome", "Cube_1", "DirectionalLight", "SkyDome_1", "SunshinePalmTree", "SunshinePalmTree_1", "Column_Round3_1", "crt_monitor_blender_edit", "retro_computer", "crt_monitor_screen", "Screen", "Column_Round3"]
-    def Cube "Ground" (
-        active = true
-        prepend apiSchemas = ["MaterialBindingAPI"]
-    )
-    {
-        rel material:binding = </Root/CheckerMat01>
-        double size = 20
-        float3 xformOp:scale = (1, 0.001, 1)
-        float3 xformOp:translate = (0, 0, -6)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-    }
-
     def Material "CheckerMat01"
     {
         asset inputs:Checker = @Textures/checker-black.png@ (
             customData = {
                 dictionary realitykit = {
-                    float2 positionInSubgraph = (198.06941, 78.14505)
-                    int stackingOrderInSubgraph = 23
+                    float2 positionInSubgraph = (260.25, 27.5)
+                    int stackingOrderInSubgraph = 4
                 }
             }
         )
-        color3f inputs:Color = (1, 0.44313726, 0.80784315) (
+        color3f inputs:Color = (0.99942404, 0.9855537, 0) (
             colorSpace = "srgb_texture"
             customData = {
                 dictionary realitykit = {
@@ -42,7 +29,7 @@ def Xform "Root"
                 }
             }
         )
-        float2 inputs:UV_Scale = (10, 10) (
+        float2 inputs:UV_Scale = (5, 5) (
             customData = {
                 dictionary realitykit = {
                     float2 positionInSubgraph = (70.25, 304.78125)
@@ -52,7 +39,9 @@ def Xform "Root"
         )
         token outputs:mtlx:surface.connect = </Root/CheckerMat01/PreviewSurface.outputs:out>
         token outputs:realitykit:vertex
-        token outputs:surface.connect = </Root/CheckerMat01/DefaultSurfaceShader.outputs:surface>
+        token outputs:surface.connect = None
+        float2 ui:nodegraph:node:pos = (20, 20)
+        int ui:nodegraph:node:stackingOrder = 1
         float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (1112.75, 342.96094)
 
         def Shader "DefaultSurfaceShader" (
@@ -104,7 +93,7 @@ def Xform "Root"
             float2 inputs:uvtiling.connect = </Root/CheckerMat01/Dot.outputs:out>
             color3f outputs:out
             float2 ui:nodegraph:node:pos = (490.75, 166.14062)
-            int ui:nodegraph:node:stackingOrder = 21
+            int ui:nodegraph:node:stackingOrder = 3
         }
 
         def Shader "Multiply"
@@ -130,10 +119,52 @@ def Xform "Root"
         }
     }
 
+    def Xform "DirectionalLight" (
+        customData = {
+            float3 rotationEulerHint = (-0.53564155, 0, 0)
+        }
+    )
+    {
+        float2 ui:nodegraph:node:pos = (20, 20)
+        int ui:nodegraph:node:stackingOrder = 1
+        quatf xformOp:orient = (0.96434987, -0.26463056, 0, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 10, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "DirectionalLight"
+        {
+            token info:id = "RealityKit.DirectionalLight"
+            float intensity = 2145.708
+
+            def RealityKitStruct "Shadow"
+            {
+                bool isEnabled = 0
+            }
+        }
+    }
+
+    def Cube "Ground" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </Root/CheckerMat01>
+        double size = 20
+        float2 ui:nodegraph:node:pos = (20, 20)
+        int ui:nodegraph:node:stackingOrder = 1
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (1, 0.001, 1)
+        float3 xformOp:translate = (0, 0, -6)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
     def "SkyDome" (
         references = @BuildingBlocks/SkyDome.usdz@
     )
     {
+        float2 ui:nodegraph:node:pos = (20, 20)
+        int ui:nodegraph:node:stackingOrder = 1
         float3 xformOp:scale = (0.02, 0.02, 0.02)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
@@ -158,32 +189,10 @@ def Xform "Root"
 
                 over "DomeMAT"
                 {
-                    color3f inputs:diffuseColor = (1, 0, 0.80784315) (
-                        colorSpace = "lin_srgb"
+                    color3f inputs:diffuseColor = (0.99942404, 0.9855537, 0) (
+                        colorSpace = "srgb_texture"
                     )
                 }
-            }
-        }
-    }
-
-    def Xform "DirectionalLight" (
-        customData = {
-            float3 rotationEulerHint = (-0.53564155, 0, 0)
-        }
-    )
-    {
-        quatf xformOp:orient = (0.96434987, -0.26463053, 0, 0)
-        float3 xformOp:translate = (0, 10, 0)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-
-        def RealityKitComponent "DirectionalLight"
-        {
-            token info:id = "RealityKit.DirectionalLight"
-            float intensity = 2145.708
-
-            def RealityKitStruct "Shadow"
-            {
-                bool isEnabled = 0
             }
         }
     }
@@ -195,8 +204,8 @@ def Xform "Root"
         references = @BuildingBlocks/SkyDome.usdz@
     )
     {
-        float2 ui:nodegraph:node:pos = (342.95554, 212.40146)
-        int ui:nodegraph:node:stackingOrder = 1
+        float2 ui:nodegraph:node:pos = (362.95554, 232.40146)
+        int ui:nodegraph:node:stackingOrder = 2
         quatf xformOp:orient = (-4.371139e-8, 1, 0, 0)
         float3 xformOp:scale = (0.02, 0.02, 0.02)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
@@ -222,44 +231,9 @@ def Xform "Root"
 
                 over "DomeMAT"
                 {
-                    color3f inputs:diffuseColor = (1, 0, 0.80784315) (
-                        colorSpace = "lin_srgb"
-                    )
-                }
-            }
-        }
-    }
-
-    def "SunshinePalmTree" (
-        active = true
-        customData = {
-            float3 rotationEulerHint = (0, 0.6083145, 0)
-        }
-        references = @SunshinePalmTree.usdz@
-    )
-    {
-        quatf xformOp:orient = (0.9540997, 0, 0.29948926, 0)
-        float3 xformOp:scale = (0.005999999, 0.005999999, 0.005999999)
-        float3 xformOp:translate = (-4.19232, 0, -8.285467)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-
-        over "Materials"
-        {
-            over "SunshinePalmTree_mat"
-            {
-                token outputs:mtlx:surface
-                token outputs:realitykit:vertex
-
-                over "pbr_shader"
-                {
-                    color3f inputs:diffuseColor = (0.019607844, 1, 0.6313726) (
+                    color3f inputs:diffuseColor = (0.99942404, 0.9855537, 0) (
                         colorSpace = "srgb_texture"
                     )
-                    delete color3f inputs:diffuseColor.connect = </Root/SunshinePalmTree/Materials/SunshinePalmTree_mat/tex_base.outputs:rgb>
-                    color3f inputs:emissiveColor = (0.019607844, 1, 0.6313726) (
-                        colorSpace = "lin_srgb"
-                    )
-                    float inputs:opacity = 0.6
                 }
             }
         }
@@ -270,9 +244,11 @@ def Xform "Root"
         references = @Column_Round3.usdz@
     )
     {
+        float2 ui:nodegraph:node:pos = (20, 20)
+        int ui:nodegraph:node:stackingOrder = 1
         quatf xformOp:orient = (1, 0, 0, 0)
-        float3 xformOp:scale = (1.5, 1.5, 1.5)
-        float3 xformOp:translate = (6.3186283, 0, -8.310324)
+        float3 xformOp:scale = (2, 2, 2)
+        float3 xformOp:translate = (-6.280076, 0, -7.7383246)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         over "Materials"
@@ -304,6 +280,8 @@ def Xform "Root"
         references = @crt_monitor_blender_edit.usdc@
     )
     {
+        float2 ui:nodegraph:node:pos = (20, 20)
+        int ui:nodegraph:node:stackingOrder = 1
         quatf xformOp:orient = (0.70710677, -0.70710677, 0, 0)
         float3 xformOp:scale = (0.6, 0.6, 0.6)
         float3 xformOp:translate = (0, -0.1, 0)
@@ -321,12 +299,38 @@ def Xform "Root"
             {
                 token outputs:mtlx:surface
                 token outputs:realitykit:vertex
+
+                over "Principled_BSDF"
+                {
+                    color3f inputs:diffuseColor = (1, 0.14913142, 0) (
+                        colorSpace = "srgb_texture"
+                    )
+                    color3f inputs:emissiveColor = (1, 0.14913142, 0) (
+                        colorSpace = "srgb_texture"
+                    )
+                }
             }
 
             over "Material_101"
             {
                 token outputs:mtlx:surface
                 token outputs:realitykit:vertex
+            }
+
+            over "Material_102"
+            {
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "Principled_BSDF"
+                {
+                    color3f inputs:diffuseColor = (0.99942404, 0.9855537, 0) (
+                        colorSpace = "srgb_texture"
+                    )
+                    color3f inputs:emissiveColor = (0.99942404, 0.9855537, 0) (
+                        colorSpace = "srgb_texture"
+                    )
+                }
             }
         }
 
@@ -381,6 +385,29 @@ def Xform "Root"
         )
         {
         }
+
+        over "Mesh_004"
+        {
+            over "Mesh_004"
+            {
+            }
+        }
+    }
+
+    def "crt_monitor_screen" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707959, 0, 0)
+        }
+        prepend references = @crt_monitor_screen.usdc@
+    )
+    {
+        float2 ui:nodegraph:node:pos = (20, 20)
+        int ui:nodegraph:node:stackingOrder = 1
+        quatf xformOp:orient = (0.7071069, -0.7071066, 0, 0)
+        float3 xformOp:scale = (0.6, 0.6, 0.6)
+        float3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 
     def "retro_computer" (
@@ -388,6 +415,8 @@ def Xform "Root"
         references = @retro_computer.usdz@
     )
     {
+        float2 ui:nodegraph:node:pos = (20, 20)
+        int ui:nodegraph:node:stackingOrder = 1
         float3 xformOp:scale = (10, 10, 10)
         float3 xformOp:translate = (0, 0, -8.808077)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
@@ -412,18 +441,39 @@ def Xform "Root"
         }
     }
 
-    def "crt_monitor_screen" (
+    def "duck_sculpture" (
         active = true
         customData = {
-            float3 rotationEulerHint = (-1.5707959, 0, 0)
+            float3 rotationEulerHint = (0, -1.1539209, 0)
         }
-        prepend references = @crt_monitor_screen.usdc@
+        prepend references = @duck_sculpture.usdz@
     )
     {
-        quatf xformOp:orient = (0.7071069, -0.7071066, 0, 0)
-        float3 xformOp:scale = (0.6, 0.6, 0.6)
-        float3 xformOp:translate = (0, 0, 0)
+        quatf xformOp:orient = (0.8381245, 0, -0.54547894, 0)
+        float3 xformOp:scale = (25, 25, 25)
+        float3 xformOp:translate = (6.0453863, 0, -5.872855)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "Materials"
+        {
+            over "defaultMaterial"
+            {
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "Shader"
+                {
+                    color3f inputs:diffuseColor = (1, 0.14913142, 0) (
+                        colorSpace = "srgb_texture"
+                    )
+                    color3f inputs:emissiveColor = (1, 0.14913142, 0) (
+                        colorSpace = "srgb_texture"
+                    )
+                    float inputs:opacity = 0.7
+                    float inputs:roughness = 0.8
+                }
+            }
+        }
     }
 }
 

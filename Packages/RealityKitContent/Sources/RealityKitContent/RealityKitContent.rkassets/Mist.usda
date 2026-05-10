@@ -259,7 +259,7 @@ def Xform "Root"
     {
         quatf xformOp:orient = (0.9866918, 0, 0.16260165, 0)
         float3 xformOp:scale = (20, 20, 20)
-        float3 xformOp:translate = (-6.434788, 0, -7.5924306)
+        float3 xformOp:translate = (6.5197315, 0, -7.5924306)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         over "Geom"
@@ -310,8 +310,8 @@ def Xform "Root"
             bindMaterialAs = "weakerThanDescendants"
         )
         quatf xformOp:orient = (0.8352497, 0, 0.5498708, 0)
-        float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (3.0099287, 0, -4.8444395)
+        float3 xformOp:scale = (4, 4, 4)
+        float3 xformOp:translate = (6.418087, 0, -13.166681)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         over "Materials"
@@ -453,7 +453,7 @@ def Xform "Root"
         int ui:nodegraph:node:stackingOrder = 1
         quatf xformOp:orient = (1, 0, 0, 0)
         float3 xformOp:scale = (1.5, 1.5, 1.5)
-        float3 xformOp:translate = (7.1216617, 0, -11.139341)
+        float3 xformOp:translate = (-6.9259415, 0, -8.333739)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         over "Materials"

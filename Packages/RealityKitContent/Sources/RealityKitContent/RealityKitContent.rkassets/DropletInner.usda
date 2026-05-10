@@ -1,0 +1,183 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 2.0 (494.100.6)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    reorder nameChildren = ["Droplet", "teapot", "Spin", "Loop", "Translate"]
+    def "teapot" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (0, -1.5707963, 0)
+        }
+        references = @teapot.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.70710677, 0, -0.7071067, 0)
+        float3 xformOp:scale = (12, 8.4, 12)
+        float3 xformOp:translate = (0, 4.1083426, -7.700314)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "Materials"
+        {
+            over "defaultMaterial"
+            {
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "Shader"
+                {
+                    color3f inputs:diffuseColor = (1, 0.14913142, 0) (
+                        colorSpace = "srgb_texture"
+                    )
+                    color3f inputs:emissiveColor = (1, 0.14913142, 0) (
+                        colorSpace = "srgb_texture"
+                    )
+                    float inputs:opacity = 0.6
+                }
+            }
+        }
+
+        def RealityKitComponent "RCP_BehaviorsContainer"
+        {
+            rel behaviors = </Root/teapot/OnAddedToScene>
+            uniform token info:id = "RCP.BehaviorsContainer"
+        }
+
+        def Preliminary_Behavior "OnAddedToScene"
+        {
+            rel actions = </Root/teapot/OnAddedToScene/Action>
+            uniform bool exclusive
+            rel triggers = </Root/teapot/OnAddedToScene/Trigger>
+
+            def Preliminary_Trigger "Trigger"
+            {
+                rel affectedObjects = </Root/teapot>
+                token info:id = "SceneTransition"
+            }
+
+            def Preliminary_Action "Action"
+            {
+                rel affectedObjects = </Root>
+                rel animationLibraryKey = </Root/Loop>
+                rel animationLibraryKeyOverrideKey = </Root/teapot/OnAddedToScene/Trigger>
+                token info:id = "PlayTimeline"
+                int loops = 0
+                int performCount = 1
+                token type = "serial"
+            }
+        }
+    }
+
+    def "Droplet" (
+        active = false
+        references = @Droplet.usda@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def RealityKitTimeline "Spin"
+    {
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Spin"
+            {
+                string actionKind = "spin"
+                int blendLayer = 400
+                double duration = 12
+                uniform token info:id = "76EB6CE4-9F04-4B2C-83E8-485B84160493"
+                float3 localAxis = (0.2, 1, 0)
+                double startTime = 0
+                rel target = </Root/teapot>
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "linear"
+                }
+            }
+        }
+    }
+
+    def RealityKitTimeline "Loop"
+    {
+        reorder nameChildren = ["Track", "Track2"]
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Play_Timeline"
+            {
+                string actionKind = "timeline"
+                int blendLayer = 500
+                double duration = 12
+                uniform token info:id = "4692CFB0-8C31-4C20-8D5C-4220C35BDF9A"
+                double loopCount = 0
+                double startTime = 0
+                rel timeline = </Root/Spin>
+            }
+        }
+
+        def RealityKitTrack "Track2"
+        {
+            def RealityKitAction "Play_Timeline"
+            {
+                string actionKind = "timeline"
+                int blendLayer = 500
+                double duration = 12.1
+                uniform token info:id = "2D06D8A7-F5E1-49C1-94A3-22A3597CF0EB"
+                double loopCount = 0
+                double startTime = 0
+                rel timeline = </Root/Translate>
+            }
+        }
+    }
+
+    def RealityKitTimeline "Translate"
+    {
+        reorder nameChildren = ["Track2", "Track"]
+        def RealityKitTrack "Track2"
+        {
+            def RealityKitAction "Transform_By"
+            {
+                string actionKind = "moveBy"
+                int blendLayer = 300
+                double duration = 1.6
+                uniform token info:id = "20C97851-0909-4362-8EA6-49621910B570"
+                float3 position = (0.25, 2.9802322e-7, -1.8007768e-8)
+                double startTime = 4.5
+                rel target = </Root/teapot>
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "easeOut"
+                }
+            }
+        }
+
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Transform_By"
+            {
+                string actionKind = "moveBy"
+                int blendLayer = 300
+                double duration = 1.6
+                uniform token info:id = "8EAB86AD-89B4-444C-A57A-050D64F5115B"
+                float3 position = (-0.25, 0, 0)
+                double startTime = 10.5
+                rel target = </Root/teapot>
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "easeIn"
+                }
+            }
+        }
+    }
+}
+

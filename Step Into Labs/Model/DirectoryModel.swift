@@ -799,9 +799,16 @@ Shows the effect of a trigger
 
         ,Lab(title: "Lab 106",
              type: .SPACE,
-             date: Date("5/06/2026"),
+             date: Date("5/07/2026"),
              isFeatured: true,
              subtitle: "Mist",
+             description: "I'm using this lab to build a basic scene that will be used for some other ideas later.")
+
+        ,Lab(title: "Lab 107",
+             type: .SPACE,
+             date: Date("5/10/2026"),
+             isFeatured: true,
+             subtitle: "Droplet",
              description: "I'm using this lab to build a basic scene that will be used for some other ideas later.")
 
 
