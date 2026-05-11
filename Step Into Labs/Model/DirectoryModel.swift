@@ -811,6 +811,13 @@ Shows the effect of a trigger
              subtitle: "Droplet",
              description: "I'm using this lab to build a basic scene that will be used for some other ideas later.")
 
+        ,Lab(title: "Lab 108",
+             type: .SPACE,
+             date: Date("5/11/2026"),
+             isFeatured: true,
+             subtitle: "Cycle",
+             description: "")
+
 
     ]
 

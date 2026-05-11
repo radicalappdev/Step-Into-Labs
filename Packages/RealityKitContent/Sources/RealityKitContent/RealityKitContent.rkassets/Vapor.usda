@@ -10,7 +10,7 @@
 
 def Xform "Root"
 {
-    reorder nameChildren = ["CheckerMat01", "Ground", "SkyDome", "Cube_1", "DirectionalLight", "SkyDome_1", "SunshinePalmTree", "SunshinePalmTree_1", "Column_Round3_1", "crt_monitor_blender_edit", "retro_computer", "crt_monitor_screen", "Screen", "Column_Round3"]
+    reorder nameChildren = ["CheckerMat01", "Ground", "DirectionalLight", "SkyDome", "SkyDome_1", "SunshinePalmTree", "crt_monitor_blender_edit", "retro_computer", "crt_monitor_screen", "SkySphere", "Column_Round3"]
     def Cube "Ground" (
         active = true
         prepend apiSchemas = ["MaterialBindingAPI"]
@@ -42,7 +42,7 @@ def Xform "Root"
                 }
             }
         )
-        float2 inputs:UV_Scale = (10, 10) (
+        float2 inputs:UV_Scale = (5, 5) (
             customData = {
                 dictionary realitykit = {
                     float2 positionInSubgraph = (70.25, 304.78125)
@@ -153,8 +153,19 @@ def Xform "Root"
         {
             over "DomeMATSG"
             {
+                token cullMode = "unspecified" (
+                    allowedTokens = ["unspecified", "none", "front", "back"]
+                )
+                string inputs:file5:varname (
+                    customData = {
+                        dictionary realitykit = {
+                            float2 positionInSubgraph = (-124.125, 87.5)
+                        }
+                    }
+                )
                 token outputs:mtlx:surface
                 token outputs:realitykit:vertex
+                float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (112.375, 110.5)
 
                 over "DomeMAT"
                 {

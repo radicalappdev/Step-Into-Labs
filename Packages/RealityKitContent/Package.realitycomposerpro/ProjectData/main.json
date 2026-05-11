@@ -1,6 +1,7 @@
 {
   "pathsToIds" : {
     "\/RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/CameraLab.usda" : "E76279B8-F948-4991-BA9B-A7873C09FC33",
+    "\/RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/Cycle.usda" : "201F1CE1-1004-4722-BD65-0B52802011DD",
     "\/RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/Droplet.usda" : "D75FE8AB-3B13-45E7-81A8-2E3BA36E6BAE",
     "\/RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/GridMaterial.usda" : "CB766F92-EE55-4A63-9401-E7B8C009764D",
     "\/RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/Immersive.usda" : "65F6F990-A780-4474-B78B-572E0E4E273D",
@@ -31,6 +32,7 @@
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/DanceLights.usda" : "EE4E9B65-08F0-49B1-A553-D543CC6E0965",
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/DragonDrop.usda" : "F1EF8ED4-F488-4C2D-82D0-6BEACEF80E03",
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/Droplet.usda" : "D3FB1415-0E8F-4D9E-B7BC-335A20238433",
+    "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/DropletInner.usda" : "BBF8181F-563E-401E-9E86-151156E1844E",
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/DynamicLightTest.usda" : "259CB978-DA76-4137-81C2-999BCD0F6ABF",
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/FeatheredMatLab.usda" : "1ED5D871-E0A7-4327-99A4-DF46F7E2ECB0",
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/GestureLabs.usda" : "C5B50F83-0F34-4891-8072-A6408510F3B3",
@@ -102,6 +104,7 @@
     "1D8A4016-C08F-4AEB-8C0B-FCB89AEB685F" : -3357639774680757467,
     "1E6EC47B-9CFD-4103-A87D-4541117F9317" : -4564316747082223660,
     "1ED5D871-E0A7-4327-99A4-DF46F7E2ECB0" : -8795690706562336384,
+    "201F1CE1-1004-4722-BD65-0B52802011DD" : -6014817738039975904,
     "223104BD-3857-4439-92AD-A1EA0F35F2B9" : -1105703999742541828,
     "26D9F6E1-E8F4-4491-8C5F-FE3B644D53F7" : -9086628641452441291,
     "28CF8148-4FFF-4A22-A6F0-99FED9AE2465" : 823925744801050259,
