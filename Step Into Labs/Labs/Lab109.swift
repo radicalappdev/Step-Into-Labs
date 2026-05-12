@@ -17,11 +17,12 @@ import RealityKit
 import RealityKitContent
 
 struct Lab109: View {
+    @State private var subscriptions = [EventSubscription]()
+
     private let sphereCenterHeight: Float = 1.7
-    private let panelRadius: Float = 2.5
-    private let panelAngularWidth: Float = 1.4
+    private let panelAngularWidth: Float = 0.7
     private let panelAspectRatio: Float = 21 / 9
-    private let panelCornerRadius: Float = 0.12
+    private let panelCornerRadius: Float = 0.06
     private let horizontalSegments = 96
     private let middleVerticalSegments = 10
     private let cornerVerticalSegments = 44
@@ -30,30 +31,68 @@ struct Lab109: View {
         [panelAngularWidth, panelAngularWidth / panelAspectRatio]
     }
 
+    private var panels: [PanelConfiguration] {
+        [
+            PanelConfiguration(name: "Group A 01", radius: 2.5, angularCenter: [0.00, 0.08], color: .cyan, angularVelocity: 0.055),
+            PanelConfiguration(name: "Group A 02", radius: 2.9, angularCenter: [1.10, 0.34], color: .cyan, angularVelocity: -0.041),
+            PanelConfiguration(name: "Group A 03", radius: 3.2, angularCenter: [-1.22, -0.18], color: .cyan, angularVelocity: 0.034),
+            PanelConfiguration(name: "Group A 04", radius: 3.6, angularCenter: [2.46, 0.14], color: .cyan, angularVelocity: -0.062),
+
+            PanelConfiguration(name: "Group B 01", radius: 2.7, angularCenter: [-0.62, 0.38], color: .systemTeal, angularVelocity: 0.047),
+            PanelConfiguration(name: "Group B 02", radius: 3.1, angularCenter: [0.78, -0.32], color: .systemTeal, angularVelocity: -0.029),
+            PanelConfiguration(name: "Group B 03", radius: 3.4, angularCenter: [-2.28, 0.24], color: .systemTeal, angularVelocity: 0.068),
+            PanelConfiguration(name: "Group B 04", radius: 3.8, angularCenter: [3.04, -0.16], color: .systemTeal, angularVelocity: -0.036),
+
+            PanelConfiguration(name: "Group C 01", radius: 2.6, angularCenter: [0.42, 0.52], color: .systemIndigo, angularVelocity: 0.025),
+            PanelConfiguration(name: "Group C 02", radius: 3.0, angularCenter: [-0.98, -0.46], color: .systemIndigo, angularVelocity: -0.052),
+            PanelConfiguration(name: "Group C 03", radius: 3.5, angularCenter: [1.82, -0.06], color: .systemIndigo, angularVelocity: 0.039),
+            PanelConfiguration(name: "Group C 04", radius: 3.9, angularCenter: [-2.86, 0.42], color: .systemIndigo, angularVelocity: -0.071)
+        ]
+    }
+
     var body: some View {
         RealityView { content in
-            guard let panelMesh = makeRoundedSphericalPanel(
-                sphereRadius: panelRadius,
-                angularSize: panelAngularSize,
-                cornerRadius: panelCornerRadius,
-                horizontalSegments: horizontalSegments,
-                middleVerticalSegments: middleVerticalSegments,
-                cornerVerticalSegments: cornerVerticalSegments
-            ) else { return }
+            var rotatingPanels: [(entity: Entity, angularVelocity: Float)] = []
 
-            var material = UnlitMaterial(color: .cyan)
-            material.blending = .transparent(opacity: 0.65)
-            material.faceCulling = .none
+            for configuration in panels {
+                guard let panelMesh = makeRoundedSphericalPanel(
+                    sphereRadius: configuration.radius,
+                    angularCenter: configuration.angularCenter,
+                    angularSize: panelAngularSize,
+                    cornerRadius: panelCornerRadius,
+                    horizontalSegments: horizontalSegments,
+                    middleVerticalSegments: middleVerticalSegments,
+                    cornerVerticalSegments: cornerVerticalSegments
+                ) else { continue }
 
-            let panel = ModelEntity(mesh: panelMesh, materials: [material])
-            panel.name = "Rounded Spherical Panel"
-            panel.position.y = sphereCenterHeight
-            content.add(panel)
+                var material = UnlitMaterial(color: configuration.color)
+                material.blending = .transparent(opacity: 0.65)
+                material.faceCulling = .none
+
+                let panel = ModelEntity(mesh: panelMesh, materials: [material])
+                panel.name = configuration.name
+                panel.position.y = sphereCenterHeight
+                content.add(panel)
+
+                rotatingPanels.append((panel, configuration.angularVelocity))
+            }
+
+            subscriptions.append(content.subscribe(to: SceneEvents.Update.self) { event in
+                for rotatingPanel in rotatingPanels {
+                    let rotation = simd_quatf(
+                        angle: Float(event.deltaTime) * rotatingPanel.angularVelocity,
+                        axis: [0, 1, 0]
+                    )
+
+                    rotatingPanel.entity.orientation = rotation * rotatingPanel.entity.orientation
+                }
+            })
         }
     }
 
     private func makeRoundedSphericalPanel(
         sphereRadius: Float,
+        angularCenter: SIMD2<Float>,
         angularSize: SIMD2<Float>,
         cornerRadius: Float,
         horizontalSegments: Int,
@@ -90,7 +129,10 @@ struct Lab109: View {
             for column in 0...horizontalSegments {
                 let u = Float(column) / Float(horizontalSegments)
                 let yaw = mix(-rowHalfWidth, rowHalfWidth, t: u)
-                let direction = sphericalDirection(yaw: yaw, pitch: pitch)
+                let direction = sphericalDirection(
+                    yaw: yaw + angularCenter.x,
+                    pitch: pitch + angularCenter.y
+                )
 
                 positions.append(direction * sphereRadius)
                 normals.append(-direction)
@@ -205,6 +247,14 @@ struct Lab109: View {
 
     private func mix(_ start: Float, _ end: Float, t: Float) -> Float {
         start + (end - start) * t
+    }
+
+    private struct PanelConfiguration {
+        let name: String
+        let radius: Float
+        let angularCenter: SIMD2<Float>
+        let color: UIColor
+        let angularVelocity: Float
     }
 }
 
