@@ -816,6 +816,13 @@ Shows the effect of a trigger
              date: Date("5/11/2026"),
              isFeatured: true,
              subtitle: "Cycle",
+             description: "In this lab, we cycle through the scenes created in Labs 105-107.")
+
+        ,Lab(title: "Lab 109",
+             type: .SPACE,
+             date: Date("5/12/2026"),
+             isFeatured: true,
+             subtitle: "Layers",
              description: "")
 
 
