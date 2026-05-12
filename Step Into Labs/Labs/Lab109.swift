@@ -20,9 +20,9 @@ struct Lab109: View {
     @State private var subscriptions = [EventSubscription]()
 
     private let sphereCenterHeight: Float = 1.7
-    private let panelAngularWidth: Float = 0.7
+    private let panelAngularWidth: Float = 1.05
     private let panelAspectRatio: Float = 21 / 9
-    private let panelCornerRadius: Float = 0.06
+    private let panelCornerRadius: Float = 0.09
     private let horizontalSegments = 96
     private let middleVerticalSegments = 10
     private let cornerVerticalSegments = 44
@@ -33,25 +33,29 @@ struct Lab109: View {
 
     private var panels: [PanelConfiguration] {
         [
-            PanelConfiguration(name: "Group A 01", radius: 2.5, angularCenter: [0.00, 0.08], color: .cyan, angularVelocity: 0.055),
-            PanelConfiguration(name: "Group A 02", radius: 2.9, angularCenter: [1.10, 0.34], color: .cyan, angularVelocity: -0.041),
-            PanelConfiguration(name: "Group A 03", radius: 3.2, angularCenter: [-1.22, -0.18], color: .cyan, angularVelocity: 0.034),
-            PanelConfiguration(name: "Group A 04", radius: 3.6, angularCenter: [2.46, 0.14], color: .cyan, angularVelocity: -0.062),
+            PanelConfiguration(name: "Vapor Portal 01", radius: 2.5, angularCenter: [0.00, 0.08], sceneName: "Vapor", angularVelocity: 0.055),
+            PanelConfiguration(name: "Vapor Portal 02", radius: 2.9, angularCenter: [1.10, 0.34], sceneName: "Vapor", angularVelocity: -0.041),
+            PanelConfiguration(name: "Vapor Portal 03", radius: 3.2, angularCenter: [-1.22, -0.18], sceneName: "Vapor", angularVelocity: 0.034),
+            PanelConfiguration(name: "Vapor Portal 04", radius: 3.6, angularCenter: [2.46, 0.14], sceneName: "Vapor", angularVelocity: -0.062),
+            PanelConfiguration(name: "Vapor Portal 05", radius: 2.6, angularCenter: [0.42, 0.52], sceneName: "Vapor", angularVelocity: 0.025),
+            PanelConfiguration(name: "Vapor Portal 06", radius: 3.0, angularCenter: [-0.98, -0.46], sceneName: "Vapor", angularVelocity: -0.052),
 
-            PanelConfiguration(name: "Group B 01", radius: 2.7, angularCenter: [-0.62, 0.38], color: .systemTeal, angularVelocity: 0.047),
-            PanelConfiguration(name: "Group B 02", radius: 3.1, angularCenter: [0.78, -0.32], color: .systemTeal, angularVelocity: -0.029),
-            PanelConfiguration(name: "Group B 03", radius: 3.4, angularCenter: [-2.28, 0.24], color: .systemTeal, angularVelocity: 0.068),
-            PanelConfiguration(name: "Group B 04", radius: 3.8, angularCenter: [3.04, -0.16], color: .systemTeal, angularVelocity: -0.036),
-
-            PanelConfiguration(name: "Group C 01", radius: 2.6, angularCenter: [0.42, 0.52], color: .systemIndigo, angularVelocity: 0.025),
-            PanelConfiguration(name: "Group C 02", radius: 3.0, angularCenter: [-0.98, -0.46], color: .systemIndigo, angularVelocity: -0.052),
-            PanelConfiguration(name: "Group C 03", radius: 3.5, angularCenter: [1.82, -0.06], color: .systemIndigo, angularVelocity: 0.039),
-            PanelConfiguration(name: "Group C 04", radius: 3.9, angularCenter: [-2.86, 0.42], color: .systemIndigo, angularVelocity: -0.071)
+            PanelConfiguration(name: "Mist Portal 01", radius: 2.7, angularCenter: [-0.62, 0.38], sceneName: "Mist", angularVelocity: 0.047),
+            PanelConfiguration(name: "Mist Portal 02", radius: 3.1, angularCenter: [0.78, -0.32], sceneName: "Mist", angularVelocity: -0.029),
+            PanelConfiguration(name: "Mist Portal 03", radius: 3.4, angularCenter: [-2.28, 0.24], sceneName: "Mist", angularVelocity: 0.068),
+            PanelConfiguration(name: "Mist Portal 04", radius: 3.8, angularCenter: [3.04, -0.16], sceneName: "Mist", angularVelocity: -0.036),
+            PanelConfiguration(name: "Mist Portal 05", radius: 3.5, angularCenter: [1.82, -0.06], sceneName: "Mist", angularVelocity: 0.039),
+            PanelConfiguration(name: "Mist Portal 06", radius: 3.9, angularCenter: [-2.86, 0.42], sceneName: "Mist", angularVelocity: -0.071)
         ]
     }
 
     var body: some View {
         RealityView { content in
+            if let droplet = try? await Entity(named: "Droplet", in: realityKitContentBundle) {
+                droplet.name = "Droplet Root Scene"
+                content.add(droplet)
+            }
+
             var rotatingPanels: [(entity: Entity, angularVelocity: Float)] = []
 
             for configuration in panels {
@@ -65,13 +69,28 @@ struct Lab109: View {
                     cornerVerticalSegments: cornerVerticalSegments
                 ) else { continue }
 
-                var material = UnlitMaterial(color: configuration.color)
-                material.blending = .transparent(opacity: 0.65)
+                let portalWorld = Entity()
+                portalWorld.name = "\(configuration.name) World"
+                portalWorld.components.set(WorldComponent())
+                content.add(portalWorld)
+
+                guard let portalScene = try? await Entity(named: configuration.sceneName, in: realityKitContentBundle) else {
+                    continue
+                }
+
+                portalWorld.addChild(portalScene)
+
+                var material = PortalMaterial()
                 material.faceCulling = .none
 
                 let panel = ModelEntity(mesh: panelMesh, materials: [material])
                 panel.name = configuration.name
                 panel.position.y = sphereCenterHeight
+                panel.components.set(PortalComponent(
+                    target: portalWorld,
+                    clippingMode: .disabled,
+                    crossingMode: .disabled
+                ))
                 content.add(panel)
 
                 rotatingPanels.append((panel, configuration.angularVelocity))
@@ -253,7 +272,7 @@ struct Lab109: View {
         let name: String
         let radius: Float
         let angularCenter: SIMD2<Float>
-        let color: UIColor
+        let sceneName: String
         let angularVelocity: Float
     }
 }
