@@ -823,7 +823,7 @@ Shows the effect of a trigger
              date: Date("5/12/2026"),
              isFeatured: true,
              subtitle: "Layers",
-             description: "")
+             description: "Standing in one world while seeing layers of two others.")
 
 
     ]

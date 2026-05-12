@@ -2,11 +2,11 @@
 //
 //  Title: Lab109
 //
-//  Subtitle:
+//  Subtitle: Layers
 //
-//  Description:
+//  Description: Standing in one world while seeing layers of two others.
 //
-//  Type:
+//  Type: Space
 //
 //  Featured:
 //
