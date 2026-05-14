@@ -830,7 +830,7 @@ Shows the effect of a trigger
              date: Date("5/14/2026"),
              isFeatured: true,
              subtitle: "Curved Display Surface",
-             description: "")
+             description: "Using MeshDescriptor to create a curved surface.")
 
 
     ]

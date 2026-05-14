@@ -4,7 +4,7 @@
 //
 //  Subtitle: Curved Display Surface
 //
-//  Description:
+//  Description: Using MeshDescriptor to create a curved surface.
 //
 //  Type: Volume
 //
@@ -103,7 +103,7 @@ struct Lab110: View {
             cornerVerticalSegments: cornerVerticalSegments
         ) else { return }
 
-        var material = UnlitMaterial(color: .cyan)
+        var material = UnlitMaterial(color: .stepGreen)
         material.blending = .transparent(opacity: 0.75)
         material.faceCulling = .none
 
