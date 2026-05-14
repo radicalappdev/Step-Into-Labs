@@ -772,14 +772,14 @@ Shows the effect of a trigger
         ,Lab(title: "Lab 102",
              type: .SPACE,
              date: Date("5/03/2026"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Input works with Portals in Immersive Spaces",
              description: "A follow up to lab 093, where input was not working when using portals in a window. Input does work when using the same portal scene in an immersive space.")
 
         ,Lab(title: "Lab 103",
              type: .SPACE,
              date: Date("5/04/2026"),
-             isFeatured: true,
+             isFeatured: false,
              subtitle: "Camera Test",
              description: "")
 
@@ -824,6 +824,13 @@ Shows the effect of a trigger
              isFeatured: true,
              subtitle: "Layers",
              description: "Standing in one world while seeing layers of two others.")
+
+        ,Lab(title: "Lab 110",
+             type: .VOLUME,
+             date: Date("5/14/2026"),
+             isFeatured: true,
+             subtitle: "Curved Display Surface",
+             description: "")
 
 
     ]
