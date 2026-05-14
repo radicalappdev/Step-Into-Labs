@@ -19,8 +19,7 @@ import RealityKitContent
 struct Lab110: View {
     @State private var draftWidth: Float = 1.05
     @State private var draftHeight: Float = 0.45
-    @State private var committedWidth: Float = 1.05
-    @State private var committedHeight: Float = 0.45
+    @State private var draftRounding: Float = 0.36
 
     private let panelName = "Curved Rounded Surface"
     private let sphereRadius: Float = 0.5
@@ -40,7 +39,7 @@ struct Lab110: View {
         }
         .realityViewLayoutBehavior(.centered)
         .debugBorder3D(.white)
-        .ornament(attachmentAnchor: .scene(.bottomFront), contentAlignment: .bottom) {
+        .ornament(attachmentAnchor: .scene(.bottomFront), contentAlignment: .bottomFront) {
             controls
         }
     }
@@ -50,15 +49,19 @@ struct Lab110: View {
             sliderRow(
                 title: "Width",
                 value: $draftWidth,
-                range: 0.45...1.35,
-                onCommit: { committedWidth = draftWidth }
+                range: 0.45...1.35
             )
 
             sliderRow(
                 title: "Height",
                 value: $draftHeight,
-                range: 0.2...0.8,
-                onCommit: { committedHeight = draftHeight }
+                range: 0.2...0.8
+            )
+
+            sliderRow(
+                title: "Rounding",
+                value: $draftRounding,
+                range: 0...1
             )
         }
         .padding(.horizontal, 24)
@@ -70,8 +73,7 @@ struct Lab110: View {
     private func sliderRow(
         title: String,
         value: Binding<Float>,
-        range: ClosedRange<Float>,
-        onCommit: @escaping () -> Void
+        range: ClosedRange<Float>
     ) -> some View {
         VStack(alignment: .leading, spacing: 6) {
             HStack {
@@ -85,19 +87,15 @@ struct Lab110: View {
                     .foregroundStyle(.secondary)
             }
 
-            Slider(value: value, in: range) { isEditing in
-                if !isEditing {
-                    onCommit()
-                }
-            }
+            Slider(value: value, in: range)
         }
     }
 
     private func configurePanel(_ panel: Entity) {
         guard let mesh = makeRoundedSphericalPanel(
             sphereRadius: sphereRadius,
-            angularSize: [committedWidth, committedHeight],
-            cornerRadius: min(committedWidth, committedHeight) * 0.18,
+            angularSize: [draftWidth, draftHeight],
+            cornerRadius: maxCornerRadius * draftRounding,
             horizontalSegments: horizontalSegments,
             middleVerticalSegments: middleVerticalSegments,
             cornerVerticalSegments: cornerVerticalSegments
@@ -108,6 +106,10 @@ struct Lab110: View {
         material.faceCulling = .none
 
         panel.components.set(ModelComponent(mesh: mesh, materials: [material]))
+    }
+
+    private var maxCornerRadius: Float {
+        min(draftWidth, draftHeight) / 2
     }
 
     private func makeRoundedSphericalPanel(
@@ -123,12 +125,21 @@ struct Lab110: View {
         let cornerRadius = min(cornerRadius, halfWidth, halfHeight)
         let innerHalfWidth = halfWidth - cornerRadius
         let innerHalfHeight = halfHeight - cornerRadius
-        let pitchSamples = roundedPanelPitchSamples(
-            halfHeight: halfHeight,
-            innerHalfHeight: innerHalfHeight,
-            middleSegments: middleVerticalSegments,
-            cornerSegments: cornerVerticalSegments
-        )
+        let pitchSamples: [Float]
+
+        if cornerRadius <= .ulpOfOne {
+            pitchSamples = panelPitchSamples(
+                halfHeight: halfHeight,
+                segments: middleVerticalSegments + cornerVerticalSegments * 2
+            )
+        } else {
+            pitchSamples = roundedPanelPitchSamples(
+                halfHeight: halfHeight,
+                innerHalfHeight: innerHalfHeight,
+                middleSegments: middleVerticalSegments,
+                cornerSegments: cornerVerticalSegments
+            )
+        }
 
         var positions: [SIMD3<Float>] = []
         var normals: [SIMD3<Float>] = []
@@ -217,6 +228,15 @@ struct Lab110: View {
         )
 
         return samples
+    }
+
+    private func panelPitchSamples(halfHeight: Float, segments: Int) -> [Float] {
+        let segments = max(1, segments)
+
+        return (0...segments).map { index in
+            let t = Float(index) / Float(segments)
+            return mix(-halfHeight, halfHeight, t: t)
+        }
     }
 
     private func appendPitchSamples(
