@@ -18,33 +18,158 @@ import RealityKitContent
 
 struct Lab111: View {
     var body: some View {
-
         TabView {
-            RoundedRectangle(cornerRadius: 12)
-                .foregroundStyle(.stepRed)
+            Tab("Lab Pages", systemImage: "rectangle.stack") {
+                LabPageIndicatorExample()
+            }
 
-            RoundedRectangle(cornerRadius: 12)
-                .foregroundStyle(.stepGreen)
-
-            RoundedRectangle(cornerRadius: 12)
-                .foregroundStyle(.stepBlue)
+            Tab("Tab Values", systemImage: "number.square") {
+                DirectValueIndicatorExample()
+            }
         }
-        .tabViewStyle(.page)
+    }
+}
 
+fileprivate struct LabPageIndicatorExample: View {
+    @State private var currentPage = LabPage.red
+    @State private var progress = 0.0
 
+    private let pageDuration = 4.0
+    private let timerStep: UInt64 = 50_000_000
 
+    var body: some View {
+        ZStack(alignment: .bottom) {
+            TabView(selection: $currentPage) {
+                Tab(value: LabPage.red) {
+                    RoundedRectangle(cornerRadius: 12)
+                        .foregroundStyle(.stepRed)
+                }
 
+                Tab(value: LabPage.green) {
+                    RoundedRectangle(cornerRadius: 12)
+                        .foregroundStyle(.stepGreen)
+                }
+
+                Tab(value: LabPage.blue) {
+                    RoundedRectangle(cornerRadius: 12)
+                        .foregroundStyle(.stepBlue)
+                }
+            }
+            // use page style, but hide the page indicators
+            .tabViewStyle(.page(indexDisplayMode: .never))
+
+            PageControlIndicator(
+                count: LabPage.allCases.count,
+                current: currentPage.index,
+                progress: progress
+            )
+            .padding(.bottom, 28)
+        }
+        .task(id: currentPage) {
+            await runPageTimer()
+        }
+    }
+
+    private func runPageTimer() async {
+        progress = 0
+        let startDate = Date()
+
+        while !Task.isCancelled {
+            let elapsed = Date().timeIntervalSince(startDate)
+            progress = min(elapsed / pageDuration, 1)
+
+            if progress >= 1 {
+                currentPage = currentPage.next
+                return
+            }
+
+            try? await Task.sleep(nanoseconds: timerStep)
+        }
+    }
+}
+
+fileprivate struct DirectValueIndicatorExample: View {
+    @State private var currentPage = 0
+    @State private var progress = 0.0
+
+    private let pageCount = 3
+    private let pageDuration = 4.0
+    private let timerStep: UInt64 = 50_000_000
+
+    var body: some View {
+        ZStack(alignment: .bottom) {
+            TabView(selection: $currentPage) {
+                Tab(value: 0) {
+                    RoundedRectangle(cornerRadius: 12)
+                        .foregroundStyle(.stepRed)
+                }
+
+                Tab(value: 1) {
+                    RoundedRectangle(cornerRadius: 12)
+                        .foregroundStyle(.stepGreen)
+                }
+
+                Tab(value: 2) {
+                    RoundedRectangle(cornerRadius: 12)
+                        .foregroundStyle(.stepBlue)
+                }
+            }
+            // use page style, but hide the page indicators
+            .tabViewStyle(.page(indexDisplayMode: .never))
+
+            PageControlIndicator(
+                count: pageCount,
+                current: currentPage,
+                progress: progress
+            )
+            .padding(.bottom, 28)
+        }
+        .task(id: currentPage) {
+            await runPageTimer()
+        }
+    }
+
+    private func runPageTimer() async {
+        progress = 0
+        let startDate = Date()
+
+        while !Task.isCancelled {
+            let elapsed = Date().timeIntervalSince(startDate)
+            progress = min(elapsed / pageDuration, 1)
+
+            if progress >= 1 {
+                currentPage = (currentPage + 1) % pageCount
+                return
+            }
+
+            try? await Task.sleep(nanoseconds: timerStep)
+        }
+    }
+}
+
+fileprivate enum LabPage: Int, CaseIterable, Hashable {
+    case red
+    case green
+    case blue
+
+    var index: Int {
+        rawValue
+    }
+
+    var next: LabPage {
+        let nextIndex = (index + 1) % Self.allCases.count
+        return Self.allCases[nextIndex]
     }
 }
 
 fileprivate struct PageControlIndicator: View {
     let count: Int
     let current: Int
-    let progress: Double    // 0.0 → 1.0
+    let progress: Double    // 0.0 -> 1.0
 
-    private let dotSize: CGFloat   = 8
+    private let dotSize: CGFloat = 8
     private let pillWidth: CGFloat = 36
-    private let height: CGFloat    = 8
+    private let height: CGFloat = 8
 
     var body: some View {
         HStack(spacing: 6) {
