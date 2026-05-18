@@ -19,14 +19,19 @@ import RealityKitContent
 struct Lab111: View {
     var body: some View {
 
-        RoundedRectangle(cornerRadius: 12)
-            .foregroundStyle(.stepRed)
+        TabView {
+            RoundedRectangle(cornerRadius: 12)
+                .foregroundStyle(.stepRed)
 
-        RoundedRectangle(cornerRadius: 12)
-            .foregroundStyle(.stepGreen)
+            RoundedRectangle(cornerRadius: 12)
+                .foregroundStyle(.stepGreen)
 
-        RoundedRectangle(cornerRadius: 12)
-            .foregroundStyle(.stepBlue)
+            RoundedRectangle(cornerRadius: 12)
+                .foregroundStyle(.stepBlue)
+        }
+        .tabViewStyle(.page)
+
+
 
 
     }
