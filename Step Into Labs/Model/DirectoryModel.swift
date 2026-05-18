@@ -832,6 +832,13 @@ Shows the effect of a trigger
              subtitle: "Curved Display Surface",
              description: "Using MeshDescriptor to create a curved surface.")
 
+        ,Lab(title: "Lab 111",
+             type: .WINDOW,
+             date: Date("5/18/2026"),
+             isFeatured: true,
+             subtitle: "Progressive Page Indicator",
+             description: "Building a timer progress capsule in SwiftUI")
+
 
     ]
 
