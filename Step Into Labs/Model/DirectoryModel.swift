@@ -839,6 +839,13 @@ Shows the effect of a trigger
              subtitle: "Progressive Page Indicator",
              description: "Building a timer progress capsule in SwiftUI")
 
+        ,Lab(title: "Lab 112",
+             type: .VOLUME,
+             date: Date("5/20/2026"),
+             isFeatured: true,
+             subtitle: "Arc Slider",
+             description: "")
+
 
     ]
 
