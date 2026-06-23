@@ -10,7 +10,7 @@
 
 def Xform "Root"
 {
-    reorder nameChildren = ["StackBounce", "StackLoop", "BlockRotate"]
+    reorder nameChildren = ["StackLoop", "StackBounce", "BlockRotate"]
     quatf xformOp:orient = (1, 0, 0, 0)
     float3 xformOp:scale = (1, 1, 1)
     float3 xformOp:translate = (0, 0, 0)
@@ -317,7 +317,7 @@ def Xform "Root"
 
     def RealityKitTimeline "StackLoop"
     {
-        reorder nameChildren = ["Track", "Track2"]
+        reorder nameChildren = ["Track2", "Track"]
         def RealityKitTrack "Track2"
         {
             def RealityKitAction "Play_Timeline"

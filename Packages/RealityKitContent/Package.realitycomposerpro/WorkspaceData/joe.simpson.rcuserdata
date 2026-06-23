@@ -1,5 +1,5 @@
 {
-  "advancedEditorSelectedIdentifier" : "ProjectBrowser",
+  "advancedEditorSelectedIdentifier" : "ShaderGraphEditorPluginID",
   "openSceneRelativePaths" : [
     "Vapor.usda",
     "Mist.usda",
@@ -5144,6 +5144,28 @@
     ],
     "79777750-B3F2-4783-B764-CA4F9CD949A8" : [
       {
+        "date" : 802923341.722221,
+        "title" : "Untitled",
+        "transform" : [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          -1.6792715e-06,
+          -1.1920929e-06,
+          83.785965,
+          1
+        ]
+      },
+      {
         "date" : 800197461.031905,
         "title" : "Untitled",
         "transform" : [
@@ -5338,28 +5360,6 @@
           7.304185,
           7.0290313,
           14.448967,
-          1
-        ]
-      },
-      {
-        "date" : 800195946.516704,
-        "title" : "Untitled",
-        "transform" : [
-          0.8926604,
-          -3.8017966e-08,
-          -0.4507299,
-          0,
-          -0.15555221,
-          0.93856156,
-          -0.3080677,
-          0,
-          0.42303783,
-          0.34511188,
-          0.83781666,
-          0,
-          3.2899194,
-          3.1659858,
-          6.508041,
           1
         ]
       }

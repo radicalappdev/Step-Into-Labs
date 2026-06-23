@@ -29,7 +29,7 @@ def Xform "Root"
             customData = {
                 dictionary realitykit = {
                     float2 positionInSubgraph = (198.06941, 78.14505)
-                    int stackingOrderInSubgraph = 23
+                    int stackingOrderInSubgraph = 27
                 }
             }
         )
@@ -38,7 +38,7 @@ def Xform "Root"
             customData = {
                 dictionary realitykit = {
                     float2 positionInSubgraph = (490.75, 519.78125)
-                    int stackingOrderInSubgraph = 7
+                    int stackingOrderInSubgraph = 26
                 }
             }
         )
@@ -126,7 +126,7 @@ def Xform "Root"
             float2 inputs:in.connect = </Root/CheckerMat01.inputs:UV_Scale>
             float2 outputs:out
             float2 ui:nodegraph:node:pos = (260.25, 304.78125)
-            int ui:nodegraph:node:stackingOrder = 12
+            int ui:nodegraph:node:stackingOrder = 25
         }
     }
 
@@ -173,6 +173,18 @@ def Xform "Root"
                         colorSpace = "lin_srgb"
                     )
                 }
+            }
+
+            over "GridMATSG"
+            {
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+            }
+
+            over "GroundMATSG"
+            {
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
             }
         }
     }
@@ -237,6 +249,18 @@ def Xform "Root"
                         colorSpace = "lin_srgb"
                     )
                 }
+            }
+
+            over "GridMATSG"
+            {
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+            }
+
+            over "GroundMATSG"
+            {
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
             }
         }
     }
